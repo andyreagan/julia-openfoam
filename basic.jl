@@ -2,6 +2,8 @@ module foamLia
 
 println("foamLia: basic openfoam manipulation")
 
+export OpenFoam,initCase
+
 using DataStructures
 
 # main (only) type
@@ -46,18 +48,43 @@ defaultTurbulenceProperties["simulationType"] = "laminar" # "RASModel" "LESModel
 defaultT = OrderedDict(String,Any)
 defaultT["dimensions"] = [0,0,0,1,0,0,0]
 defaultT["internalField"] = "uniform 300"
-emptyBC = OrderedDict(String,Any)
-emptyBC["type"] = "empty"
+# this should work, but deepcopy doesn't work
+# emptyBC = OrderedDict(String,Any)
+# emptyBC["type"] = "empty"
+# defaultT["boundaryField"] = OrderedDict(String,Any)
+# defaultT["boundaryField"]["front"] = deepcopy(emptyBC)
+# defaultT["boundaryField"]["back"] = deepcopy(emptyBC)
+# groovyBC = OrderedDict(String,Any)
+# groovyBC["type"] = "groovyBC"
+# groovyBC["value"] = "uniform 300"
+# groovyBC["gradientExpression"] = "\"gradT\""
+# groovyBC["fractionExpression"] = "\"0\""
+# groovyBC["variables"] = "\"Text=280;hc=225;gradT=(Text-T)*hc\""
+# groovyBC["timelines"] = ()
+# function setGroovyBC(Text::Int,hc::Int,expression::String)
+#     groovyBC["variables"] = "\"Text=$(Text);hc=$(hc);$(expression)\""
+#     return groovyBC
+# end
+# setGroovyBC(T::Int) = setGroovyBC(T::Int,225,"gradT=(Text-T)*hc")
+# defaultT["boundaryField"]["topinside"] = deepcopy(setGroovyBC(280))
+# println(defaultT)
+# testvar = deepcopy(groovyBC)
+# println(testvar)
+# defaultT["boundaryField"]["topoutside"] = deepcopy(setGroovyBC(280))
+# println(defaultT)
+# println(groovyBC)
+# defaultT["boundaryField"]["bottominside"] = deepcopy(setGroovyBC(340))
+# println(defaultT)
+# println(testvar)
+# println(groovyBC)
+# defaultT["boundaryField"]["bottomoutside"] = deepcopy(setGroovyBC(340))
+# defaultT["boundaryField"]["topoutside"]["variables"] = "\"Text=280;hc=225;gradT=(Text-T)*hc\""
+# println(defaultT)
 defaultT["boundaryField"] = OrderedDict(String,Any)
-defaultT["boundaryField"]["front"] = deepcopy(emptyBC)
-defaultT["boundaryField"]["back"] = deepcopy(emptyBC)
-groovyBC = OrderedDict(String,Any)
-groovyBC["type"] = "groovyBC"
-groovyBC["value"] = "uniform 300"
-groovyBC["gradientExpression"] = "\"gradT\""
-groovyBC["fractionExpression"] = "\"0\""
-groovyBC["variables"] = "\"Text=280;hc=225;gradT=(Text-T)*hc\""
-groovyBC["timelines"] = ()
+defaultT["boundaryField"]["front"] = OrderedDict(String,Any)
+defaultT["boundaryField"]["front"]["type"] = "empty"
+defaultT["boundaryField"]["back"] = OrderedDict(String,Any)
+defaultT["boundaryField"]["back"]["type"] = "empty"
 defaultT["boundaryField"]["topinside"] = OrderedDict(String,Any)
 defaultT["boundaryField"]["topinside"]["type"] = "groovyBC"
 defaultT["boundaryField"]["topinside"]["value"] = "uniform 300"
@@ -222,17 +249,9 @@ function initCase(o::OpenFoam,baseCase::String)
     writeVolScalarField(o,o.T,"T","0")
 end
 
-# okay, test implementation
-case = OpenFoam("/Users/andyreagan/work/2014/2014-11foamLab-julia/juliaCase")
-# manipulate parameters
-# case.controlDict["runTime"] = 1000
-# case.T["..."] = replace(case.T["..."],Text=340,Text=Ttop)
-# # ["boundaryField"]["bottominside"]["variables"] = "\"Text=340;hc=225;gradT=(Text-T)*hc\""
-baseCase = "/Users/andyreagan/work/2014/2014-11foamLab-julia/testCase"
-initCase(case,baseCase)
+end
 
-# (o::OpenFoam,d::OrderedDict,name::String,location::String)
-# writeVolScalarField(test,defaultT,"T","0")
+
 
 
 
