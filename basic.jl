@@ -1,7 +1,10 @@
-println("basic openfoam manipulation")
+module foamLia
+
+println("foamLia: basic openfoam manipulation")
 
 using DataStructures
 
+# main (only) type
 # want to be able to store all case-related information
 type OpenFoam
     caseFolder::String
@@ -16,11 +19,7 @@ type OpenFoam
     T::OrderedDict
 end
 
-# # initialize with all of our default settings
-# function init(model::OpenFoam)
-#     OpenFOAM
-# end
-
+# default settings
 defaultControlDict = OrderedDict(String,Any)
 defaultControlDict["application"] = "buoyantBoussinesqPimpleFoam"
 defaultControlDict["startFrom"] = "startTime"
@@ -47,11 +46,18 @@ defaultTurbulenceProperties["simulationType"] = "laminar" # "RASModel" "LESModel
 defaultT = OrderedDict(String,Any)
 defaultT["dimensions"] = [0,0,0,1,0,0,0]
 defaultT["internalField"] = "uniform 300"
+emptyBC = OrderedDict(String,Any)
+emptyBC["type"] = "empty"
 defaultT["boundaryField"] = OrderedDict(String,Any)
-defaultT["boundaryField"]["front"] = OrderedDict(String,Any)
-defaultT["boundaryField"]["front"]["type"] = "empty"
-defaultT["boundaryField"]["back"] = OrderedDict(String,Any)
-defaultT["boundaryField"]["back"]["type"] = "empty"
+defaultT["boundaryField"]["front"] = deepcopy(emptyBC)
+defaultT["boundaryField"]["back"] = deepcopy(emptyBC)
+groovyBC = OrderedDict(String,Any)
+groovyBC["type"] = "groovyBC"
+groovyBC["value"] = "uniform 300"
+groovyBC["gradientExpression"] = "\"gradT\""
+groovyBC["fractionExpression"] = "\"0\""
+groovyBC["variables"] = "\"Text=280;hc=225;gradT=(Text-T)*hc\""
+groovyBC["timelines"] = ()
 defaultT["boundaryField"]["topinside"] = OrderedDict(String,Any)
 defaultT["boundaryField"]["topinside"]["type"] = "groovyBC"
 defaultT["boundaryField"]["topinside"]["value"] = "uniform 300"
@@ -227,5 +233,8 @@ initCase(case,baseCase)
 
 # (o::OpenFoam,d::OrderedDict,name::String,location::String)
 # writeVolScalarField(test,defaultT,"T","0")
+
+
+
 
 
