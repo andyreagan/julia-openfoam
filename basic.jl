@@ -117,7 +117,7 @@ defaultT["boundaryField"]["bottomoutside"]["timelines"] = ()
 OpenFoam(folder) = OpenFoam(folder,defaultControlDict,defaultTurbulenceProperties,defaultT)
 
 header = """/*--------------------------------*- C++ -*----------------------------------*\
-| =========                 |                                                 |
+| =========                |                                                 |
 | \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
 |  \\    /   O peration     | Version:  2.2.1                                 |
 |   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
@@ -132,7 +132,7 @@ type CompactRepr
   entrySeparator::String
 end
 
-DefaultCompactRepr = CompactRepr("\t", ";\n\n")
+DefaultCompactRepr = CompactRepr(" ", ";\n\n")
 
 function showCompact{K,V}(m::OrderedDict{K,V}, config::CompactRepr)
   # Note that without the typehint on the Array, this will somehow get
@@ -156,7 +156,7 @@ function writeDict(o::OpenFoam,d::OrderedDict,name::String,location::String)
     write(f,string(header,"\n"))
 
     # write the file info
-    finfo = string("FoamFile\n{\n",showCompact(OrderedDict([("version","2.0"),("format","ascii"),("class","dictionary"),("location",string("\"",location,"\"")),("object",name)]),CompactRepr("\t", ";\n")),";\n}\n\n")
+    finfo = string("FoamFile\n{\n",showCompact(OrderedDict([("version","2.0"),("format","ascii"),("class","dictionary"),("location",string("\"",location,"\"")),("object",name)]),CompactRepr(" ", ";\n")),";\n}\n\n")
     write(f,finfo)
 
     write(f,lbreak)
@@ -173,7 +173,7 @@ writeDict(o) = writeDict(o,o.controlDict,"controlDict","system")
 
 function serializeD(d::OrderedDict)
   return join(
-    String[string(k) * "\t" * serializeDinner(v)
+    String[string(k) * " " * serializeDinner(v)
            for (k, v) in d],
     ";
 \n"
@@ -182,7 +182,7 @@ end
 
 function serializeDinner(d::OrderedDict)
   return join(["\n{\n",join(
-    String[string(k) * "\t" * serializeDinner(v)
+    String[string(k) * " " * serializeDinner(v)
            for (k, v) in d],
     ";\n"
   ),";\n}"],"")
@@ -199,7 +199,7 @@ function writeVolScalarField(o::OpenFoam,d::OrderedDict,name::String,location::S
     write(f,string(header,"\n"))
 
     # write the file info
-    finfo = string("FoamFile\n{\n",showCompact(OrderedDict([("version","2.0"),("format","ascii"),("class","dictionary"),("location",string("\"",location,"\"")),("object",name)]),CompactRepr("\t", ";\n")),";\n}\n\n")
+    finfo = string("FoamFile\n{\n",showCompact(OrderedDict([("version","2.0"),("format","ascii"),("class","dictionary"),("location",string("\"",location,"\"")),("object",name)]),CompactRepr(" ", ";\n")),";\n}\n\n")
     write(f,finfo)
 
     write(f,lbreak)
@@ -217,13 +217,18 @@ function copyFromBase(o::OpenFoam,files::Array,baseCase::String)
     for file in files
         s = join([baseCase,file],"/")
         d = join([o.caseFolder,file],"/")
-        # println("copying $(s) to $(d)")
+        println("copying $(s) to $(d)")
         cp(s,d)
+	if file == "Allrun"
+	    run(`chmod +x $d`)
+	end
     end
+    
 end
 
-allFiles = ["0/alphat","0/epsilon","0/k","0/nut","0/p","0/p_rgh","0/T","0/U","constant/g","constant/RASProperties","constant/transportProperties","constant/turbulenceProperties","system/controlDict","system/fvSchemes","system/fvSolution","system/setFieldsDict"]
-meshFiles = [join(["constant","polyMesh",x],"/") for x in ["blockMeshDict","blockMeshDict3D","boundary","faces","neighbour","owner","points","pointsGrep0","pyZones"]]
+allFiles = ["Allrun","0/alphat","0/epsilon","0/k","0/nut","0/p","0/p_rgh","0/T","0/U","constant/g","constant/RASProperties","constant/transportProperties","constant/turbulenceProperties","system/controlDict","system/fvSchemes","system/fvSolution","system/setFieldsDict"]
+meshFiles = [join(["constant","polyMesh",x],"/") for x in ["blockMeshDict","blockMeshDict3D","boundary","faces","neighbour","owner","points"]]
+# ,"pointsGrep0","pyZones"]]
 # println(meshFiles)
 
 copyFromBase(o::OpenFoam,baseCase::String) = copyFromBase(o::OpenFoam,append!(allFiles,meshFiles),baseCase::String)
