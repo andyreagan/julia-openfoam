@@ -40,7 +40,7 @@ defaultControlDict["timePrecision"] = 6
 defaultControlDict["runTimeModifiable"] = "true"
 defaultControlDict["adjustTime"] = "no"
 defaultControlDict["maxCo"] = 0.5
-defaultControlDict["libs"] = ("libOpenFOAM.so","libsimpleSwakFunctionObjects.so","libswakFunctionObjects.so","libgroovyBC.so")
+defaultControlDict["libs"] = ["\"libOpenFOAM.so\"","\"libsimpleSwakFunctionObjects.so\"","\"libswakFunctionObjects.so\"","\"libgroovyBC.so\""]
 
 defaultTurbulenceProperties = OrderedDict(String,String)
 defaultTurbulenceProperties["simulationType"] = "laminar" # "RASModel" "LESModel"
@@ -186,6 +186,10 @@ function serializeDinner(d::OrderedDict)
            for (k, v) in d],
     ";\n"
   ),";\n}"],"")
+end
+
+function serializeDinner(a::Array)
+  return join(a,"\n")
 end
 
 function serializeDinner(s::Any)
