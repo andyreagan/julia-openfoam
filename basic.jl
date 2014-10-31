@@ -90,28 +90,28 @@ defaultT["boundaryField"]["topinside"]["type"] = "groovyBC"
 defaultT["boundaryField"]["topinside"]["value"] = "uniform 300"
 defaultT["boundaryField"]["topinside"]["gradientExpression"] = "\"gradT\""
 defaultT["boundaryField"]["topinside"]["fractionExpression"] = "\"0\""
-defaultT["boundaryField"]["topinside"]["variables"] = "\"Text=280;hc=225;gradT=(Text-T)*hc\""
+defaultT["boundaryField"]["topinside"]["variables"] = "\"Text=280;hc=225;gradT=(Text-T)*hc;\""
 defaultT["boundaryField"]["topinside"]["timelines"] = ()
 defaultT["boundaryField"]["topoutside"] = OrderedDict(String,Any)
 defaultT["boundaryField"]["topoutside"]["type"] = "groovyBC"
 defaultT["boundaryField"]["topoutside"]["value"] = "uniform 300"
 defaultT["boundaryField"]["topoutside"]["gradientExpression"] = "\"gradT\""
 defaultT["boundaryField"]["topoutside"]["fractionExpression"] = "\"0\""
-defaultT["boundaryField"]["topoutside"]["variables"] = "\"Text=280;hc=225;gradT=(Text-T)*hc\""
+defaultT["boundaryField"]["topoutside"]["variables"] = "\"Text=280;hc=225;gradT=(Text-T)*hc;\""
 defaultT["boundaryField"]["topoutside"]["timelines"] = ()
 defaultT["boundaryField"]["bottominside"] = OrderedDict(String,Any)
 defaultT["boundaryField"]["bottominside"]["type"] = "groovyBC"
 defaultT["boundaryField"]["bottominside"]["value"] = "uniform 300"
 defaultT["boundaryField"]["bottominside"]["gradientExpression"] = "\"gradT\""
 defaultT["boundaryField"]["bottominside"]["fractionExpression"] = "\"0\""
-defaultT["boundaryField"]["bottominside"]["variables"] = "\"Text=340;hc=225;gradT=(Text-T)*hc\""
+defaultT["boundaryField"]["bottominside"]["variables"] = "\"Text=340;hc=225;gradT=(Text-T)*hc;\""
 defaultT["boundaryField"]["bottominside"]["timelines"] = ()
 defaultT["boundaryField"]["bottomoutside"] = OrderedDict(String,Any)
 defaultT["boundaryField"]["bottomoutside"]["type"] = "groovyBC"
 defaultT["boundaryField"]["bottomoutside"]["value"] = "uniform 300"
 defaultT["boundaryField"]["bottomoutside"]["gradientExpression"] = "\"gradT\""
 defaultT["boundaryField"]["bottomoutside"]["fractionExpression"] = "\"0\""
-defaultT["boundaryField"]["bottomoutside"]["variables"] = "\"Text=340;hc=225;gradT=(Text-T)*hc\""
+defaultT["boundaryField"]["bottomoutside"]["variables"] = "\"Text=340;hc=225;gradT=(Text-T)*hc;\""
 defaultT["boundaryField"]["bottomoutside"]["timelines"] = ()
 
 OpenFoam(folder) = OpenFoam(folder,defaultControlDict,defaultTurbulenceProperties,defaultT)
@@ -162,7 +162,7 @@ function writeDict(o::OpenFoam,d::OrderedDict,name::String,location::String)
     write(f,lbreak)
 
     # write the main info
-    maininfo = string(showCompact(d),";\n\n")
+    maininfo = string(serializeD(d),";\n\n")
     write(f,maininfo)
 
     write(f,lbreak)
@@ -189,7 +189,15 @@ function serializeDinner(d::OrderedDict)
 end
 
 function serializeDinner(a::Array)
-  return join(a,"\n")
+  if typeof(a[1]) == ASCIIString
+    println("joining array")
+    println(a)
+    println(join(a,"\n"))
+    return join(["(",join(a,"\n"),")"],"\n")
+  else
+    println("not joining array")
+    return join(["[",join(a," "),"]"],"")
+  end
 end
 
 function serializeDinner(s::Any)
