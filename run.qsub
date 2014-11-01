@@ -1,0 +1,13 @@
+# This job needs 1 compute node with 1 processor per node.
+# It should be allowed to run for up to 30min.
+#PBS -l walltime=24:00:00
+# Name of job.
+#PBS -N foamBCTest
+# Join STDERR TO STDOUT.  (omit this if you want separate STDOUT AND STDERR)
+#PBS -j oe
+
+cd /users/a/r/areagan/work/2014/2014-11julia-openfoam
+
+julia BCtest.jl 1000 0.01 1.0 ${topBC} ${bottomBC} 225
+
+
