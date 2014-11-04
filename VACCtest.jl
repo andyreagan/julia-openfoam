@@ -4,7 +4,9 @@ using foamLia
 
 # okay, test implementation
 # case = OpenFoam("/users/a/r/areagan/scratch/run/juliatest")
-caseFolder = "/users/a/r/areagan/OpenFOAM/areagan-2.2.1/run/juliabase"
+# caseFolder = "/users/a/r/areagan/OpenFOAM/areagan-2.2.1/run/juliabase"
+caseFolder = "/users/a/r/areagan/scratch/run/BCTest-260-370"
+# caseFolder = "/users/a/r/areagan/scratch/run/2014-10-15-small-mesh-long-runs/400"
 case = OpenFoam(caseFolder)
 
 # manipulate parameters
@@ -24,4 +26,23 @@ baseCase = "/users/a/r/areagan/OpenFOAM/areagan-2.2.1/run/juliabase"
 
 # run(`./Allrun`)
 
-readMesh(case)
+# readMesh(case)
+
+timeSaves = findTimes(case)
+println(timeSaves)
+
+# T = readVar(case,"0.24","T")
+
+# println(size(T))
+
+# Tbottom = readVarSpec(case,"0.24","T",[1,10,100,1000,1600])
+
+# println(Tbottom)
+
+for t in timeSaves
+    if t>0
+	continue
+    end
+end
+
+

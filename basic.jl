@@ -2,10 +2,18 @@ module foamLia
 
 println("foamLia: basic openfoam manipulation")
 
-export OpenFoam,initCase,run,runQ,readMesh
+export OpenFoam,initCase,run,runQ,readMesh,findTimes,readVar,readVarSpec,stringG
 
 using DataStructures
 import Base.run
+
+function stringG(a::Number)
+    if float(int(a)) == a
+        return string(int(a))
+    else
+        return string(a)
+    end
+end
 
 # main (only) type
 # want to be able to store all case-related information
@@ -125,10 +133,11 @@ defaultMeshParam["y"] = 40
 defaultMeshParam["refinements"] = 0
 
 defaultMesh = OrderedDict(String,Any)
-defaultMesh["points"] = [] # (-0.0001 -0.375 0)
-defaultMesh["faces"] = [] # 4(2 84 85 3)
-defaultMesh["cellFaces"] = [] # 1
-defaultMesh["cellCenters"] = [] # 1
+defaultMesh["points"] = zeros(Float64,3,1) # (-0.0001 -0.375 0)
+defaultMesh["faces"] = zeros(Int64,4,1) # 4(2 84 85 3)
+defaultMesh["owner"] = zeros(Int64,1,1) # 1
+defaultMesh["cellFaces"] = zeros(Int64,6,1) # 1
+defaultMesh["cellCenters"] = zeros(Float64,3,1) # 1
 # defaultMesh["boundary"] = []
 
 # meshParameters::OrderedDict
@@ -209,12 +218,12 @@ end
 
 function serializeDinner(a::Array)
   if typeof(a[1]) == ASCIIString
-    println("joining array")
-    println(a)
-    println(join(a,"\n"))
+    # println("joining array")
+    # println(a)
+    # println(join(a,"\n"))
     return join(["(",join(a,"\n"),")"],"\n")
   else
-    println("not joining array")
+    # println("not joining array")
     return join(["[",join(a," "),"]"],"")
   end
 end
@@ -258,13 +267,11 @@ end
 
 allFiles = ["Allrun","0/alphat","0/epsilon","0/k","0/nut","0/p","0/p_rgh","0/T","0/U","constant/g","constant/RASProperties","constant/transportProperties","constant/turbulenceProperties","system/controlDict","system/fvSchemes","system/fvSolution","system/setFieldsDict"]
 meshFiles = [join(["constant","polyMesh",x],"/") for x in ["blockMeshDict","blockMeshDict3D","boundary","faces","neighbour","owner","points"]]
-# ,"pointsGrep0","pyZones"]]
-# println(meshFiles)
 
 copyFromBase(o::OpenFoam,baseCase::String) = copyFromBase(o::OpenFoam,append!(allFiles,meshFiles),baseCase::String)
 
 function initCase(o::OpenFoam,baseCase::String)
-    println("making sure folders exist")
+    # println("making sure folders exist")
     for folder in [join([o.caseFolder,"system"],"/"),join([o.caseFolder,"constant","polyMesh"],"/"),join([o.caseFolder,"0"],"/")]
         if !isdir(folder)
             mkpath(folder)
@@ -300,8 +307,8 @@ function readMesh(o::OpenFoam)
     while !b
         m = match(r"([0-9]+)\n",readline(f))
         if m != nothing
-            println("done with initial read")
-            println("there are $(m.captures[1]) points")
+            # println("done with initial read")
+            # println("there are $(m.captures[1]) points")
             o.fullMesh["points"] = zeros(3,int(m.captures[1]))
             b = true
         end
@@ -310,21 +317,21 @@ function readMesh(o::OpenFoam)
     for line in eachline(f)
         m = match(r"\(([-.0-9]+) ([-.0-9]+) ([-.0-9]+)\)\n",line)
         if m != nothing
-            i = i+1
+            i=i+1
             o.fullMesh["points"][:,i] = map(float,m.captures)
         end        
     end
     close(f)
-    println("here are some points")
-    println(o.fullMesh["points"][:,100])
+    # println("here are some points")
+    # println(o.fullMesh["points"][:,100])
 
     f = open(join([o.caseFolder,"constant","polyMesh","faces"],"/"),"r")
     b = false
     while !b
         m = match(r"([0-9]+)\n",readline(f))
         if m != nothing
-            println("done with initial read")
-            println("there are $(m.captures[1]) faces")
+            # println("done with initial read")
+            # println("there are $(m.captures[1]) faces")
             o.fullMesh["faces"] = zeros(Int,4,int(m.captures[1]))
             b = true
         end
@@ -333,16 +340,16 @@ function readMesh(o::OpenFoam)
     for line in eachline(f)
         m = match(r"4\(([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+)\)\n",line)
         if m != nothing
-            i = i+1
-            o.fullMesh["faces"][:,i] = map(int,m.captures)
-        end        
+            i=i+1
+            o.fullMesh["faces"][:,i] = map((x)->x+1,map(int,m.captures))
+        end
     end
     close(f)
-    println("here is a face's points nums")
-    println(o.fullMesh["faces"][:,100])
-    println("here are those points")
+    # println("here is a face's points nums")
+    # println(o.fullMesh["faces"][:,100])
+    # println("here are those points")
     for p in o.fullMesh["faces"][:,100]
-        println(o.fullMesh["points"][:,p])
+        # println(o.fullMesh["points"][:,p])
     end
 
     # rather than read into owner, read the faces into their cell
@@ -353,15 +360,16 @@ function readMesh(o::OpenFoam)
         a = readline(f)
         c = match(r"nCells: ([0-9]+)",a)
         if c != nothing
-            println("there are $(c.captures[1]) cells")
+            # println("there are $(c.captures[1]) cells")
             numcells = int(c.captures[1])
             o.fullMesh["cellFaces"] = zeros(Int,6,numcells)
             o.fullMesh["cellCenters"] = zeros(Float64,3,numcells)
         end
         m = match(r"([0-9]+)\n",a)
         if m != nothing
-            println("done with initial read")
-            println("there are $(m.captures[1]) faces owned")
+            # println("done with initial read")
+            # println("there are $(m.captures[1]) faces owned")
+            o.fullMesh["owner"] = zeros(Int64,int(m.captures[1]))
             b = true
         end
     end
@@ -369,23 +377,24 @@ function readMesh(o::OpenFoam)
     for line in eachline(f)
         m = match(r"([0-9]+)\n",line)
         if m != nothing
-            i = i+1
+            i=i+1
             j = 1
             while o.fullMesh["cellFaces"][j,int(m.captures[1])+1] != 0
-                j = j+1
+                j=j+1
             end
             o.fullMesh["cellFaces"][j,int(m.captures[1])+1] = i
+            o.fullMesh["owner"][i] = int(m.captures[1])+1
         end        
     end
     close(f)
-    println(o.fullMesh["cellFaces"][:,100:110])
+    # println(o.fullMesh["cellFaces"][:,100:110])
 
     f = open(join([o.caseFolder,"constant","polyMesh","neighbour"],"/"),"r")
     b = false
     while !b
         m = match(r"([0-9]+)\n",readline(f))
         if m != nothing
-            println("done with initial read")
+            # println("done with initial read")
             b = true
         end
     end
@@ -393,16 +402,16 @@ function readMesh(o::OpenFoam)
     for line in eachline(f)
         m = match(r"([0-9]+)\n",line)
         if m != nothing
-            i = i+1
+            i=i+1
             j = 1
             while o.fullMesh["cellFaces"][j,int(m.captures[1])+1] != 0
-                j = j+1
+                j=j+1
             end
             o.fullMesh["cellFaces"][j,int(m.captures[1])+1] = i
         end        
     end
     close(f)
-    println(o.fullMesh["cellFaces"][:,100:110])
+    # println(o.fullMesh["cellFaces"][:,100:110])
 
     for i in 1:numcells
         # add up all of the points, for all of the faces
@@ -413,15 +422,229 @@ function readMesh(o::OpenFoam)
         center = zeros(Float64,3)
         for j in 1:6
            for p in o.fullMesh["faces"][:,o.fullMesh["cellFaces"][j,i]]
-               center += o.fullMesh["points"][:,p+1]
+               center += o.fullMesh["points"][:,p]
            end
         end
         o.fullMesh["cellCenters"][:,i] = center/24
     end
     
-    println(o.fullMesh["cellCenters"][:,100:110])
+    # println(o.fullMesh["cellCenters"][:,100:110])
+
+    # faces, cells
+    # take them while we're at it
+    fa,ce = takeSlices(o)
+    return fa,ce
 end
 
+function readVar(o::OpenFoam,t::String,v::String)
+    # just go read that file
+    # t is the time (a string!)
+    # v is the variable
+    cd(o.caseFolder)
+    f = open(join([t,v],"/"),"r")
+    b = false
+    # couple defaults
+    n = 1
+    mr = r"([0-9]+)\n"
+    var = []
+    while !b
+        a = readline(f)
+        c = match(r"class\s+([a-zA-Z]+);",a)
+        if c != nothing
+            # println("this variable is class $(c.captures[1])")
+            if c.captures[1] == "volScalarField"
+                mr = r"([0-9.\-]+e*[0-9.\-]+)\n"
+                n = 1
+            elseif c.captures[1] == "surfaceScalarField"
+                mr = r"([0-9.\-]+e*[0-9.\-]+)\n"
+                n = 1
+            elseif c.captures[1] == "volVectorField"
+                mr = r"\(([0-9.\-]+e*[0-9.\-]+) ([0-9.\-]+e*[0-9.\-]+) ([0-9.\-]+e*[0-9.\-]+)\)\n"
+                n = 3
+            elseif c.captures[1] == "surfaceVectorField"
+                mr = r"\(([0-9.\-]+e*[0-9.\-]+) ([0-9.\-]+e*[0-9.\-]+) ([0-9.\-]+e*[0-9.\-]+)\)\n"
+                n = 3
+            end
+        end
+        m = match(r"([0-9]+)\n",a)
+        if m != nothing
+            # println("done with initial read")
+            # println("there are $(m.captures[1]) variables to read")
+            var = zeros(Float64,n,int(m.captures[1]))
+            b = true
+        end
+    end
+    i = 0
+    for line in eachline(f)
+        m = match(mr,line)
+        if m != nothing
+            i=i+1
+            # println(m)
+            # println(map(string,m.captures))
+            # println(i)
+            # println(var[:,i])
+            var[:,i] = map(float,map(string,m.captures))
+        end
+    end
+    close(f)
+    return var
+end
+
+function readVarSpec(o::OpenFoam,t::String,v::String,ind::Array{Int64})
+    # get some specific lines
+    # t is the time (a string!)
+    # v is the variable
+    cd(o.caseFolder)
+    f = open(join([t,v],"/"),"r")
+    b = false
+    # couple defaults
+    n = 1
+    mr = r"([0-9.\-]+e*[0-9.\-]+)\n"
+    var = []
+    while !b
+        a = readline(f)
+        c = match(r"class\s+([a-zA-Z]+);",a)
+        if c != nothing
+            # println("this variable is class $(c.captures[1])")
+            if c.captures[1] == "volScalarField"
+                mr = r"([0-9.\-]+e*[0-9.\-]+)\n"
+                n = 1
+            elseif c.captures[1] == "surfaceScalarField"
+                mr = r"([0-9.\-]+e*[0-9.\-]+)\n"
+                n = 1
+            elseif c.captures[1] == "volVectorField"
+                mr = r"\(([0-9.\-]+e*[0-9.\-]+) ([0-9.\-]+e*[0-9.\-]+) ([0-9.\-]+e*[0-9.\-]+)\)\n"
+                n = 3
+            elseif c.captures[1] == "surfaceVectorField"
+                mr = r"\(([0-9.\-]+e*[0-9.\-]+) ([0-9.\-]+e*[0-9.\-]+) ([0-9.\-]+e*[0-9.\-]+)\)\n"
+                n = 3
+            end
+        end
+        m = match(r"([0-9]+)\n",a)
+        if m != nothing
+            # println("done with initial read")
+            # println("there are $(m.captures[1]) variables to read")
+            var = zeros(Float64,n,length(ind))
+            b = true
+        end
+    end
+    i = 0
+    j = 1
+    while j <= length(ind)
+        line = readline(f)
+        m = match(mr,line)
+        if m != nothing
+            i=i+1
+            if i == ind[j]
+                var[:,j] = map(float,map(string,m.captures))
+                j = j+1
+            end
+        end
+    end
+    close(f)
+    return var
+end
+
+function takeSlices(o::OpenFoam)
+    # find the points which lie directly on the slices (y or z are 0)
+    TOL = 1e-15
+    # points = zeros(Int64,4,1) # 12,3,6,9
+    # points = [Array(Int64,1) for i in 1:4] # 12,3,6,9
+    points = [Int64[] for i in 1:4] # 12,3,6,9
+    for i in 1:size(o.fullMesh["points"])[2]
+    # for i in 1:length(o.fullMesh["points"][1,:])
+        if abs(o.fullMesh["points"][2,i]) < TOL # vertical slice
+            if o.fullMesh["points"][3,i] > 0 # top
+                append!(points[1],[i])
+            else # bottom
+                append!(points[3],[i])
+            end
+        end
+        if abs(o.fullMesh["points"][3,i]) < TOL
+            if o.fullMesh["points"][2,i] > 0 # right
+                append!(points[2],[i])
+            else # left
+                append!(points[4],[i])
+            end        
+        end
+    end
+    # return points
+
+    ## make sure that the face contains ALL of these points
+    faces = [Int64[] for i in 1:4] # 12,3,6,9
+    # go get the faces for which those points are in
+    for i in 1:size(o.fullMesh["faces"])[2]
+        for j in 1:4
+            pointsOnSlice = 0
+            for p in o.fullMesh["faces"][:,i]
+               if p in points[j]
+                   pointsOnSlice = pointsOnSlice+1
+                   if pointsOnSlice == 4
+                       append!(faces[j],[i])
+                   end
+                   continue
+               else
+                   break
+               end
+            end
+        end
+    end
+
+    # go get the cells which own those faces (and neighbor them?)
+    # really just want the owners...need to go back and save the owner information
+    # okay got them
+    faceowners = [zeros(Int64,length(faces[1])) for i in 1:4] # 12,3,6,9
+    # go get the faces for which those points are in
+    for j in 1:4
+        for i in 1:length(faces[1])
+            faceowners[j][i] = o.fullMesh["owner"][faces[j][i]]
+        end
+    end
+    return faces,faceowners
+end
+
+function findTimes(o::OpenFoam)
+    times = Int64[]
+    cd(o.caseFolder)
+    # this works
+    # but i don't need to be so redundant
+    # for line in split(readall(`ls -R` |> `grep uniform`),"\n")
+    #     m = match(r"/([0-9.]+)/uniform",line)
+    #     if m != nothing
+    #         append!(times,int(m.captures[1]))
+    #     end
+    # end
+    for line in split(readall(`ls`),"\n")
+        i = match(r"^([0-9]+)$",line)
+        f = match(r"^([0-9]+\.[0-9]+)$",line)
+        # println(line)
+        # println(m)
+        if i != nothing
+            # println(i)
+            if length(times) > 0
+                if typeof(times[1]) == Int64
+                    append!(times,[int(i.captures[1])])
+                else
+                    append!(times,[float(i.captures[1])])
+                end
+            else
+                append!(times,[int(i.captures[1])])
+            end
+        end
+        if f != nothing
+            # println(f)
+            if length(times) > 0
+                if typeof(times[1]) == Int64
+                    times = convert(Array{Float64},times)
+                end
+            else
+                times = Float64[]
+            end
+            append!(times,[float(f.captures[1])])
+        end
+    end
+    sort!(times)
+end
 
 qsubheader = """#PBS -l walltime=24:00:00
 #PBS -N foamBCTest
