@@ -22,7 +22,6 @@ println(case.T)
 
 baseCase = "/users/a/r/areagan/OpenFOAM/areagan-2.2.1/run/juliabase"
 initCase(case,baseCase)
-cd(caseFolder)
-run(`./Allrun`)
+run(case,`./Allrun`,"workq")
 
 

@@ -3,7 +3,9 @@ include("basic.jl")
 using foamLia
 
 # okay, test implementation
-case = OpenFoam("/users/a/r/areagan/scratch/run/juliatest")
+# case = OpenFoam("/users/a/r/areagan/scratch/run/juliatest")
+caseFolder = "/users/a/r/areagan/OpenFOAM/areagan-2.2.1/run/juliabase"
+case = OpenFoam(caseFolder)
 
 # manipulate parameters
 case.controlDict["endTime"] = 1
@@ -13,12 +15,13 @@ case.controlDict["writeInterval"] = .1
 # # ["boundaryField"]["bottominside"]["variables"] = "\"Text=340;hc=225;gradT=(Text-T)*hc\""
 
 baseCase = "/users/a/r/areagan/OpenFOAM/areagan-2.2.1/run/juliabase"
-initCase(case,baseCase)
+# initCase(case,baseCase)
 
 # (o::OpenFoam,d::OrderedDict,name::String,location::String)
 # writeVolScalarField(test,defaultT,"T","0")
 
-cd("/users/a/r/areagan/scratch/run/juliatest")
+# cd("/users/a/r/areagan/scratch/run/juliatest")
 
-run(`./Allrun`)
+# run(`./Allrun`)
 
+readMesh(case)

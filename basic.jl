@@ -2,9 +2,10 @@ module foamLia
 
 println("foamLia: basic openfoam manipulation")
 
-export OpenFoam,initCase
+export OpenFoam,initCase,run,runQ,readMesh
 
 using DataStructures
+import Base.run
 
 # main (only) type
 # want to be able to store all case-related information
@@ -19,6 +20,8 @@ type OpenFoam
     turbulenceProperties::OrderedDict
     # blockMeshDict::OrderedDict
     T::OrderedDict
+    meshParameters::OrderedDict
+    fullMesh::OrderedDict
 end
 
 # default settings
@@ -114,7 +117,23 @@ defaultT["boundaryField"]["bottomoutside"]["fractionExpression"] = "\"0\""
 defaultT["boundaryField"]["bottomoutside"]["variables"] = "\"Text=340;hc=225;gradT=(Text-T)*hc;\""
 defaultT["boundaryField"]["bottomoutside"]["timelines"] = ()
 
-OpenFoam(folder) = OpenFoam(folder,defaultControlDict,defaultTurbulenceProperties,defaultT)
+defaultMeshParam = OrderedDict(String,Any)
+defaultMeshParam["baseMeshDir"] = "/users/a/r/areagan/scratch/run/2014-10-23-all-meshes/"
+defaultMeshParam["dim"] = 2
+defaultMeshParam["x"] = 250
+defaultMeshParam["y"] = 40
+defaultMeshParam["refinements"] = 0
+
+defaultMesh = OrderedDict(String,Any)
+defaultMesh["points"] = [] # (-0.0001 -0.375 0)
+defaultMesh["faces"] = [] # 4(2 84 85 3)
+defaultMesh["cellFaces"] = [] # 1
+defaultMesh["cellCenters"] = [] # 1
+# defaultMesh["boundary"] = []
+
+# meshParameters::OrderedDict
+# fullMesh::OrderedDict
+OpenFoam(folder) = OpenFoam(folder,defaultControlDict,defaultTurbulenceProperties,defaultT,defaultMeshParam,defaultMesh)
 
 header = """/*--------------------------------*- C++ -*----------------------------------*\
 | =========                |                                                 |
@@ -235,7 +254,6 @@ function copyFromBase(o::OpenFoam,files::Array,baseCase::String)
 	    run(`chmod +x $d`)
 	end
     end
-    
 end
 
 allFiles = ["Allrun","0/alphat","0/epsilon","0/k","0/nut","0/p","0/p_rgh","0/T","0/U","constant/g","constant/RASProperties","constant/transportProperties","constant/turbulenceProperties","system/controlDict","system/fvSchemes","system/fvSolution","system/setFieldsDict"]
@@ -266,7 +284,190 @@ function initCase(o::OpenFoam,baseCase::String)
     writeVolScalarField(o,o.T,"T","0")
 end
 
+# defaultMesh["points"] = [] # (-0.0001 -0.375 0)
+# defaultMesh["faces"] = [] # 4(2 84 85 3)
+# defaultMesh["neighbour"] = [] # 1
+# defaultMesh["owner"] = [] # 0
+
+function readMesh(o::OpenFoam)
+    # give this function level scope
+    numcells = 0
+    
+    # read the mesh from the case
+    # goal is to fill up the mesh property
+    f = open(join([o.caseFolder,"constant","polyMesh","points"],"/"),"r")
+    b = false
+    while !b
+        m = match(r"([0-9]+)\n",readline(f))
+        if m != nothing
+            println("done with initial read")
+            println("there are $(m.captures[1]) points")
+            o.fullMesh["points"] = zeros(3,int(m.captures[1]))
+            b = true
+        end
+    end
+    i = 0
+    for line in eachline(f)
+        m = match(r"\(([-.0-9]+) ([-.0-9]+) ([-.0-9]+)\)\n",line)
+        if m != nothing
+            i = i+1
+            o.fullMesh["points"][:,i] = map(float,m.captures)
+        end        
+    end
+    close(f)
+    println("here are some points")
+    println(o.fullMesh["points"][:,100])
+
+    f = open(join([o.caseFolder,"constant","polyMesh","faces"],"/"),"r")
+    b = false
+    while !b
+        m = match(r"([0-9]+)\n",readline(f))
+        if m != nothing
+            println("done with initial read")
+            println("there are $(m.captures[1]) faces")
+            o.fullMesh["faces"] = zeros(Int,4,int(m.captures[1]))
+            b = true
+        end
+    end
+    i = 0
+    for line in eachline(f)
+        m = match(r"4\(([0-9]+) ([0-9]+) ([0-9]+) ([0-9]+)\)\n",line)
+        if m != nothing
+            i = i+1
+            o.fullMesh["faces"][:,i] = map(int,m.captures)
+        end        
+    end
+    close(f)
+    println("here is a face's points nums")
+    println(o.fullMesh["faces"][:,100])
+    println("here are those points")
+    for p in o.fullMesh["faces"][:,100]
+        println(o.fullMesh["points"][:,p])
+    end
+
+    # rather than read into owner, read the faces into their cell
+    # each cell needs 6 faces
+    f = open(join([o.caseFolder,"constant","polyMesh","owner"],"/"),"r")
+    b = false
+    while !b
+        a = readline(f)
+        c = match(r"nCells: ([0-9]+)",a)
+        if c != nothing
+            println("there are $(c.captures[1]) cells")
+            numcells = int(c.captures[1])
+            o.fullMesh["cellFaces"] = zeros(Int,6,numcells)
+            o.fullMesh["cellCenters"] = zeros(Float64,3,numcells)
+        end
+        m = match(r"([0-9]+)\n",a)
+        if m != nothing
+            println("done with initial read")
+            println("there are $(m.captures[1]) faces owned")
+            b = true
+        end
+    end
+    i = 0
+    for line in eachline(f)
+        m = match(r"([0-9]+)\n",line)
+        if m != nothing
+            i = i+1
+            j = 1
+            while o.fullMesh["cellFaces"][j,int(m.captures[1])+1] != 0
+                j = j+1
+            end
+            o.fullMesh["cellFaces"][j,int(m.captures[1])+1] = i
+        end        
+    end
+    close(f)
+    println(o.fullMesh["cellFaces"][:,100:110])
+
+    f = open(join([o.caseFolder,"constant","polyMesh","neighbour"],"/"),"r")
+    b = false
+    while !b
+        m = match(r"([0-9]+)\n",readline(f))
+        if m != nothing
+            println("done with initial read")
+            b = true
+        end
+    end
+    i = 0
+    for line in eachline(f)
+        m = match(r"([0-9]+)\n",line)
+        if m != nothing
+            i = i+1
+            j = 1
+            while o.fullMesh["cellFaces"][j,int(m.captures[1])+1] != 0
+                j = j+1
+            end
+            o.fullMesh["cellFaces"][j,int(m.captures[1])+1] = i
+        end        
+    end
+    close(f)
+    println(o.fullMesh["cellFaces"][:,100:110])
+
+    for i in 1:numcells
+        # add up all of the points, for all of the faces
+        # there will be a total of 6*4 = 24 points
+        # whereas really we only need 8
+        # the triple redundancy won't matter
+        # and trying to eliminate it would be slower
+        center = zeros(Float64,3)
+        for j in 1:6
+           for p in o.fullMesh["faces"][:,o.fullMesh["cellFaces"][j,i]]
+               center += o.fullMesh["points"][:,p+1]
+           end
+        end
+        o.fullMesh["cellCenters"][:,i] = center/24
+    end
+    
+    println(o.fullMesh["cellCenters"][:,100:110])
 end
+
+
+qsubheader = """#PBS -l walltime=24:00:00
+#PBS -N foamBCTest
+#PBS -j oe
+
+cd /users/a/r/areagan/work/2014/2014-11julia-openfoam
+
+./Allrun"""
+
+function run(o::OpenFoam,c::Cmd,q::String)
+    println("submitting the qsub job")
+    cd(o.caseFolder)	
+
+    walltime = "30:00:00"
+    jobname = "foamBCTest"
+
+    f = open("run.qsub","w")
+
+    # write the header
+    # write(f,qsubheader)
+
+    a = "#PBS"
+    write(f,join([a,"-l",join(["walltime",walltime],"=")]," "))
+    write(f,"\n")
+    write(f,join([a,"-N",jobname]," "))
+    write(f,"\n")
+    write(f,join([a,"-j","oe"]," "))
+    write(f,"\n\n")
+    write(f,"cd $(o.caseFolder)\n\n")
+    write(f,"$(string(c)[2:end-1])\n\n")
+
+    close(f)
+    run(`qsub -q $(q) run.qsub`)
+    # println(`qsub -q $(q) run.qsub`)
+end
+
+function run(o::OpenFoam,c::Cmd)
+    cd(o.caseFolder)
+    run(c)
+end
+
+end
+
+
+
+
 
 
 
