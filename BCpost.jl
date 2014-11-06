@@ -56,8 +56,8 @@ for i in 1:length(timeSaves)
     end
 end
 
-println(Tavg)
-println(Phiavg)
+# println(Tavg)
+# println(Phiavg)
 
 cd("/users/a/r/areagan/scratch/run/BCTest-$(topT)-$(bottomT)")
 
@@ -68,5 +68,35 @@ close(f)
 f = open("Phiavg.csv","w")
 writecsv(f,Phiavg)
 close(f)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

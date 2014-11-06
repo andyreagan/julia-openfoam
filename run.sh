@@ -8,7 +8,7 @@ do
     # qsub -V run.qsub
     # now I'm going to call julia
     # which will submit a qsub
-    sleep 1
-    julia BCtest.jl 1000 0.01 1.0 ${topBC} ${bottomBC} 225
+    # sleep 1
+    julia BCpost.jl 1000 0.01 1.0 ${topBC} ${bottomBC} 225
   done
 done
