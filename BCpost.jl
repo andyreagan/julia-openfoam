@@ -24,7 +24,6 @@ baseCase = "/users/a/r/areagan/OpenFOAM/areagan-2.2.1/run/juliabase"
 # initCase(case,baseCase)
 # run(case,`./Allrun`,"workq")
 
-
 faces,cells = readMesh(case)
 
 timeSaves = findTimes(case)
