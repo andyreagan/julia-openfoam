@@ -17,11 +17,13 @@ case.controlDict["writeInterval"] = float(writeInterval)
 case.T["boundaryField"]["bottominside"]["variables"] = "\"Text=$(bottomT);hc=$(hc);gradT=(Text-T)*hc;\""
 case.T["boundaryField"]["bottomoutside"]["variables"] = "\"Text=$(bottomT);hc=$(hc);gradT=(Text-T)*hc;\""
 case.T["boundaryField"]["topinside"]["variables"] = "\"Text=$(topT);hc=$(hc);gradT=(Text-T)*hc;\""
-case.T["boundaryField"]["topinside"]["variables"] = "\"Text=$(topT);hc=$(hc);gradT=(Text-T)*hc;\""
+case.T["boundaryField"]["topoutside"]["variables"] = "\"Text=$(topT);hc=$(hc);gradT=(Text-T)*hc;\""
 println(case.T)
 
 baseCase = "/users/a/r/areagan/OpenFOAM/areagan-2.2.1/run/juliabase"
 initCase(case,baseCase)
-run(case,`./Allrun`,"workq")
+# run(case,`./Allrun`,"workq")
+run(case,`./Allrun`)
+
 
 
