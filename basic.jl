@@ -2,7 +2,7 @@ module foamLia
 
 println("foamLia: basic openfoam manipulation")
 
-export OpenFoam,initCase,run,runQ,readMesh,findTimes,readVar,readVarSpec,stringG,rewriteVar,reshapeMesh
+export OpenFoam,initCase,run,runQ,readMesh,findTimes,readVar,readVarSpec,stringG,rewriteVar,reshapeMesh,writeDict,writeVolScalarField
 
 using DataStructures
 import Base.run
