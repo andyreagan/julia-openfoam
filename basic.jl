@@ -2,7 +2,7 @@ module foamLia
 
 println("foamLia: basic openfoam manipulation")
 
-export OpenFoam,initCase,run,runQ,readMesh,findTimes,readVar,readVarSpec,stringG
+export OpenFoam,initCase,run,runQ,readMesh,findTimes,readVar,readVarSpec,stringG,rewriteVar,reshapeMesh
 
 using DataStructures
 import Base.run
@@ -475,9 +475,10 @@ function readVar(o::OpenFoam,t::String,v::String)
         end
     end
     i = 0
+    # println(size(var))
     for line in eachline(f)
         m = match(mr,line)
-        if m != nothing
+        if m != nothing && i < size(var)[2]
             i=i+1
             # println(m)
             # println(map(string,m.captures))
@@ -486,6 +487,87 @@ function readVar(o::OpenFoam,t::String,v::String)
             var[:,i] = map(float,map(string,m.captures))
         end
     end
+    close(f)
+    return var
+end
+
+function rewriteVar(o::OpenFoam,t::String,v::String,var::Array)
+    # just go read that file
+    # t is the time (a string!)
+    # v is the variable name, "T"
+    # var is the array of the variable
+    
+    cd(o.caseFolder)
+    f = open(join([t,v],"/"),"r")
+    b = false
+    header = ""
+    # couple defaults
+    n = 1
+    len = 40000
+    mr = r"([0-9]+)\n"
+    while !b
+        a = readline(f)
+        header = join([header,a],"")
+        c = match(r"class\s+([a-zA-Z]+);",a)
+        if c != nothing
+            # println("this variable is class $(c.captures[1])")
+            if c.captures[1] == "volScalarField"
+                mr = r"([0-9.\-]+e*[0-9.\-]+)\n"
+                n = 1
+            elseif c.captures[1] == "surfaceScalarField"
+                mr = r"([0-9.\-]+e*[0-9.\-]+)\n"
+                n = 1
+            elseif c.captures[1] == "volVectorField"
+                mr = r"\(([0-9.\-]+e*[0-9.\-]+) ([0-9.\-]+e*[0-9.\-]+) ([0-9.\-]+e*[0-9.\-]+)\)\n"
+                n = 3
+            elseif c.captures[1] == "surfaceVectorField"
+                mr = r"\(([0-9.\-]+e*[0-9.\-]+) ([0-9.\-]+e*[0-9.\-]+) ([0-9.\-]+e*[0-9.\-]+)\)\n"
+                n = 3
+            end
+        end
+        m = match(r"([0-9]+)\n",a)
+        if m != nothing
+            # println("done with initial read")
+            # println("there are $(m.captures[1]) variables to read")
+            len = int(m.captures[1])
+            b = true
+        end
+    end
+    i = 0
+    println(size(var))
+
+    b = false
+    while !b
+        a = readline(f)
+        if a == ";\n"
+            b = true
+        end
+    end
+    # footer = ""
+    footer = join(readlines(f),"")
+    close(f)
+    # println(header)
+    # println(footer)
+
+    cp(join([t,v],"/"),join([t,string(v,"_o")],"/"))
+    f = open(join([t,v],"/"),"w")
+    write(f,header)
+    if n == 1
+        write(f,"(\n")
+        for i in 1:length(var)
+            write(f,"$(var[i])\n")
+        end
+        write(f,")\n")
+        write(f,";\n\n")
+    elseif n==3
+        write(f,"(\n")
+        for i in 1:length(var)
+            write(f,"($(var[i,1]) $(var[i,2]) $(var[i,3]))\n")
+        end
+        write(f,")\n")
+        write(f,";\n\n")
+    end
+    write(f,footer)
     close(f)
     return var
 end
@@ -684,6 +766,81 @@ end
 function run(o::OpenFoam,c::Cmd)
     cd(o.caseFolder)
     run(c)
+end
+
+function reshapeMesh(case)
+    # don't need the result, but I do want to read the mesh
+    readMesh(case)
+
+    x = case.meshParameters["x"]*4
+    y = case.meshParameters["y"]+2*case.meshParameters["refinements"]
+    points = zeros(Int64,x,y)
+    indices = zeros(Int64,x*y,2)
+
+    # println("the mesh is $(x) by $(y)")
+
+    theta = [y for y in 2*pi/x/2:2*pi/x:2*pi-2*pi/x/2]
+    # println(size(theta))
+    # println(theta[1:10])
+    # println(theta[end-10:end])
+
+    # println(size(case.fullMesh["cellCenters"]))
+    # println(case.fullMesh["cellCenters"][:,1])
+
+    TOL = 1e-3
+    # println(size(case.fullMesh["cellCenters"])[2])
+    # println(case.fullMesh["cellCenters"][:,size(case.fullMesh["cellCenters"])[2]])
+    for i in 1:size(case.fullMesh["cellCenters"])[2]
+        # println("i is $(i)")
+        # start them at the right side, go counter clockwise
+        # arctan(z/y) where y is right the right (adjacent), 
+        # z is up (opposite)
+        th = atan2(case.fullMesh["cellCenters"][3,i],case.fullMesh["cellCenters"][2,i])
+        # wrap around
+        if th<0
+            th = th+2*pi
+        end
+        r = sqrt(case.fullMesh["cellCenters"][3,i]^2+case.fullMesh["cellCenters"][2,i]^2)
+        # println("th is $(th)")
+        # println("r is $(r)")
+        # find the index of theta
+        j = 1
+        # while abs(th-theta[j])>abs(th-theta[j+1]) > TOL
+        while abs(th-theta[j]) > abs(th-theta[j+1]) # && j <= 999
+            # println(j)
+            # println(abs(th-theta[j]))
+            j += 1
+            # this can't be the best way
+            if j == 1000
+                break
+            end
+        end
+        # println("j is $(j)")
+        # println(points[j,:])
+        k = 1
+        while points[j,k] != 0.0
+            k += 1
+        end
+        # println("k is $(k)")
+        points[j,k] = i
+        # (no point in filling indices until sorted)
+    end
+
+    # now go and sort the points by their r value
+    for i in 1:x
+        ps = points[i,:]
+        # go get the r for each of the points
+        rs = [sqrt(case.fullMesh["cellCenters"][3,p]^2+case.fullMesh["cellCenters"][2,p]^2) for p in ps]
+        perm = sortperm(rs)
+        points[i,:] = ps[perm]
+        j = 1
+        for p in ps
+            indices[p,:] = [i,j]
+            j+=1
+        end
+    end
+
+    points,indices
 end
 
 end
