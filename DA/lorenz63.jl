@@ -285,6 +285,7 @@ ETKF = function(X_f::Array,y_0::Array,H::Array,R::Array,delta::Float64)
 
     # estimate error covariance
     pf = 1/(N-1).*( *(X_f_diff,X_f_diff.') )
+    println(pf)
     
     # compute Kalman gain matrix
     K = \( *(pf,H.') , R+ *(H ,*(pf,H.') ) )

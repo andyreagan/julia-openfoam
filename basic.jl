@@ -56,74 +56,78 @@ defaultControlDict["libs"] = ["\"libOpenFOAM.so\"","\"libsimpleSwakFunctionObjec
 defaultTurbulenceProperties = OrderedDict(String,String)
 defaultTurbulenceProperties["simulationType"] = "laminar" # "RASModel" "LESModel"
 
-defaultT = OrderedDict(String,Any)
-defaultT["dimensions"] = [0,0,0,1,0,0,0]
-defaultT["internalField"] = "uniform 300"
-# this should work, but deepcopy doesn't work
-# emptyBC = OrderedDict(String,Any)
-# emptyBC["type"] = "empty"
-# defaultT["boundaryField"] = OrderedDict(String,Any)
-# defaultT["boundaryField"]["front"] = deepcopy(emptyBC)
-# defaultT["boundaryField"]["back"] = deepcopy(emptyBC)
-# groovyBC = OrderedDict(String,Any)
-# groovyBC["type"] = "groovyBC"
-# groovyBC["value"] = "uniform 300"
-# groovyBC["gradientExpression"] = "\"gradT\""
-# groovyBC["fractionExpression"] = "\"0\""
-# groovyBC["variables"] = "\"Text=280;hc=225;gradT=(Text-T)*hc\""
-# groovyBC["timelines"] = ()
-# function setGroovyBC(Text::Int,hc::Int,expression::String)
-#     groovyBC["variables"] = "\"Text=$(Text);hc=$(hc);$(expression)\""
-#     return groovyBC
-# end
-# setGroovyBC(T::Int) = setGroovyBC(T::Int,225,"gradT=(Text-T)*hc")
-# defaultT["boundaryField"]["topinside"] = deepcopy(setGroovyBC(280))
-# println(defaultT)
-# testvar = deepcopy(groovyBC)
-# println(testvar)
-# defaultT["boundaryField"]["topoutside"] = deepcopy(setGroovyBC(280))
-# println(defaultT)
-# println(groovyBC)
-# defaultT["boundaryField"]["bottominside"] = deepcopy(setGroovyBC(340))
-# println(defaultT)
-# println(testvar)
-# println(groovyBC)
-# defaultT["boundaryField"]["bottomoutside"] = deepcopy(setGroovyBC(340))
-# defaultT["boundaryField"]["topoutside"]["variables"] = "\"Text=280;hc=225;gradT=(Text-T)*hc\""
-# println(defaultT)
-defaultT["boundaryField"] = OrderedDict(String,Any)
-defaultT["boundaryField"]["front"] = OrderedDict(String,Any)
-defaultT["boundaryField"]["front"]["type"] = "empty"
-defaultT["boundaryField"]["back"] = OrderedDict(String,Any)
-defaultT["boundaryField"]["back"]["type"] = "empty"
-defaultT["boundaryField"]["topinside"] = OrderedDict(String,Any)
-defaultT["boundaryField"]["topinside"]["type"] = "groovyBC"
-defaultT["boundaryField"]["topinside"]["value"] = "uniform 300"
-defaultT["boundaryField"]["topinside"]["gradientExpression"] = "\"gradT\""
-defaultT["boundaryField"]["topinside"]["fractionExpression"] = "\"0\""
-defaultT["boundaryField"]["topinside"]["variables"] = "\"Text=280;hc=225;gradT=(Text-T)*hc;\""
-defaultT["boundaryField"]["topinside"]["timelines"] = ()
-defaultT["boundaryField"]["topoutside"] = OrderedDict(String,Any)
-defaultT["boundaryField"]["topoutside"]["type"] = "groovyBC"
-defaultT["boundaryField"]["topoutside"]["value"] = "uniform 300"
-defaultT["boundaryField"]["topoutside"]["gradientExpression"] = "\"gradT\""
-defaultT["boundaryField"]["topoutside"]["fractionExpression"] = "\"0\""
-defaultT["boundaryField"]["topoutside"]["variables"] = "\"Text=280;hc=225;gradT=(Text-T)*hc;\""
-defaultT["boundaryField"]["topoutside"]["timelines"] = ()
-defaultT["boundaryField"]["bottominside"] = OrderedDict(String,Any)
-defaultT["boundaryField"]["bottominside"]["type"] = "groovyBC"
-defaultT["boundaryField"]["bottominside"]["value"] = "uniform 300"
-defaultT["boundaryField"]["bottominside"]["gradientExpression"] = "\"gradT\""
-defaultT["boundaryField"]["bottominside"]["fractionExpression"] = "\"0\""
-defaultT["boundaryField"]["bottominside"]["variables"] = "\"Text=340;hc=225;gradT=(Text-T)*hc;\""
-defaultT["boundaryField"]["bottominside"]["timelines"] = ()
-defaultT["boundaryField"]["bottomoutside"] = OrderedDict(String,Any)
-defaultT["boundaryField"]["bottomoutside"]["type"] = "groovyBC"
-defaultT["boundaryField"]["bottomoutside"]["value"] = "uniform 300"
-defaultT["boundaryField"]["bottomoutside"]["gradientExpression"] = "\"gradT\""
-defaultT["boundaryField"]["bottomoutside"]["fractionExpression"] = "\"0\""
-defaultT["boundaryField"]["bottomoutside"]["variables"] = "\"Text=340;hc=225;gradT=(Text-T)*hc;\""
-defaultT["boundaryField"]["bottomoutside"]["timelines"] = ()
+function create_defaultT()
+    defaultT = OrderedDict(String,Any)
+    defaultT["dimensions"] = [0,0,0,1,0,0,0]
+    defaultT["internalField"] = "uniform 300"
+    # this should work, but deepcopy doesn't work
+    # emptyBC = OrderedDict(String,Any)
+    # emptyBC["type"] = "empty"
+    # defaultT["boundaryField"] = OrderedDict(String,Any)
+    # defaultT["boundaryField"]["front"] = deepcopy(emptyBC)
+    # defaultT["boundaryField"]["back"] = deepcopy(emptyBC)
+    # groovyBC = OrderedDict(String,Any)
+    # groovyBC["type"] = "groovyBC"
+    # groovyBC["value"] = "uniform 300"
+    # groovyBC["gradientExpression"] = "\"gradT\""
+    # groovyBC["fractionExpression"] = "\"0\""
+    # groovyBC["variables"] = "\"Text=280;hc=225;gradT=(Text-T)*hc\""
+    # groovyBC["timelines"] = ()
+    # function setGroovyBC(Text::Int,hc::Int,expression::String)
+    #     groovyBC["variables"] = "\"Text=$(Text);hc=$(hc);$(expression)\""
+    #     return groovyBC
+    # end
+    # setGroovyBC(T::Int) = setGroovyBC(T::Int,225,"gradT=(Text-T)*hc")
+    # defaultT["boundaryField"]["topinside"] = deepcopy(setGroovyBC(280))
+    # println(defaultT)
+    # testvar = deepcopy(groovyBC)
+    # println(testvar)
+    # defaultT["boundaryField"]["topoutside"] = deepcopy(setGroovyBC(280))
+    # println(defaultT)
+    # println(groovyBC)
+    # defaultT["boundaryField"]["bottominside"] = deepcopy(setGroovyBC(340))
+    # println(defaultT)
+    # println(testvar)
+    # println(groovyBC)
+    # defaultT["boundaryField"]["bottomoutside"] = deepcopy(setGroovyBC(340))
+    # defaultT["boundaryField"]["topoutside"]["variables"] = "\"Text=280;hc=225;gradT=(Text-T)*hc\""
+    # println(defaultT)
+    defaultT["boundaryField"] = OrderedDict(String,Any)
+    defaultT["boundaryField"]["front"] = OrderedDict(String,Any)
+    defaultT["boundaryField"]["front"]["type"] = "empty"
+    defaultT["boundaryField"]["back"] = OrderedDict(String,Any)
+    defaultT["boundaryField"]["back"]["type"] = "empty"
+    defaultT["boundaryField"]["topinside"] = OrderedDict(String,Any)
+    defaultT["boundaryField"]["topinside"]["type"] = "groovyBC"
+    defaultT["boundaryField"]["topinside"]["value"] = "uniform 300"
+    defaultT["boundaryField"]["topinside"]["gradientExpression"] = "\"gradT\""
+    defaultT["boundaryField"]["topinside"]["fractionExpression"] = "\"0\""
+    defaultT["boundaryField"]["topinside"]["variables"] = "\"Text=280;hc=225;gradT=(Text-T)*hc;\""
+    defaultT["boundaryField"]["topinside"]["timelines"] = ()
+    defaultT["boundaryField"]["topoutside"] = OrderedDict(String,Any)
+    defaultT["boundaryField"]["topoutside"]["type"] = "groovyBC"
+    defaultT["boundaryField"]["topoutside"]["value"] = "uniform 300"
+    defaultT["boundaryField"]["topoutside"]["gradientExpression"] = "\"gradT\""
+    defaultT["boundaryField"]["topoutside"]["fractionExpression"] = "\"0\""
+    defaultT["boundaryField"]["topoutside"]["variables"] = "\"Text=280;hc=225;gradT=(Text-T)*hc;\""
+    defaultT["boundaryField"]["topoutside"]["timelines"] = ()
+    defaultT["boundaryField"]["bottominside"] = OrderedDict(String,Any)
+    defaultT["boundaryField"]["bottominside"]["type"] = "groovyBC"
+    defaultT["boundaryField"]["bottominside"]["value"] = "uniform 300"
+    defaultT["boundaryField"]["bottominside"]["gradientExpression"] = "\"gradT\""
+    defaultT["boundaryField"]["bottominside"]["fractionExpression"] = "\"0\""
+    defaultT["boundaryField"]["bottominside"]["variables"] = "\"Text=340;hc=225;gradT=(Text-T)*hc;\""
+    defaultT["boundaryField"]["bottominside"]["timelines"] = ()
+    defaultT["boundaryField"]["bottomoutside"] = OrderedDict(String,Any)
+    defaultT["boundaryField"]["bottomoutside"]["type"] = "groovyBC"
+    defaultT["boundaryField"]["bottomoutside"]["value"] = "uniform 300"
+    defaultT["boundaryField"]["bottomoutside"]["gradientExpression"] = "\"gradT\""
+    defaultT["boundaryField"]["bottomoutside"]["fractionExpression"] = "\"0\""
+    defaultT["boundaryField"]["bottomoutside"]["variables"] = "\"Text=340;hc=225;gradT=(Text-T)*hc;\""
+    defaultT["boundaryField"]["bottomoutside"]["timelines"] = ()
+    
+    defaultT
+end
 
 defaultMeshParam = OrderedDict(String,Any)
 defaultMeshParam["baseMeshDir"] = "/users/a/r/areagan/scratch/run/2014-10-23-all-meshes/"
@@ -142,7 +146,9 @@ defaultMesh["cellCenters"] = zeros(Float64,3,1) # 1
 
 # meshParameters::OrderedDict
 # fullMesh::OrderedDict
-OpenFoam(folder) = OpenFoam(folder,defaultControlDict,defaultTurbulenceProperties,defaultT,defaultMeshParam,defaultMesh)
+# this deep copy is not working
+# OpenFoam(folder) = OpenFoam(folder,defaultControlDict,defaultTurbulenceProperties,deepcopy(defaultT),defaultMeshParam,defaultMesh)
+OpenFoam(folder) = OpenFoam(folder,defaultControlDict,defaultTurbulenceProperties,create_defaultT(),defaultMeshParam,defaultMesh)
 
 header = """/*--------------------------------*- C++ -*----------------------------------*\
 | =========                |                                                 |
@@ -239,7 +245,7 @@ function writeVolScalarField(o::OpenFoam,d::OrderedDict,name::String,location::S
     write(f,string(header,"\n"))
 
     # write the file info
-    finfo = string("FoamFile\n{\n",showCompact(OrderedDict([("version","2.0"),("format","ascii"),("class","dictionary"),("location",string("\"",location,"\"")),("object",name)]),CompactRepr(" ", ";\n")),";\n}\n\n")
+    finfo = string("FoamFile\n{\n",showCompact(OrderedDict([("version","2.0"),("format","ascii"),("class","volScalarField"),("location",string("\"",location,"\"")),("object",name)]),CompactRepr(" ", ";\n")),";\n}\n\n")
     write(f,finfo)
 
     write(f,lbreak)
