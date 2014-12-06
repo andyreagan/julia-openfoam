@@ -196,7 +196,7 @@ function writeDict(o::OpenFoam,d::OrderedDict,name::String,location::String)
     write(f,lbreak)
 
     # write the main info
-    maininfo = string(serializeD(d),";\n\n")
+    maininfo = string(serializeD(d),";\n\n") 
     write(f,maininfo)
 
     write(f,lbreak)

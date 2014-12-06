@@ -229,18 +229,24 @@ EnKF = function(X_f::Array,y_0::Array,H::Array,R::Array,delta::Float64)
 
     # this computes the difference from the mean without that forecast
     X_f_diff = X_f - repmat(x_f,1,N)
+    println("X_f_diff:")
+    println(size(X_f_diff))
+    println(X_f_diff[1:10,:])
 
     # multiplicative inflation
     X_f_diff = sqrt(1+delta).*X_f_diff
 
     # estimate error covariance
     pf = 1/(N-1).*( *(X_f_diff,X_f_diff.') )
+    println(pf[1:10,1:10])
     
     # compute Kalman gain matrix
     K = \( *(pf,H.') , R+ *(H ,*(pf,H.') ) )
+    println(K[1:10,1:10])
 
     # innovation
     d = y_0 - *(H,x_f)
+    println(d[1:10])
 
     X_a = zeros(size(X_f))
     for j=1:N
@@ -279,23 +285,26 @@ ETKF = function(X_f::Array,y_0::Array,H::Array,R::Array,delta::Float64)
 
     # this computes the difference from the mean without that forecast
     X_f_diff = X_f - repmat(x_f,1,N)
+    println(X_f_diff[1:10,:])
 
     # multiplicative inflation
     X_f_diff = sqrt(1+delta).*X_f_diff
 
     # estimate error covariance
     pf = 1/(N-1).*( *(X_f_diff,X_f_diff.') )
-    println(pf)
+    println(pf[1:10,1:10])
     
     # compute Kalman gain matrix
     K = \( *(pf,H.') , R+ *(H ,*(pf,H.') ) )
+    println(K[1:10,1:10])
 
     # innovation
     d = y_0 - *(H,x_f)
+    println(d[1:10])
 
     x_a = x_f + *(K,d)
 
-    # perform the transform
+    # perform the transform 
     # it is (from the literature)
     # absolutely necessary to perform this inversion
     # D = *(H,X_f_diff)

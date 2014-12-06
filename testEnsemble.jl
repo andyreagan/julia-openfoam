@@ -3,19 +3,19 @@ include("basic.jl")
 
 using DA
 
-# some samples
-A = repmat([1,2,3],1,10)+.1*randn(3,10)
-X_f = A
-y_0 = [1.5,2.1,3.01]
-H = eye(3)
-R = .05.*eye(3)
-delta = .01
+# # some samples
+# A = repmat([1,2,3],1,10)+.1*randn(3,10)
+# X_f = A
+# y_0 = [1.5,2.1,3.01]
+# H = eye(3)
+# R = .05.*eye(3)
+# delta = .01
 
-# give it a shot
-X_a = EnKF(X_f,y_0,H,R,delta)
+# # give it a shot
+# X_a = EnKF(X_f,y_0,H,R,delta)
 
-println("quick test result:")
-println(X_a)
+# println("quick test result:")
+# println(X_a)
 
 println("beginning real test")
 
@@ -80,13 +80,13 @@ case.T["internalField"] = string("nonuniform List<scalar>\n$(length(truth))\n(\n
 # writeVolScalarField(case,case.T,"T","0")
 
 # perturb that with uniform noise
-stddev = 0.25
+stddev = 0.5
 observations = truth+randn(size(truth))*stddev
 
 # set these things, and then go fill an observations vector
 window = 1
 start_assimilation = 180
-end_assimilation = 199
+end_assimilation = 182
 # this thing is huuuge, so be careful?
 # could also just go pull observations at each time step
 println("building the observations vector, full")
@@ -102,7 +102,7 @@ end
 println("done building the observations vector")
 
 # this fills with the same model
-Nens = 3
+Nens = 50
 ens = Array(OpenFoam,Nens)
 writeInterval = 1
 endTime = 1
@@ -169,9 +169,10 @@ R = 3
 
 forecast = zeros(Float64,length(start_assimilation:window:end_assimilation),size(points)[1],size(points)[2])
 analysis = zeros(Float64,length(start_assimilation:window:end_assimilation),size(points)[1],size(points)[2])
+Tscaling = 1
 x,y = size(points)
 # loop over zones
-for i in 0:1 # 0:x-1
+for i in 0:0 # 0:x-1
     println("assimilating at $(i)")
     println("using points $(mod(linspace(i-R,i+R,R*2+1),x)+1)")
     local_obs = observations[1,mod(linspace(i-R,i+R,R*2+1),x)+1,:]
@@ -179,7 +180,7 @@ for i in 0:1 # 0:x-1
     println("flattening")
     local_obs_flat = reshape(local_obs,length(local_obs),1)
     X_f = ones(Float64,length(local_obs),Nens)
-    for j=1:Nens
+    for j=1: Nens
         # println("size of valueReshaped is: ")
         # println(size(ens[j].T["valueReshaped"]))
         local_ens = ens[j].T["valueReshaped"][mod(linspace(i-R,i+R,R*2+1),x)+1,:]
@@ -194,7 +195,12 @@ for i in 0:1 # 0:x-1
     println(X_f[R*y+1:(R+1)*y,:])
     println("observation:")
     println(local_obs[R*y+1:(R+1)*y])
+    X_f = X_f./Tscaling
+    local_obs_flat = local_obs_flat./Tscaling
     X_a = ETKF(X_f,local_obs_flat,eye(length(local_obs)),eye(length(local_obs)).*stddev,delta)
+    println("analysis:")
+    println(X_a[R*y+1:(R+1)*y,:])
+    X_a = X_a.*Tscaling
     println("analysis:")
     println(X_a[R*y+1:(R+1)*y,:])
     analysis[1,x,:] = mean(X_a[R*y+1:(R+1)*y,:],2)
@@ -212,23 +218,6 @@ for i=1:Nens
     writeVolScalarField(ens[i],ens[i].T,"T","0")
 end
 
-# forecast = zeros(truth)
-# analysis = zeros(truth)
-# X_f = zeros(3,Nens)
-# for i=1:Nens
-#     X_f[:,i] = ens[i].x
-# end
-# forecast[:,1] = mean(X_f,2)
-# println("initial application of filter")
-# # X_a = EnKF(X_f,observations[:,1],eye(3),eye(3).*stddev,delta)
-# X_a = ETKF(X_f,observations[:,1],eye(3),eye(3).*stddev,delta)
-# println("initial analysis:")
-# println(X_a)
-# analysis[:,1] = mean(X_a,2)
-# for i=1:Nens
-#     ens[i].x = X_a[:,i]+randn(3)*sigma
-# end
-
 # for j=1:int(runtime/window)
 #     println("time is $(j*window)")
 #     for i=1:Nens
@@ -245,21 +234,4 @@ end
 #         ens[i].x = X_a[:,i]+randn(3)*sigma
 #     end
 # end
-
-# println(truth[:,1])
-# println(observations[:,1])
-# println(forecast[:,1])
-# println(analysis[:,1])
-
-# println(truth[:,end])
-# println(observations[:,end])
-# println(forecast[:,end])
-# println(analysis[:,end])
-
-# println("here are each of the ensembles:")
-# for i=1:Nens
-#     println(ens[i].x)
-# end
-
-
 
