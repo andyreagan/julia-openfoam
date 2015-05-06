@@ -2,7 +2,7 @@ module foamLia
 
 println("foamLia: basic openfoam manipulation")
 
-export OpenFoam,initCase,run,runQ,readMesh,findTimes,readVar,readVarSpec,stringG
+export OpenFoam,initCase,run,runQ,readMesh,findTimes,readVar,readVarSpec,stringG,rewriteVar,reshapeMesh,writeDict,writeVolScalarField
 
 using DataStructures
 import Base.run
@@ -56,74 +56,78 @@ defaultControlDict["libs"] = ["\"libOpenFOAM.so\"","\"libsimpleSwakFunctionObjec
 defaultTurbulenceProperties = OrderedDict(String,String)
 defaultTurbulenceProperties["simulationType"] = "laminar" # "RASModel" "LESModel"
 
-defaultT = OrderedDict(String,Any)
-defaultT["dimensions"] = [0,0,0,1,0,0,0]
-defaultT["internalField"] = "uniform 300"
-# this should work, but deepcopy doesn't work
-# emptyBC = OrderedDict(String,Any)
-# emptyBC["type"] = "empty"
-# defaultT["boundaryField"] = OrderedDict(String,Any)
-# defaultT["boundaryField"]["front"] = deepcopy(emptyBC)
-# defaultT["boundaryField"]["back"] = deepcopy(emptyBC)
-# groovyBC = OrderedDict(String,Any)
-# groovyBC["type"] = "groovyBC"
-# groovyBC["value"] = "uniform 300"
-# groovyBC["gradientExpression"] = "\"gradT\""
-# groovyBC["fractionExpression"] = "\"0\""
-# groovyBC["variables"] = "\"Text=280;hc=225;gradT=(Text-T)*hc\""
-# groovyBC["timelines"] = ()
-# function setGroovyBC(Text::Int,hc::Int,expression::String)
-#     groovyBC["variables"] = "\"Text=$(Text);hc=$(hc);$(expression)\""
-#     return groovyBC
-# end
-# setGroovyBC(T::Int) = setGroovyBC(T::Int,225,"gradT=(Text-T)*hc")
-# defaultT["boundaryField"]["topinside"] = deepcopy(setGroovyBC(280))
-# println(defaultT)
-# testvar = deepcopy(groovyBC)
-# println(testvar)
-# defaultT["boundaryField"]["topoutside"] = deepcopy(setGroovyBC(280))
-# println(defaultT)
-# println(groovyBC)
-# defaultT["boundaryField"]["bottominside"] = deepcopy(setGroovyBC(340))
-# println(defaultT)
-# println(testvar)
-# println(groovyBC)
-# defaultT["boundaryField"]["bottomoutside"] = deepcopy(setGroovyBC(340))
-# defaultT["boundaryField"]["topoutside"]["variables"] = "\"Text=280;hc=225;gradT=(Text-T)*hc\""
-# println(defaultT)
-defaultT["boundaryField"] = OrderedDict(String,Any)
-defaultT["boundaryField"]["front"] = OrderedDict(String,Any)
-defaultT["boundaryField"]["front"]["type"] = "empty"
-defaultT["boundaryField"]["back"] = OrderedDict(String,Any)
-defaultT["boundaryField"]["back"]["type"] = "empty"
-defaultT["boundaryField"]["topinside"] = OrderedDict(String,Any)
-defaultT["boundaryField"]["topinside"]["type"] = "groovyBC"
-defaultT["boundaryField"]["topinside"]["value"] = "uniform 300"
-defaultT["boundaryField"]["topinside"]["gradientExpression"] = "\"gradT\""
-defaultT["boundaryField"]["topinside"]["fractionExpression"] = "\"0\""
-defaultT["boundaryField"]["topinside"]["variables"] = "\"Text=280;hc=225;gradT=(Text-T)*hc;\""
-defaultT["boundaryField"]["topinside"]["timelines"] = ()
-defaultT["boundaryField"]["topoutside"] = OrderedDict(String,Any)
-defaultT["boundaryField"]["topoutside"]["type"] = "groovyBC"
-defaultT["boundaryField"]["topoutside"]["value"] = "uniform 300"
-defaultT["boundaryField"]["topoutside"]["gradientExpression"] = "\"gradT\""
-defaultT["boundaryField"]["topoutside"]["fractionExpression"] = "\"0\""
-defaultT["boundaryField"]["topoutside"]["variables"] = "\"Text=280;hc=225;gradT=(Text-T)*hc;\""
-defaultT["boundaryField"]["topoutside"]["timelines"] = ()
-defaultT["boundaryField"]["bottominside"] = OrderedDict(String,Any)
-defaultT["boundaryField"]["bottominside"]["type"] = "groovyBC"
-defaultT["boundaryField"]["bottominside"]["value"] = "uniform 300"
-defaultT["boundaryField"]["bottominside"]["gradientExpression"] = "\"gradT\""
-defaultT["boundaryField"]["bottominside"]["fractionExpression"] = "\"0\""
-defaultT["boundaryField"]["bottominside"]["variables"] = "\"Text=340;hc=225;gradT=(Text-T)*hc;\""
-defaultT["boundaryField"]["bottominside"]["timelines"] = ()
-defaultT["boundaryField"]["bottomoutside"] = OrderedDict(String,Any)
-defaultT["boundaryField"]["bottomoutside"]["type"] = "groovyBC"
-defaultT["boundaryField"]["bottomoutside"]["value"] = "uniform 300"
-defaultT["boundaryField"]["bottomoutside"]["gradientExpression"] = "\"gradT\""
-defaultT["boundaryField"]["bottomoutside"]["fractionExpression"] = "\"0\""
-defaultT["boundaryField"]["bottomoutside"]["variables"] = "\"Text=340;hc=225;gradT=(Text-T)*hc;\""
-defaultT["boundaryField"]["bottomoutside"]["timelines"] = ()
+function create_defaultT()
+    defaultT = OrderedDict(String,Any)
+    defaultT["dimensions"] = [0,0,0,1,0,0,0]
+    defaultT["internalField"] = "uniform 300"
+    # this should work, but deepcopy doesn't work
+    # emptyBC = OrderedDict(String,Any)
+    # emptyBC["type"] = "empty"
+    # defaultT["boundaryField"] = OrderedDict(String,Any)
+    # defaultT["boundaryField"]["front"] = deepcopy(emptyBC)
+    # defaultT["boundaryField"]["back"] = deepcopy(emptyBC)
+    # groovyBC = OrderedDict(String,Any)
+    # groovyBC["type"] = "groovyBC"
+    # groovyBC["value"] = "uniform 300"
+    # groovyBC["gradientExpression"] = "\"gradT\""
+    # groovyBC["fractionExpression"] = "\"0\""
+    # groovyBC["variables"] = "\"Text=280;hc=225;gradT=(Text-T)*hc\""
+    # groovyBC["timelines"] = ()
+    # function setGroovyBC(Text::Int,hc::Int,expression::String)
+    #     groovyBC["variables"] = "\"Text=$(Text);hc=$(hc);$(expression)\""
+    #     return groovyBC
+    # end
+    # setGroovyBC(T::Int) = setGroovyBC(T::Int,225,"gradT=(Text-T)*hc")
+    # defaultT["boundaryField"]["topinside"] = deepcopy(setGroovyBC(280))
+    # println(defaultT)
+    # testvar = deepcopy(groovyBC)
+    # println(testvar)
+    # defaultT["boundaryField"]["topoutside"] = deepcopy(setGroovyBC(280))
+    # println(defaultT)
+    # println(groovyBC)
+    # defaultT["boundaryField"]["bottominside"] = deepcopy(setGroovyBC(340))
+    # println(defaultT)
+    # println(testvar)
+    # println(groovyBC)
+    # defaultT["boundaryField"]["bottomoutside"] = deepcopy(setGroovyBC(340))
+    # defaultT["boundaryField"]["topoutside"]["variables"] = "\"Text=280;hc=225;gradT=(Text-T)*hc\""
+    # println(defaultT)
+    defaultT["boundaryField"] = OrderedDict(String,Any)
+    defaultT["boundaryField"]["front"] = OrderedDict(String,Any)
+    defaultT["boundaryField"]["front"]["type"] = "empty"
+    defaultT["boundaryField"]["back"] = OrderedDict(String,Any)
+    defaultT["boundaryField"]["back"]["type"] = "empty"
+    defaultT["boundaryField"]["topinside"] = OrderedDict(String,Any)
+    defaultT["boundaryField"]["topinside"]["type"] = "groovyBC"
+    defaultT["boundaryField"]["topinside"]["value"] = "uniform 300"
+    defaultT["boundaryField"]["topinside"]["gradientExpression"] = "\"gradT\""
+    defaultT["boundaryField"]["topinside"]["fractionExpression"] = "\"0\""
+    defaultT["boundaryField"]["topinside"]["variables"] = "\"Text=280;hc=225;gradT=(Text-T)*hc;\""
+    defaultT["boundaryField"]["topinside"]["timelines"] = ()
+    defaultT["boundaryField"]["topoutside"] = OrderedDict(String,Any)
+    defaultT["boundaryField"]["topoutside"]["type"] = "groovyBC"
+    defaultT["boundaryField"]["topoutside"]["value"] = "uniform 300"
+    defaultT["boundaryField"]["topoutside"]["gradientExpression"] = "\"gradT\""
+    defaultT["boundaryField"]["topoutside"]["fractionExpression"] = "\"0\""
+    defaultT["boundaryField"]["topoutside"]["variables"] = "\"Text=280;hc=225;gradT=(Text-T)*hc;\""
+    defaultT["boundaryField"]["topoutside"]["timelines"] = ()
+    defaultT["boundaryField"]["bottominside"] = OrderedDict(String,Any)
+    defaultT["boundaryField"]["bottominside"]["type"] = "groovyBC"
+    defaultT["boundaryField"]["bottominside"]["value"] = "uniform 300"
+    defaultT["boundaryField"]["bottominside"]["gradientExpression"] = "\"gradT\""
+    defaultT["boundaryField"]["bottominside"]["fractionExpression"] = "\"0\""
+    defaultT["boundaryField"]["bottominside"]["variables"] = "\"Text=340;hc=225;gradT=(Text-T)*hc;\""
+    defaultT["boundaryField"]["bottominside"]["timelines"] = ()
+    defaultT["boundaryField"]["bottomoutside"] = OrderedDict(String,Any)
+    defaultT["boundaryField"]["bottomoutside"]["type"] = "groovyBC"
+    defaultT["boundaryField"]["bottomoutside"]["value"] = "uniform 300"
+    defaultT["boundaryField"]["bottomoutside"]["gradientExpression"] = "\"gradT\""
+    defaultT["boundaryField"]["bottomoutside"]["fractionExpression"] = "\"0\""
+    defaultT["boundaryField"]["bottomoutside"]["variables"] = "\"Text=340;hc=225;gradT=(Text-T)*hc;\""
+    defaultT["boundaryField"]["bottomoutside"]["timelines"] = ()
+    
+    defaultT
+end
 
 defaultMeshParam = OrderedDict(String,Any)
 defaultMeshParam["baseMeshDir"] = "/users/a/r/areagan/scratch/run/2014-10-23-all-meshes/"
@@ -142,7 +146,9 @@ defaultMesh["cellCenters"] = zeros(Float64,3,1) # 1
 
 # meshParameters::OrderedDict
 # fullMesh::OrderedDict
-OpenFoam(folder) = OpenFoam(folder,defaultControlDict,defaultTurbulenceProperties,defaultT,defaultMeshParam,defaultMesh)
+# this deep copy is not working
+# OpenFoam(folder) = OpenFoam(folder,defaultControlDict,defaultTurbulenceProperties,deepcopy(defaultT),defaultMeshParam,defaultMesh)
+OpenFoam(folder) = OpenFoam(folder,defaultControlDict,defaultTurbulenceProperties,create_defaultT(),defaultMeshParam,defaultMesh)
 
 header = """/*--------------------------------*- C++ -*----------------------------------*\
 | =========                |                                                 |
@@ -190,7 +196,7 @@ function writeDict(o::OpenFoam,d::OrderedDict,name::String,location::String)
     write(f,lbreak)
 
     # write the main info
-    maininfo = string(serializeD(d),";\n\n")
+    maininfo = string(serializeD(d),";\n\n") 
     write(f,maininfo)
 
     write(f,lbreak)
@@ -239,7 +245,7 @@ function writeVolScalarField(o::OpenFoam,d::OrderedDict,name::String,location::S
     write(f,string(header,"\n"))
 
     # write the file info
-    finfo = string("FoamFile\n{\n",showCompact(OrderedDict([("version","2.0"),("format","ascii"),("class","dictionary"),("location",string("\"",location,"\"")),("object",name)]),CompactRepr(" ", ";\n")),";\n}\n\n")
+    finfo = string("FoamFile\n{\n",showCompact(OrderedDict([("version","2.0"),("format","ascii"),("class","volScalarField"),("location",string("\"",location,"\"")),("object",name)]),CompactRepr(" ", ";\n")),";\n}\n\n")
     write(f,finfo)
 
     write(f,lbreak)
@@ -475,9 +481,10 @@ function readVar(o::OpenFoam,t::String,v::String)
         end
     end
     i = 0
+    # println(size(var))
     for line in eachline(f)
         m = match(mr,line)
-        if m != nothing
+        if m != nothing && i < size(var)[2]
             i=i+1
             # println(m)
             # println(map(string,m.captures))
@@ -486,6 +493,87 @@ function readVar(o::OpenFoam,t::String,v::String)
             var[:,i] = map(float,map(string,m.captures))
         end
     end
+    close(f)
+    return var
+end
+
+function rewriteVar(o::OpenFoam,t::String,v::String,var::Array)
+    # just go read that file
+    # t is the time (a string!)
+    # v is the variable name, "T"
+    # var is the array of the variable
+    
+    cd(o.caseFolder)
+    f = open(join([t,v],"/"),"r")
+    b = false
+    header = ""
+    # couple defaults
+    n = 1
+    len = 40000
+    mr = r"([0-9]+)\n"
+    while !b
+        a = readline(f)
+        header = join([header,a],"")
+        c = match(r"class\s+([a-zA-Z]+);",a)
+        if c != nothing
+            # println("this variable is class $(c.captures[1])")
+            if c.captures[1] == "volScalarField"
+                mr = r"([0-9.\-]+e*[0-9.\-]+)\n"
+                n = 1
+            elseif c.captures[1] == "surfaceScalarField"
+                mr = r"([0-9.\-]+e*[0-9.\-]+)\n"
+                n = 1
+            elseif c.captures[1] == "volVectorField"
+                mr = r"\(([0-9.\-]+e*[0-9.\-]+) ([0-9.\-]+e*[0-9.\-]+) ([0-9.\-]+e*[0-9.\-]+)\)\n"
+                n = 3
+            elseif c.captures[1] == "surfaceVectorField"
+                mr = r"\(([0-9.\-]+e*[0-9.\-]+) ([0-9.\-]+e*[0-9.\-]+) ([0-9.\-]+e*[0-9.\-]+)\)\n"
+                n = 3
+            end
+        end
+        m = match(r"([0-9]+)\n",a)
+        if m != nothing
+            # println("done with initial read")
+            # println("there are $(m.captures[1]) variables to read")
+            len = int(m.captures[1])
+            b = true
+        end
+    end
+    i = 0
+    println(size(var))
+
+    b = false
+    while !b
+        a = readline(f)
+        if a == ";\n"
+            b = true
+        end
+    end
+    # footer = ""
+    footer = join(readlines(f),"")
+    close(f)
+    # println(header)
+    # println(footer)
+
+    cp(join([t,v],"/"),join([t,string(v,"_o")],"/"))
+    f = open(join([t,v],"/"),"w")
+    write(f,header)
+    if n == 1
+        write(f,"(\n")
+        for i in 1:length(var)
+            write(f,"$(var[i])\n")
+        end
+        write(f,")\n")
+        write(f,";\n\n")
+    elseif n==3
+        write(f,"(\n")
+        for i in 1:length(var)
+            write(f,"($(var[i,1]) $(var[i,2]) $(var[i,3]))\n")
+        end
+        write(f,")\n")
+        write(f,";\n\n")
+    end
+    write(f,footer)
     close(f)
     return var
 end
@@ -684,6 +772,81 @@ end
 function run(o::OpenFoam,c::Cmd)
     cd(o.caseFolder)
     run(c)
+end
+
+function reshapeMesh(case)
+    # don't need the result, but I do want to read the mesh
+    readMesh(case)
+
+    x = case.meshParameters["x"]*4
+    y = case.meshParameters["y"]+2*case.meshParameters["refinements"]
+    points = zeros(Int64,x,y)
+    indices = zeros(Int64,x*y,2)
+
+    # println("the mesh is $(x) by $(y)")
+
+    theta = [y for y in 2*pi/x/2:2*pi/x:2*pi-2*pi/x/2]
+    # println(size(theta))
+    # println(theta[1:10])
+    # println(theta[end-10:end])
+
+    # println(size(case.fullMesh["cellCenters"]))
+    # println(case.fullMesh["cellCenters"][:,1])
+
+    TOL = 1e-3
+    # println(size(case.fullMesh["cellCenters"])[2])
+    # println(case.fullMesh["cellCenters"][:,size(case.fullMesh["cellCenters"])[2]])
+    for i in 1:size(case.fullMesh["cellCenters"])[2]
+        # println("i is $(i)")
+        # start them at the right side, go counter clockwise
+        # arctan(z/y) where y is right the right (adjacent), 
+        # z is up (opposite)
+        th = atan2(case.fullMesh["cellCenters"][3,i],case.fullMesh["cellCenters"][2,i])
+        # wrap around
+        if th<0
+            th = th+2*pi
+        end
+        r = sqrt(case.fullMesh["cellCenters"][3,i]^2+case.fullMesh["cellCenters"][2,i]^2)
+        # println("th is $(th)")
+        # println("r is $(r)")
+        # find the index of theta
+        j = 1
+        # while abs(th-theta[j])>abs(th-theta[j+1]) > TOL
+        while abs(th-theta[j]) > abs(th-theta[j+1]) # && j <= 999
+            # println(j)
+            # println(abs(th-theta[j]))
+            j += 1
+            # this can't be the best way
+            if j == 1000
+                break
+            end
+        end
+        # println("j is $(j)")
+        # println(points[j,:])
+        k = 1
+        while points[j,k] != 0.0
+            k += 1
+        end
+        # println("k is $(k)")
+        points[j,k] = i
+        # (no point in filling indices until sorted)
+    end
+
+    # now go and sort the points by their r value
+    for i in 1:x
+        ps = points[i,:]
+        # go get the r for each of the points
+        rs = [sqrt(case.fullMesh["cellCenters"][3,p]^2+case.fullMesh["cellCenters"][2,p]^2) for p in ps]
+        perm = sortperm(rs)
+        points[i,:] = ps[perm]
+        j = 1
+        for p in ps
+            indices[p,:] = [i,j]
+            j+=1
+        end
+    end
+
+    points,indices
 end
 
 end
