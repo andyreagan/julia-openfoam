@@ -1,0 +1,140 @@
+\lefthyphenmin=3
+\righthyphenmin=2
+
+\usepackage{url}
+\usepackage{graphicx,epsfig,verbatim,enumerate}
+\usepackage{amssymb,amsmath}
+\usepackage{ifthen}
+\newboolean{twocolswitch}
+
+\usepackage{xcolor}
+\usepackage{color}
+%% \usepackage[svgnames]{xcolor}
+%% \usepackage[table]{xcolor}
+%% \usepackage{colortbl}
+\newcommand{\todo}[1]{\noindent\textcolor{red}{{$\Box$ #1}}}
+\definecolor{lightgrey}{rgb}{0.5,0.5,0.5}
+
+\usepackage{rotating}
+\usepackage{longtable}
+\usepackage{array}
+
+\newcommand{\avg}[1]{\left\langle#1\right\rangle}
+\newcommand{\tavg}[1]{\langle#1\rangle}
+
+\newcommand{\LavgHa}[2]{\tavg{L_{#1,#2}}}
+\newcommand{\LavgHaN}[2]{\tavg{L_{#1,#2}}}
+\newcommand{\Lavg}{\tavg{L}}
+
+\newcommand{\sindex}[1]{}
+\newcommand{\nindex}[1]{}
+
+\newcommand{\etal}{\textit{et al.}}
+\newcommand{\www}[1]{\url{#1}}
+\newcommand{\req}[1]{(\ref{#1})}
+\newcommand{\Req}[1]{Eq.~(\ref{#1})}
+
+
+\newcommand{\yes}{}
+\newcommand{\no}{}
+\newcommand{\tbf}{\textbf}
+\newcommand{\tit}{\textit}
+
+\newcommand{\dee}[1]{\mbox{d}#1}
+\newcommand{\pdiff}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\partialdiff}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\pdiffsq}[2]{\frac{\partial^2 #1}{{\partial #2}^2}}
+\newcommand{\diff}[2]{\frac{{\rm d}#1}{{\rm d}#2}}
+\newcommand{\diffsq}[2]{\frac{{\rm d}^{2}#1}{{\rm d} {#2}^2}}
+\newcommand{\tdiff}[2]{\mbox{d} #1/\mbox{d} #2}
+\newcommand{\tdiffsq}[2]{\mbox{d}^{2} #1/\mbox{d} {#2}^2}
+\newcommand{\tpdiff}[2]{\partial #1/\partial #2}
+\newcommand{\tpdiffsq}[2]{\partial^2 #1/\partial {#2}^2}
+\newcommand{\postdee}[1]{\,\mbox{d}#1}
+\newcommand{\rhoref}{\rho_{\text{ref}}}
+
+\newcommand{\mbe}{\mathbf{\epsilon}}
+\newcommand{\mbx}{\mathbf{x}}
+\newcommand{\mby}{\mathbf{y}}
+\newcommand{\mbd}{\mathbf{d}}
+\newcommand{\mbB}{\mathbf{B}}
+\newcommand{\mbW}{\mathbf{W}}
+\newcommand{\mbR}{\mathbf{R}}
+\newcommand{\mbH}{\mathbf{H}}
+\newcommand{\mbK}{\mathbf{K}}
+\newcommand{\mbP}{\mathbf{P}}
+\newcommand{\mbZ}{\mathbf{Z}}
+\newcommand{\mbw}{\mathbf{w}}
+\newcommand{\mbX}{\mathbf{X}}
+\newcommand{\mbY}{\mathbf{Y}}
+\newcommand{\mb}{\mathbf{}}
+\newcommand{\expv}[1]{E \left [ #1 \right ]}
+
+\newcommand{\PreserveBackslash}[1]{\let\temp=\\#1\let\\=\temp}
+\newcommand{\PBS}[1]{\let\temp=\\#1\let\\=\temp}
+
+% \newcommand{\kstar}{d^{\ast}}
+% \newcommand{\kstari}{k_i^\ast}
+\newcommand{\kstar}{d^\ast}
+\newcommand{\kstari}{d_i^\ast}
+
+\newcommand{\dstar}{d^\ast}
+\newcommand{\dstari}{d_i^\ast}
+
+\newcommand{\phifix}{{\phi^{\ast}}}
+\newcommand{\phifixc}{{\phi_c^{\ast}}}
+\newcommand{\phifixb}{{\phi_b^{\ast}}}
+
+\newcommand{\Gfun}{G}
+
+\newcommand{\dstardist}{g}
+\newcommand{\dosedist}{f}
+\newcommand{\dosedistk}{f^{k\star}}
+
+\newcommand{\meandegree}{z}
+\newcommand{\kmax}{k_{\rm max}}
+
+\newcommand{\wff}{\url{wefeelfine.org}}
+
+\newcommand{\fplus}{f_{+}}
+\newcommand{\fminus}{f_{-}}
+\newcommand{\aplus}{a_{+}}
+\newcommand{\aminus}{a_{-}}
+
+%%%
+%% happiness
+
+%%%
+%% happiness
+
+\newcommand{\havg}[1]{h_{\rm avg}(#1)}
+\newcommand{\havgword}[1]{h_{\rm avg}(\mbox{`#1'})}
+\newcommand{\havgsup}[1]{h_{\rm avg}^{#1}}
+\newcommand{\havgsuparg}[2]{h_{\rm avg}^{#1}(#2)}
+\newcommand{\havgfn}{h_{\rm avg}}
+\newcommand{\havgfnamb}{h_{\rm avg}^{\rm (amb)}}
+\newcommand{\havgfnnorm}{h_{\rm avg}^{\rm (norm)}}
+
+%% \newcommand{\pinstA}{\mathbf{a}}
+%% \newcommand{\pinstB}{\mathbf{b}}
+
+\newcommand{\pinstA}{\rm inst}
+\newcommand{\pinstB}{j}
+
+%% \newcommand{\popA}{i}
+%% \newcommand{\popB}{p}
+
+\newcommand{\popA}{\rm inst}
+\newcommand{\popB}{\rm pop}
+
+
+
+
+
+
+
+
+
+
+
+

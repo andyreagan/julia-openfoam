@@ -1,0 +1,56 @@
+\documentclass[pre,twocolumn,twoside,showpacs,byrevtex,superscriptaddress]{revtex4}
+
+%% hack to load in root name
+\usepackage{currfile}
+\input{\currfilebase.settings}
+\input{\filenamebase.settings}
+
+\setboolean{twocolswitch}{true}
+
+\newcommand{\revtexonly}[1]{#1}
+\newcommand{\plainlatexonly}[1]{}
+
+\renewcommand{\floatpagefraction}{0.95} 
+\renewcommand{\dbltopfraction}{0.95}
+
+\begin{document}
+
+\title{
+  \input{\filenamebase.title}
+}
+
+\input{\filenamebase.author}
+
+\date{\today}
+
+\input{\filenamebase.abs}  
+
+\maketitle
+
+%%%%%%%%% end of author(s), address(es) plus abstract
+
+\input{\filenamebase.body}
+
+\input{\filenamebase.acknowledgments}
+
+\input{\filenamebase.biblio}
+
+%% trying to do a supplementary here
+
+%% label things by supplementary
+%% \renewcommand{\thepage}{S\arabic{page}}  
+%% \renewcommand{\thesection}{S\arabic{section}}   
+%% \renewcommand{\thetable}{S\arabic{table}}   
+%% \renewcommand{\thefigure}{S\arabic{figure}}
+
+%% \setboolean{twocolswitch}{false}
+
+%% going to have to make a new file for this...
+
+\appendix
+
+\section{Supplementary}
+
+\input{\filenamebase.supplementary}
+
+\end{document}

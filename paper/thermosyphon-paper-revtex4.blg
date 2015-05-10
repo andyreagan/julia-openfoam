@@ -1,0 +1,61 @@
+This is BibTeX, Version 0.99d (TeX Live 2013)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: thermosyphon-paper-revtex4.aux
+The style file: chicago.bst
+Database file #1: thermosyphon-paper.bib
+Repeated entry---line 621 of file thermosyphon-paper.bib
+ : @article{danforth2007estimating
+ :                                ,
+I'm skipping whatever remains of this entry
+Warning--no volume for gorman1984
+Warning--no volume for gorman1986
+Warning--no number and no volume in harris2011predicting
+Warning--page numbers missing in harris2011predicting
+Warning--page numbers missing in weather-violence2013
+Warning--no volume for jiang2003
+Warning--no number and no volume in savely1972
+Warning--page numbers missing in savely1972
+Warning--page numbers missing in welander1967
+Warning--no volume for yuen1999
+You've used 30 entries,
+            2861 wiz_defined-function locations,
+            807 strings with 10308 characters,
+and the built_in function-call counts, 23131 in all, are:
+= -- 1875
+> -- 1940
+< -- 3
++ -- 594
+- -- 636
+* -- 2281
+:= -- 4211
+add.period$ -- 91
+call.type$ -- 30
+change.case$ -- 243
+chr.to.int$ -- 30
+cite$ -- 40
+duplicate$ -- 546
+empty$ -- 1278
+format.name$ -- 732
+if$ -- 4280
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 30
+newline$ -- 153
+num.names$ -- 300
+pop$ -- 167
+preamble$ -- 1
+purify$ -- 424
+quote$ -- 0
+skip$ -- 563
+stack$ -- 0
+substring$ -- 1225
+swap$ -- 180
+text.length$ -- 3
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 590
+warning$ -- 10
+while$ -- 278
+width$ -- 0
+write$ -- 396
+(There was 1 error message)

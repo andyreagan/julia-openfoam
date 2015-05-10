@@ -1,0 +1,590 @@
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  7 MAR 2015 12:24
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**thermosyphon-paper-revtex4
+(./thermosyphon-paper-revtex4.tex
+LaTeX2e <2011/06/27>
+Babel <3.9f> and hyphenation patterns for 78 languages loaded.
+(/usr/local/texlive/2013/texmf-dist/tex/latex/revtex4/revtex4.cls
+Document Class: revtex4 2001/08/02 v4.0 (http://publish.aps.org/revtex4/ for do
+cumentation)
+ Copyright (c) 2001 The American Physical Society.
+ mailto:revtex@aps.org
+ Licensed under the LPPL:
+http://www.ctan.org/tex-archive/macros/latex/base/lppl.txt
+ Arthur Ogawa <ogawa@teleport.com>
+ Based on work by David Carlisle <david@dcarlisle.demon.co.uk>.
+ltxutil: portions licensed from W. E. Baxter (web@superscript.com)
+Class revtex4 Info: Repairing broken LateX \@sect on input line 596.
+\intertabularlinepenalty=\count79
+\@tbpen=\count80
+\@arstrutbox@hline=\box26
+Class revtex4 Info: Repairing broken LaTeX \@xbitor on input line 1610.
+ltxgrid: portions licensed from W. E. Baxter (web@superscript.com)
+\c@linecount=\count81
+\output=\toks14
+\@protection@box=\box27
+\@topmark@saved=\toks15
+\footins@saved=\box28
+\pagesofar=\box29
+\footbox=\box30
+\pagegrid@col=\count82
+Class revtex4 Info: Incorporating package {textcase}  [1998/11/12 v0.06 Text on
+ly upper/lower case changing (DPC)]. on input line 3682.
+(/usr/local/texlive/2013/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip10
+Package: url 2006/04/12  ver 3.3  Verb mode for urls, etc.
+)
+\c@affil=\count83
+\absbox=\box31
+\c@part=\count84
+\c@section=\count85
+\c@subsection=\count86
+\c@subsubsection=\count87
+\c@paragraph=\count88
+\c@subparagraph=\count89
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\c@figure=\count90
+\c@table=\count91
+
+(/usr/local/texlive/2013/texmf-dist/tex/latex/natbib/natbib.sty
+Package: natbib 2010/09/13 8.31b (PWD, AO)
+\bibhang=\skip43
+\bibsep=\skip44
+LaTeX Info: Redefining \cite on input line 694.
+\c@NAT@ctr=\count92
+)
+\widetext@top=\box32
+\widetext@bot=\box33
+
+(/usr/local/texlive/2013/texmf-dist/tex/latex/revtex4/revsymb.sty
+Package: revsymb 2001/08/02 v4.0 (http://publish.aps.org/revtex4/ for documenta
+tion)
+LaTeX Info: Redefining \REV@mathfrak on input line 118.
+))
+(/usr/local/texlive/2013/texmf-dist/tex/latex/revtex4/aps.rtx
+File: aps.rtx 2001/08/02 v4.0 (http://publish.aps.org/revtex4/ for documentatio
+n)
+)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/revtex4/10pt.rtx
+File: 10pt.rtx 2001/08/02 v4.0 (http://publish.aps.org/revtex4/ for documentati
+on)
+)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/currfile/currfile.sty
+Package: currfile 2013/02/01 v0.7b Provides the file path elements of the curre
+nt input file
+
+(/usr/local/texlive/2013/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
+
+(/usr/local/texlive/2013/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks16
+)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
+)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
+
+(/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
+)
+(/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
+
+(/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)))
+(/usr/local/texlive/2013/texmf-dist/tex/latex/filehook/filehook.sty
+Package: filehook 2011/10/12 v0.5d Hooks for input files
+)
+\c@currfiledepth=\count93
+)
+(./thermosyphon-paper-revtex4.settings.tex) (./thermosyphon-paper.settings.tex
+(/usr/local/texlive/2013/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2013/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2013/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/latexconfig/graphics.cfg
+File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
+)
+Package graphics Info: Driver file: pdftex.def on input line 91.
+
+(/usr/local/texlive/2013/texmf-dist/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+\Gread@gobject=\count94
+))
+\Gin@req@height=\dimen102
+\Gin@req@width=\dimen103
+)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/graphics/epsfig.sty
+Package: epsfig 1999/02/16 v1.7a (e)psfig emulation (SPQR)
+\epsfxsize=\dimen104
+\epsfysize=\dimen105
+)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/tools/verbatim.sty
+Package: verbatim 2003/08/22 v1.5q LaTeX2e package for verbatim enhancements
+\every@verbatim=\toks17
+\verbatim@line=\toks18
+\verbatim@in@stream=\read1
+)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/tools/enumerate.sty
+Package: enumerate 1999/03/05 v3.00 enumerate extensions (DPC)
+\@enLab=\toks19
+)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+
+(/usr/local/texlive/2013/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\@emptytoks=\toks20
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+LaTeX Info: Redefining \frak on input line 111.
+LaTeX Info: Redefining \Bbb on input line 113.
+))
+(/usr/local/texlive/2013/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2013/01/14 v2.14 AMS math features
+\@mathmargin=\skip45
+
+For additional information on amsmath, use the `?' option.
+(/usr/local/texlive/2013/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01
+
+(/usr/local/texlive/2013/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0
+\@emptytoks=\toks21
+\ex@=\dimen106
+))
+(/usr/local/texlive/2013/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d
+\pmbraise@=\dimen107
+)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 1999/12/14 v2.01 operator names
+)
+\inf@bad=\count95
+LaTeX Info: Redefining \frac on input line 210.
+\uproot@=\count96
+\leftroot@=\count97
+LaTeX Info: Redefining \overline on input line 306.
+\classnum@=\count98
+\DOTSCASE@=\count99
+LaTeX Info: Redefining \ldots on input line 378.
+LaTeX Info: Redefining \dots on input line 381.
+LaTeX Info: Redefining \cdots on input line 466.
+\Mathstrutbox@=\box34
+\strutbox@=\box35
+\big@size=\dimen108
+LaTeX Font Info:    Redeclaring font encoding OML on input line 566.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
+\macc@depth=\count100
+\c@MaxMatrixCols=\count101
+\dotsspace@=\muskip11
+\c@parentequation=\count102
+\dspbrk@lvl=\count103
+\tag@help=\toks22
+\row@=\count104
+\column@=\count105
+\maxfields@=\count106
+\andhelp@=\toks23
+\eqnshift@=\dimen109
+\alignsep@=\dimen110
+\tagshift@=\dimen111
+\tagwidth@=\dimen112
+\totwidth@=\dimen113
+\lineht@=\dimen114
+\@envbody=\toks24
+\multlinegap=\skip46
+\multlinetaggap=\skip47
+\mathdisplay@stack=\toks25
+LaTeX Info: Redefining \[ on input line 2665.
+LaTeX Info: Redefining \] on input line 2666.
+)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
+)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2007/01/21 v2.11 LaTeX color extensions (UK)
+
+(/usr/local/texlive/2013/texmf-dist/tex/latex/latexconfig/color.cfg
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1337.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1341.
+Package xcolor Info: Model `RGB' extended on input line 1353.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1355.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1356.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1357.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1358.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1359.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
+)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/rotating/rotating.sty
+Package: rotating 2009/03/28 v2.16a rotated objects in LaTeX
+\c@r@tfl@t=\count107
+\rotFPtop=\skip48
+\rotFPbot=\skip49
+\rot@float@box=\box36
+\rot@mess@toks=\toks26
+)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/tools/longtable.sty
+Package: longtable 2004/02/01 v4.11 Multi-page Table package (DPC)
+\LTleft=\skip50
+\LTright=\skip51
+\LTpre=\skip52
+\LTpost=\skip53
+\LTchunksize=\count108
+\LTcapwidth=\dimen115
+\LT@head=\box37
+\LT@firsthead=\box38
+\LT@foot=\box39
+\LT@lastfoot=\box40
+\LT@cols=\count109
+\LT@rows=\count110
+\c@LT@tables=\count111
+\c@LT@chunks=\count112
+\LT@p@ftn=\toks27
+)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/tools/array.sty
+Package: array 2008/09/09 v2.4c Tabular extension package (FMi)
+\col@sep=\dimen116
+\extrarowheight=\dimen117
+\NC@list=\toks28
+\extratabsurround=\skip54
+\backup@length=\skip55
+))
+(./thermosyphon-paper-revtex4.aux)
+\openout1 = `thermosyphon-paper-revtex4.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+Class revtex4 Info: Patching array package. on input line 16.
+Class revtex4 Info: Patching unrecognized longtable package. (Proceeding with f
+ingers crossed) on input line 16.
+Class revtex4 Info: cite was not loaded (OK!) on input line 16.
+Class revtex4 Info: multicol was not loaded (OK!) on input line 16.
+
+(/usr/local/texlive/2013/texmf-dist/tex/context/base/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count113
+\scratchdimen=\dimen118
+\scratchbox=\box41
+\nofMPsegments=\count114
+\nofMParguments=\count115
+\everyMPshowfont=\toks29
+\MPscratchCnt=\count116
+\MPscratchDim=\dimen119
+\MPnumerator=\count117
+\makeMPintoPDFobject=\count118
+\everyMPtoPDFconversion=\toks30
+) (/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in PDF mode is detected.
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
+
+(/usr/local/texlive/2013/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
+
+(/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
+Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
+))
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 452.
+
+(/usr/local/texlive/2013/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+(./thermosyphon-paper.author.tex) (./thermosyphon-paper.abs.tex)
+
+Class revtex4 Warning: Assuming \noaffiliation for Andrew Reagan.
+
+(./thermosyphon-paper.title.tex) (./thermosyphon-paper.body.tex
+<../../2013/2013-05data-assimilation/papers/harris-tellus-2012-loop.pdf, id=1, 
+558.83395pt x 562.03494pt>
+File: ../../2013/2013-05data-assimilation/papers/harris-tellus-2012-loop.pdf Gr
+aphic file (type pdf)
+
+<use ../../2013/2013-05data-assimilation/papers/harris-tellus-2012-loop.pdf>
+Package pdftex.def Info: ../../2013/2013-05data-assimilation/papers/harris-tell
+us-2012-loop.pdf used on input line 27.
+(pdftex.def)             Requested size: 229.49844pt x 230.81316pt.
+LaTeX Font Info:    Try loading font information for U+msa on input line 32.
+
+(/usr/local/texlive/2013/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 32.
+
+(/usr/local/texlive/2013/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+) [1{/usr/local/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <../
+../2013/2013-05data-assimilation/papers/harris-tellus-2012-loop.pdf>]
+<figures/221TimeSeries.pdf, id=85, 422.40712pt x 334.70125pt>
+File: figures/221TimeSeries.pdf Graphic file (type pdf)
+
+<use figures/221TimeSeries.pdf>
+Package pdftex.def Info: figures/221TimeSeries.pdf used on input line 48.
+(pdftex.def)             Requested size: 229.49844pt x 181.84933pt.
+
+Underfull \hbox (badness 1484) in paragraph at lines 70--72
+\OT1/cmr/m/n/10 tron-ics Tech-ni-cian, the exper-i-men-tal ther-mosyphons
+ []
+
+
+Underfull \hbox (badness 1331) in paragraph at lines 73--81
+ \OT1/cmr/m/n/10 wrapped around the bot-tom half of the 
+ []
+
+
+Underfull \hbox (badness 1874) in paragraph at lines 73--81
+ \OT1/cmr/m/n/10 transmitting clear THV from McMaster- 
+ []
+
+
+Underfull \hbox (badness 2726) in paragraph at lines 93--98
+\OT1/cmr/m/n/10 cre-at-ed using Open-FOAM's native mesh-ing util-i-ty
+ []
+
+
+</Users/andyreagan/work/2013/2013-05data-assimilation/OpenFOAM/figures/heating_
+zoom_mesh4.png, id=86, 750.805pt x 551.05875pt>
+File: /Users/andyreagan/work/2013/2013-05data-assimilation/OpenFOAM/figures/hea
+ting_zoom_mesh4.png Graphic file (type png)
+
+<use /Users/andyreagan/work/2013/2013-05data-assimilation/OpenFOAM/figures/heat
+ing_zoom_mesh4.png>
+Package pdftex.def Info: /Users/andyreagan/work/2013/2013-05data-assimilation/O
+penFOAM/figures/heating_zoom_mesh4.png used on input line 101.
+(pdftex.def)             Requested size: 229.49844pt x 168.43843pt.
+
+</Users/andyreagan/work/2013/2013-05data-assimilation/OpenFOAM/figures/3D-mesh2
+.png, id=87, 789.95125pt x 558.085pt>
+File: /Users/andyreagan/work/2013/2013-05data-assimilation/OpenFOAM/figures/3D-
+mesh2.png Graphic file (type png)
+
+<use /Users/andyreagan/work/2013/2013-05data-assimilation/OpenFOAM/figures/3D-m
+esh2.png>
+Package pdftex.def Info: /Users/andyreagan/work/2013/2013-05data-assimilation/O
+penFOAM/figures/3D-mesh2.png used on input line 111.
+(pdftex.def)             Requested size: 229.49844pt x 162.13855pt.
+ [2 <./figures/221TimeSeries.pdf>]
+
+LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix]
+ on input line 129.
+
+
+</Users/andyreagan/work/2013/2013-05data-assimilation/OpenFOAM/figures/heating0
+03.png, id=113, 615.29875pt x 414.54875pt>
+File: /Users/andyreagan/work/2013/2013-05data-assimilation/OpenFOAM/figures/hea
+ting003.png Graphic file (type png)
+
+<use /Users/andyreagan/work/2013/2013-05data-assimilation/OpenFOAM/figures/heat
+ing003.png>
+Package pdftex.def Info: /Users/andyreagan/work/2013/2013-05data-assimilation/O
+penFOAM/figures/heating003.png used on input line 135.
+(pdftex.def)             Requested size: 229.49844pt x 154.62042pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[3 </Users/andyreagan/work/2013/2013-05data-assimilation/OpenFOAM/figures/heati
+ng_zoom_mesh4.png> </Users/andyreagan/work/2013/2013-05data-assimilation/OpenFO
+AM/figures/3D-mesh2.png (PNG copy)> </Users/andyreagan/work/2013/2013-05data-as
+similation/OpenFOAM/figures/heating003.png>]
+<figures/TLM-verification003_noname.pdf, id=119, 472.76625pt x 467.7475pt>
+File: figures/TLM-verification003_noname.pdf Graphic file (type pdf)
+
+<use figures/TLM-verification003_noname.pdf>
+Package pdftex.def Info: figures/TLM-verification003_noname.pdf used on input l
+ine 200.
+(pdftex.def)             Requested size: 229.49844pt x 227.06422pt.
+ [4 <./figures/TLM-verification003_noname.pdf>]
+<../../2013/2013-05data-assimilation/src/experiments/windowExperiment/window_ex
+periment_plot002.pdf, id=139, 465.74pt x 392.46625pt>
+File: ../../2013/2013-05data-assimilation/src/experiments/windowExperiment/wind
+ow_experiment_plot002.pdf Graphic file (type pdf)
+
+<use ../../2013/2013-05data-assimilation/src/experiments/windowExperiment/windo
+w_experiment_plot002.pdf>
+Package pdftex.def Info: ../../2013/2013-05data-assimilation/src/experiments/wi
+ndowExperiment/window_experiment_plot002.pdf used on input line 288.
+(pdftex.def)             Requested size: 229.49844pt x 193.38806pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+<../../2013/2013-05data-assimilation/src/experiments/covInflTest/figures/ETKF_3
+90s_infl_error.pdf, id=140, 495.8525pt x 394.47375pt>
+File: ../../2013/2013-05data-assimilation/src/experiments/covInflTest/figures/E
+TKF_390s_infl_error.pdf Graphic file (type pdf)
+
+<use ../../2013/2013-05data-assimilation/src/experiments/covInflTest/figures/ET
+KF_390s_infl_error.pdf>
+Package pdftex.def Info: ../../2013/2013-05data-assimilation/src/experiments/co
+vInflTest/figures/ETKF_390s_infl_error.pdf used on input line 300.
+(pdftex.def)             Requested size: 229.49844pt x 182.57367pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+</Users/andyreagan/work/2013/2013-05data-assimilation/src/experiments/openFoamA
+ssimilation/data/synData-tStep.01-b290-t340-m40000/results_vs_N_32_w10_labels.p
+df, id=141, 485.22098pt x 365.51913pt>
+File: /Users/andyreagan/work/2013/2013-05data-assimilation/src/experiments/open
+FoamAssimilation/data/synData-tStep.01-b290-t340-m40000/results_vs_N_32_w10_lab
+els.pdf Graphic file (type pdf)
+
+<use /Users/andyreagan/work/2013/2013-05data-assimilation/src/experiments/openF
+oamAssimilation/data/synData-tStep.01-b290-t340-m40000/results_vs_N_32_w10_labe
+ls.pdf>
+Package pdftex.def Info: /Users/andyreagan/work/2013/2013-05data-assimilation/s
+rc/experiments/openFoamAssimilation/data/synData-tStep.01-b290-t340-m40000/resu
+lts_vs_N_32_w10_labels.pdf used on input line 326.
+(pdftex.def)             Requested size: 229.49844pt x 172.88159pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[5]
+
+LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix]
+ on input line 337.
+
+
+</Users/andyreagan/work/2013/2013-05data-assimilation/src/experiments/openFoamA
+ssimilation/data/synData-tStep.01-b290-t340-m40000/results_vs_N_40000_w10_label
+s.pdf, id=145, 487.7957pt x 374.92957pt>
+File: /Users/andyreagan/work/2013/2013-05data-assimilation/src/experiments/open
+FoamAssimilation/data/synData-tStep.01-b290-t340-m40000/results_vs_N_40000_w10_
+labels.pdf Graphic file (type pdf)
+
+<use /Users/andyreagan/work/2013/2013-05data-assimilation/src/experiments/openF
+oamAssimilation/data/synData-tStep.01-b290-t340-m40000/results_vs_N_40000_w10_l
+abels.pdf>
+Package pdftex.def Info: /Users/andyreagan/work/2013/2013-05data-assimilation/s
+rc/experiments/openFoamAssimilation/data/synData-tStep.01-b290-t340-m40000/resu
+lts_vs_N_40000_w10_labels.pdf used on input line 340.
+(pdftex.def)             Requested size: 229.49844pt x 176.39998pt.
+
+
+LaTeX Warning: Reference `fig:localcovadaptive' on page 6 undefined on input li
+ne 352.
+
+) [6 <../../2013/2013-05data-assimilation/src/experiments/windowExperiment/wind
+ow_experiment_plot002.pdf> <../../2013/2013-05data-assimilation/src/experiments
+/covInflTest/figures/ETKF_390s_infl_error.pdf> </Users/andyreagan/work/2013/201
+3-05data-assimilation/src/experiments/openFoamAssimilation/data/synData-tStep.0
+1-b290-t340-m40000/results_vs_N_32_w10_labels.pdf> </Users/andyreagan/work/2013
+/2013-05data-assimilation/src/experiments/openFoamAssimilation/data/synData-tSt
+ep.01-b290-t340-m40000/results_vs_N_40000_w10_labels.pdf>]
+(./thermosyphon-paper.acknowledgments.tex) (./thermosyphon-paper.biblio.tex
+(./thermosyphon-paper-revtex4.bbl
+Underfull \hbox (badness 1960) in paragraph at lines 5--10
+ []\OT1/cmr/m/n/9 Asur, S. and B. A. Huber-man (2010).  Pre-dict-
+ []
+
+
+Underfull \hbox (badness 1622) in paragraph at lines 5--10
+ \OT1/cmr/m/it/9 IEEE/WIC/ACM Inter-na-tion-al Con-fer-ence on\OT1/cmr/m/n/9 , 
+Vol-
+ []
+
+
+Underfull \hbox (badness 1248) in paragraph at lines 124--127
+ []\OT1/cmr/m/n/9 Kalnay, E., H. Li, T. Miyoshi, S.-C. YANG, and
+ []
+
+[7])) (./thermosyphon-paper.supplementary.tex)
+Underfull \hbox (badness 1253) in paragraph at lines 1--55
+\OT1/cmr/m/n/10 pushed the bound-ary of com-pu-ta-tion-al pow-er, and
+ []
+
+
+Class revtex4 Warning: Environment acknowledgements is obsolete;
+Use acknowledgments instead.
+
+[8] (./thermosyphon-paper-revtex4.aux)
+
+LaTeX Warning: There were undefined references.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 5126 strings out of 493315
+ 71862 string characters out of 6137904
+ 157203 words of memory out of 5000000
+ 8441 multiletter control sequences out of 15000+600000
+ 11583 words of font info for 44 fonts, out of 8000000 for 9000
+ 957 hyphenation exceptions out of 8191
+ 39i,9n,40p,430b,328s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
+></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
+</usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></
+usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></u
+sr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></us
+r/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr
+/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/l
+ocal/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/loc
+al/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local
+/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/t
+exlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/tex
+live/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texliv
+e/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2
+013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2013
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2013/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2013/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2013/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2013/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2013/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/local/texlive/2013/texmf-dist
+/fonts/type1/urw/helvetic/uhvr8a.pfb>
+Output written on thermosyphon-paper-revtex4.pdf (8 pages, 1077133 bytes).
+PDF statistics:
+ 284 PDF objects out of 1000 (max. 8388607)
+ 205 compressed objects within 3 object streams
+ 0 named destinations out of 1000 (max. 500000)
+ 51 words of extra memory for PDF output out of 10000 (max. 10000000)
+
