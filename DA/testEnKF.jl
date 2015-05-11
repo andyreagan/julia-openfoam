@@ -1,5 +1,4 @@
-include("lorenz63.jl")
-
+include("DA.jl")
 using DA
 
 # some samples
@@ -17,7 +16,7 @@ println("quick test result:")
 println(X_a)
 
 println("beginning real test")
-
+include("foamLab.jl")
 using foamLab
 l = Lorenz63()
 
@@ -111,3 +110,7 @@ println("here are each of the ensembles:")
 for i=1:Nens
     println(ens[i].x)
 end
+
+
+
+

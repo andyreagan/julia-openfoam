@@ -1,7 +1,7 @@
-include("lorenz63.jl")
-println("library loaded")
+include("foamLab.jl")
 using foamLab
 l = Lorenz63()
+# make sure that type is what i expected...
 # println(l)
 # run(l)
 # println(typeof(l.J(randn(3),0.0)))
@@ -31,6 +31,7 @@ stddev = .05
 observations = truth+randn(size(truth))*stddev
 
 # now try to predict it
+include("DA.jl")
 using DA
 l.t = 0.0
 
