@@ -2,9 +2,11 @@ include("foamLab.jl")
 using foamLab
 l = Lorenz63()
 # make sure that type is what i expected...
-# println(l)
+println("this is what we have created:")
+println(l)
 # run(l)
-# println(typeof(l.J(randn(3),0.0)))
+println("and here is what the jacobian looks like:")
+println(typeof(l.J(randn(3),0.0)))
 
 window = 0.1
 runtime = 1
@@ -55,14 +57,28 @@ for i=1:int(runtime/window)
     analysis[:,i+1] = l.x
 end
 
+println("----------------------------------------")
+println("beginning of the model run")
+println("----------------------------------------")
+println("truth:")
 println(truth[:,1])
+println("observation:")
 println(observations[:,1])
+println("forecast:")
 println(forecast[:,1])
+println("analysis:")
 println(analysis[:,1])
 
+println("----------------------------------------")
+println("end of the model run")
+println("----------------------------------------")
+println("truth:")
 println(truth[:,end])
+println("observation:")
 println(observations[:,end])
+println("forecast:")
 println(forecast[:,end])
+println("analysis:")
 println(analysis[:,end])
 
 

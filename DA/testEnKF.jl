@@ -21,7 +21,7 @@ using foamLab
 l = Lorenz63()
 
 window = 0.1
-runtime = 10.0
+runtime = 1.0
 l.window = window
 l.x = randn(3)*10.0
 # get it to some model state
@@ -70,8 +70,8 @@ for i=1:Nens
 end
 forecast[:,1] = mean(X_f,2)
 println("initial application of filter")
-# X_a = EnKF(X_f,observations[:,1],eye(3),eye(3).*stddev,delta)
-X_a = ETKF(X_f,observations[:,1],eye(3),eye(3).*stddev,delta)
+X_a = EnKF(X_f,observations[:,1],eye(3),eye(3).*stddev,delta)
+# X_a = ETKF(X_f,observations[:,1],eye(3),eye(3).*stddev,delta)
 println("initial analysis:")
 println(X_a)
 analysis[:,1] = mean(X_a,2)
@@ -80,7 +80,7 @@ for i=1:Nens
 end
 
 for j=1:int(runtime/window)
-    println("time is $(j*window)")
+    # println("time is $(j*window)")
     for i=1:Nens
         run(ens[i])
     end
@@ -88,29 +88,95 @@ for j=1:int(runtime/window)
         X_f[:,i] = ens[i].x
     end
     forecast[:,j+1] = mean(X_f,2)
-    # X_a = EnKF(X_f,observations[:,j+1],eye(3),eye(3).*stddev,delta)
-    X_a = ETKF(X_f,observations[:,j+1],eye(3),eye(3).*stddev,delta)
+    X_a = EnKF(X_f,observations[:,j+1],eye(3),eye(3).*stddev,delta)
+    # X_a = ETKF(X_f,observations[:,j+1],eye(3),eye(3).*stddev,delta)
     analysis[:,j+1] = mean(X_a,2)
     for i=1:Nens
         ens[i].x = X_a[:,i]+randn(3)*sigma
     end
 end
 
-println(truth[:,1])
-println(observations[:,1])
-println(forecast[:,1])
-println(analysis[:,1])
+# println(truth[:,1])
+# println(observations[:,1])
+# println(forecast[:,1])
+# println(analysis[:,1])
 
-println(truth[:,end])
-println(observations[:,end])
-println(forecast[:,end])
-println(analysis[:,end])
+# println(truth[:,end])
+# println(observations[:,end])
+# println(forecast[:,end])
+# println(analysis[:,end])
 
-println("here are each of the ensembles:")
-for i=1:Nens
-    println(ens[i].x)
+# println("here are each of the ensembles:")
+# for i=1:Nens
+#     println(ens[i].x)
+# end
+
+# let's test RMSE vs ensemble size
+
+function rmse(a,b)
+    sum(sqrt(a.^2-b.^2))
 end
 
+ens_sizes = [5,10,20,50,100]
+ens_RMSE = zeros(ens_sizes)
+
+println("testing vs ensemble size")
+
+for ens_i=1:size(ens_sizes)[1]
+    Nens = ens_sizes[ens_i]
+    println("using Nens=$(Nens)")
+    ens = Array(Lorenz63,Nens)
+    for i=1:Nens
+        # println("initializing ensemble $(i)")
+        ens[i] = Lorenz63()
+        ens[i].x = randn(3)*10.0
+        for j=1:10
+            run(ens[i])
+        end
+        ens[i].t = 0.0
+        ens[i].window = window
+    end
+
+    forecast = zeros(truth)
+    analysis = zeros(truth)
+    X_f = zeros(3,Nens)
+    for i=1:Nens
+        X_f[:,i] = ens[i].x
+    end
+    forecast[:,1] = mean(X_f,2)
+    println("initial application of filter")
+    X_a = EnKF(X_f,observations[:,1],eye(3),eye(3).*stddev,delta)
+    # X_a = ETKF(X_f,observations[:,1],eye(3),eye(3).*stddev,delta)
+    println("initial analysis:")
+    println(X_a)
+    analysis[:,1] = mean(X_a,2)
+    for i=1:Nens
+        ens[i].x = X_a[:,i]+randn(3)*sigma
+    end
+
+    for j=1:int(runtime/window)
+        # println("time is $(j*window)")
+        for i=1:Nens
+            run(ens[i])
+        end
+        for i=1:Nens
+            X_f[:,i] = ens[i].x
+        end
+        forecast[:,j+1] = mean(X_f,2)
+        X_a = EnKF(X_f,observations[:,j+1],eye(3),eye(3).*stddev,delta)
+        # X_a = ETKF(X_f,observations[:,j+1],eye(3),eye(3).*stddev,delta)
+        analysis[:,j+1] = mean(X_a,2)
+        for i=1:Nens
+            ens[i].x = X_a[:,i]+randn(3)*sigma
+        end
+    end
+    println("final analysis:")
+    println(X_a)
+    println(ens_i)
+    # println(rmse(truth[1,:],forecast[1,:]))
+    # ens_RMSE[ens_i] = rmse(truth[1,:],forecast[1,:])
+    ens_RMSE[ens_i] = sum((truth[1,:]-forecast[1,:]).^2)
+end
 
 
 

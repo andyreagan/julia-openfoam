@@ -32,10 +32,12 @@ basic.jl
 -defines the foamLia module, exports all of the functions
 DA/testscript.jl
 DA/testEnKF.jl
+-test of the EnKF. copied into the ijulia notebook
 DA/lorenz63.jl
 -basically the same as the matlab code
 -it relies on the shell script to run openfoam models (which basic.jl does a better job of)
 
 upgrades:
 -always name files that define modules from the same name
+
 
