@@ -1,5 +1,5 @@
 module foamLia
-export OpenFoam,initCase,run,runQ,readMesh,findTimes,readVar,readVarSpec,stringG,rewriteVar,reshapeMesh,writeDict,writeVolScalarField
+export Lorenz63,OpenFoam,initCase,run,runQ,readMesh,findTimes,readVar,readVarSpec,stringG,rewriteVar,reshapeMesh,writeDict,writeVolScalarField
 # println("foamLia: basic openfoam manipulation")
 
 using DataStructures
@@ -12,6 +12,50 @@ function stringG(a::Number)
         return string(a)
     end
 end
+
+# abstract model type to subclass Lorenz63,OpenFOAM from
+abstract Model
+
+type Lorenz63 <: Model
+    # x::Array(Float64,1)
+    x
+    dt::Function
+    J::Function
+    nVar::Int
+    tstep::Float64
+    t::Float64
+    window::Float64
+    # params::Array(Float64,1)
+    params
+    TLMMethod::String
+    # p_f::Array(Float64,1,1)
+    pf
+    directory::String
+end
+
+# functional programming for breakfast
+# the outer function returns a function
+# which is the lorenz63 model
+function outer()
+    inner = function(y::Array,t::Float64)
+        b,s,r = (8/3,10.0,28.0)
+        [s*(y[2]-y[1]),r*y[1]-y[2]-y[1]*y[3],y[1]*y[2]-b*y[3]]
+    end
+    return inner
+end
+
+# this is the lorenz 63 jacobian
+J = function(y::Array,t::Float64)
+    b,s,r = (8/3,10.0,28.0)
+    [-s s 0.0;-y[3]+r -1.0 -y[1];y[2] y[1] -b]
+end
+
+# redefine the default constructor
+# with some intermediaries
+Lorenz63(dt,J,nVar) = Lorenz63([1.0,1.0,1.0],dt,J,nVar,.01,0.0,20.0,[8/3,10.0,28.0],"rk4prime",[],"/Users/andyreagan/work")
+# use the above contstruct #dispatching
+Lorenz63(J) = Lorenz63(outer(),J,3)
+Lorenz63() = Lorenz63(J)
 
 # main (only) type
 # want to be able to store all case-related information
@@ -147,6 +191,8 @@ defaultMesh["cellCenters"] = zeros(Float64,3,1) # 1
 # this deep copy is not working
 # OpenFoam(folder) = OpenFoam(folder,defaultControlDict,defaultTurbulenceProperties,deepcopy(defaultT),defaultMeshParam,defaultMesh)
 OpenFoam(folder) = OpenFoam(folder,defaultControlDict,defaultTurbulenceProperties,create_defaultT(),defaultMeshParam,defaultMesh)
+
+
 
 header = """/*--------------------------------*- C++ -*----------------------------------*\
 | =========                |                                                 |
@@ -770,6 +816,52 @@ end
 function run(o::OpenFoam,c::Cmd)
     cd(o.caseFolder)
     run(c)
+end
+
+# run function for lorenz model
+function run(f::Lorenz63)
+    # println("in lorenz function")
+    f.x = rk4(f.dt,f.x,[f.t,f.t+f.window],f.tstep)
+    f.t += f.window
+end
+
+function run(f::Lorenz63,TLM::String)
+    # println("in lorenz function, running w TLM")
+    f.x,f.pf = rk4p(f.dt,f.J,f.x,[f.t,f.t+f.window],f.tstep)
+    f.t += f.window
+end
+
+# simple rk4 implementation
+function rk4(f::Function,y::Array,tspan::Array,tstep::Float64)
+    for t=tspan[1]:tstep:tspan[2]
+        s1 = f(y,t)
+        s2 = f(y+tstep/2*s1,t+tstep/2)
+        s3 = f(y+tstep/2*s2,t+tstep/2)
+        s4 = f(y+tstep*s3,t+tstep)
+        y += tstep*(s1 + 2*s2 + 2*s3 + s4)/6
+    end
+    # println(y)
+    y
+end
+
+# derivative of above method
+# also need a function for the jacobian (J here)
+function rk4p(f::Function,J::Function,y::Array,tspan::Array,tstep::Float64)
+    dim = length(y)
+    L = eye(dim)
+    for t=tspan[1]:tstep:tspan[2]
+        s1 = f(y,t)
+        L1 = J(y,t)
+        s2 = f(y+tstep/2*s1,t+tstep/2)
+        L2 = *(J(y+tstep/2*s1,t+tstep/2),(eye(dim)+tstep/2*L1));
+        s3 = f(y+tstep/2*s2,t+tstep/2)
+        L3 = *(J(y+tstep/2*s2,t+tstep/2),(eye(dim)+tstep/2*L2));
+        s4 = f(y+tstep*s3,t+tstep)
+        L4 = *(J(y+tstep*s3,t+tstep),(eye(dim)+tstep*L3));
+        L = *(L,eye(dim) + tstep/6*(L1 + 2*L2 + 2*L3 + L4));
+        y += tstep*(s1 + 2*s2 + 2*s3 + s4)/6
+    end
+    y,L
 end
 
 function reshapeMesh(case)

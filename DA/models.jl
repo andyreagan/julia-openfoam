@@ -73,3 +73,4 @@ Lorenz63(dt,J,nVar) = Lorenz63([1.0,1.0,1.0],dt,J,nVar,.01,0.0,20.0,[8/3,10.0,28
 # use the above contstruct #dispatching
 Lorenz63(J) = Lorenz63(outer(),J,3)
 Lorenz63() = Lorenz63(J)
+
