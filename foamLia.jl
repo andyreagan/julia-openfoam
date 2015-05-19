@@ -307,7 +307,7 @@ function copyFromBase(o::OpenFoam,files::Array,baseCase::String)
     for file in files
         s = join([baseCase,file],"/")
         d = join([o.caseFolder,file],"/")
-        println("copying $(s) to $(d)")
+        # println("copying $(s) to $(d)")
         cp(s,d)
 	if file == "Allrun"
 	    run(`chmod +x $d`)
@@ -329,15 +329,15 @@ function initCase(o::OpenFoam,baseCase::String)
             # println(string(folder," exists"))
         end
     end
-    println("copying over base case")
+    # println("copying over base case")
     # copyFromBase(o,allFiles,baseCase)
     # copyFromBase(o,meshFiles,baseCase)
     copyFromBase(o,baseCase)
-    println("writing out controlDict")
+    # println("writing out controlDict")
     writeDict(o,o.controlDict,"controlDict","system")
-    println("writing out turbulenceProperties")
+    # println("writing out turbulenceProperties")
     writeDict(o,o.turbulenceProperties,"turbulenceProperties","constant")
-    println("writing out T")
+    # println("writing out T")
     writeVolScalarField(o,o.T,"T","0")
 end
 
