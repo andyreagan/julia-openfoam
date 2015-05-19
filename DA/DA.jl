@@ -3,7 +3,7 @@ export threeDVar,EKF,EnKF,ETKF
 
 EKF = function(xf::Array,y::Array,H::Array,R::Array,pf::Array)
     # compute the Kalman gain matrix
-    K = \( *(pf,H.') , R+ *(H ,*(pf,H.') ) );
+    K = /( *(pf,H.') , R+ *(H ,*(pf,H.') ) );
 
     # innovation
     d = y - *(H,xf);
@@ -17,7 +17,7 @@ end
 
 threeDVar = function(xf::Array,y::Array,H::Array,R::Array,B::Array)
     # compute the intermediary matrix solution
-    K = \( ( inv(B) + *(H.', *(inv(R),H)), *(H.',inv(R) ) ) );
+    K = /( ( inv(B) + *(H.', *(inv(R),H)), *(H.',inv(R) ) ) );
 
     # innovation
     d = y - *(H,xf);
@@ -66,7 +66,7 @@ EnKF = function(X_f::Array,y_0::Array,H::Array,R::Array,delta::Float64)
     # println(pf[1:10,1:10])
     
     # compute Kalman gain matrix
-    K = \( *(pf,H.') , R+ *(H ,*(pf,H.') ) )
+    K = /( *(pf,H.') , R+ *(H ,*(pf,H.') ) )
     # println(K[1:10,1:10])
 
     # innovation
@@ -120,7 +120,7 @@ ETKF = function(X_f::Array,y_0::Array,H::Array,R::Array,delta::Float64)
     # println(pf[1:10,1:10])
     
     # compute Kalman gain matrix
-    K = \( *(pf,H.') , R+ *(H ,*(pf,H.') ) )
+    K = /( *(pf,H.') , R+ *(H ,*(pf,H.') ) )
     # println(K[1:10,1:10])
 
     # innovation
