@@ -84,19 +84,23 @@ for t=1:length(ass_times)
     println("--------------------------------------------------------------------------------")
     println("--------------------------------------------------------------------------------")
     println("time $(t)")
-    for j=1:Nens
-        forecastFlux[j,t] = mean(readVarSpec(ens[j],stringG(t),"phi",faces[3]))
+    if t>1
+        for j=1:Nens
+            forecastFlux[j,t] = mean(readVarSpec(ens[j],stringG(t),"phi",faces[3]))
+        end
     end
     println("forecast flux:")
-    println(forecastFlux[:,t])
+    println(forecastFlux[:,t+1])
     f,a = assimilate(observations,t,R,points,Nens,ens)
-    for j=1:Nens
-        analysisFlux[j,t] = mean(readVarSpec(ens[j],stringG(t),"phi",faces[3]))
+    if t>1
+        for j=1:Nens
+            analysisFlux[j,t] = mean(readVarSpec(ens[j],stringG(t),"phi",faces[3]))
+        end
     end
     groundFlux[t] = mean(readVarSpec(case,stringG(ass_times[t]),"phi",faces[3]))
     println("ground flux:")
     println(groundFlux[t])
     analysis[t] = a
     forecast[t] = f
-    runEnsemble(ens,t)
+    runEnsemble(ens,t-1)
 end

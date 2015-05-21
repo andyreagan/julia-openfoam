@@ -143,7 +143,9 @@ function assimilate(observations,t,R,points,Nens,ens)
     for i in 0:x-1
         println("assimilating at x=$(i)")
         # println("using points $(mod(linspace(i-R,i+R,R*2+1),x)+1)")
-        local_obs = squeeze(observations[t][mod(linspace(i-R,i+R,R*2+1),x)+1,:],1)'
+	# println(size(observations[t][mod(linspace(i-R,i+R,R*2+1),x)+1,:]))
+	# don't need the squeeze anymore
+        local_obs = observations[t][mod(linspace(i-R,i+R,R*2+1),x)+1,:]'
         # println("size of local_obs is $(size(local_obs))")    
         # flatten to 1D
         # println("flattening")
