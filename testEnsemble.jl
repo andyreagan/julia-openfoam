@@ -37,16 +37,18 @@ println("size of points is $(size(points))")
 # set these things, and then go fill an observations vector
 window = 1
 start_assimilation = 100
-end_assimilation = 200
+end_assimilation = 199
 
 readFlux(case,start_assimilation,faces)
 
 println("building the observations vector, full")
 observations = buildObservations(case,start_assimilation,end_assimilation,window,points)
+println("$(size(observations))")
 
 Nens = 20
 
 ens = initializeEnsemble(Nens,topT,bottomT,deltaT,writeInterval,hc,false)
+# make sure that phi is loaded into time 0
 
 # check the boundary field setting?
 # ens[1].T["boundaryField"]["front"]["type"] = "full"
@@ -80,7 +82,7 @@ forecastFlux = zeros(Nens,length(ass_times))
 analysisFlux = zeros(Nens,length(ass_times))
 groundFlux = zeros(length(ass_times))
 
-for t=1:length(ass_times)
+for t=0:length(ass_times)-1
     println("--------------------------------------------------------------------------------")
     println("--------------------------------------------------------------------------------")
     println("time $(t)")
@@ -90,8 +92,8 @@ for t=1:length(ass_times)
         end
     end
     println("forecast flux:")
-    println(forecastFlux[:,t+1])
-    f,a = assimilate(observations,t,R,points,Nens,ens)
+    println(forecastFlux[:,t])
+    f,a = assimilate(observations,t-1,R,points,Nens,ens)
     if t>1
         for j=1:Nens
             analysisFlux[j,t] = mean(readVarSpec(ens[j],stringG(t),"phi",faces[3]))

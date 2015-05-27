@@ -62,14 +62,16 @@ Lorenz63() = Lorenz63(J)
 type OpenFoam
     caseFolder::String
     controlDict::OrderedDict
-    # fvSchemes::OrderedDict
-    # fvSolution::OrderedDict
-    # setFieldsDict::OrderedDict
-    # RASProperties::OrderedDict
-    # transportProperties::OrderedDict
+    fvSchemes::OrderedDict
+    fvSolution::OrderedDict
+    setFieldsDict::OrderedDict
+    RASProperties::OrderedDict
+    transportProperties::OrderedDict
     turbulenceProperties::OrderedDict
-    # blockMeshDict::OrderedDict
+    blockMeshDict::OrderedDict
     T::OrderedDict
+    Phi::OrderedDict
+    U::OrderedDict
     meshParameters::OrderedDict
     fullMesh::OrderedDict
 end
@@ -96,12 +98,14 @@ defaultControlDict["maxCo"] = 0.5
 defaultControlDict["libs"] = ["\"libOpenFOAM.so\"","\"libsimpleSwakFunctionObjects.so\"","\"libswakFunctionObjects.so\"","\"libgroovyBC.so\""]
 
 defaultTurbulenceProperties = OrderedDict(String,String)
-defaultTurbulenceProperties["simulationType"] = "laminar" # "RASModel" "LESModel"
+defaultTurbulenceProperties["simulationType"] = "laminar"
+# other options: "RASModel","LESModel"
 
 function create_defaultT()
     defaultT = OrderedDict(String,Any)
     defaultT["dimensions"] = [0,0,0,1,0,0,0]
     defaultT["internalField"] = "uniform 300"
+
     # this should work, but deepcopy doesn't work
     # emptyBC = OrderedDict(String,Any)
     # emptyBC["type"] = "empty"
@@ -134,6 +138,7 @@ function create_defaultT()
     # defaultT["boundaryField"]["bottomoutside"] = deepcopy(setGroovyBC(340))
     # defaultT["boundaryField"]["topoutside"]["variables"] = "\"Text=280;hc=225;gradT=(Text-T)*hc\""
     # println(defaultT)
+
     defaultT["boundaryField"] = OrderedDict(String,Any)
     defaultT["boundaryField"]["front"] = OrderedDict(String,Any)
     defaultT["boundaryField"]["front"]["type"] = "empty"

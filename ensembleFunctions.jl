@@ -89,8 +89,12 @@ function initializeEnsemble(Nens,topT,bottomT,deltaT,writeInterval,hc,init)
             seed = int(floor(rand()*9600)+1)
             println("reading from model at time $(seed)")
             initialT = readVar(case,stringG(seed),"T")
+	    # also care about these variables
+            initialPhi = readVar(case,stringG(seed),"T")
+            initialV = readVar(case,stringG(seed),"T")
             println("setting internal field")
             ens[i].T["internalField"] = string("nonuniform List<scalar>\n$(length(truth))\n(\n",join(readVar(case,stringG(seed),"T"),"\n"),"\n)\n") # "uniform 300"
+            ens[i].T["internalField"] = string("nonuniform List<scalar>\n$(length(truth))\n(\n",join(readVar(case,stringG(seed),"T"),"\n"),"\n)\n")
             println("writing T at time 0")
             writeVolScalarField(ens[i],ens[i].T,"T","0")
         end
@@ -140,12 +144,12 @@ function assimilate(observations,t,R,points,Nens,ens)
 
     # for i in 0:0
     # all of the zones
-    for i in 0:x-1
+    for i in 0:990 # x-1
         println("assimilating at x=$(i)")
         # println("using points $(mod(linspace(i-R,i+R,R*2+1),x)+1)")
 	# println(size(observations[t][mod(linspace(i-R,i+R,R*2+1),x)+1,:]))
 	# don't need the squeeze anymore
-        local_obs = observations[t][mod(linspace(i-R,i+R,R*2+1),x)+1,:]'
+        local_obs = observations[t+1][mod(linspace(i-R,i+R,R*2+1),x)+1,:]'
         # println("size of local_obs is $(size(local_obs))")    
         # flatten to 1D
         # println("flattening")
@@ -205,7 +209,7 @@ function assimilate(observations,t,R,points,Nens,ens)
     
     # write it out
     for i=1:Nens
-        ens[i].T["internalField"] = string("nonuniform List<scalar>\n$(length(truth))\n(\n",join(ens[i].T["value"],"\n"),"\n)\n") # "uniform 300"
+        ens[i].T["internalField"] = string("nonuniform List<scalar>\n$(length(ens[i].T["value"]))\n(\n",join(ens[i].T["value"],"\n"),"\n)\n") # "uniform 300"
         writeVolScalarField(ens[i],ens[i].T,"T",string(t))
     end
     
