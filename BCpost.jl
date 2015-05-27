@@ -1,7 +1,7 @@
 println(ARGS)
 endTime,deltaT,writeInterval,topT,bottomT,hc = ARGS
 
-include("basic.jl")
+include("foamLia/foamLia.jl")
 
 using foamLia
 

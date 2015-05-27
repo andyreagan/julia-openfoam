@@ -1,0 +1,45 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.2.1                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      transportProperties;
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+transportModel Newtonian;
+
+Cp0             4.187; // Kj/Kg at 300K
+
+// trying to add some density!
+rho             rho [ 1 -3 0 0 0 0 0 ] 1000;
+
+// Laminar viscosity
+nu              nu [0 2 -1 0 0 0 0] 1e-06; // was 1e-05 for air
+
+// Thermal expansion coefficient
+beta            beta [0 0 0 -1 0 0 0] 3e-04; // 3e-03 for air
+
+// Reference temperature
+TRef            TRef [0 0 0 1 0 0 0] 300; // Kelvin
+
+// Laminar Prandtl number
+Pr              Pr [0 0 0 0 0 0 0] 5.43; // 0.9 for air
+
+// Turbulent Prandtl number
+Prt             Prt [0 0 0 0 0 0 0] 5.43; //assume it's just the same
+
+/* reference numbers:
+http://www.engineeringtoolbox.com/air-properties-d_156.html
+http://www.engineeringtoolbox.com/water-thermal-properties-d_162.html
+*/
+
+// ************************************************************************* //

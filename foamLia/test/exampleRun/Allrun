@@ -1,0 +1,17 @@
+#!/bin/sh
+cd ${0%/*} || exit 1    # run from this directory
+
+# Source the OpenFOAM directories
+. $HOME/OpenFOAM/OpenFOAM-2.2.1/etc/bashrc
+
+# Remove logs
+\rm -f log*
+
+# Source tutorial run functions
+. $WM_PROJECT_DIR/bin/tools/RunFunctions
+application=`getApplication`
+
+# Run
+runApplication $application
+
+# ----------------------------------------------------------------- end-of-file

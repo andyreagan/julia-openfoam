@@ -1,0 +1,145 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.2.1                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      blockMeshDict;
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+convertToMeters 0.01; // specifications in .1 meters (deca meters?)
+
+vertices
+(
+ // 16 vertices for the loop (x y z)
+ // top four
+ (.01 0 34.5) //0
+ (-.01 0 34.5) //1
+ (.01 0 37.5) //2
+ (-.01 0 37.5) //3
+ // left four
+ (.01 -34.5 0) //4
+ (-.01 -34.5 0) //5
+ (.01 -37.5 0) //6
+ (-.01 -37.5 0) //7
+ // bottom four
+ (.01 0 -34.5) //8
+ (-.01 0 -34.5) //9
+ (.01 0 -37.5) //10
+ (-.01 0 -37.5) //11
+ // right four
+ (.01 34.5 0) //12
+ (-.01 34.5 0) //13
+ (.01 37.5 0) //14
+ (-.01 37.5 0) //15
+);
+
+blocks
+(
+    // block 1, upper left
+    hex (7 6 4 5 3 2 0 1) (1 40 250) simpleGrading (1 1 1)
+    // block 2, lower left
+    hex (5 4 6 7 9 8 10 11) (1 40 250) simpleGrading (1 1 1)
+    // block 3, lower right
+    hex (12 13 15 14 8 9 11 10) (1 40 250) simpleGrading (1 1 1)
+    // block 4, upper right
+    hex (13 12 14 15 1 0 2 3) (1 40 250) simpleGrading (1 1 1)
+);
+
+// define the arcs of the loop
+edges
+(
+ arc 0 4 (.01 -24.3952 24.3952) //(0.01 -sqrt(2)/2*r sqrt(2)/2*r)
+ arc 1 5 (-.01 -24.3952 24.3952) //(0.01 -sqrt(2)/2*R sqrt(2)/2*R)
+ arc 3 7 (-.01 -26.5165 26.5165)
+ arc 2 6 (.01 -26.5165 26.5165)
+ arc 4 8 (.01 -24.3952 -24.3952)
+ arc 5 9 (-.01 -24.3952 -24.3952)
+ arc 6 10 (.01 -26.5165 -26.5165)
+ arc 7 11 (-.01 -26.5165 -26.5165)
+ arc 8 12 (.01 24.3952 -24.3952)
+ arc 9 13 (-.01 24.3952 -24.3952)
+ arc 10 14 (.01 26.5165 -26.5165)
+ arc 11 15 (-.01 26.5165 -26.5165)
+ arc 12 0 (.01 24.3952 24.3952)
+ arc 13 1 (-.01 24.3952 24.3952)
+ arc 14 2 (.01 26.5165 26.5165)
+ arc 15 3 (-.01 26.5165 26.5165)
+);
+
+// recall they must be clockwise from the inside
+boundary
+(
+ front
+ {
+   type empty;
+   faces
+   (
+    (0 2 6 4)
+    (4 6 10 8)
+    (8 10 14 12)
+    (12 14 2 0)
+    );
+ }
+ back
+ {
+   type empty;
+   faces
+     (
+      (1 5 7 3)
+      (5 9 11 7)
+      (9 13 15 11)
+      (13 1 3 15)
+      );
+ }
+ topinside
+ {
+   type wall;
+   faces
+     (
+      (1 0 4 5)
+      (0 1 13 12)
+      );
+ }
+ topoutside
+ {
+   type wall;
+   faces
+     (
+      (2 3 7 6)
+      (2 14 15 3)
+      );
+ }
+ bottominside
+ {
+   type wall;
+   faces
+     (
+      (4 8 9 5)
+      (8 12 13 9)
+      );
+ }
+ bottomoutside
+ {
+   type wall;
+   faces
+     (
+      (6 7 11 10)
+      (10 11 15 14)
+      );
+ }
+);
+
+mergePatchPairs
+(
+);
+
+// ************************************************************************* //
