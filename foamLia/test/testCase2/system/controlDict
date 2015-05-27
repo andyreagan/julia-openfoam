@@ -56,7 +56,7 @@ libs (
 "libsimpleSwakFunctionObjects.so"
 "libswakFunctionObjects.so"
 "libgroovyBC.so"
-);
+)
 
 // ************************************************************************* //
 

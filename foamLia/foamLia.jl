@@ -68,6 +68,7 @@ type OpenFoam
     RASProperties::OrderedDict
     transportProperties::OrderedDict
     turbulenceProperties::OrderedDict
+    g::OrderedDict
     blockMeshDict::OrderedDict
     T::OrderedDict
     Phi::OrderedDict
@@ -190,6 +191,13 @@ function create_defaultSetFieldsDict()
     setFieldsDict["defaultFieldValues"] = [""]
     setFieldsDict["regions"] = [""]
     setFieldsDict
+end
+
+function create_defaultG()
+    g = OrderedDict(String,String)
+    g["dimensions"] = "[0 1 -2 0 0 0 0]"
+    g["value"] = "( 0 0 -9.81)"
+    g
 end
 
 function create_defaultRASProperties()
@@ -352,7 +360,7 @@ end
 # this deep copy is not working
 # OpenFoam(folder) = OpenFoam(folder,defaultControlDict,defaultTurbulenceProperties,deepcopy(defaultT),defaultMeshParam,defaultMesh)
 # OpenFoam(folder) = OpenFoam(folder,defaultControlDict,defaultTurbulenceProperties,create_defaultT(),defaultMeshParam,defaultMesh)
-OpenFoam(folder) = OpenFoam(folder,create_defaultControlDict(),create_defaultFvSchemes(),create_defaultFvSolution(),create_defaultSetFieldsDict(),create_defaultRASProperties(),create_defaultTransportProperties(),create_defaultTurbulenceProperties(),create_defaultBlockMeshDict(),create_defaultT(),create_defaultT(),create_defaultT(),create_defaultMeshParam(),create_defaultMesh())
+OpenFoam(folder) = OpenFoam(folder,create_defaultControlDict(),create_defaultFvSchemes(),create_defaultFvSolution(),create_defaultSetFieldsDict(),create_defaultRASProperties(),create_defaultTransportProperties(),create_defaultTurbulenceProperties(),create_defaultG(),create_defaultBlockMeshDict(),create_defaultT(),create_defaultT(),create_defaultT(),create_defaultMeshParam(),create_defaultMesh())
 
 header = """/*--------------------------------*- C++ -*----------------------------------*\
 | =========                |                                                 |
@@ -370,7 +378,7 @@ type CompactRepr
   entrySeparator::String
 end
 
-DefaultCompactRepr = CompactRepr(" ", ";\n\n")
+DefaultCompactRepr = CompactRepr(" ", "\n\n")
 
 function showCompact{K,V}(m::OrderedDict{K,V}, config::CompactRepr)
   # Note that without the typehint on the Array, this will somehow get
@@ -385,7 +393,7 @@ end
 showCompact{K,V}(m::OrderedDict{K,V}) = showCompact(m, DefaultCompactRepr)
 # end stolen from dictutils
 
-function writeDict(o::OpenFoam,d::OrderedDict,name::String,location::String)
+function writeDict(o::OpenFoam,d::OrderedDict,name::String,location::String,class::String)
     # mkdir(join([o.caseFolder,location],"/"))
 
     f = open(join([o.caseFolder,location,name],"/"),"w")
@@ -394,18 +402,20 @@ function writeDict(o::OpenFoam,d::OrderedDict,name::String,location::String)
     write(f,string(header,"\n"))
 
     # write the file info
-    finfo = string("FoamFile\n{\n",showCompact(OrderedDict([("version","2.0"),("format","ascii"),("class","dictionary"),("location",string("\"",location,"\"")),("object",name)]),CompactRepr(" ", ";\n")),";\n}\n\n")
+    finfo = string("FoamFile\n{\n",showCompact(OrderedDict([("version","2.0"),("format","ascii"),("class",class),("location",string("\"",location,"\"")),("object",name)]),CompactRepr(" ", ";\n")),";\n}\n\n")
     write(f,finfo)
 
     write(f,lbreak)
 
     # write the main info
-    maininfo = string(serializeD(d),";\n\n") 
+    maininfo = string(serializeD(d),"\n\n") 
     write(f,maininfo)
 
     write(f,lbreak)
     close(f)
 end
+
+writeDict(o::OpenFoam,d::OrderedDict,name::String,location::String) = writeDict(o::OpenFoam,d::OrderedDict,name::String,location::String,"dictionary")
 
 writeDict(o) = writeDict(o,o.controlDict,"controlDict","system")
 
@@ -422,19 +432,23 @@ function serializeDinner(d::OrderedDict,depth::Int)
 end
 
 function serializeDinner(a::Array,depth::Int)
-  if typeof(a[1]) == ASCIIString
-    # println("joining array")
-    # println(a)
-    # println(join(a,"\n"))
-    return join(["(",join(a,"\n"),")"],"\n")
-  else
-    # println("not joining array")
-    return join(["[",join(a," "),"]"],"")
-  end
+    if typeof(a[1]) == ASCIIString
+        # println("joining array")
+        # println(a)
+        # println(join(a,"\n"))
+        return join(["(",join(a,"\n"),")"],"\n")
+    else
+        # println("not joining array")
+        return join(["[",join(a," "),"]"],"")
+    end
 end
 
+# function serializeDinner(s::String,depth::Int)
+#     join([s,";"],"")
+# end
+
 function serializeDinner(s::Any,depth::Int)
-  return join([string(s),";"],"")
+    join([string(s),";"],"")
 end
 
 function writeVolScalarField(o::OpenFoam,d::OrderedDict,name::String,location::String)
@@ -449,7 +463,7 @@ function writeVolScalarField(o::OpenFoam,d::OrderedDict,name::String,location::S
 
     write(f,lbreak)
 
-    maininfo = string(serializeD(d),";\n\n")
+    maininfo = string(serializeD(d),"\n\n")
     write(f,maininfo)
 
     write(f,lbreak)
@@ -470,8 +484,10 @@ function copyFromBase(o::OpenFoam,files::Array,baseCase::String)
     end
 end
 
-allFiles = ["Allrun","0/alphat","0/epsilon","0/k","0/nut","0/p","0/p_rgh","0/T","0/U","constant/g","constant/RASProperties","constant/transportProperties","constant/turbulenceProperties","system/controlDict","system/fvSchemes","system/fvSolution","system/setFieldsDict"]
-meshFiles = [join(["constant","polyMesh",x],"/") for x in ["blockMeshDict","blockMeshDict3D","boundary","faces","neighbour","owner","points"]]
+# allFiles = ["Allrun","0/alphat","0/epsilon","0/k","0/nut","0/p","0/p_rgh","0/T","0/U","constant/g","constant/RASProperties","constant/transportProperties","constant/turbulenceProperties","system/controlDict","system/fvSchemes","system/fvSolution","system/FieldsDict"]
+allFiles = ["Allrun","0/alphat","0/epsilon","0/k","0/nut","0/p","0/p_rgh","0/T","0/U"]
+# meshFiles = [join(["constant","polyMesh",x],"/") for x in ["blockMeshDict","blockMeshDict3D","boundary","faces","neighbour","owner","points"]]
+meshFiles = [join(["constant","polyMesh",x],"/") for x in ["boundary","faces","neighbour","owner","points"]]
 
 copyFromBase(o::OpenFoam,baseCase::String) = copyFromBase(o::OpenFoam,append!(allFiles,meshFiles),baseCase::String)
 
@@ -509,6 +525,9 @@ function initCase(o::OpenFoam,baseCase::String)
 
     println("writing out turbulenceProperties")
     writeDict(o,o.turbulenceProperties,"turbulenceProperties","constant")
+
+    println("writing out g")
+    writeDict(o,o.g,"g","constant","uniformDimensionedVectorField")
 
     println("writing out T")
     writeVolScalarField(o,o.T,"T","0")

@@ -21,7 +21,7 @@ RASModel $RASModel;
 
 turbulence $turbulence;
 
-printCoeffs on;;
+printCoeffs on;
 
 // ************************************************************************* //
 
