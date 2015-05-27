@@ -264,7 +264,7 @@ function create_defaultT()
     defaultT["dimensions"] = "[0 0 0 1 0 0 0]"
     defaultT["internalField"] = "uniform 300"
 
-    # this should work, but deepcopy doesn't work
+    # this should work, but I must not understand deepcopy
     # emptyBC = OrderedDict(String,Any)
     # emptyBC["type"] = "empty"
     # defaultT["boundaryField"] = OrderedDict(String,Any)
@@ -436,10 +436,10 @@ function serializeDinner(a::Array,depth::Int)
         # println("joining array")
         # println(a)
         # println(join(a,"\n"))
-        return join(["(",join(a,"\n"),")"],"\n")
+        return join(["(",join(a,"\n"),");"],"\n")
     else
         # println("not joining array")
-        return join(["[",join(a," "),"]"],"")
+        return join(["[",join(a," "),"];"],"")
     end
 end
 
