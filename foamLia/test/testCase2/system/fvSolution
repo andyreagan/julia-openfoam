@@ -16,6 +16,7 @@ object fvSolution;
 
 // ************************************************************************* //
 
+
 solvers 
 {
     p_rgh 
@@ -42,7 +43,8 @@ solvers
         $U ;
         relTol 0;
     }
-};
+}
+
 PIMPLE 
 {
     momentumPredicto no;
@@ -51,7 +53,8 @@ PIMPLE
     nNonOrthogonalCorrectors 0;
     pRefCell 0;
     pRefValue 0;
-};
+}
+
 relaxationFactors 
 {
     fields 

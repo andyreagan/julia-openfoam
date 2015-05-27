@@ -16,8 +16,14 @@ object setFieldsDict;
 
 // ************************************************************************* //
 
-defaultFieldValues ASCIIString[""];;
-regions ASCIIString[""];;
+
+defaultFieldValues (
+
+)
+
+regions (
+
+);
 
 // ************************************************************************* //
 

@@ -409,16 +409,7 @@ end
 writeDict(o) = writeDict(o,o.controlDict,"controlDict","system")
 
 function serializeD(d::OrderedDict)
-  join(String[string(k) * " " * serializeDinner(v,1) for (k, v) in d],";\n")    
-end
-
-function serializeDinner(d::OrderedDict)
-  return join(["\n{\n",join(
-    # String["    " * string(k) * " " * serializeDinner(v)
-    String[string(k) * " " * serializeDinner(v)
-           for (k, v) in d],
-    ";\n"
-  ),";\n}"],"")
+  join(String["\n" * string(k) * " " * serializeDinner(v,1) for (k, v) in d],"\n")    
 end
 
 function serializeDinner(d::OrderedDict,depth::Int)
@@ -429,7 +420,7 @@ function serializeDinner(d::OrderedDict,depth::Int)
   ),"\n"*repeat("    ",depth-1)*"}"],"")
 end
 
-function serializeDinner(a::Array)
+function serializeDinner(a::Array,depth::Int)
   if typeof(a[1]) == ASCIIString
     # println("joining array")
     # println(a)
@@ -439,10 +430,6 @@ function serializeDinner(a::Array)
     # println("not joining array")
     return join(["[",join(a," "),"]"],"")
   end
-end
-
-function serializeDinner(s::Any)
-  return join([string(s),""],"")
 end
 
 function serializeDinner(s::Any,depth::Int)

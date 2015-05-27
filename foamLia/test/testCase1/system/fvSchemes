@@ -16,14 +16,17 @@ object fvSchemes;
 
 // ************************************************************************* //
 
+
 ddtSchemes 
 {
     default Euler;
-};
+}
+
 gradSchemes 
 {
     default Gauss linear;
-};
+}
+
 divSchemes 
 {
     default none;
@@ -34,7 +37,8 @@ divSchemes
     div(phi,R) Gauss upwind;
     div(R) Gauss linear;
     div((nuEff*dev(T(grad(U))))) Gauss linear;
-};
+}
+
 laplacianSchemes 
 {
     default none;
@@ -44,15 +48,18 @@ laplacianSchemes
     laplacian(DkEff,k) Gauss linear uncorrected;
     laplacian(DepsilonEff,epsilon) Gauss linear uncorrected;
     laplacian(DREff,R) Gauss linear uncorrected;
-};
+}
+
 interpolationSchemes 
 {
     default linear;
-};
+}
+
 snGradSchemes 
 {
     default uncorrected;
-};
+}
+
 fluxRequired 
 {
     default no;

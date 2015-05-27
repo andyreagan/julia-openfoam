@@ -16,24 +16,47 @@ object controlDict;
 
 // ************************************************************************* //
 
-application buoyantBoussinesqPimpleFoam;;
-startFrom startTime;;
-startTime 0;;
-stopAt endTime;;
-endTime 20;;
-deltaT 0.001;;
-writeControl runTime;;
-writeInterval 0.1;;
-purgeWrite 0;;
-writeFormat ascii;;
-writePrecision 6;;
-writeCompression off;;
-timeFormat general;;
-timePrecision 6;;
-runTimeModifiable true;;
-adjustTime no;;
-maxCo 0.5;;
-libs ASCIIString["\"libOpenFOAM.so\"","\"libsimpleSwakFunctionObjects.so\"","\"libswakFunctionObjects.so\"","\"libgroovyBC.so\""];;
+
+application buoyantBoussinesqPimpleFoam;
+
+startFrom startTime;
+
+startTime 0;
+
+stopAt endTime;
+
+endTime 20;
+
+deltaT 0.001;
+
+writeControl runTime;
+
+writeInterval 0.1;
+
+purgeWrite 0;
+
+writeFormat ascii;
+
+writePrecision 6;
+
+writeCompression off;
+
+timeFormat general;
+
+timePrecision 6;
+
+runTimeModifiable true;
+
+adjustTime no;
+
+maxCo 0.5;
+
+libs (
+"libOpenFOAM.so"
+"libsimpleSwakFunctionObjects.so"
+"libswakFunctionObjects.so"
+"libgroovyBC.so"
+);
 
 // ************************************************************************* //
 
