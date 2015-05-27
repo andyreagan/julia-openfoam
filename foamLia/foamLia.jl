@@ -76,30 +76,179 @@ type OpenFoam
     fullMesh::OrderedDict
 end
 
-# default settings
-defaultControlDict = OrderedDict(String,Any)
-defaultControlDict["application"] = "buoyantBoussinesqPimpleFoam"
-defaultControlDict["startFrom"] = "startTime"
-defaultControlDict["startTime"] = 0
-defaultControlDict["stopAt"] = "endTime"
-defaultControlDict["endTime"] = 100
-defaultControlDict["deltaT"] = .001
-defaultControlDict["writeControl"] = "runTime"
-defaultControlDict["writeInterval"] = 0.1
-defaultControlDict["purgeWrite"] = 0
-defaultControlDict["writeFormat"] = "ascii"
-defaultControlDict["writePrecision"] = 6
-defaultControlDict["writeCompression"] = "off"
-defaultControlDict["timeFormat"] = "general"
-defaultControlDict["timePrecision"] = 6
-defaultControlDict["runTimeModifiable"] = "true"
-defaultControlDict["adjustTime"] = "no"
-defaultControlDict["maxCo"] = 0.5
-defaultControlDict["libs"] = ["\"libOpenFOAM.so\"","\"libsimpleSwakFunctionObjects.so\"","\"libswakFunctionObjects.so\"","\"libgroovyBC.so\""]
+function create_defaultControlDict()
+    # default settings
+    controlDict = OrderedDict(String,Any)
+    controlDict["application"] = "buoyantBoussinesqPimpleFoam"
+    controlDict["startFrom"] = "startTime"
+    controlDict["startTime"] = 0
+    controlDict["stopAt"] = "endTime"
+    controlDict["endTime"] = 100
+    controlDict["deltaT"] = .001
+    controlDict["writeControl"] = "runTime"
+    controlDict["writeInterval"] = 0.1
+    controlDict["purgeWrite"] = 0
+    controlDict["writeFormat"] = "ascii"
+    controlDict["writePrecision"] = 6
+    controlDict["writeCompression"] = "off"
+    controlDict["timeFormat"] = "general"
+    controlDict["timePrecision"] = 6
+    controlDict["runTimeModifiable"] = "true"
+    controlDict["adjustTime"] = "no"
+    controlDict["maxCo"] = 0.5
+    controlDict["libs"] = ["\"libOpenFOAM.so\"","\"libsimpleSwakFunctionObjects.so\"","\"libswakFunctionObjects.so\"","\"libgroovyBC.so\""]
+    controlDict
+end
 
-defaultTurbulenceProperties = OrderedDict(String,String)
-defaultTurbulenceProperties["simulationType"] = "laminar"
-# other options: "RASModel","LESModel"
+function create_defaultFvSchemes()
+    fvSchemes = OrderedDict(String,Any)
+    fvSchemes["ddtSchemes"] = OrderedDict(String,String)
+    fvSchemes["ddtSchemes"]["default"] = "Euler"
+    # "CrankNicholson 1"
+
+    fvSchemes["gradSchemes"] = OrderedDict(String,String)
+    fvSchemes["gradSchemes"]["default"] = "Gauss linear"
+
+    fvSchemes["divSchemes"] = OrderedDict(String,String)
+    fvSchemes["divSchemes"]["default"] = "none"
+    fvSchemes["divSchemes"]["div(phi,U)"] = "Gauss upwind"
+    fvSchemes["divSchemes"]["div(phi,T)"] = "Gauss upwind"
+    fvSchemes["divSchemes"]["div(phi,k)"] = "Gauss upwind"
+    fvSchemes["divSchemes"]["div(phi,epsilon)"] = "Gauss upwind"
+    fvSchemes["divSchemes"]["div(phi,R)"] = "Gauss upwind"
+    fvSchemes["divSchemes"]["div(R)"] = "Gauss linear"
+    fvSchemes["divSchemes"]["div((nuEff*dev(T(grad(U)))))"] = "Gauss linear"
+
+    fvSchemes["laplacianSchemes"] = OrderedDict(String,String)
+    fvSchemes["laplacianSchemes"]["default"] = "none"
+    fvSchemes["laplacianSchemes"]["laplacian(nuEff,U)"] = "Gauss linear uncorrected"
+    fvSchemes["laplacianSchemes"]["laplacian(Dp,p_rgh)"] = "Gauss linear uncorrected"
+    fvSchemes["laplacianSchemes"]["laplacian(alphaEff,T)"] = "Gauss linear uncorrected"
+    fvSchemes["laplacianSchemes"]["laplacian(DkEff,k)"] = "Gauss linear uncorrected"
+    fvSchemes["laplacianSchemes"]["laplacian(DepsilonEff,epsilon)"] = "Gauss linear uncorrected"
+    fvSchemes["laplacianSchemes"]["laplacian(DREff,R)"] = "Gauss linear uncorrected"
+
+    fvSchemes["interpolationSchemes"] = OrderedDict(String,String)
+    fvSchemes["interpolationSchemes"]["default"] = "linear"
+
+    fvSchemes["snGradSchemes"] = OrderedDict(String,String)
+    fvSchemes["snGradSchemes"]["default"] = "uncorrected"
+
+    fvSchemes["fluxRequired"] = OrderedDict(String,String)
+    fvSchemes["fluxRequired"]["default"] = "no"
+    fvSchemes["fluxRequired"]["p_rgh"] = ""
+
+    fvSchemes
+end
+
+function create_defaultFvSolution()
+    fvSolution = OrderedDict(String,Any)
+
+    fvSolution["solvers"] = OrderedDict(String,Any)
+
+    fvSolution["solvers"]["p_rgh"] = OrderedDict(String,String)
+    fvSolution["solvers"]["p_rgh"]["solver"] = "PCG"
+    fvSolution["solvers"]["p_rgh"]["preconditioner"] = "DIC"
+    fvSolution["solvers"]["p_rgh"]["tolerance"] = "1e-8"
+    fvSolution["solvers"]["p_rgh"]["relTol"] = "0.01"
+
+    fvSolution["solvers"]["p_rghFinal"] = OrderedDict(String,String)
+    fvSolution["solvers"]["p_rghFinal"]["\$p_rgh"] = ""
+    fvSolution["solvers"]["p_rghFinal"]["relTol"] = "0"
+
+    fvSolution["solvers"]["\"(U|T|k|epsilon|R)\""] = OrderedDict(String,String)
+    fvSolution["solvers"]["\"(U|T|k|epsilon|R)\""]["solver"] = "PBiCG"
+    fvSolution["solvers"]["\"(U|T|k|epsilon|R)\""]["preconditioner"] = "DILU"
+    fvSolution["solvers"]["\"(U|T|k|epsilon|R)\""]["tolerance"] = "1e-6"
+    fvSolution["solvers"]["\"(U|T|k|epsilon|R)\""]["relTol"] = "0.1"
+
+    fvSolution["solvers"]["\"(U|T|k|epsilon|R)Final\""] = OrderedDict(String,String)
+    fvSolution["solvers"]["\"(U|T|k|epsilon|R)Final\""]["\$U"] = ""
+    fvSolution["solvers"]["\"(U|T|k|epsilon|R)Final\""]["relTol"] = "0"
+
+
+    fvSolution["PIMPLE"] = OrderedDict(String,String)
+    fvSolution["PIMPLE"]["momentumPredicto"] = "no"
+    fvSolution["PIMPLE"]["nOuterCorrectors"] = "1"
+    fvSolution["PIMPLE"]["nCorrectors"] = "2"
+    fvSolution["PIMPLE"]["nNonOrthogonalCorrectors"] = "0"
+    fvSolution["PIMPLE"]["pRefCell"] = "0"
+    fvSolution["PIMPLE"]["pRefValue"] = "0"
+
+
+    fvSolution["relaxationFactors"] = OrderedDict(String,Any)
+    fvSolution["relaxationFactors"]["fields"] = OrderedDict(String,String)
+    fvSolution["relaxationFactors"]["equations"] = OrderedDict(String,String)
+    fvSolution["relaxationFactors"]["equations"]["\"(U|T|k|epsilon|R)\""] = "1"
+    fvSolution["relaxationFactors"]["equations"]["\"(U|T|k|epsilon|R)Final\""] = "1"
+
+    fvSolution
+end
+
+function create_defaultSetFieldsDict()
+    setFieldsDict = OrderedDict(String,Any)
+    setFieldsDict["defaultFieldValues"] = [""]
+    setFieldsDict["regions"] = [""]
+    setFieldsDict
+end
+
+function create_defaultRASProperties()
+    RASProperties = OrderedDict(String,Any)
+    RASProperties["RASModel"] = "\$RASModel"
+    RASProperties["turbulence"] = "\$turbulence"
+    RASProperties["printCoeffs"] = "on"
+    RASProperties
+end
+
+function create_defaultTransportProperties()
+    transportProperties = OrderedDict(String,Any)
+
+    # reference numbers:
+    # http://www.engineeringtoolbox.com/air-properties-d_156.html
+    # http://www.engineeringtoolbox.com/water-thermal-properties-d_162.html
+
+    transportProperties["transportModel"] = "Newtonian"
+    transportProperties["Cp0"] = "4.187"
+    # Kj/Kg at 300K
+
+    # trying to add some density!
+    transportProperties["rho"] = "rho [ 1 -3 0 0 0 0 0 ] 1000"
+
+    # Laminar viscosity
+    transportProperties["nu"] = "nu [0 2 -1 0 0 0 0] 1e-06"
+    # was 1e-05 for air
+
+    # Thermal expansion coefficient
+    transportProperties["beta"] = "beta [0 0 0 -1 0 0 0] 3e-04"
+    # 3e-03 for air
+
+    # Reference temperature
+    transportProperties["TRef"] = "TRef [0 0 0 1 0 0 0] 300"
+    # Kelvin
+
+    # Laminar Prandtl number
+    transportProperties["Pr"] = "Pr [0 0 0 0 0 0 0] 5.43"
+    # 0.9 for air
+
+    # Turbulent Prandtl number
+    transportProperties["Prt"] = "Prt [0 0 0 0 0 0 0] 5.43"
+    #assume it's just the same
+
+    transportProperties
+end
+
+function create_defaultTurbulenceProperties()
+    turbulenceProperties = OrderedDict(String,String)
+    turbulenceProperties["simulationType"] = "laminar"
+    # other options: "RASModel","LESModel"
+    turbulenceProperties
+end
+
+function create_defaultBlockMeshDict()
+    blockMeshDict = OrderedDict(String,Any)
+    blockMeshDict["application"] = "buoyantBoussinesqPimpleFoam"
+    blockMeshDict
+end
 
 function create_defaultT()
     defaultT = OrderedDict(String,Any)
@@ -176,28 +325,33 @@ function create_defaultT()
     defaultT
 end
 
-defaultMeshParam = OrderedDict(String,Any)
-defaultMeshParam["baseMeshDir"] = "/users/a/r/areagan/scratch/run/2014-10-23-all-meshes/"
-defaultMeshParam["dim"] = 2
-defaultMeshParam["x"] = 250
-defaultMeshParam["y"] = 40
-defaultMeshParam["refinements"] = 0
+function create_defaultMeshParam()
+    meshParam = OrderedDict(String,Any)
+    meshParam["baseMeshDir"] = "/users/a/r/areagan/scratch/run/2014-10-23-all-meshes/"
+    meshParam["dim"] = 2
+    meshParam["x"] = 250
+    meshParam["y"] = 40
+    meshParam["refinements"] = 0
+    meshParam
+end
 
-defaultMesh = OrderedDict(String,Any)
-defaultMesh["points"] = zeros(Float64,3,1) # (-0.0001 -0.375 0)
-defaultMesh["faces"] = zeros(Int64,4,1) # 4(2 84 85 3)
-defaultMesh["owner"] = zeros(Int64,1,1) # 1
-defaultMesh["cellFaces"] = zeros(Int64,6,1) # 1
-defaultMesh["cellCenters"] = zeros(Float64,3,1) # 1
-# defaultMesh["boundary"] = []
+function create_defaultMesh()
+    mesh = OrderedDict(String,Any)
+    mesh["points"] = zeros(Float64,3,1) # (-0.0001 -0.375 0)
+    mesh["faces"] = zeros(Int64,4,1) # 4(2 84 85 3)
+    mesh["owner"] = zeros(Int64,1,1) # 1
+    mesh["cellFaces"] = zeros(Int64,6,1) # 1
+    mesh["cellCenters"] = zeros(Float64,3,1) # 1
+    # mesh["boundary"] = []
+    mesh
+end
 
 # meshParameters::OrderedDict
 # fullMesh::OrderedDict
 # this deep copy is not working
 # OpenFoam(folder) = OpenFoam(folder,defaultControlDict,defaultTurbulenceProperties,deepcopy(defaultT),defaultMeshParam,defaultMesh)
-OpenFoam(folder) = OpenFoam(folder,defaultControlDict,defaultTurbulenceProperties,create_defaultT(),defaultMeshParam,defaultMesh)
-
-
+# OpenFoam(folder) = OpenFoam(folder,defaultControlDict,defaultTurbulenceProperties,create_defaultT(),defaultMeshParam,defaultMesh)
+OpenFoam(folder) = OpenFoam(folder,create_defaultControlDict(),create_defaultFvSchemes(),create_defaultFvSolution(),create_defaultSetFieldsDict(),create_defaultRASProperties(),create_defaultTransportProperties(),create_defaultTurbulenceProperties(),create_defaultBlockMeshDict(),create_defaultT(),create_defaultT(),create_defaultT(),create_defaultMeshParam(),create_defaultMesh())
 
 header = """/*--------------------------------*- C++ -*----------------------------------*\
 | =========                |                                                 |
@@ -255,20 +409,24 @@ end
 writeDict(o) = writeDict(o,o.controlDict,"controlDict","system")
 
 function serializeD(d::OrderedDict)
-  return join(
-    String[string(k) * " " * serializeDinner(v)
-           for (k, v) in d],
-    ";
-\n"
-  )    
+  join(String[string(k) * " " * serializeDinner(v,1) for (k, v) in d],";\n")    
 end
 
 function serializeDinner(d::OrderedDict)
   return join(["\n{\n",join(
+    # String["    " * string(k) * " " * serializeDinner(v)
     String[string(k) * " " * serializeDinner(v)
            for (k, v) in d],
     ";\n"
   ),";\n}"],"")
+end
+
+function serializeDinner(d::OrderedDict,depth::Int)
+  return join(["\n"*repeat("    ",depth-1)*"{\n",join(
+    String[repeat("    ",depth) * string(k) * " " * serializeDinner(v,depth+1)
+           for (k, v) in d],
+    "\n"
+  ),"\n"*repeat("    ",depth-1)*"}"],"")
 end
 
 function serializeDinner(a::Array)
@@ -285,6 +443,10 @@ end
 
 function serializeDinner(s::Any)
   return join([string(s),""],"")
+end
+
+function serializeDinner(s::Any,depth::Int)
+  return join([string(s),";"],"")
 end
 
 function writeVolScalarField(o::OpenFoam,d::OrderedDict,name::String,location::String)
@@ -312,7 +474,7 @@ function copyFromBase(o::OpenFoam,files::Array,baseCase::String)
     for file in files
         s = join([baseCase,file],"/")
         d = join([o.caseFolder,file],"/")
-        # println("copying $(s) to $(d)")
+        println("copying $(s) to $(d)")
         cp(s,d)
 	if file == "Allrun"
 	    run(`chmod +x $d`)
@@ -331,18 +493,36 @@ function initCase(o::OpenFoam,baseCase::String)
         if !isdir(folder)
             mkpath(folder)
         else
-            # println(string(folder," exists"))
+            println(string(folder," exists"))
         end
     end
-    # println("copying over base case")
+    println("copying over base case")
     # copyFromBase(o,allFiles,baseCase)
     # copyFromBase(o,meshFiles,baseCase)
     copyFromBase(o,baseCase)
-    # println("writing out controlDict")
+
+    println("writing out controlDict")
     writeDict(o,o.controlDict,"controlDict","system")
-    # println("writing out turbulenceProperties")
+
+    println("writing out fvSchemes")
+    writeDict(o,o.fvSchemes,"fvSchemes","system")
+
+    println("writing out fvSolution")
+    writeDict(o,o.fvSolution,"fvSolution","system")
+
+    println("writing out setFieldsDict")
+    writeDict(o,o.setFieldsDict,"setFieldsDict","system")
+
+    println("writing out RASProperties")
+    writeDict(o,o.RASProperties,"RASProperties","constant")
+
+    println("writing out transportProperties")
+    writeDict(o,o.transportProperties,"transportProperties","constant")
+
+    println("writing out turbulenceProperties")
     writeDict(o,o.turbulenceProperties,"turbulenceProperties","constant")
-    # println("writing out T")
+
+    println("writing out T")
     writeVolScalarField(o,o.T,"T","0")
 end
 
