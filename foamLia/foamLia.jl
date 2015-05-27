@@ -252,7 +252,8 @@ end
 
 function create_defaultT()
     defaultT = OrderedDict(String,Any)
-    defaultT["dimensions"] = [0,0,0,1,0,0,0]
+    # defaultT["dimensions"] = [0,0,0,1,0,0,0]
+    defaultT["dimensions"] = "[0 0 0 1 0 0 0]"
     defaultT["internalField"] = "uniform 300"
 
     # this should work, but deepcopy doesn't work
