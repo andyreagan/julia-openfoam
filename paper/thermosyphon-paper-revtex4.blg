@@ -3,10 +3,6 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: thermosyphon-paper-revtex4.aux
 The style file: chicago.bst
 Database file #1: thermosyphon-paper.bib
-Repeated entry---line 621 of file thermosyphon-paper.bib
- : @article{danforth2007estimating
- :                                ,
-I'm skipping whatever remains of this entry
 Warning--no volume for gorman1984
 Warning--no volume for gorman1986
 Warning--no number and no volume in harris2011predicting
@@ -58,4 +54,4 @@ warning$ -- 10
 while$ -- 278
 width$ -- 0
 write$ -- 396
-(There was 1 error message)
+(There were 10 warnings)

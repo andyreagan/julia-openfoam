@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  7 MAR 2015 12:24
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  1 JUN 2015 14:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -338,17 +338,16 @@ e
 ))
 (./thermosyphon-paper.author.tex) (./thermosyphon-paper.abs.tex)
 
-Class revtex4 Warning: Assuming \noaffiliation for Andrew Reagan.
+Class revtex4 Warning: Assuming \noaffiliation for Andrew ReaganChris Danforth.
+
 
 (./thermosyphon-paper.title.tex) (./thermosyphon-paper.body.tex
-<../../2013/2013-05data-assimilation/papers/harris-tellus-2012-loop.pdf, id=1, 
-558.83395pt x 562.03494pt>
-File: ../../2013/2013-05data-assimilation/papers/harris-tellus-2012-loop.pdf Gr
-aphic file (type pdf)
+<figures/harris-tellus-2012-loop.pdf, id=1, 558.83395pt x 562.03494pt>
+File: figures/harris-tellus-2012-loop.pdf Graphic file (type pdf)
 
-<use ../../2013/2013-05data-assimilation/papers/harris-tellus-2012-loop.pdf>
-Package pdftex.def Info: ../../2013/2013-05data-assimilation/papers/harris-tell
-us-2012-loop.pdf used on input line 27.
+<use figures/harris-tellus-2012-loop.pdf>
+Package pdftex.def Info: figures/harris-tellus-2012-loop.pdf used on input line
+ 27.
 (pdftex.def)             Requested size: 229.49844pt x 230.81316pt.
 LaTeX Font Info:    Try loading font information for U+msa on input line 32.
 
@@ -359,8 +358,8 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 32.
 
 (/usr/local/texlive/2013/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [1{/usr/local/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <../
-../2013/2013-05data-assimilation/papers/harris-tellus-2012-loop.pdf>]
+) [1{/usr/local/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./f
+igures/harris-tellus-2012-loop.pdf>]
 <figures/221TimeSeries.pdf, id=85, 422.40712pt x 334.70125pt>
 File: figures/221TimeSeries.pdf Graphic file (type pdf)
 
@@ -441,30 +440,23 @@ Package pdftex.def Info: figures/TLM-verification003_noname.pdf used on input l
 ine 200.
 (pdftex.def)             Requested size: 229.49844pt x 227.06422pt.
  [4 <./figures/TLM-verification003_noname.pdf>]
-<../../2013/2013-05data-assimilation/src/experiments/windowExperiment/window_ex
-periment_plot002.pdf, id=139, 465.74pt x 392.46625pt>
-File: ../../2013/2013-05data-assimilation/src/experiments/windowExperiment/wind
-ow_experiment_plot002.pdf Graphic file (type pdf)
+<figures/window_experiment_plot002.pdf, id=139, 465.74pt x 392.46625pt>
+File: figures/window_experiment_plot002.pdf Graphic file (type pdf)
 
-<use ../../2013/2013-05data-assimilation/src/experiments/windowExperiment/windo
-w_experiment_plot002.pdf>
-Package pdftex.def Info: ../../2013/2013-05data-assimilation/src/experiments/wi
-ndowExperiment/window_experiment_plot002.pdf used on input line 288.
+<use figures/window_experiment_plot002.pdf>
+Package pdftex.def Info: figures/window_experiment_plot002.pdf used on input li
+ne 288.
 (pdftex.def)             Requested size: 229.49844pt x 193.38806pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
+<figures/ETKF_390s_infl_error.pdf, id=140, 495.8525pt x 394.47375pt>
+File: figures/ETKF_390s_infl_error.pdf Graphic file (type pdf)
 
-<../../2013/2013-05data-assimilation/src/experiments/covInflTest/figures/ETKF_3
-90s_infl_error.pdf, id=140, 495.8525pt x 394.47375pt>
-File: ../../2013/2013-05data-assimilation/src/experiments/covInflTest/figures/E
-TKF_390s_infl_error.pdf Graphic file (type pdf)
-
-<use ../../2013/2013-05data-assimilation/src/experiments/covInflTest/figures/ET
-KF_390s_infl_error.pdf>
-Package pdftex.def Info: ../../2013/2013-05data-assimilation/src/experiments/co
-vInflTest/figures/ETKF_390s_infl_error.pdf used on input line 300.
+<use figures/ETKF_390s_infl_error.pdf>
+Package pdftex.def Info: figures/ETKF_390s_infl_error.pdf used on input line 30
+0.
 (pdftex.def)             Requested size: 229.49844pt x 182.57367pt.
 
 
@@ -514,15 +506,13 @@ lts_vs_N_40000_w10_labels.pdf used on input line 340.
 LaTeX Warning: Reference `fig:localcovadaptive' on page 6 undefined on input li
 ne 352.
 
-) [6 <../../2013/2013-05data-assimilation/src/experiments/windowExperiment/wind
-ow_experiment_plot002.pdf> <../../2013/2013-05data-assimilation/src/experiments
-/covInflTest/figures/ETKF_390s_infl_error.pdf> </Users/andyreagan/work/2013/201
-3-05data-assimilation/src/experiments/openFoamAssimilation/data/synData-tStep.0
-1-b290-t340-m40000/results_vs_N_32_w10_labels.pdf> </Users/andyreagan/work/2013
-/2013-05data-assimilation/src/experiments/openFoamAssimilation/data/synData-tSt
-ep.01-b290-t340-m40000/results_vs_N_40000_w10_labels.pdf>]
-(./thermosyphon-paper.acknowledgments.tex) (./thermosyphon-paper.biblio.tex
-(./thermosyphon-paper-revtex4.bbl
+[6 <./figures/window_experiment_plot002.pdf> <./figures/ETKF_390s_infl_error.pd
+f> </Users/andyreagan/work/2013/2013-05data-assimilation/src/experiments/openFo
+amAssimilation/data/synData-tStep.01-b290-t340-m40000/results_vs_N_32_w10_label
+s.pdf> </Users/andyreagan/work/2013/2013-05data-assimilation/src/experiments/op
+enFoamAssimilation/data/synData-tStep.01-b290-t340-m40000/results_vs_N_40000_w1
+0_labels.pdf>]) (./thermosyphon-paper.acknowledgments.tex)
+(./thermosyphon-paper.biblio.tex (./thermosyphon-paper-revtex4.bbl
 Underfull \hbox (badness 1960) in paragraph at lines 5--10
  []\OT1/cmr/m/n/9 Asur, S. and B. A. Huber-man (2010).  Pre-dict-
  []
@@ -553,9 +543,9 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 5126 strings out of 493315
- 71862 string characters out of 6137904
- 157203 words of memory out of 5000000
+ 5123 strings out of 493315
+ 71038 string characters out of 6137904
+ 156203 words of memory out of 5000000
  8441 multiletter control sequences out of 15000+600000
  11583 words of font info for 44 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
@@ -581,7 +571,7 @@ mf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2013/texmf
 ist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2013/texmf-di
 st/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/local/texlive/2013/texmf-dist
 /fonts/type1/urw/helvetic/uhvr8a.pfb>
-Output written on thermosyphon-paper-revtex4.pdf (8 pages, 1077133 bytes).
+Output written on thermosyphon-paper-revtex4.pdf (8 pages, 1077002 bytes).
 PDF statistics:
  284 PDF objects out of 1000 (max. 8388607)
  205 compressed objects within 3 object streams

@@ -71,8 +71,9 @@ type OpenFoam
     g::OrderedDict
     blockMeshDict::OrderedDict
     T::OrderedDict
-    Phi::OrderedDict
+    phi::OrderedDict
     U::OrderedDict
+    p::OrderedDict
     meshParameters::OrderedDict
     fullMesh::OrderedDict
 end
@@ -262,6 +263,7 @@ function create_defaultT()
     defaultT = OrderedDict(String,Any)
     # defaultT["dimensions"] = [0,0,0,1,0,0,0]
     defaultT["dimensions"] = "[0 0 0 1 0 0 0]"
+
     defaultT["internalField"] = "uniform 300"
 
     # this should work, but I must not understand deepcopy
@@ -334,6 +336,91 @@ function create_defaultT()
     defaultT
 end
 
+function create_defaultPhi()
+    defaultPhi = OrderedDict(String,Any)
+    defaultPhi["dimensions"] = "[0 3 -1 0 0 0 0]"
+
+    defaultPhi["internalField"] = "uniform 0"
+
+    defaultPhi["boundaryField"] = OrderedDict(String,Any)
+    defaultPhi["boundaryField"]["front"] = OrderedDict(String,String)
+    defaultPhi["boundaryField"]["front"]["type"] = "empty"
+    defaultPhi["boundaryField"]["front"]["value"] = "uniform 0" # nonuniform 0()
+    defaultPhi["boundaryField"]["back"] = OrderedDict(String,String)
+    defaultPhi["boundaryField"]["back"]["type"] = "empty"
+    defaultPhi["boundaryField"]["back"]["value"] = "uniform 0" # nonuniform 0()
+    defaultPhi["boundaryField"]["topinside"] = OrderedDict(String,String)
+    defaultPhi["boundaryField"]["topinside"]["type"] = "calculated"
+    defaultPhi["boundaryField"]["topinside"]["value"] = "uniform 0" # nonuniform 0()
+    defaultPhi["boundaryField"]["topoutside"] = OrderedDict(String,String)
+    defaultPhi["boundaryField"]["topoutside"]["type"] = "calculated"
+    defaultPhi["boundaryField"]["topoutside"]["value"] = "uniform 0" # nonuniform 0()
+    defaultPhi["boundaryField"]["bottominside"] = OrderedDict(String,String)
+    defaultPhi["boundaryField"]["bottominside"]["type"] = "calculated"
+    defaultPhi["boundaryField"]["bottominside"]["value"] = "uniform 0" # nonuniform 0()
+    defaultPhi["boundaryField"]["bottomoutside"] = OrderedDict(String,String)
+    defaultPhi["boundaryField"]["bottomoutside"]["type"] = "calculated"
+    defaultPhi["boundaryField"]["bottomoutside"]["value"] = "uniform 0" # nonuniform 0()
+    
+    defaultPhi
+end
+
+function create_defaultU()
+    defaultU = OrderedDict(String,Any)
+    defaultU["dimensions"] = "[0 1 -1 0 0 0 0]"
+
+    defaultU["internalField"] = "uniform (0 0 0)"
+
+    defaultU["boundaryField"] = OrderedDict(String,Any)
+    defaultU["boundaryField"]["front"] = OrderedDict(String,String)
+    defaultU["boundaryField"]["front"]["type"] = "empty"
+    defaultU["boundaryField"]["back"] = OrderedDict(String,String)
+    defaultU["boundaryField"]["back"]["type"] = "empty"
+    defaultU["boundaryField"]["topinside"] = OrderedDict(String,String)
+    defaultU["boundaryField"]["topinside"]["type"] = "fixedValue"
+    defaultU["boundaryField"]["topinside"]["value"] = "uniform (0 0 0)" 
+    defaultU["boundaryField"]["topoutside"] = OrderedDict(String,String)
+    defaultU["boundaryField"]["topoutside"]["type"] = "fixedValue"
+    defaultU["boundaryField"]["topoutside"]["value"] = "uniform (0 0 0)"
+    defaultU["boundaryField"]["bottominside"] = OrderedDict(String,String)
+    defaultU["boundaryField"]["bottominside"]["type"] = "fixedValue"
+    defaultU["boundaryField"]["bottominside"]["value"] = "uniform (0 0 0)"
+    defaultU["boundaryField"]["bottomoutside"] = OrderedDict(String,String)
+    defaultU["boundaryField"]["bottomoutside"]["type"] = "fixedValue"
+    defaultU["boundaryField"]["bottomoutside"]["value"] = "uniform (0 0 0)"
+    
+    defaultU
+end
+
+function create_defaultP()
+    defaultP = OrderedDict(String,Any)
+    defaultP["dimensions"] = "[0 2 -2 0 0 0 0]"
+
+    defaultP["internalField"] = "uniform 0"
+
+    defaultP["boundaryField"] = OrderedDict(String,Any)
+    defaultP["boundaryField"]["front"] = OrderedDict(String,String)
+    defaultP["boundaryField"]["front"]["type"] = "empty"
+    defaultP["boundaryField"]["back"] = OrderedDict(String,String)
+    defaultP["boundaryField"]["back"]["type"] = "empty"
+    defaultP["boundaryField"]["topinside"] = OrderedDict(String,String)
+    defaultP["boundaryField"]["topinside"]["type"] = "calculated"
+    defaultP["boundaryField"]["topinside"]["value"] = "uniform 0" # nonuniform 0()
+    defaultP["boundaryField"]["topoutside"] = OrderedDict(String,String)
+    defaultP["boundaryField"]["topoutside"]["type"] = "calculated"
+    defaultP["boundaryField"]["topoutside"]["value"] = "uniform 0" # nonuniform 0()
+    defaultP["boundaryField"]["bottominside"] = OrderedDict(String,String)
+    defaultP["boundaryField"]["bottominside"]["type"] = "calculated"
+    defaultP["boundaryField"]["bottominside"]["value"] = "uniform 0" # nonuniform 0()
+    defaultP["boundaryField"]["bottomoutside"] = OrderedDict(String,String)
+    defaultP["boundaryField"]["bottomoutside"]["type"] = "calculated"
+    defaultP["boundaryField"]["bottomoutside"]["value"] = "uniform 0" # nonuniform 0()
+    
+    defaultP
+end
+
+
+
 function create_defaultMeshParam()
     meshParam = OrderedDict(String,Any)
     meshParam["baseMeshDir"] = "/users/a/r/areagan/scratch/run/2014-10-23-all-meshes/"
@@ -360,7 +447,7 @@ end
 # this deep copy is not working
 # OpenFoam(folder) = OpenFoam(folder,defaultControlDict,defaultTurbulenceProperties,deepcopy(defaultT),defaultMeshParam,defaultMesh)
 # OpenFoam(folder) = OpenFoam(folder,defaultControlDict,defaultTurbulenceProperties,create_defaultT(),defaultMeshParam,defaultMesh)
-OpenFoam(folder) = OpenFoam(folder,create_defaultControlDict(),create_defaultFvSchemes(),create_defaultFvSolution(),create_defaultSetFieldsDict(),create_defaultRASProperties(),create_defaultTransportProperties(),create_defaultTurbulenceProperties(),create_defaultG(),create_defaultBlockMeshDict(),create_defaultT(),create_defaultT(),create_defaultT(),create_defaultMeshParam(),create_defaultMesh())
+OpenFoam(folder) = OpenFoam(folder,create_defaultControlDict(),create_defaultFvSchemes(),create_defaultFvSolution(),create_defaultSetFieldsDict(),create_defaultRASProperties(),create_defaultTransportProperties(),create_defaultTurbulenceProperties(),create_defaultG(),create_defaultBlockMeshDict(),create_defaultT(),create_defaultPhi(),create_defaultU(),create_defaultP(),create_defaultMeshParam(),create_defaultMesh())
 
 header = """/*--------------------------------*- C++ -*----------------------------------*\
 | =========                |                                                 |
@@ -470,6 +557,44 @@ function writeVolScalarField(o::OpenFoam,d::OrderedDict,name::String,location::S
     close(f)
 end
 
+function writeVolVectorField(o::OpenFoam,d::OrderedDict,name::String,location::String)
+    f = open(join([o.caseFolder,location,name],"/"),"w")
+
+    # write the header
+    write(f,string(header,"\n"))
+
+    # write the file info
+    finfo = string("FoamFile\n{\n",showCompact(OrderedDict([("version","2.0"),("format","ascii"),("class","volVectorField"),("location",string("\"",location,"\"")),("object",name)]),CompactRepr(" ", ";\n")),";\n}\n\n")
+    write(f,finfo)
+
+    write(f,lbreak)
+
+    maininfo = string(serializeD(d),"\n\n")
+    write(f,maininfo)
+
+    write(f,lbreak)
+    close(f)
+end
+
+function writeSurfaceScalarField(o::OpenFoam,d::OrderedDict,name::String,location::String)
+    f = open(join([o.caseFolder,location,name],"/"),"w")
+
+    # write the header
+    write(f,string(header,"\n"))
+
+    # write the file info
+    finfo = string("FoamFile\n{\n",showCompact(OrderedDict([("version","2.0"),("format","ascii"),("class","surfaceScalarField"),("location",string("\"",location,"\"")),("object",name)]),CompactRepr(" ", ";\n")),";\n}\n\n")
+    write(f,finfo)
+
+    write(f,lbreak)
+
+    maininfo = string(serializeD(d),"\n\n")
+    write(f,maininfo)
+
+    write(f,lbreak)
+    close(f)
+end
+
 # writeDict(o) = writeDict(o,o.controlDict,"controlDict","system")
 
 function copyFromBase(o::OpenFoam,files::Array,baseCase::String)
@@ -485,7 +610,8 @@ function copyFromBase(o::OpenFoam,files::Array,baseCase::String)
 end
 
 # allFiles = ["Allrun","0/alphat","0/epsilon","0/k","0/nut","0/p","0/p_rgh","0/T","0/U","constant/g","constant/RASProperties","constant/transportProperties","constant/turbulenceProperties","system/controlDict","system/fvSchemes","system/fvSolution","system/FieldsDict"]
-allFiles = ["Allrun","0/alphat","0/epsilon","0/k","0/nut","0/p","0/p_rgh","0/T","0/U"]
+allFilesTurbulent = ["Allrun","0/alphat","0/epsilon","0/k","0/nut","0/p","0/p_rgh","0/T","0/U"]
+allFiles = ["Allrun","0/alphat","0/p","0/p_rgh","0/T","0/U"]
 # meshFiles = [join(["constant","polyMesh",x],"/") for x in ["blockMeshDict","blockMeshDict3D","boundary","faces","neighbour","owner","points"]]
 meshFiles = [join(["constant","polyMesh",x],"/") for x in ["boundary","faces","neighbour","owner","points"]]
 
@@ -501,9 +627,12 @@ function initCase(o::OpenFoam,baseCase::String)
         end
     end
     println("copying over base case")
-    # copyFromBase(o,allFiles,baseCase)
-    # copyFromBase(o,meshFiles,baseCase)
-    copyFromBase(o,baseCase)
+    if o.turbulenceProperties["simulationType"] == "laminar"
+        copyFromBase(o,baseCase)
+    else
+        copyFromBase(o,allFilesTurbulent,baseCase)
+        copyFromBase(o,meshFiles,baseCase)
+    end
 
     println("writing out controlDict")
     writeDict(o,o.controlDict,"controlDict","system")
@@ -531,6 +660,15 @@ function initCase(o::OpenFoam,baseCase::String)
 
     println("writing out T")
     writeVolScalarField(o,o.T,"T","0")
+
+    println("writing out phi")
+    writeSurfaceScalarField(o,o.phi,"phi","0")
+
+    println("writing out U")
+    writeVolVectorField(o,o.U,"U","0")
+
+    println("writing out p")
+    writeVolScalarField(o,o.p,"p","0")
 end
 
 # defaultMesh["points"] = [] # (-0.0001 -0.375 0)
@@ -544,6 +682,8 @@ function readMesh(o::OpenFoam)
     
     # read the mesh from the case
     # goal is to fill up the mesh property
+    
+    # first read the points
     f = open(join([o.caseFolder,"constant","polyMesh","points"],"/"),"r")
     b = false
     while !b
@@ -567,6 +707,7 @@ function readMesh(o::OpenFoam)
     # println("here are some points")
     # println(o.fullMesh["points"][:,100])
 
+    # now read the faces
     f = open(join([o.caseFolder,"constant","polyMesh","faces"],"/"),"r")
     b = false
     while !b

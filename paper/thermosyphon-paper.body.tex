@@ -24,7 +24,7 @@ The open-source nature of this software enables its integration with the data as
 The thermosyphon, a type of natural convection loop or non-mechanical heat pump, can be likened to a toy model of climate \cite{harris2011predicting}.
 \begin{figure}[t!]
   \centering
-  \includegraphics[width=0.45\textwidth]{../../2013/2013-05data-assimilation/papers/harris-tellus-2012-loop.pdf}
+  \includegraphics[width=0.45\textwidth]{figures/harris-tellus-2012-loop.pdf}
   \caption[Schematic of the experimental, and computational, setup from Harris et al (2012)]{
     Schematic of the experimental, and computational, setup from Harris et al (2012).
     The loop radius is given by $R$ and inner radius by $r$.
@@ -285,7 +285,7 @@ The ensemble filter begins to out-perform the extended Kalman filter for longer 
 
 \begin{figure}[h!]
   \centering
-  \includegraphics[width=0.45\textwidth]{../../2013/2013-05data-assimilation/src/experiments/windowExperiment/window_experiment_plot002.pdf}
+  \includegraphics[width=0.45\textwidth]{figures/window_experiment_plot002.pdf}
   \caption[The RMS error is reported for our EKF and EnKF filters]{
     The RMS error (not scaled by climatology) is reported for our EKF and EnKF filters, measured as the difference between forecast and truth at the end of an assimiliation window for the latter 2500 assimiliation windows in a 3000 assimilation window model run.
     Error is measured in the only observed variable, $x_1$.
@@ -297,7 +297,7 @@ The ensemble filter begins to out-perform the extended Kalman filter for longer 
 
 \begin{figure}[h!]
   \centering
-  \includegraphics[width=0.45\textwidth]{../../2013/2013-05data-assimilation/src/experiments/covInflTest/figures/ETKF_390s_infl_error.pdf}
+  \includegraphics[width=0.45\textwidth]{figures/ETKF_390s_infl_error.pdf}
   \caption[The RMS error averaged over 100 model runs of length 1000 windows is reported for the ETKF for varying additive and multiplicative inflation factors]{
     The RMS error averaged over 100 model runs of length 1000 windows is reported for the ETKF for varying additive and multiplicative inflation factors $\Delta$ and $\mu$.
     Each of the 100 model runs starts with a random IC, and the analysis forecast starts randomly.
@@ -352,3 +352,5 @@ New methods specific to CFD, possibly using principle mode decomposition of flow
 In Figure \ref{fig:localcovadaptive}, flow structures present in our computational experiment demonstrate the potential for adaptive covariance localization.
 
 The numerical coupling of CFD to experiment by DA should be generally useful to improve the skill of CFD predictions in even data-poor experiments, which can provide better knowledge of unobservable quantities of interest in fluid flow.
+
+

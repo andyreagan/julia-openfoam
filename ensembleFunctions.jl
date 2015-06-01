@@ -81,8 +81,6 @@ function initializeEnsemble(Nens,topT,bottomT,deltaT,writeInterval,hc,init)
         baseCase = "/users/a/r/areagan/OpenFOAM/areagan-2.2.1/run/juliabase"
         if init
             initCase(ens[i],baseCase)
-            println("writing out controlDict")
-            writeDict(ens[i],ens[i].controlDict,"controlDict","system")
         
             # pick a random time from the truth, read it in, set that to the 0
             println("picking random time to read from model")
@@ -90,11 +88,12 @@ function initializeEnsemble(Nens,topT,bottomT,deltaT,writeInterval,hc,init)
             println("reading from model at time $(seed)")
             initialT = readVar(case,stringG(seed),"T")
 	    # also care about these variables
-            initialPhi = readVar(case,stringG(seed),"T")
-            initialV = readVar(case,stringG(seed),"T")
+            initialPhi = readVar(case,stringG(seed),"phi")
+            initialU = readVar(case,stringG(seed),"U")
+            initialP = readVar(case,stringG(seed),"p")
             println("setting internal field")
-            ens[i].T["internalField"] = string("nonuniform List<scalar>\n$(length(truth))\n(\n",join(readVar(case,stringG(seed),"T"),"\n"),"\n)\n") # "uniform 300"
-            ens[i].T["internalField"] = string("nonuniform List<scalar>\n$(length(truth))\n(\n",join(readVar(case,stringG(seed),"T"),"\n"),"\n)\n")
+            ens[i].T["internalField"] = string("nonuniform List<scalar>\n$(length(truth))\n(\n",join(initalT,"\n"),"\n)\n")
+            # ens[i].T["internalField"] = string("nonuniform List<scalar>\n$(length(truth))\n(\n",join(readVar(case,stringG(seed),"T"),"\n"),"\n)\n")
             println("writing T at time 0")
             writeVolScalarField(ens[i],ens[i].T,"T","0")
         end
