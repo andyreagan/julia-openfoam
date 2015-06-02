@@ -92,10 +92,20 @@ function initializeEnsemble(Nens,topT,bottomT,deltaT,writeInterval,hc,init)
             initialU = readVar(case,stringG(seed),"U")
             initialP = readVar(case,stringG(seed),"p")
             println("setting internal field")
-            ens[i].T["internalField"] = string("nonuniform List<scalar>\n$(length(truth))\n(\n",join(initalT,"\n"),"\n)\n")
+            ens[i].T["internalField"] = string("nonuniform List<scalar>\n$(length(initialT))\n(\n",join(initialT,"\n"),"\n)\n")
             # ens[i].T["internalField"] = string("nonuniform List<scalar>\n$(length(truth))\n(\n",join(readVar(case,stringG(seed),"T"),"\n"),"\n)\n")
+            ens[i].phi["internalField"] = string("nonuniform List<scalar>\n$(length(initialPhi))\n(\n",join(initialPhi,"\n"),"\n)\n")
+            tmp = Array(String,size(initialU)[2]);
+            for i=1:size(initialU)[2]
+                tmp[i] = "("*join(initialU[:,i]," ")*")"
+            end
+            ens[i].U["internalField"] = string("nonuniform List<vector>\n$(length(tmp))\n(\n",join(tmp,"\n"),"\n)\n")
+            ens[i].p["internalField"] = string("nonuniform List<scalar>\n$(length(initialP))\n(\n",join(initialP,"\n"),"\n)\n")
             println("writing T at time 0")
             writeVolScalarField(ens[i],ens[i].T,"T","0")
+            writeSurfaceScalarField(ens[i],ens[i].phi,"phi","0")
+            writeVolVectorField(ens[i],ens[i].U,"U","0")
+            writeVolScalarField(ens[i],ens[i].p,"p","0")
         end
     
         # println("test that they run for 1 timestep")

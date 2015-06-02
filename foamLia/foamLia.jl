@@ -1,5 +1,5 @@
 module foamLia
-export Lorenz63,OpenFoam,initCase,run,runQ,readMesh,findTimes,readVar,readVarSpec,stringG,rewriteVar,reshapeMesh,writeDict,writeVolScalarField
+export Lorenz63,OpenFoam,initCase,run,runQ,readMesh,findTimes,readVar,readVarSpec,stringG,rewriteVar,reshapeMesh,writeDict,writeVolScalarField,writeVolVectorField,writeSurfaceScalarField
 # println("foamLia: basic openfoam manipulation")
 
 using DataStructures
@@ -575,6 +575,8 @@ function writeVolVectorField(o::OpenFoam,d::OrderedDict,name::String,location::S
     write(f,lbreak)
     close(f)
 end
+
+
 
 function writeSurfaceScalarField(o::OpenFoam,d::OrderedDict,name::String,location::String)
     f = open(join([o.caseFolder,location,name],"/"),"w")
