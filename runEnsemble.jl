@@ -47,7 +47,7 @@ println("$(size(observations))")
 
 Nens = 20
 
-ens = initializeEnsemble(Nens,topT,bottomT,deltaT,writeInterval,hc,false)
+ens = initializeEnsemble(Nens,topT,bottomT,deltaT,writeInterval,hc,true)
 # make sure that phi is loaded into time 0
 
 # check the boundary field setting?
@@ -86,23 +86,19 @@ for t=0:length(ass_times)-1
     println("--------------------------------------------------------------------------------")
     println("--------------------------------------------------------------------------------")
     println("time $(t)")
-    if t>1
-        for j=1:Nens
-            forecastFlux[j,t] = mean(readVarSpec(ens[j],stringG(t),"phi",faces[3]))
-        end
+    for j=1:Nens
+        forecastFlux[j,t+1] = mean(readVarSpec(ens[j],stringG(t),"phi",faces[3]))
     end
     println("forecast flux:")
-    println(forecastFlux[:,t])
-    f,a = assimilate(observations,t-1,R,points,Nens,ens)
-    if t>1
-        for j=1:Nens
-            analysisFlux[j,t] = mean(readVarSpec(ens[j],stringG(t),"phi",faces[3]))
-        end
+    println(forecastFlux[:,t+1])
+    f,a = assimilate(observations,t,R,points,Nens,ens)
+    for j=1:Nens
+        analysisFlux[j,t+1] = mean(readVarSpec(ens[j],stringG(t),"phi",faces[3]))
     end
-    groundFlux[t] = mean(readVarSpec(case,stringG(ass_times[t]),"phi",faces[3]))
+    groundFlux[t+1] = mean(readVarSpec(case,stringG(ass_times[t+1]),"phi",faces[3]))
     println("ground flux:")
-    println(groundFlux[t])
-    analysis[t] = a
-    forecast[t] = f
-    runEnsemble(ens,t-1)
+    println(groundFlux[t+1])
+    analysis[t+1] = a
+    forecast[t+1] = f
+    runEnsemble(ens,t)
 end
