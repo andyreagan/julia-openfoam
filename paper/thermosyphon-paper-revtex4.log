@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  1 JUN 2015 14:40
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  2 JUN 2015 14:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -437,7 +437,7 @@ File: figures/TLM-verification003_noname.pdf Graphic file (type pdf)
 
 <use figures/TLM-verification003_noname.pdf>
 Package pdftex.def Info: figures/TLM-verification003_noname.pdf used on input l
-ine 200.
+ine 199.
 (pdftex.def)             Requested size: 229.49844pt x 227.06422pt.
  [4 <./figures/TLM-verification003_noname.pdf>]
 <figures/window_experiment_plot002.pdf, id=139, 465.74pt x 392.46625pt>
@@ -445,7 +445,7 @@ File: figures/window_experiment_plot002.pdf Graphic file (type pdf)
 
 <use figures/window_experiment_plot002.pdf>
 Package pdftex.def Info: figures/window_experiment_plot002.pdf used on input li
-ne 288.
+ne 287.
 (pdftex.def)             Requested size: 229.49844pt x 193.38806pt.
 
 
@@ -455,17 +455,27 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 File: figures/ETKF_390s_infl_error.pdf Graphic file (type pdf)
 
 <use figures/ETKF_390s_infl_error.pdf>
-Package pdftex.def Info: figures/ETKF_390s_infl_error.pdf used on input line 30
-0.
+Package pdftex.def Info: figures/ETKF_390s_infl_error.pdf used on input line 29
+9.
 (pdftex.def)             Requested size: 229.49844pt x 182.57367pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
+[5]
+
+LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix]
+ on input line 318.
+
+
+Underfull \hbox (badness 1824) in paragraph at lines 320--325
+[]\OT1/cmr/m/n/10 To incor-po-rate lim-it-ed obser-va-tions into a high-
+ []
+
 
 </Users/andyreagan/work/2013/2013-05data-assimilation/src/experiments/openFoamA
 ssimilation/data/synData-tStep.01-b290-t340-m40000/results_vs_N_32_w10_labels.p
-df, id=141, 485.22098pt x 365.51913pt>
+df, id=144, 485.22098pt x 365.51913pt>
 File: /Users/andyreagan/work/2013/2013-05data-assimilation/src/experiments/open
 FoamAssimilation/data/synData-tStep.01-b290-t340-m40000/results_vs_N_32_w10_lab
 els.pdf Graphic file (type pdf)
@@ -475,21 +485,15 @@ oamAssimilation/data/synData-tStep.01-b290-t340-m40000/results_vs_N_32_w10_labe
 ls.pdf>
 Package pdftex.def Info: /Users/andyreagan/work/2013/2013-05data-assimilation/s
 rc/experiments/openFoamAssimilation/data/synData-tStep.01-b290-t340-m40000/resu
-lts_vs_N_32_w10_labels.pdf used on input line 326.
+lts_vs_N_32_w10_labels.pdf used on input line 341.
 (pdftex.def)             Requested size: 229.49844pt x 172.88159pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[5]
-
-LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix]
- on input line 337.
-
-
+ [6 <./figures/window_experiment_plot002.pdf> <./figures/ETKF_390s_infl_error.p
+df> </Users/andyreagan/work/2013/2013-05data-assimilation/src/experiments/openF
+oamAssimilation/data/synData-tStep.01-b290-t340-m40000/results_vs_N_32_w10_labe
+ls.pdf>]
 </Users/andyreagan/work/2013/2013-05data-assimilation/src/experiments/openFoamA
 ssimilation/data/synData-tStep.01-b290-t340-m40000/results_vs_N_40000_w10_label
-s.pdf, id=145, 487.7957pt x 374.92957pt>
+s.pdf, id=198, 487.7957pt x 374.92957pt>
 File: /Users/andyreagan/work/2013/2013-05data-assimilation/src/experiments/open
 FoamAssimilation/data/synData-tStep.01-b290-t340-m40000/results_vs_N_40000_w10_
 labels.pdf Graphic file (type pdf)
@@ -499,20 +503,15 @@ oamAssimilation/data/synData-tStep.01-b290-t340-m40000/results_vs_N_40000_w10_l
 abels.pdf>
 Package pdftex.def Info: /Users/andyreagan/work/2013/2013-05data-assimilation/s
 rc/experiments/openFoamAssimilation/data/synData-tStep.01-b290-t340-m40000/resu
-lts_vs_N_40000_w10_labels.pdf used on input line 340.
+lts_vs_N_40000_w10_labels.pdf used on input line 355.
 (pdftex.def)             Requested size: 229.49844pt x 176.39998pt.
 
 
-LaTeX Warning: Reference `fig:localcovadaptive' on page 6 undefined on input li
-ne 352.
+LaTeX Warning: Reference `fig:localcovadaptive' on page 7 undefined on input li
+ne 367.
 
-[6 <./figures/window_experiment_plot002.pdf> <./figures/ETKF_390s_infl_error.pd
-f> </Users/andyreagan/work/2013/2013-05data-assimilation/src/experiments/openFo
-amAssimilation/data/synData-tStep.01-b290-t340-m40000/results_vs_N_32_w10_label
-s.pdf> </Users/andyreagan/work/2013/2013-05data-assimilation/src/experiments/op
-enFoamAssimilation/data/synData-tStep.01-b290-t340-m40000/results_vs_N_40000_w1
-0_labels.pdf>]) (./thermosyphon-paper.acknowledgments.tex)
-(./thermosyphon-paper.biblio.tex (./thermosyphon-paper-revtex4.bbl
+) (./thermosyphon-paper.acknowledgments.tex) (./thermosyphon-paper.biblio.tex
+(./thermosyphon-paper-revtex4.bbl
 Underfull \hbox (badness 1960) in paragraph at lines 5--10
  []\OT1/cmr/m/n/9 Asur, S. and B. A. Huber-man (2010).  Pre-dict-
  []
@@ -523,12 +522,14 @@ Underfull \hbox (badness 1622) in paragraph at lines 5--10
 Vol-
  []
 
-
+[7 </Users/andyreagan/work/2013/2013-05data-assimilation/src/experiments/openFo
+amAssimilation/data/synData-tStep.01-b290-t340-m40000/results_vs_N_40000_w10_la
+bels.pdf>]
 Underfull \hbox (badness 1248) in paragraph at lines 124--127
  []\OT1/cmr/m/n/9 Kalnay, E., H. Li, T. Miyoshi, S.-C. YANG, and
  []
 
-[7])) (./thermosyphon-paper.supplementary.tex)
+)) (./thermosyphon-paper.supplementary.tex)
 Underfull \hbox (badness 1253) in paragraph at lines 1--55
 \OT1/cmr/m/n/10 pushed the bound-ary of com-pu-ta-tion-al pow-er, and
  []
@@ -541,12 +542,16 @@ Use acknowledgments instead.
 
 LaTeX Warning: There were undefined references.
 
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right .
+
+
  ) 
 Here is how much of TeX's memory you used:
- 5123 strings out of 493315
- 71038 string characters out of 6137904
- 156203 words of memory out of 5000000
- 8441 multiletter control sequences out of 15000+600000
+ 5121 strings out of 493315
+ 71017 string characters out of 6137904
+ 163203 words of memory out of 5000000
+ 8439 multiletter control sequences out of 15000+600000
  11583 words of font info for 44 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
  39i,9n,40p,430b,328s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -570,11 +575,12 @@ mf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2013/texmf
 -dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2013/texmf-d
 ist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2013/texmf-di
 st/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/local/texlive/2013/texmf-dist
-/fonts/type1/urw/helvetic/uhvr8a.pfb>
-Output written on thermosyphon-paper-revtex4.pdf (8 pages, 1077002 bytes).
+/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2013/texmf-
+dist/fonts/type1/urw/helvetic/uhvr8a.pfb>
+Output written on thermosyphon-paper-revtex4.pdf (8 pages, 1086204 bytes).
 PDF statistics:
- 284 PDF objects out of 1000 (max. 8388607)
- 205 compressed objects within 3 object streams
+ 288 PDF objects out of 1000 (max. 8388607)
+ 208 compressed objects within 3 object streams
  0 named destinations out of 1000 (max. 500000)
  51 words of extra memory for PDF output out of 10000 (max. 10000000)
 

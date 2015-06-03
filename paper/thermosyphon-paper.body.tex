@@ -141,10 +141,9 @@ Here is a picture of the thermosyphon colored by temperature.
   \label{fig:CFDloopSS}
 \end{figure}
 
+\section{Methods}
 
-
-
-\section{Data Assimilation Methods}
+\subsection{Data Assimilation}
 
 Tests of the data assimilation algorithms described here are performed with the Lorenz 63 system, which is analogous to the above equations with Lorenz's $\beta = 1$, and $K = 0$.
 The cannonical choice of $\sigma = 10, \beta = 8/3$ and $\rho = 28$, produce the well known butterfly attractor, is used for all examples here.
@@ -308,9 +307,25 @@ The ensemble filter begins to out-perform the extended Kalman filter for longer 
 
 \end{figure}
 
+\subsection{Limited observation experiment}
+
+An initial test of prediction skill with limited observations in a twin model experiment showed that we needed 1000 measurements of the temperature to predict flow reversals within 1 assimilation window.
+In an attempt to decrease the required observations to a realizable number, we implement a simple, adaptively localized covariance for data assimilation.
+Using the ``square'' sections of the loop to localize, we shift the zone to the left or right to follow the dominate flow direction at the center.
+Since we first saw a modest improvement in the prediction skill with full temperature observations, we hope that this improvement increases and is sufficient to get down to needing as few as 32 observations to predict reversals 1 assimilation window out.
+\todo{run the reduced observations experiment with shifted windows}
+
+\subsection{DMD experiment}
+
+To incorporate limited observations into a high-dimensional CFD simulation, we combine ideas from both CFD literature and data assimilation to make predictions.
+We perform data assimilation in a subspace composed of the leading modes from a DMD of a series of loop snapshots.
+In this reduced space, we hope to pull out the mode that corresponds to the instability leading to flow reversals.
+\todo{get a DMD working on the full loop}
+\todo{use projection onto leading modes in data assimilation (this is still fuzzy)}
+
 \section{Results}
 
-The first output of this work is a general data assimilation framework for MATLAB.
+The first output of this work is a general data assimilation framework for MATLAB and Julia.
 By utilizing an object-oriented (OO) design, the model and data assimilation algorithm code are separate and can be changed independently.
 The principal advantage of this approach is the ease of incorporation of new models and DA techniques.
 
