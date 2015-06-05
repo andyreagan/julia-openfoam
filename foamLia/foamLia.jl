@@ -821,6 +821,18 @@ function readMesh(o::OpenFoam)
     return fa,ce
 end
 
+# here are a couple strings to test of that readVar regex
+# teststring = "(2.60429e-31 0.000193236 0.0619409)\n"
+# teststring = "(0 8.77659e-05 0.0561036)\n"
+# mr = r"\(([0-9.\-e]+) ([0-9.\-e]+) ([0-9.\-e]+)\)\n"
+# m = match(mr,teststring)
+# if m ≠ nothing
+#     print(m)
+# else
+#     println("you will amount to")
+#     print(m)
+# end
+
 function readVar(o::OpenFoam,t::String,v::String)
     # just go read that file
     # t is the time (a string!)
@@ -838,16 +850,17 @@ function readVar(o::OpenFoam,t::String,v::String)
         if c != nothing
             # println("this variable is class $(c.captures[1])")
             if c.captures[1] == "volScalarField"
-                mr = r"([0-9.\-]+e*[0-9.\-]+)\n"
+                mr = r"([0-9.\-e]+)\n"
                 n = 1
             elseif c.captures[1] == "surfaceScalarField"
-                mr = r"([0-9.\-]+e*[0-9.\-]+)\n"
+                mr = r"([0-9.\-e]+)\n"
                 n = 1
             elseif c.captures[1] == "volVectorField"
-                mr = r"\(([0-9.\-]+e*[0-9.\-]+) ([0-9.\-]+e*[0-9.\-]+) ([0-9.\-]+e*[0-9.\-]+)\)\n"
+                mr = r"\(([0-9.\-e]+) ([0-9.\-e]+) ([0-9.\-e]+)\)\n"
                 n = 3
             elseif c.captures[1] == "surfaceVectorField"
-                mr = r"\(([0-9.\-]+e*[0-9.\-]+) ([0-9.\-]+e*[0-9.\-]+) ([0-9.\-]+e*[0-9.\-]+)\)\n"
+                mr = r"\(([0-9.\-e]+) ([0-9.\-e]+) ([0-9.\-e]+)\)\n"
+                # mr = r"\(([0-9.\-e]+e*[0-9.\-]+) ([0-9.\-]+e*[0-9.\-]+) ([0-9.\-]+e*[0-9.\-]+)\)\n"
                 n = 3
             end
         end
@@ -863,7 +876,7 @@ function readVar(o::OpenFoam,t::String,v::String)
     # println(size(var))
     for line in eachline(f)
         m = match(mr,line)
-        if m != nothing && i < size(var)[2]
+        if m ≠ nothing && i < size(var)[2]
             i=i+1
             # println(m)
             # println(map(string,m.captures))
