@@ -61,14 +61,14 @@ function buildObservations(case,start,end_assimilation,window,points)
     observations
 end
 
-function initializeEnsemble(Nens,topT,bottomT,deltaT,writeInterval,hc,init)
+function initializeEnsemble(Nens,topT,bottomT,deltaT,writeInterval,hc,init,truth)
     println("initializing all $(Nens) ensemble models")
     ens = Array(OpenFoam,Nens)
     writeInterval = 1
     endTime = 1
     for i=1:Nens
         println("initializing ensemble $(i)")
-        caseFolder = "/users/a/r/areagan/scratch/run/ensembleTest/ens$(i)-$(Nens)-$(topT)-$(bottomT)"
+        caseFolder = "/users/a/r/areagan/scratch/run/ensembleTest/ens$(dec(i,3))-$(dec(Nens,3))-$(topT)-$(bottomT)-shorter"
         ens[i] = OpenFoam(caseFolder)
         ens[i].controlDict["endTime"] = int(endTime)
         ens[i].controlDict["startTime"] = 0
@@ -86,15 +86,15 @@ function initializeEnsemble(Nens,topT,bottomT,deltaT,writeInterval,hc,init)
             println("picking random time to read from model")
             seed = int(floor(rand()*9600)+1)
             println("reading from model at time $(seed)")
-            initialT = readVar(case,stringG(seed),"T")
+            initialT = readVar(truth,stringG(seed),"T")
 	    # also care about these variables
-            initialPhi = readVar(case,stringG(seed),"phi")
-            initialU = readVar(case,stringG(seed),"U")
+            initialPhi = readVar(truth,stringG(seed),"phi")
+            initialU = readVar(truth,stringG(seed),"U")
 	    # p was not actually saved on the base case
-            # initialP = readVar(case,stringG(seed),"p")
+            # initialP = readVar(truth,stringG(seed),"p")
             println("setting internal field")
             ens[i].T["internalField"] = string("nonuniform List<scalar>\n$(length(initialT))\n(\n",join(initialT,"\n"),"\n)\n")
-            # ens[i].T["internalField"] = string("nonuniform List<scalar>\n$(length(truth))\n(\n",join(readVar(case,stringG(seed),"T"),"\n"),"\n)\n")
+            # ens[i].T["internalField"] = string("nonuniform List<scalar>\n$(length(truth))\n(\n",join(readVar(truth,stringG(seed),"T"),"\n"),"\n)\n")
             ens[i].phi["internalField"] = string("nonuniform List<scalar>\n$(length(initialPhi))\n(\n",join(initialPhi,"\n"),"\n)\n")
             tmp = Array(String,size(initialU)[2]);
             for j=1:size(initialU)[2]
@@ -143,77 +143,47 @@ function runEnsemble(ens,t)
 end
 
 function assimilate(observations,t,R,points,Nens,ens)
-    x,y = size(points)
+    x,y = size(points) # 1000,40
     Tscaling = 1.0
-    X_f = ones(Float64,(R*2+1)*y,Nens)
+    zone_size = 10
+    X_f = ones(Float64,(R*2+zone_size)*y,Nens) # 15*40,20
     stddev = 0.5
     delta = 0.0
+    L = R
 
-    forecast = zeros(Float64,size(points)[1],size(points)[2])
-    analysis = zeros(Float64,size(points)[1],size(points)[2])
+    # forecast = zeros(Float64,x,y)
+    # analysis = zeros(Float64,x,y)
 
-    # for i in 0:0
-    # all of the zones
-    for i in 0:990 # x-1
-        println("assimilating at x=$(i)")
-        # println("using points $(mod(linspace(i-R,i+R,R*2+1),x)+1)")
-	# println(size(observations[t][mod(linspace(i-R,i+R,R*2+1),x)+1,:]))
-	# don't need the squeeze anymore
-        local_obs = observations[t+1][mod(linspace(i-R,i+R,R*2+1),x)+1,:]'
-        # println("size of local_obs is $(size(local_obs))")    
-        # flatten to 1D
-        # println("flattening")
-        local_obs_flat = reshape(local_obs,length(local_obs))
-        # subtract off the mean
-        # local_obs_flat = (local_obs_flat-(topT+bottomT)/2).*Tscaling
-    
-        # don't need to use this again...
-        # local_obs = (local_obs-(topT+bottomT)/2).*Tscaling
-    
+    for i=1:Nens
+        # read in the value
+        ens[i].T["value"] = readVar(ens[i],stringG(t),"T")
+        # reshape the values
+        ens[i].T["valueReshaped"] = zeros(size(points))
+        for j in 1:length(points)
+            ens[i].T["valueReshaped"][j] = ens[i].T["value"][points[j]]
+        end
+    end
+
+    for i in 0:zone_size:984
+        println("assimilating at x=$(i+1) through x=$(i+zone_size)")
+	
+        local_obs = observations[mod(linspace(i-R,i+R+zone_size-1,R*2+zone_size),x)+1,:]
+        local_obs_flat = reshape(local_obs',length(local_obs))
+	
         for j=1:Nens
-            # # println("size of valueReshaped is: ")
-            # # println(size(ens[j].T["valueReshaped"]))
-            local_ens = ens[j].T["valueReshaped"][mod(linspace(i-R,i+R,R*2+1),x)+1,:]'
-            # println("size of local_ens is $(size(local_ens))")
-    
-            # X_f[:,j] = (reshape(local_ens,length(local_obs),1)-(topT+bottomT)/2).*Tscaling
-            X_f[:,j] = reshape(local_ens,length(local_obs))
+            local_ens = ens[j].T["valueReshaped"][mod(linspace(i-R,i+R+zone_size-1,R*2+zone_size),x)+1,:]
+            X_f[:,j] = reshape(local_ens',length(local_obs))
         end
     
-        # save the forecast
-        # println("reading the forecast center at $(R*y+1:(R+1)*y), the indices in the flattened")
-        # println("size of forecast center is $(size(X_f[R*y+1:(R+1)*y,:]))")
-        # forecast[t,x,:] = mean(X_f[R*y+1:(R+1)*y,:],2)
-        forecast[x,:] = mean(X_f[R*y+1:(R+1)*y,:],2)
+	# forecast[i+1:i+zone_size,:] = reshape(mean(X_f[R*y+1:(R+zone_size)*y,:],2),y,zone_size)'
 
+        # X_a = ETKF(X_f,local_obs_flat,eye(length(local_obs)),eye(length(local_obs)).*stddev,delta)
+        X_a = EnKF(X_f,local_obs_flat,eye(length(local_obs)),eye(length(local_obs)).*stddev,delta)
+
+	# analysis[i+1:i+zone_size,:] = reshape(mean(X_a[R*y+1:(R+zone_size)*y,:],2),y,zone_size)'
     
-        # println("center forecast avg:")
-        # println(forecast[1,x,:])
-        # # println("center forecast:")
-        # # println(X_f[R*y+1:(R+1)*y,:])
-        # # println("local observation of truth:")
-        # # println(local_obs_flat)
-        # println("center observation:")
-        # println(local_obs_flat[R*y+1:(R+1)*y])
-        # X_a = EnKF(X_f,local_obs_flat,eye(length(local_obs)),eye(length(local_obs)).*stddev,delta)
-        X_a = ETKF(X_f,local_obs_flat,eye(length(local_obs)),eye(length(local_obs)).*stddev,delta)
-        # println("center analysis:")
-        # println(X_a[R*y+1:(R+1)*y,:])
-        # # println("full analysis, rescaled:")
-        # # println(X_a[R*y+1:(R+1)*y,:]./Tscaling+(topT+bottomT)/2)
-        # analysis[1,x,:] = mean(X_a[R*y+1:(R+1)*y,:],2)./Tscaling+(topT+bottomT)/2
-        # analysis[t,x,:] = mean(X_a[R*y+1:(R+1)*y,:],2)
-        analysis[x,:] = mean(X_a[R*y+1:(R+1)*y,:],2)
-    
-    
-        # println("center analysis avg:")
-        # println(analysis[1,x,:])
-        # go set the in the "value" part of the ensemble
         for j=1:Nens
-            for k=1:y
-                # ens[j].T["value"][points[i+1,k]] = X_a[R*y+k,j]./Tscaling+(topT+bottomT)/2
-                ens[j].T["value"][points[i+1,k]] = X_a[R*y+k,j]
-            end
+            ens[j].T["value"][reshape(points[i+1:i+zone_size,:]',zone_size*y)] = X_a[R*y+1:(R+zone_size)*y,j]
         end
     end
     
@@ -223,5 +193,5 @@ function assimilate(observations,t,R,points,Nens,ens)
         writeVolScalarField(ens[i],ens[i].T,"T",string(t))
     end
     
-    forecast,analysis
+    # forecast,analysis
 end

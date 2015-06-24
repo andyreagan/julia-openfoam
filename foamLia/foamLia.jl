@@ -576,8 +576,6 @@ function writeVolVectorField(o::OpenFoam,d::OrderedDict,name::String,location::S
     close(f)
 end
 
-
-
 function writeSurfaceScalarField(o::OpenFoam,d::OrderedDict,name::String,location::String)
     f = open(join([o.caseFolder,location,name],"/"),"w")
 
@@ -1199,6 +1197,17 @@ function rk4p(f::Function,J::Function,y::Array,tspan::Array,tstep::Float64)
     y,L
 end
 
+function atan3(x,y)
+    # like atan2, but go counterclockwise
+    # from the left hand side (to always get a positive theta)
+    th = atan2(x,y)
+    # wrap around
+    if th<0
+        th = th+2*pi
+    end
+    th
+end
+    
 function reshapeMesh(case)
     # don't need the result, but I do want to read the mesh
     readMesh(case)
@@ -1211,6 +1220,7 @@ function reshapeMesh(case)
     # println("the mesh is $(x) by $(y)")
 
     theta = [y for y in 2*pi/x/2:2*pi/x:2*pi-2*pi/x/2]
+
     # println(size(theta))
     # println(theta[1:10])
     # println(theta[end-10:end])
@@ -1226,11 +1236,8 @@ function reshapeMesh(case)
         # start them at the right side, go counter clockwise
         # arctan(z/y) where y is right the right (adjacent), 
         # z is up (opposite)
-        th = atan2(case.fullMesh["cellCenters"][3,i],case.fullMesh["cellCenters"][2,i])
-        # wrap around
-        if th<0
-            th = th+2*pi
-        end
+        th = atan3(case.fullMesh["cellCenters"][3,i],case.fullMesh["cellCenters"][2,i])
+        
         r = sqrt(case.fullMesh["cellCenters"][3,i]^2+case.fullMesh["cellCenters"][2,i]^2)
         # println("th is $(th)")
         # println("r is $(r)")
