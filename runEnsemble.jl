@@ -35,9 +35,10 @@ points,indices = reshapeMesh(truthCase)
 println("size of points is $(size(points))")
 
 # set these things, and then go fill an observations vector
-window = 1
+window = 10
 start_assimilation = 100
-end_assimilation = 109
+end_assimilation = 290
+# 100:10:290 is 20 timesteps
 
 readFlux(truthCase,start_assimilation,faces)
 
@@ -87,26 +88,26 @@ for t=0:length(ass_times)-1
     println("--------------------------------------------------------------------------------")
     println("time $(t)")
     for j=1:Nens
-        forecastFlux[j,t+1] = mean(readVarSpec(ens[j],stringG(t),"phi",faces[3]))	
+        forecastFlux[j,t+1] = mean(readVarSpec(ens[j],stringG(ass_times[t+1]),"phi",faces[3]))
     end
     println("forecast flux:")
     println(forecastFlux[:,t+1])
     # go read in the observation right now
-    obs = readVar(truthCase,stringG(start_assimilation+t),"T")
+    obs = readVar(truthCase,stringG(ass_times[t+1]),"T")
     obs_reshaped = zeros(size(points))
     for i in 1:length(points)
         obs_reshaped[i] = obs[points[i]]
     end
-    assimilate(obs_reshaped,t,R,points,Nens,ens)
+    assimilate(obs_reshaped,ass_times[t+1],R,points,Nens,ens)
     for j=1:Nens
-        analysisFlux[j,t+1] = mean(readVarSpec(ens[j],stringG(t),"phi",faces[3]))
+        analysisFlux[j,t+1] = mean(readVarSpec(ens[j],stringG(ass_times[t+1]),"phi",faces[3]))
     end
     truthFlux[t+1] = mean(readVarSpec(truthCase,stringG(ass_times[t+1]),"phi",faces[3]))
     println("truth flux:")
     println(truthFlux[t+1])
     # analysis[t+1] = a
     # forecast[t+1] = f
-    runEnsemble(ens,t)
+    runEnsemble(ens,ass_times[t+1],window)
 end
 
 trial = 7

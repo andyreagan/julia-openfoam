@@ -132,11 +132,11 @@ function initializeEnsemble(Nens,topT,bottomT,deltaT,writeInterval,hc,init,truth
     ens
 end
 
-function runEnsemble(ens,t)
+function runEnsemble(ens,t,window)
     for i=1:length(ens)
         println("running ensemble $(i)")
         ens[i].controlDict["startTime"] = t
-        ens[i].controlDict["endTime"] = t+1
+        ens[i].controlDict["endTime"] = t+window
         writeDict(ens[i],ens[i].controlDict,"controlDict","system")
         run(ens[i],`./Allrun`)
     end
