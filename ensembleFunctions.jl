@@ -68,7 +68,7 @@ function initializeEnsemble(Nens,topT,bottomT,deltaT,writeInterval,hc,init,truth
     endTime = 1
     for i=1:Nens
         println("initializing ensemble $(i)")
-        caseFolder = "/users/a/r/areagan/scratch/run/ensembleTest/ens$(dec(i,3))-$(dec(Nens,3))-$(topT)-$(bottomT)-shorter"
+        caseFolder = "/users/a/r/areagan/scratch/run/ensembleTest/ens$(dec(i,3))-$(dec(Nens,3))-$(topT)-$(bottomT)-longerwindow"
         ens[i] = OpenFoam(caseFolder)
         ens[i].controlDict["endTime"] = int(endTime)
         ens[i].controlDict["startTime"] = 0

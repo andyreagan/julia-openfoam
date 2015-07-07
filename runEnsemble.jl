@@ -88,7 +88,7 @@ for t=0:length(ass_times)-1
     println("--------------------------------------------------------------------------------")
     println("time $(t)")
     for j=1:Nens
-        forecastFlux[j,t+1] = mean(readVarSpec(ens[j],stringG(ass_times[t+1]),"phi",faces[3]))
+        forecastFlux[j,t+1] = mean(readVarSpec(ens[j],stringG(ass_times[t+1]-ass_times[1]),"phi",faces[3]))
     end
     println("forecast flux:")
     println(forecastFlux[:,t+1])
@@ -98,16 +98,16 @@ for t=0:length(ass_times)-1
     for i in 1:length(points)
         obs_reshaped[i] = obs[points[i]]
     end
-    assimilate(obs_reshaped,ass_times[t+1],R,points,Nens,ens)
+    assimilate(obs_reshaped,ass_times[t+1]-ass_times[1],R,points,Nens,ens)
     for j=1:Nens
-        analysisFlux[j,t+1] = mean(readVarSpec(ens[j],stringG(ass_times[t+1]),"phi",faces[3]))
+        analysisFlux[j,t+1] = mean(readVarSpec(ens[j],stringG(ass_times[t+1]-ass_times[1]),"phi",faces[3]))
     end
     truthFlux[t+1] = mean(readVarSpec(truthCase,stringG(ass_times[t+1]),"phi",faces[3]))
     println("truth flux:")
     println(truthFlux[t+1])
     # analysis[t+1] = a
     # forecast[t+1] = f
-    runEnsemble(ens,ass_times[t+1],window)
+    runEnsemble(ens,ass_times[t+1]-ass_times[1],window)
 end
 
 trial = 7
