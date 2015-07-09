@@ -68,7 +68,7 @@ function initializeEnsemble(Nens,topT,bottomT,deltaT,writeInterval,hc,init,truth
     endTime = 1
     for i=1:Nens
         println("initializing ensemble $(i)")
-        caseFolder = "/users/a/r/areagan/scratch/run/ensembleTest/ens$(dec(i,3))-$(dec(Nens,3))-$(topT)-$(bottomT)-longerwindow"
+        caseFolder = "/users/a/r/areagan/scratch/run/ensembleTest/ens$(dec(i,3))-$(dec(Nens,3))-$(topT)-$(bottomT)-shift-test"
         ens[i] = OpenFoam(caseFolder)
         ens[i].controlDict["endTime"] = int(endTime)
         ens[i].controlDict["startTime"] = 0
@@ -142,7 +142,7 @@ function runEnsemble(ens,t,window)
     end
 end
 
-function assimilate(observations,t,R,points,Nens,ens)
+function assimilate(observations,t,R,points,Nens,ens,max_shift)
     x,y = size(points) # 1000,40
     Tscaling = 1.0
     zone_size = 10
@@ -166,7 +166,7 @@ function assimilate(observations,t,R,points,Nens,ens)
 
     for i in 0:zone_size:984
         println("assimilating at x=$(i+1) through x=$(i+zone_size)")
-	
+	local_shift = compute_shift(i,indices,points,x,y,U,zone_size,max_vel,R)
         local_obs = observations[mod(linspace(i-R,i+R+zone_size-1,R*2+zone_size),x)+1,:]
         local_obs_flat = reshape(local_obs',length(local_obs))
 	
@@ -194,4 +194,41 @@ function assimilate(observations,t,R,points,Nens,ens)
     end
     
     # forecast,analysis
+end
+
+function compute_shift(i,indices,points,x,y,U,zone_size,max_vel,R)
+    # will shift up the zone size, requiring a velocity
+    # of max_vel to make that shift
+    
+    # compute the angle around the loop of zone i
+    # turning counterclockwise starting on the RHS
+    my_angle = mean(indices[reshape(points[i+1:i+zone_size,:],y*zone_size),1],1)/x*(2*pi)
+    # println("my angle is $(my_angle)")
+    # this is the tangent to that, turning counterclockwise
+    my_tangent = mod(my_angle+pi/2,2*pi)
+    # println("my tangent is $(my_tangent)")
+    
+    # unit vector tangent toangle around loop
+    my_vec = [cos(my_tangent),sin(my_tangent)]
+    
+    # pull the velocities out of U
+    velocities = U[2:3,reshape(points[i+1:i+zone_size,:],y*zone_size)]
+    
+    # project each velocity onto the tangent
+    aloldots = zeros(200)
+    for i=1:200
+        alldots[i] = dot(velocities[:,i],my_vec)
+    end
+    # println(alldots)
+    
+    # take the average velocity
+    avg_vel = mean(alldots)
+    
+    # compute the shift
+    shift = round(avg_vel/max_vel*zone_size)
+    println(shift)
+    # bound it
+    shift = min(shift,R)
+    shift = max(shift,-R)
+    return shift
 end

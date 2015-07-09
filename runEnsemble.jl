@@ -32,7 +32,7 @@ println("reading in mesh")
 faces,cells = readMesh(truthCase)
 println("reshaping mesh")
 points,indices = reshapeMesh(truthCase)
-println("size of points is $(size(points))")
+println("size of points is $(size(set))")
 
 # set these things, and then go fill an observations vector
 window = 10
@@ -49,7 +49,7 @@ readFlux(truthCase,start_assimilation,faces)
 Nens = 20
 
 ens = initializeEnsemble(Nens,topT,bottomT,deltaT,writeInterval,hc,true,truthCase)
-# make sure that phi is loaded into time 0		
+# make sure that phi is loaded into time 0
 
 # check the boundary field setting?
 # ens[1].T["boundaryField"]["front"]["type"] = "full"
@@ -62,6 +62,7 @@ ens = initializeEnsemble(Nens,topT,bottomT,deltaT,writeInterval,hc,true,truthCas
 delta = 0.5
 sigma = 0.0
 R = 10
+max_shift = 10
 # example to get the proper indices
 # mod([-2,-1,0,1,2],1000)+1
 # linspace(-2,2,5) for the inside
@@ -98,7 +99,7 @@ for t=0:length(ass_times)-1
     for i in 1:length(points)
         obs_reshaped[i] = obs[points[i]]
     end
-    assimilate(obs_reshaped,ass_times[t+1]-ass_times[1],R,points,Nens,ens)
+    assimilate(obs_reshaped,ass_times[t+1]-ass_times[1],R,points,Nens,ens,max_shift)
     for j=1:Nens
         analysisFlux[j,t+1] = mean(readVarSpec(ens[j],stringG(ass_times[t+1]-ass_times[1]),"phi",faces[3]))
     end
@@ -110,7 +111,7 @@ for t=0:length(ass_times)-1
     runEnsemble(ens,ass_times[t+1]-ass_times[1],window)
 end
 
-trial = 7
+trial = 8
 # save those forecasts!
 writecsv("forecastFlux-$(dec(trial,3)).csv",forecastFlux)
 writecsv("analysisFlux-$(dec(trial,3)).csv",analysisFlux)
