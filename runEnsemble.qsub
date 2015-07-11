@@ -13,7 +13,7 @@ echo "PBS_SERVER=${PBS_SERVER}"
 echo "PBS_NODEFILE=${PBS_NODEFILE}"
 
 echo "currdir=$(pwd)"
-cd /users/a/r/areagan/work/2014/2014-11julia-openfoam
+cd /users/a/r/areagan/work/2014/11-julia-openfoam
 echo "currdir=$(pwd)"
 
 /usr/bin/time -v julia runEnsemble-lessObs.jl
