@@ -68,7 +68,7 @@ function initializeEnsemble(Nens,topT,bottomT,deltaT,writeInterval,hc,init,truth
     endTime = 1
     for i=1:Nens
         println("initializing ensemble $(i)")
-        caseFolder = "/users/a/r/areagan/scratch/run/ensembleTest/ens$(dec(i,3))-$(dec(Nens,3))-$(topT)-$(bottomT)-shift-test"
+        caseFolder = "/users/a/r/areagan/scratch/run/ensembleTest/ens$(dec(i,3))-$(dec(Nens,3))-$(topT)-$(bottomT)-slide"
         ens[i] = OpenFoam(caseFolder)
         ens[i].controlDict["endTime"] = int(endTime)
         ens[i].controlDict["startTime"] = 0
@@ -165,7 +165,7 @@ function assimilate(observations,t,R,points,Nens,ens,max_shift)
 
     for i in 0:zone_size:984
         println("assimilating at x=$(i+1) through x=$(i+zone_size)")
-	local_shift = compute_shift(i,indices,points,x,y,U,zone_size,max_vel,R)
+	# local_shift = compute_shift(i,indices,points,x,y,U,zone_size,max_vel,R)
         local_obs = observations[mod(linspace(i-R,i+R+zone_size-1,R*2+zone_size),x)+1,:]
         local_obs_flat = reshape(local_obs',length(local_obs))
 	
@@ -229,6 +229,8 @@ function assimilate_lessobs(observations,t,R,points,Nens,ens,max_shift)
     obs_operator[1:obs_spacing:end] = 1
     obs_operator = diagm(obs_operator)
     obs_error = obs_operator*stddev
+
+    max_vel = .01
     
     for i in 0:zone_size:984
         println("assimilating at x=$(i+1) through x=$(i+zone_size)")
@@ -296,6 +298,9 @@ function assimilate_sliding(observations,t,R,points,Nens,ens,max_shift)
     obs_operator[1:obs_spacing:end] = 1
     obs_operator = diagm(obs_operator)
     obs_error = obs_operator*stddev
+
+    max_vel = .01
+    U = readVar(truthCase,stringG(t),"U")    
     
     for i in 0:zone_size:984
         println("assimilating at x=$(i+1) through x=$(i+zone_size)")
@@ -324,7 +329,7 @@ function assimilate_sliding(observations,t,R,points,Nens,ens,max_shift)
     # write it out
     for i=1:Nens
         ens[i].T["internalField"] = string("nonuniform List<scalar>\n$(length(ens[i].T["value"]))\n(\n",join(ens[i].T["value"],"\n"),"\n)\n") # "uniform 300"
-        writeVolScalarField(ens[i],ens[i].T,"T",string(t))
+        writeVolScalarField(ens[i],ens[i].T,"T",stringG(t))
     end
     
     # forecast,analysis

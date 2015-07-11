@@ -601,7 +601,7 @@ function copyFromBase(o::OpenFoam,files::Array,baseCase::String)
     for file in files
         s = join([baseCase,file],"/")
         d = join([o.caseFolder,file],"/")
-        println("copying $(s) to $(d)")
+        # println("copying $(s) to $(d)")
         cp(s,d)
 	if file == "Allrun"
 	    run(`chmod +x $d`)
