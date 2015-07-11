@@ -300,6 +300,7 @@ function assimilate_sliding(observations,t,R,points,Nens,ens,max_shift)
     for i in 0:zone_size:984
         println("assimilating at x=$(i+1) through x=$(i+zone_size)")
 	local_shift = compute_shift(i,indices,points,x,y,U,zone_size,max_vel,R)
+        println("local shift: $(local_shift)")
         local_obs = observations[mod(linspace(i-R,i+R+zone_size-1,R*2+zone_size),x)+1,:]
         local_obs_flat = reshape(local_obs',length(local_obs))
 	

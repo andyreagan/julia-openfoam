@@ -99,7 +99,7 @@ for t=0:length(ass_times)-1
     for i in 1:length(points)
         obs_reshaped[i] = obs[points[i]]
     end
-    assimilate_lessobs(obs_reshaped,ass_times[t+1]-ass_times[1],R,points,Nens,ens,max_shift)
+    assimilate_sliding(obs_reshaped,ass_times[t+1]-ass_times[1],R,points,Nens,ens,max_shift)
     for j=1:Nens
         analysisFlux[j,t+1] = mean(readVarSpec(ens[j],stringG(ass_times[t+1]-ass_times[1]),"phi",faces[3]))
     end
@@ -113,7 +113,7 @@ end
 
 cd("/users/a/r/areagan/work/2014/11-julia-openfoam")
 
-trial = 9
+trial = 10
 # save those forecasts!
 writecsv("forecastFlux-$(dec(trial,3)).csv",forecastFlux)
 writecsv("analysisFlux-$(dec(trial,3)).csv",analysisFlux)
