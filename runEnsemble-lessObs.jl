@@ -32,7 +32,7 @@ println("reading in mesh")
 faces,cells = readMesh(truthCase)
 println("reshaping mesh")
 points,indices = reshapeMesh(truthCase)
-println("size of points is $(size(set))")
+# println("size of points is $(size(set))")
 
 # set these things, and then go fill an observations vector
 window = 10
