@@ -149,7 +149,6 @@ function assimilate(observations,t,R,points,Nens,ens,max_shift)
     X_f = ones(Float64,(R*2+zone_size)*y,Nens) # 15*40,20
     stddev = 0.5
     delta = 0.0
-    L = R
 
     # forecast = zeros(Float64,x,y)
     # analysis = zeros(Float64,x,y)
@@ -179,6 +178,140 @@ function assimilate(observations,t,R,points,Nens,ens,max_shift)
 
         # X_a = ETKF(X_f,local_obs_flat,eye(length(local_obs)),eye(length(local_obs)).*stddev,delta)
         X_a = EnKF(X_f,local_obs_flat,eye(length(local_obs)),eye(length(local_obs)).*stddev,delta)
+
+	# analysis[i+1:i+zone_size,:] = reshape(mean(X_a[R*y+1:(R+zone_size)*y,:],2),y,zone_size)'
+    
+        for j=1:Nens
+            ens[j].T["value"][reshape(points[i+1:i+zone_size,:]',zone_size*y)] = X_a[R*y+1:(R+zone_size)*y,j]
+        end
+    end
+    
+    # write it out
+    for i=1:Nens
+        ens[i].T["internalField"] = string("nonuniform List<scalar>\n$(length(ens[i].T["value"]))\n(\n",join(ens[i].T["value"],"\n"),"\n)\n") # "uniform 300"
+        writeVolScalarField(ens[i],ens[i].T,"T",string(t))
+    end
+    
+    # forecast,analysis
+end
+
+function assimilate_lessobs(observations,t,R,points,Nens,ens,max_shift)
+    x,y = size(points) # 1000,40
+    Tscaling = 1.0
+    zone_size = 10
+    X_f = ones(Float64,(R*2+zone_size)*y,Nens) # 15*40,20
+    stddev = 0.5
+    delta = 0.0
+
+    # forecast = zeros(Float64,x,y)
+    # analysis = zeros(Float64,x,y)
+
+    for i=1:Nens
+        # read in the value
+        ens[i].T["value"] = readVar(ens[i],stringG(t),"T")
+        # reshape the values
+        ens[i].T["valueReshaped"] = zeros(size(points))
+        for j in 1:length(points)
+            ens[i].T["valueReshaped"][j] = ens[i].T["value"][points[j]]
+        end
+    end
+
+    # this is the the spacing between observations
+    obs_spacing = 5
+    # using a simple 1:obs_spacing:end
+    # could get fancier with this array to take
+    # observations only in the middle or something
+    
+    # this is the size of the local covariance
+    num_local_vars = (R*2+zone_size)*40
+    # build the observation operator
+    obs_operator = zeros(num_local_vars)
+    obs_operator[1:obs_spacing:end] = 1
+    obs_operator = diagm(obs_operator)
+    obs_error = obs_operator*stddev
+    
+    for i in 0:zone_size:984
+        println("assimilating at x=$(i+1) through x=$(i+zone_size)")
+	local_shift = compute_shift(i,indices,points,x,y,U,zone_size,max_vel,R)
+        local_obs = observations[mod(linspace(i-R,i+R+zone_size-1,R*2+zone_size),x)+1,:]
+        local_obs_flat = reshape(local_obs',length(local_obs))
+	
+        for j=1:Nens
+            local_ens = ens[j].T["valueReshaped"][mod(linspace(i-R,i+R+zone_size-1,R*2+zone_size),x)+1,:]
+            X_f[:,j] = reshape(local_ens',length(local_obs))
+        end
+    
+	# forecast[i+1:i+zone_size,:] = reshape(mean(X_f[R*y+1:(R+zone_size)*y,:],2),y,zone_size)'
+
+        # X_a = ETKF(X_f,local_obs_flat,eye(length(local_obs)),eye(length(local_obs)).*stddev,delta)
+        X_a = EnKF(X_f,local_obs_flat,obs_operator,obs_error,delta)
+
+	# analysis[i+1:i+zone_size,:] = reshape(mean(X_a[R*y+1:(R+zone_size)*y,:],2),y,zone_size)'
+    
+        for j=1:Nens
+            ens[j].T["value"][reshape(points[i+1:i+zone_size,:]',zone_size*y)] = X_a[R*y+1:(R+zone_size)*y,j]
+        end
+    end
+    
+    # write it out
+    for i=1:Nens
+        ens[i].T["internalField"] = string("nonuniform List<scalar>\n$(length(ens[i].T["value"]))\n(\n",join(ens[i].T["value"],"\n"),"\n)\n") # "uniform 300"
+        writeVolScalarField(ens[i],ens[i].T,"T",string(t))
+    end
+    
+    # forecast,analysis
+end
+
+function assimilate_sliding(observations,t,R,points,Nens,ens,max_shift)
+    x,y = size(points) # 1000,40
+    Tscaling = 1.0
+    zone_size = 10
+    X_f = ones(Float64,(R*2+zone_size)*y,Nens) # 15*40,20
+    stddev = 0.5
+    delta = 0.0
+
+    # forecast = zeros(Float64,x,y)
+    # analysis = zeros(Float64,x,y)
+
+    for i=1:Nens
+        # read in the value
+        ens[i].T["value"] = readVar(ens[i],stringG(t),"T")
+        # reshape the values
+        ens[i].T["valueReshaped"] = zeros(size(points))
+        for j in 1:length(points)
+            ens[i].T["valueReshaped"][j] = ens[i].T["value"][points[j]]
+        end
+    end
+
+    # this is the the spacing between observations
+    obs_spacing = 1
+    # using a simple 1:obs_spacing:end
+    # could get fancier with this array to take
+    # observations only in the middle or something
+    
+    # this is the size of the local covariance
+    num_local_vars = (R*2+zone_size)*40
+    # build the observation operator
+    obs_operator = zeros(num_local_vars)
+    obs_operator[1:obs_spacing:end] = 1
+    obs_operator = diagm(obs_operator)
+    obs_error = obs_operator*stddev
+    
+    for i in 0:zone_size:984
+        println("assimilating at x=$(i+1) through x=$(i+zone_size)")
+	local_shift = compute_shift(i,indices,points,x,y,U,zone_size,max_vel,R)
+        local_obs = observations[mod(linspace(i-R,i+R+zone_size-1,R*2+zone_size),x)+1,:]
+        local_obs_flat = reshape(local_obs',length(local_obs))
+	
+        for j=1:Nens
+            local_ens = ens[j].T["valueReshaped"][mod(linspace(i-R,i+R+zone_size-1,R*2+zone_size),x)+1,:]
+            X_f[:,j] = reshape(local_ens',length(local_obs))
+        end
+    
+	# forecast[i+1:i+zone_size,:] = reshape(mean(X_f[R*y+1:(R+zone_size)*y,:],2),y,zone_size)'
+
+        # X_a = ETKF(X_f,local_obs_flat,eye(length(local_obs)),eye(length(local_obs)).*stddev,delta)
+        X_a = EnKF(X_f,local_obs_flat,obs_operator,obs_error,delta)
 
 	# analysis[i+1:i+zone_size,:] = reshape(mean(X_a[R*y+1:(R+zone_size)*y,:],2),y,zone_size)'
     
