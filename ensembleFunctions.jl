@@ -231,6 +231,7 @@ function assimilate_lessobs(observations,t,R,points,Nens,ens,max_shift)
     obs_error = obs_operator*stddev
 
     max_vel = .01
+    U = readVar(truthCase,stringG(t),"U")
     
     for i in 0:zone_size:984
         println("assimilating at x=$(i+1) through x=$(i+zone_size)")
@@ -300,7 +301,7 @@ function assimilate_sliding(observations,t,R,points,Nens,ens,max_shift)
     obs_error = obs_operator*stddev
 
     max_vel = .01
-    U = readVar(truthCase,stringG(t),"U")    
+    U = readVar(truthCase,stringG(t),"U")
     
     for i in 0:zone_size:984
         println("assimilating at x=$(i+1) through x=$(i+zone_size)")
