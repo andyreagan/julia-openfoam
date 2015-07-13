@@ -61,14 +61,14 @@ function buildObservations(case,start,end_assimilation,window,points)
     observations
 end
 
-function initializeEnsemble(Nens,topT,bottomT,deltaT,writeInterval,hc,init,truth)
+function initializeEnsemble(Nens,topT,bottomT,deltaT,writeInterval,hc,init,truth,suffix)
     println("initializing all $(Nens) ensemble models")
     ens = Array(OpenFoam,Nens)
     writeInterval = 1
     endTime = 1
     for i=1:Nens
         println("initializing ensemble $(i)")
-        caseFolder = "/users/a/r/areagan/scratch/run/ensembleTest/ens$(dec(i,3))-$(dec(Nens,3))-$(topT)-$(bottomT)-slide"
+        caseFolder = "/users/a/r/areagan/scratch/run/ensembleTest/ens$(dec(i,3))-$(dec(Nens,3))-$(topT)-$(bottomT)-$(suffix)"
         ens[i] = OpenFoam(caseFolder)
         ens[i].controlDict["endTime"] = int(endTime)
         ens[i].controlDict["startTime"] = 0
@@ -196,6 +196,13 @@ function assimilate(observations,t,R,points,Nens,ens,max_shift)
 end
 
 function assimilate_lessobs(observations,t,R,points,Nens,ens,max_shift)
+    # assimilate_sliding
+    # 
+    # do the assimilation with a sliding window
+
+    println("beginning lessobs assimilation at time t=$(t)")
+
+    println("initializing variables")
     x,y = size(points) # 1000,40
     Tscaling = 1.0
     zone_size = 10
@@ -230,11 +237,8 @@ function assimilate_lessobs(observations,t,R,points,Nens,ens,max_shift)
     obs_operator = diagm(obs_operator)
     obs_error = obs_operator*stddev
 
-    max_vel = .01
-    
     for i in 0:zone_size:984
         println("assimilating at x=$(i+1) through x=$(i+zone_size)")
-	local_shift = compute_shift(i,indices,points,x,y,U,zone_size,max_vel,R)
         local_obs = observations[mod(linspace(i-R,i+R+zone_size-1,R*2+zone_size),x)+1,:]
         local_obs_flat = reshape(local_obs',length(local_obs))
 	
@@ -264,7 +268,14 @@ function assimilate_lessobs(observations,t,R,points,Nens,ens,max_shift)
     # forecast,analysis
 end
 
-function assimilate_sliding(observations,t,R,points,Nens,ens,max_shift)
+function assimilate_sliding(observations,t,R,points,Nens,ens,max_shift,U)
+    # assimilate_sliding
+    # 
+    # do the assimilation with a sliding window
+
+    println("beginning sliding assimilation at time t=$(t)")
+
+    println("initializing variables")
     x,y = size(points) # 1000,40
     Tscaling = 1.0
     zone_size = 10
@@ -275,6 +286,7 @@ function assimilate_sliding(observations,t,R,points,Nens,ens,max_shift)
     # forecast = zeros(Float64,x,y)
     # analysis = zeros(Float64,x,y)
 
+    println("reading in ensemble values")
     for i=1:Nens
         # read in the value
         ens[i].T["value"] = readVar(ens[i],stringG(t),"T")
@@ -291,6 +303,7 @@ function assimilate_sliding(observations,t,R,points,Nens,ens,max_shift)
     # could get fancier with this array to take
     # observations only in the middle or something
     
+    println("building local observation operator")
     # this is the size of the local covariance
     num_local_vars = (R*2+zone_size)*40
     # build the observation operator
@@ -299,18 +312,17 @@ function assimilate_sliding(observations,t,R,points,Nens,ens,max_shift)
     obs_operator = diagm(obs_operator)
     obs_error = obs_operator*stddev
 
-    max_vel = .01
-    U = readVar(truthCase,stringG(t),"U")    
-    
+    max_vel = 0.01
+
     for i in 0:zone_size:984
         println("assimilating at x=$(i+1) through x=$(i+zone_size)")
 	local_shift = compute_shift(i,indices,points,x,y,U,zone_size,max_vel,R)
         println("local shift: $(local_shift)")
-        local_obs = observations[mod(linspace(i-R,i+R+zone_size-1,R*2+zone_size),x)+1,:]
+        local_obs = observations[mod(linspace(i-R+local_shift,i+R+zone_size-1+local_shift,R*2+zone_size),x)+1,:]
         local_obs_flat = reshape(local_obs',length(local_obs))
 	
         for j=1:Nens
-            local_ens = ens[j].T["valueReshaped"][mod(linspace(i-R,i+R+zone_size-1,R*2+zone_size),x)+1,:]
+            local_ens = ens[j].T["valueReshaped"][mod(linspace(i-R+local_shift,i+R+zone_size-1+local_shift,R*2+zone_size),x)+1,:]
             X_f[:,j] = reshape(local_ens',length(local_obs))
         end
     
@@ -322,7 +334,7 @@ function assimilate_sliding(observations,t,R,points,Nens,ens,max_shift)
 	# analysis[i+1:i+zone_size,:] = reshape(mean(X_a[R*y+1:(R+zone_size)*y,:],2),y,zone_size)'
     
         for j=1:Nens
-            ens[j].T["value"][reshape(points[i+1:i+zone_size,:]',zone_size*y)] = X_a[R*y+1:(R+zone_size)*y,j]
+            ens[j].T["value"][reshape(points[i+1:i+zone_size,:]',zone_size*y)] = X_a[(R+local_shift)*y+1:(R+zone_size+local_shift)*y,j]
         end
     end
     
@@ -354,7 +366,7 @@ function compute_shift(i,indices,points,x,y,U,zone_size,max_vel,R)
     velocities = U[2:3,reshape(points[i+1:i+zone_size,:],y*zone_size)]
     
     # project each velocity onto the tangent
-    aloldots = zeros(200)
+    alldots = zeros(200)
     for i=1:200
         alldots[i] = dot(velocities[:,i],my_vec)
     end

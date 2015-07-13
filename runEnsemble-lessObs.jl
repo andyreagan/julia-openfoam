@@ -48,7 +48,8 @@ readFlux(truthCase,start_assimilation,faces)
 
 Nens = 20
 
-ens = initializeEnsemble(Nens,topT,bottomT,deltaT,writeInterval,hc,true,truthCase)
+ens = initializeEnsemble(Nens,topT,bottomT,deltaT,writeInterval,hc,true,truthCase,"lessobs-001")
+# ens = initializeEnsemble(Nens,topT,bottomT,deltaT,writeInterval,hc,false,truthCase,"slide-002")
 # make sure that phi is loaded into time 0
 
 # check the boundary field setting?
@@ -94,12 +95,22 @@ for t=0:length(ass_times)-1
     println("forecast flux:")
     println(forecastFlux[:,t+1])
     # go read in the observation right now
+    println("reading in the observations")
     obs = readVar(truthCase,stringG(ass_times[t+1]),"T")
     obs_reshaped = zeros(size(points))
+    println("observations read in")
+    println("reshaping observations")
     for i in 1:length(points)
         obs_reshaped[i] = obs[points[i]]
     end
-    assimilate_sliding(obs_reshaped,ass_times[t+1]-ass_times[1],R,points,Nens,ens,max_shift)
+    println("observations reshaped")
+
+    # println("reading in truth velocity information")
+    # U = readVar(truthCase,stringG(ass_times[t+1]),"U")
+    # assimilate_sliding(obs_reshaped,ass_times[t+1]-ass_times[1],R,points,Nens,ens,max_shift,U)
+
+    assimilate_lessobs(obs_reshaped,ass_times[t+1]-ass_times[1],R,points,Nens,ens,max_shift)
+
     for j=1:Nens
         analysisFlux[j,t+1] = mean(readVarSpec(ens[j],stringG(ass_times[t+1]-ass_times[1]),"phi",faces[3]))
     end
@@ -113,7 +124,7 @@ end
 
 cd("/users/a/r/areagan/work/2014/11-julia-openfoam")
 
-trial = 10
+trial = 13
 # save those forecasts!
 writecsv("forecastFlux-$(dec(trial,3)).csv",forecastFlux)
 writecsv("analysisFlux-$(dec(trial,3)).csv",analysisFlux)

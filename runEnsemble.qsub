@@ -16,4 +16,7 @@ echo "currdir=$(pwd)"
 cd /users/a/r/areagan/work/2014/11-julia-openfoam
 echo "currdir=$(pwd)"
 
+echo "julia version:"
+which julia
+
 /usr/bin/time -v julia runEnsemble-lessObs.jl
