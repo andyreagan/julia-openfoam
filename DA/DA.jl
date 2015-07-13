@@ -62,15 +62,15 @@ EnKF = function(X_f::Array,y_0::Array,H::Array,R::Array,delta::Float64)
     X_f_diff = sqrt(1+delta).*X_f_diff
 
     # estimate error covariance
-    pf = 1/(N-1).*( *(X_f_diff,X_f_diff.') )
+    pf = 1/(N-1)*( X_f_diff*X_f_diff' )
     # println(pf[1:10,1:10])
     
     # compute Kalman gain matrix
-    K = /( *(pf,H.') , R+ *(H ,*(pf,H.') ) )
+    K = /( pf*H' , R+H*pf*H' )
     # println(K[1:10,1:10])
 
     # innovation
-    d = y_0 - *(H,x_f)
+    d = y_0 - H*x_f
     # println(d[1:10])
 
     X_a = zeros(size(X_f))

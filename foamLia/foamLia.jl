@@ -1162,6 +1162,7 @@ end
 function run(o::OpenFoam,c::Cmd)
     cd(o.caseFolder)
     run(c)
+    0
 end
 
 # run function for lorenz model

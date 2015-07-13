@@ -142,6 +142,16 @@ function runEnsemble(ens,t,window)
     end
 end
 
+function runEnsembleP(ens,t,window)
+    @parallel (+) for i=1:length(ens)
+        println("running ensemble $(i)")
+        ens[i].controlDict["startTime"] = t
+        ens[i].controlDict["endTime"] = t+window
+        writeDict(ens[i],ens[i].controlDict,"controlDict","system")
+        run(ens[i],`./Allrun`)
+    end
+end
+
 function assimilate(observations,t,R,points,Nens,ens,max_shift)
     x,y = size(points) # 1000,40
     Tscaling = 1.0
@@ -224,7 +234,7 @@ function assimilate_lessobs(observations,t,R,points,Nens,ens,max_shift)
     end
 
     # this is the the spacing between observations
-    obs_spacing = 2
+    obs_spacing = 5
     # using a simple 1:obs_spacing:end
     # could get fancier with this array to take
     # observations only in the middle or something
@@ -254,7 +264,7 @@ function assimilate_lessobs(observations,t,R,points,Nens,ens,max_shift)
 	# forecast[i+1:i+zone_size,:] = reshape(mean(X_f[R*y+1:(R+zone_size)*y,:],2),y,zone_size)'
 
         # X_a = ETKF(X_f,local_obs_flat,eye(length(local_obs)),eye(length(local_obs)).*stddev,delta)
-        X_a = EnKF(X_f,local_obs_flat,obs_operator,obs_error,delta)
+        X_a = EnKF(X_f,local_obs_flat[1:obs_spacing:end],obs_operator,obs_error,delta)
 
 	# analysis[i+1:i+zone_size,:] = reshape(mean(X_a[R*y+1:(R+zone_size)*y,:],2),y,zone_size)'
     
