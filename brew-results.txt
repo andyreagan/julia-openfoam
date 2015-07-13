@@ -1,0 +1,74 @@
+==> Installing open-mpi dependency: libevent
+==> Downloading https://homebrew.bintray.com/bottles/libevent-2.0.22.yosemite.bottle.tar.gz
+######################################################################## 100.0%
+==> Pouring libevent-2.0.22.yosemite.bottle.tar.gz
+🍺  /usr/local/Cellar/libevent/2.0.22: 48 files, 1.8M
+==> Installing open-mpi
+==> Downloading https://homebrew.bintray.com/bottles/open-mpi-1.8.6.yosemite.bottle.tar.gz
+######################################################################## 100.0%
+==> Pouring open-mpi-1.8.6.yosemite.bottle.tar.gz
+🍺  /usr/local/Cellar/open-mpi/1.8.6: 781 files, 22M
+==> Downloading https://homebrew.bintray.com/bottles/boost-1.58.0.yosemite.bottle.tar.gz
+######################################################################## 100.0%
+==> Pouring boost-1.58.0.yosemite.bottle.tar.gz
+🍺  /usr/local/Cellar/boost/1.58.0: 10718 files, 486M
+==> Downloading https://homebrew.bintray.com/bottles/cgal-4.6.yosemite.bottle.tar.gz
+######################################################################## 100.0%
+==> Pouring cgal-4.6.yosemite.bottle.tar.gz
+🍺  /usr/local/Cellar/cgal/4.6: 2803 files, 34M
+==> Downloading https://homebrew.bintray.com/bottles/ccache-3.2.2.yosemite.bottle.tar.gz
+######################################################################## 100.0%
+==> Pouring ccache-3.2.2.yosemite.bottle.tar.gz
+==> Caveats
+To install symlinks for compilers that will automatically use
+ccache, prepend this directory to your PATH:
+  /usr/local/opt/ccache/libexec
+
+If this is an upgrade and you have previously added the symlinks to
+your PATH, you may need to modify it to the path specified above so
+it points to the current version.
+
+NOTE: ccache can prevent some software from compiling.
+ALSO NOTE: The brew command, by design, will never use ccache.
+
+==> Summary
+🍺  /usr/local/Cellar/ccache/3.2.2: 11 files, 532K
+==> Downloading https://homebrew.bintray.com/bottles/flex-2.5.39.yosemite.bottle.tar.gz
+######################################################################## 100.0%
+==> Pouring flex-2.5.39.yosemite.bottle.tar.gz
+==> Caveats
+This formula is keg-only, which means it was not symlinked into /usr/local.
+
+OS X already provides this software and installing another version in
+parallel can cause all kinds of trouble.
+
+Some formulae require a newer version of flex.
+
+Generally there are no consequences of this for you. If you build your
+own software and it requires this formula, you'll need to add to your
+build variables:
+
+    LDFLAGS:  -L/usr/local/opt/flex/lib
+    CPPFLAGS: -I/usr/local/opt/flex/include
+
+==> Summary
+🍺  /usr/local/Cellar/flex/2.5.39: 45 files, 2.0M
+==> Downloading https://homebrew.bintray.com/bottles/bison-3.0.4.yosemite.bottle.tar.gz
+######################################################################## 100.0%
+==> Pouring bison-3.0.4.yosemite.bottle.tar.gz
+==> Caveats
+This formula is keg-only, which means it was not symlinked into /usr/local.
+
+OS X already provides this software and installing another version in
+parallel can cause all kinds of trouble.
+
+Some formulae require a newer version of bison.
+
+Generally there are no consequences of this for you. If you build your
+own software and it requires this formula, you'll need to add to your
+build variables:
+
+    LDFLAGS:  -L/usr/local/opt/bison/lib
+
+==> Summary
+🍺  /usr/local/Cellar/bison/3.0.4: 51 files, 2.2M
