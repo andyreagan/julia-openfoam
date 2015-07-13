@@ -48,7 +48,7 @@ readFlux(truthCase,start_assimilation,faces)
 
 Nens = 20
 
-ens = initializeEnsemble(Nens,topT,bottomT,deltaT,writeInterval,hc,true,truthCase,"lessobs-001")
+ens = initializeEnsemble(Nens,topT,bottomT,deltaT,writeInterval,hc,false,truthCase,"lessobs-001")
 # ens = initializeEnsemble(Nens,topT,bottomT,deltaT,writeInterval,hc,false,truthCase,"slide-002")
 # make sure that phi is loaded into time 0
 

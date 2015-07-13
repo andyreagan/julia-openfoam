@@ -224,23 +224,27 @@ function assimilate_lessobs(observations,t,R,points,Nens,ens,max_shift)
     end
 
     # this is the the spacing between observations
-    obs_spacing = 5
+    obs_spacing = 2
     # using a simple 1:obs_spacing:end
     # could get fancier with this array to take
     # observations only in the middle or something
     
     # this is the size of the local covariance
     num_local_vars = (R*2+zone_size)*40
+    num_observations = int(floor(num_local_vars/obs_spacing))
     # build the observation operator
-    obs_operator = zeros(num_local_vars)
-    obs_operator[1:obs_spacing:end] = 1
-    obs_operator = diagm(obs_operator)
-    obs_error = obs_operator*stddev
+    obs_operator = zeros(num_observations,num_local_vars)
+    i = 0;
+    for obs_counter=1:obs_spacing:num_local_vars
+	i = i+1
+        obs_operator[i,obs_counter] = 1
+    end
+    obs_error = eye(num_observations)*stddev
 
     for i in 0:zone_size:984
         println("assimilating at x=$(i+1) through x=$(i+zone_size)")
         local_obs = observations[mod(linspace(i-R,i+R+zone_size-1,R*2+zone_size),x)+1,:]
-        local_obs_flat = reshape(local_obs',length(local_obs))
+        local_obs_flat = reshape(local_obs',length(local_obs))	
 	
         for j=1:Nens
             local_ens = ens[j].T["valueReshaped"][mod(linspace(i-R,i+R+zone_size-1,R*2+zone_size),x)+1,:]
