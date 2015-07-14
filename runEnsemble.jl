@@ -1,7 +1,7 @@
-include("DA/DA.jl")
-include("foamLia/foamLia.jl")
-using DA
-using foamLia
+@everywhere include("DA/DA.jl")
+@everywhere include("foamLia/foamLia.jl")
+@everywhere using DA
+@everywhere using foamLia
 println("modules loaded")
 
 include("ensembleFunctions.jl")
@@ -47,8 +47,9 @@ readFlux(truthCase,start_assimilation,faces)
 # println("$(size(observations))")
 
 Nens = 20
-
-ens = initializeEnsemble(Nens,topT,bottomT,deltaT,writeInterval,hc,true,truthCase)
+create_new_directories = true
+directory_suffix = "longer-001"
+ens = initializeEnsemble(Nens,topT,bottomT,deltaT,writeInterval,hc,create_new_directories,truthCase,directory_suffix)
 # make sure that phi is loaded into time 0
 
 # check the boundary field setting?
@@ -62,7 +63,9 @@ ens = initializeEnsemble(Nens,topT,bottomT,deltaT,writeInterval,hc,true,truthCas
 delta = 0.5
 sigma = 0.0
 R = 10
-max_shift = 10
+# this control the max shift
+# set to 0 for no sliding
+max_shift = 0
 # example to get the proper indices
 # mod([-2,-1,0,1,2],1000)+1
 # linspace(-2,2,5) for the inside
@@ -99,7 +102,14 @@ for t=0:length(ass_times)-1
     for i in 1:length(points)
         obs_reshaped[i] = obs[points[i]]
     end
-    assimilate(obs_reshaped,ass_times[t+1]-ass_times[1],R,points,Nens,ens,max_shift)
+    if max_shift > 0
+        println("reading in truth velocity information")
+        U = readVar(truthCase,stringG(ass_times[t+1]),"U")
+    else
+        # we don't care about velocity
+        U = 0
+    end
+    assimilate(obs_reshaped,ass_times[t+1]-ass_times[1],R,points,Nens,ens,max_shift,U,1)
     for j=1:Nens
         analysisFlux[j,t+1] = mean(readVarSpec(ens[j],stringG(ass_times[t+1]-ass_times[1]),"phi",faces[3]))
     end
@@ -108,16 +118,16 @@ for t=0:length(ass_times)-1
     println(truthFlux[t+1])
     # analysis[t+1] = a
     # forecast[t+1] = f
-    runEnsemble(ens,ass_times[t+1]-ass_times[1],window)
+    runEnsembleP(ens,ass_times[t+1]-ass_times[1],window)
 end
 
 cd("/users/a/r/areagan/work/2014/11-julia-openfoam")
 
-trial = 8
+trial = 1
 # save those forecasts!
-writecsv("forecastFlux-$(dec(trial,3)).csv",forecastFlux)
-writecsv("analysisFlux-$(dec(trial,3)).csv",analysisFlux)
-writecsv("truthFlux-$(dec(trial,3)).csv",truthFlux)
+writecsv("forecastFlux-$(directory_suffix)-trial$(dec(trial,3)).csv",forecastFlux)
+writecsv("analysisFlux-$(directory_suffix)-trial$(dec(trial,3)).csv",analysisFlux)
+writecsv("truthFlux-$(directory_suffix)-trial$(dec(trial,3)).csv",truthFlux)
 
 
 

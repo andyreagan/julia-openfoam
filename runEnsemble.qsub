@@ -19,4 +19,4 @@ echo "currdir=$(pwd)"
 echo "julia version:"
 which julia
 
-/usr/bin/time -v julia runEnsemble-lessObs.jl
+/usr/bin/time -v julia runEnsemble.jl
