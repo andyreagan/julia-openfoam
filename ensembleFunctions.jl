@@ -203,7 +203,7 @@ function assimilate(observations,t,R,points,Nens,ens,max_shift,U,obs_spacing)
 
     max_vel = 0.01
 
-    for i in 0:zone_size:984
+    @parallel (+) for i in 0:zone_size:984
         println("assimilating at x=$(i+1) through x=$(i+zone_size)")
         if max_shift > 0
             local_shift = compute_shift(i,indices,points,x,y,U,zone_size,max_vel,max_shift)
@@ -229,6 +229,8 @@ function assimilate(observations,t,R,points,Nens,ens,max_shift,U,obs_spacing)
         for j=1:Nens
             ens[j].T["value"][reshape(points[i+1:i+zone_size,:]',zone_size*y)] = X_a[(R+local_shift)*y+1:(R+zone_size+local_shift)*y,j]
         end
+	
+	0
     end
     
     # write it out
@@ -276,3 +278,5 @@ function compute_shift(i,indices,points,x,y,U,zone_size,max_vel,R)
     shift = max(shift,-R)
     return shift
 end
+
+

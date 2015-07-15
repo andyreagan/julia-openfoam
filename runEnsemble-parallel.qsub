@@ -1,15 +1,19 @@
 # This job needs 1 compute node with 1 processor per node.
 # #PBS -l nodes=node547.cluster:ppn=1,pmem=8gb,pvmem=9gb
-#PBS -l nodes=1:ppn=1,pmem=8gb,pvmem=9gb
+# #PBS -l nodes=1:ppn=10 # ,mem=16gb,vmem=18gb
+#PBS -l nodes=1:ppn=8,pmem=1gb,pvmem=1gb
 
 # It should be allowed to run for up to 30min.
 #PBS -l walltime=30:00:00
+# #PBS -l walltime=01:00:00
 
 # Name of job.
 #PBS -N foamEnsembleRun
 
-# Join STDERR TO STDOUT.  (omit this if you want separate STDOUT AND STDERR)
+# Join STDERR TO STDOUT
 #PBS -j oe
+
+# Look at some of the environment action from PBS
 
 echo "PBS_O_HOST=${PBS_O_HOST}"
 echo "PBS_SERVER=${PBS_SERVER}"
@@ -27,8 +31,8 @@ cd $PBS_O_WORKDIR
 echo "julia version:"
 which julia
 
-# julia runEnsemble.jl "slide-004" "290" "8" "1"
-# julia runEnsemble.jl "lessobs-002" "290" "0" "2"
-julia runEnsemble.jl "lessobs-003" "290" "0" "5"
+julia -p "$(($PBS_NP-1))" runEnsemble.jl "longer-002" "1990" "0" "1"
+# julia -p "$(($PBS_NP-1))" runEnsemble.jl "longer-002" "1990" "0" "1"
+# julia -p "$(($PBS_NP-1))" runEnsemble.jl "longer-002" "1990" "0" "1"
 
 
