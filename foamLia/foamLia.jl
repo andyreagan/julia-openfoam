@@ -1128,7 +1128,7 @@ qsubheader = """#PBS -l walltime=24:00:00
 #PBS -N foamBCTest
 #PBS -j oe
 
-cd /users/a/r/areagan/work/2014/2014-11julia-openfoam
+cd /users/a/r/areagan/work/2014/11-julia-openfoam
 
 ./Allrun"""
 

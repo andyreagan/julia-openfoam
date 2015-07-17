@@ -4,6 +4,8 @@ With sufficiently large forcing of heat, the direction of fluid flow in the loop
 As is the case for state-of-the-art weather models, we only observe the statistics over a small region of state space, making prediction difficult.
 To overcome this challenge, data assimilation methods, and specifically ensemble methods, use the computational model itself to estimate the uncertainty of the model to optimally combine these observations into an initial condition for predicting the future state.
 First, we build and verify four distinct DA methods.
-Then, a computational fluid dynamics simulation of the loop and a reduced order model are both used by these DA methods to predict flow reversals.
-The results contribute to a testbed for algorithm development.
+Then, we perform a twin model experiment with the computational fluid dynamics simulation of the loop using the ETKF to assimilate observations and predict flow reversals.
+We show that using adaptively shaped localized covariance outperforms static localized covariance with the ETKF, and allows for the use of less observations in predicting flow reversals.
+We also show that a DMD of the temperature and velocity fields recovers the low dimensional system underlying reversals, finding specific modes which together are predictive of reversal direction.
+Additionally, these results contribute to a test-bed for algorithm development.
 \end{abstract}

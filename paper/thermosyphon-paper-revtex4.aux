@@ -15,45 +15,50 @@
 \citation{harris2011predicting}
 \newlabel{FirstPage}{{}{1}{}{}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {I}Introduction}{1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Schematic of the experimental, and computational, setup from Harris et al (2012)}}{1}{}}
-\newlabel{fig:thermosyphons}{{1}{1}{}{}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {II}Physical Experiment and Computational Model}{1}{}}
 \citation{glenn2013}
 \citation{glenn2013}
 \citation{glenn2013}
 \citation{issa1986solution}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Schematic of the experimental, and computational, setup from Harris et al (2012)}}{2}{}}
+\newlabel{fig:thermosyphons}{{1}{2}{}{}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces A time series of the physical thermosyphon, from the Undergraduate Honor's Thesis of Darcy Glenn {\cite {glenn2013}}}}{2}{}}
 \newlabel{fig:chrisLoop}{{2}{2}{}{}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {A}Computational Setup}{2}{}}
 \citation{lorenc1986analysis}
 \citation{kalnay2003}
+\citation{danforth2007estimating,li2009accounting}
 \@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces A snapshot of the mesh used for CFD simulations}}{3}{}}
 \newlabel{fig:CFDmesh1}{{3}{3}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces The 3D mesh viewed as a wireframe from within}}{3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces The 3D mesh viewed as a wire-frame from within}}{3}{}}
 \newlabel{fig:CFDmesh2}{{4}{3}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces A screenshot of the whole simulated loop}}{3}{}}
-\newlabel{fig:CFDloopSS}{{5}{3}{}{}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {III}Methods}{3}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {A}Data Assimilation}{3}{}}
-\citation{danforth2007estimating,li2009accounting}
 \citation{bishop2001adaptive}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces The future error predicted by the TLM is compared to the error growth in Lorenz 63 system for an initial perturbation with standard deviation of 0.1, averaged over 1000 TLM integrations}}{4}{}}
+\newlabel{fig:TLMverification}{{5}{4}{}{}{}}
 \newlabel{eq:ODETLM}{{8}{4}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces The future error predicted by the TLM is compared to the error growth in Lorenz 63 system for an initial perturbation with standard deviation of 0.1, averaged over 1000 TLM integrations}}{4}{}}
-\newlabel{fig:TLMverification}{{6}{4}{}{}{}}
 \citation{kalnay20074}
 \citation{ott2004local}
 \citation{hunt2007efficient}
-\@writefile{toc}{\contentsline {subsection}{\numberline {B}Limited observation experiment}{5}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces The RMS error is reported for our EKF and EnKF filters}}{6}{}}
-\newlabel{fig:window_test}{{7}{6}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces The RMS error averaged over 100 model runs of length 1000 windows is reported for the ETKF for varying additive and multiplicative inflation factors}}{6}{}}
-\newlabel{fig:ETKF_cov_tuning_390s}{{8}{6}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces The RMS error is reported for our EKF and EnKF filters}}{5}{}}
+\newlabel{fig:window_test}{{6}{5}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces The RMS error averaged over 100 model runs of length 1000 windows is reported for the ETKF for varying additive and multiplicative inflation factors}}{5}{}}
+\newlabel{fig:ETKF_cov_tuning_390s}{{7}{5}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B}Limited observation with adaptive local covariance}{6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces }}{6}{}}
+\newlabel{fig:sliding_spag}{{8}{6}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces }}{6}{}}
+\newlabel{fig:sliding_results}{{9}{6}{}{}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {C}DMD experiment}{6}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {IV}Results}{6}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Prediction skill over time for synthetic temperature sensors}}{6}{}}
-\newlabel{fig:TsensorExp}{{9}{6}{}{}{}}
 \bibdata{thermosyphon-paper}
 \bibcite{asur2010predicting}{{1}{2010}{{Asur and Huberman}}{{Asur and Huberman}}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces }}{7}{}}
+\newlabel{fig:DMD_modes}{{10}{7}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces }}{7}{}}
+\newlabel{fig:DMD_phaseplane}{{11}{7}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {IV}Results}{7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {}Acknowledgments}{7}{}}
 \bibcite{bishop2001adaptive}{{2}{2001}{{Bishop et~al.}}{{Bishop, Etherton, and Majumdar}}}
 \bibcite{burroughs2005reduced}{{3}{2005}{{Burroughs et~al.}}{{Burroughs, Coutsias, and Romero}}}
 \bibcite{creveling1975stability}{{4}{1975}{{Creveling et~al.}}{{Creveling, PAZ, Baladi, and Schoenhals}}}
@@ -67,10 +72,6 @@
 \bibcite{harris2011predicting}{{12}{2011}{{Harris et~al.}}{{Harris, Ridouane, Hitt, and Danforth}}}
 \bibcite{weather-violence2013}{{13}{2013}{{Hsiang et~al.}}{{Hsiang, Burke, and Miguel}}}
 \bibcite{hunt2007efficient}{{14}{2007}{{Hunt et~al.}}{{Hunt, Kostelich, and Szunyogh}}}
-\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Prediction skill over time for complete observations of temperature}}{7}{}}
-\newlabel{fig:fullObsExp}{{10}{7}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {}Acknowledgments}{7}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {}References}{7}{}}
 \bibcite{issa1986solution}{{15}{1986}{{Issa}}{{Issa}}}
 \bibcite{jasak2007}{{16}{2007}{{Jasak et~al.}}{{Jasak, Jemcov, and Tukovic}}}
 \bibcite{jiang2003}{{17}{2003}{{Jiang and Shoji}}{{Jiang and Shoji}}}
@@ -90,6 +91,7 @@
 \global \chardef \firstnote@num30\relax 
 \bibstyle{chicago}
 \newlabel{LastPage}{{}{7}}
+\@writefile{toc}{\contentsline {section}{\numberline {}References}{8}{}}
 \newlabel{LastBibItem}{{30}{8}{}{}{}}
 \@writefile{toc}{\appendix }
 \@writefile{toc}{\contentsline {section}{\numberline {A}Supplementary}{8}{}}
