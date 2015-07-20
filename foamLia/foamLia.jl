@@ -80,7 +80,7 @@ end
 
 function create_defaultControlDict()
     # default settings
-    controlDict = OrderedDict(String,Any)
+    controlDict = OrderedDict()
     controlDict["application"] = "buoyantBoussinesqPimpleFoam"
     controlDict["startFrom"] = "startTime"
     controlDict["startTime"] = 0
@@ -103,15 +103,15 @@ function create_defaultControlDict()
 end
 
 function create_defaultFvSchemes()
-    fvSchemes = OrderedDict(String,Any)
-    fvSchemes["ddtSchemes"] = OrderedDict(String,String)
+    fvSchemes = OrderedDict()
+    fvSchemes["ddtSchemes"] = OrderedDict()
     fvSchemes["ddtSchemes"]["default"] = "Euler"
     # "CrankNicholson 1"
 
-    fvSchemes["gradSchemes"] = OrderedDict(String,String)
+    fvSchemes["gradSchemes"] = OrderedDict()
     fvSchemes["gradSchemes"]["default"] = "Gauss linear"
 
-    fvSchemes["divSchemes"] = OrderedDict(String,String)
+    fvSchemes["divSchemes"] = OrderedDict()
     fvSchemes["divSchemes"]["default"] = "none"
     fvSchemes["divSchemes"]["div(phi,U)"] = "Gauss upwind"
     fvSchemes["divSchemes"]["div(phi,T)"] = "Gauss upwind"
@@ -121,7 +121,7 @@ function create_defaultFvSchemes()
     fvSchemes["divSchemes"]["div(R)"] = "Gauss linear"
     fvSchemes["divSchemes"]["div((nuEff*dev(T(grad(U)))))"] = "Gauss linear"
 
-    fvSchemes["laplacianSchemes"] = OrderedDict(String,String)
+    fvSchemes["laplacianSchemes"] = OrderedDict()
     fvSchemes["laplacianSchemes"]["default"] = "none"
     fvSchemes["laplacianSchemes"]["laplacian(nuEff,U)"] = "Gauss linear uncorrected"
     fvSchemes["laplacianSchemes"]["laplacian(Dp,p_rgh)"] = "Gauss linear uncorrected"
@@ -130,13 +130,13 @@ function create_defaultFvSchemes()
     fvSchemes["laplacianSchemes"]["laplacian(DepsilonEff,epsilon)"] = "Gauss linear uncorrected"
     fvSchemes["laplacianSchemes"]["laplacian(DREff,R)"] = "Gauss linear uncorrected"
 
-    fvSchemes["interpolationSchemes"] = OrderedDict(String,String)
+    fvSchemes["interpolationSchemes"] = OrderedDict()
     fvSchemes["interpolationSchemes"]["default"] = "linear"
 
-    fvSchemes["snGradSchemes"] = OrderedDict(String,String)
+    fvSchemes["snGradSchemes"] = OrderedDict()
     fvSchemes["snGradSchemes"]["default"] = "uncorrected"
 
-    fvSchemes["fluxRequired"] = OrderedDict(String,String)
+    fvSchemes["fluxRequired"] = OrderedDict()
     fvSchemes["fluxRequired"]["default"] = "no"
     fvSchemes["fluxRequired"]["p_rgh"] = ""
 
@@ -144,32 +144,32 @@ function create_defaultFvSchemes()
 end
 
 function create_defaultFvSolution()
-    fvSolution = OrderedDict(String,Any)
+    fvSolution = OrderedDict()
 
-    fvSolution["solvers"] = OrderedDict(String,Any)
+    fvSolution["solvers"] = OrderedDict()
 
-    fvSolution["solvers"]["p_rgh"] = OrderedDict(String,String)
+    fvSolution["solvers"]["p_rgh"] = OrderedDict()
     fvSolution["solvers"]["p_rgh"]["solver"] = "PCG"
     fvSolution["solvers"]["p_rgh"]["preconditioner"] = "DIC"
     fvSolution["solvers"]["p_rgh"]["tolerance"] = "1e-8"
     fvSolution["solvers"]["p_rgh"]["relTol"] = "0.01"
 
-    fvSolution["solvers"]["p_rghFinal"] = OrderedDict(String,String)
+    fvSolution["solvers"]["p_rghFinal"] = OrderedDict()
     fvSolution["solvers"]["p_rghFinal"]["\$p_rgh"] = ""
     fvSolution["solvers"]["p_rghFinal"]["relTol"] = "0"
 
-    fvSolution["solvers"]["\"(U|T|k|epsilon|R)\""] = OrderedDict(String,String)
+    fvSolution["solvers"]["\"(U|T|k|epsilon|R)\""] = OrderedDict()
     fvSolution["solvers"]["\"(U|T|k|epsilon|R)\""]["solver"] = "PBiCG"
     fvSolution["solvers"]["\"(U|T|k|epsilon|R)\""]["preconditioner"] = "DILU"
     fvSolution["solvers"]["\"(U|T|k|epsilon|R)\""]["tolerance"] = "1e-6"
     fvSolution["solvers"]["\"(U|T|k|epsilon|R)\""]["relTol"] = "0.1"
 
-    fvSolution["solvers"]["\"(U|T|k|epsilon|R)Final\""] = OrderedDict(String,String)
+    fvSolution["solvers"]["\"(U|T|k|epsilon|R)Final\""] = OrderedDict()
     fvSolution["solvers"]["\"(U|T|k|epsilon|R)Final\""]["\$U"] = ""
     fvSolution["solvers"]["\"(U|T|k|epsilon|R)Final\""]["relTol"] = "0"
 
 
-    fvSolution["PIMPLE"] = OrderedDict(String,String)
+    fvSolution["PIMPLE"] = OrderedDict()
     fvSolution["PIMPLE"]["momentumPredicto"] = "no"
     fvSolution["PIMPLE"]["nOuterCorrectors"] = "1"
     fvSolution["PIMPLE"]["nCorrectors"] = "2"
@@ -178,9 +178,9 @@ function create_defaultFvSolution()
     fvSolution["PIMPLE"]["pRefValue"] = "0"
 
 
-    fvSolution["relaxationFactors"] = OrderedDict(String,Any)
-    fvSolution["relaxationFactors"]["fields"] = OrderedDict(String,String)
-    fvSolution["relaxationFactors"]["equations"] = OrderedDict(String,String)
+    fvSolution["relaxationFactors"] = OrderedDict()
+    fvSolution["relaxationFactors"]["fields"] = OrderedDict()
+    fvSolution["relaxationFactors"]["equations"] = OrderedDict()
     fvSolution["relaxationFactors"]["equations"]["\"(U|T|k|epsilon|R)\""] = "1"
     fvSolution["relaxationFactors"]["equations"]["\"(U|T|k|epsilon|R)Final\""] = "1"
 
@@ -188,21 +188,21 @@ function create_defaultFvSolution()
 end
 
 function create_defaultSetFieldsDict()
-    setFieldsDict = OrderedDict(String,Any)
+    setFieldsDict = OrderedDict()
     setFieldsDict["defaultFieldValues"] = [""]
     setFieldsDict["regions"] = [""]
     setFieldsDict
 end
 
 function create_defaultG()
-    g = OrderedDict(String,String)
+    g = OrderedDict()
     g["dimensions"] = "[0 1 -2 0 0 0 0]"
     g["value"] = "( 0 0 -9.81)"
     g
 end
 
 function create_defaultRASProperties()
-    RASProperties = OrderedDict(String,Any)
+    RASProperties = OrderedDict()
     RASProperties["RASModel"] = "\$RASModel"
     RASProperties["turbulence"] = "\$turbulence"
     RASProperties["printCoeffs"] = "on"
@@ -210,7 +210,7 @@ function create_defaultRASProperties()
 end
 
 function create_defaultTransportProperties()
-    transportProperties = OrderedDict(String,Any)
+    transportProperties = OrderedDict()
 
     # reference numbers:
     # http://www.engineeringtoolbox.com/air-properties-d_156.html
@@ -247,32 +247,32 @@ function create_defaultTransportProperties()
 end
 
 function create_defaultTurbulenceProperties()
-    turbulenceProperties = OrderedDict(String,String)
+    turbulenceProperties = OrderedDict()
     turbulenceProperties["simulationType"] = "laminar"
     # other options: "RASModel","LESModel"
     turbulenceProperties
 end
 
 function create_defaultBlockMeshDict()
-    blockMeshDict = OrderedDict(String,Any)
+    blockMeshDict = OrderedDict()
     blockMeshDict["application"] = "buoyantBoussinesqPimpleFoam"
     blockMeshDict
 end
 
 function create_defaultT()
-    defaultT = OrderedDict(String,Any)
+    defaultT = OrderedDict()
     # defaultT["dimensions"] = [0,0,0,1,0,0,0]
     defaultT["dimensions"] = "[0 0 0 1 0 0 0]"
 
     defaultT["internalField"] = "uniform 300"
 
     # this should work, but I must not understand deepcopy
-    # emptyBC = OrderedDict(String,Any)
+    # emptyBC = OrderedDict()
     # emptyBC["type"] = "empty"
-    # defaultT["boundaryField"] = OrderedDict(String,Any)
+    # defaultT["boundaryField"] = OrderedDict()
     # defaultT["boundaryField"]["front"] = deepcopy(emptyBC)
     # defaultT["boundaryField"]["back"] = deepcopy(emptyBC)
-    # groovyBC = OrderedDict(String,Any)
+    # groovyBC = OrderedDict()
     # groovyBC["type"] = "groovyBC"
     # groovyBC["value"] = "uniform 300"
     # groovyBC["gradientExpression"] = "\"gradT\""
@@ -299,33 +299,33 @@ function create_defaultT()
     # defaultT["boundaryField"]["topoutside"]["variables"] = "\"Text=280;hc=225;gradT=(Text-T)*hc\""
     # println(defaultT)
 
-    defaultT["boundaryField"] = OrderedDict(String,Any)
-    defaultT["boundaryField"]["front"] = OrderedDict(String,Any)
+    defaultT["boundaryField"] = OrderedDict()
+    defaultT["boundaryField"]["front"] = OrderedDict()
     defaultT["boundaryField"]["front"]["type"] = "empty"
-    defaultT["boundaryField"]["back"] = OrderedDict(String,Any)
+    defaultT["boundaryField"]["back"] = OrderedDict()
     defaultT["boundaryField"]["back"]["type"] = "empty"
-    defaultT["boundaryField"]["topinside"] = OrderedDict(String,Any)
+    defaultT["boundaryField"]["topinside"] = OrderedDict()
     defaultT["boundaryField"]["topinside"]["type"] = "groovyBC"
     defaultT["boundaryField"]["topinside"]["value"] = "uniform 300"
     defaultT["boundaryField"]["topinside"]["gradientExpression"] = "\"gradT\""
     defaultT["boundaryField"]["topinside"]["fractionExpression"] = "\"0\""
     defaultT["boundaryField"]["topinside"]["variables"] = "\"Text=280;hc=225;gradT=(Text-T)*hc;\""
     defaultT["boundaryField"]["topinside"]["timelines"] = ()
-    defaultT["boundaryField"]["topoutside"] = OrderedDict(String,Any)
+    defaultT["boundaryField"]["topoutside"] = OrderedDict()
     defaultT["boundaryField"]["topoutside"]["type"] = "groovyBC"
     defaultT["boundaryField"]["topoutside"]["value"] = "uniform 300"
     defaultT["boundaryField"]["topoutside"]["gradientExpression"] = "\"gradT\""
     defaultT["boundaryField"]["topoutside"]["fractionExpression"] = "\"0\""
     defaultT["boundaryField"]["topoutside"]["variables"] = "\"Text=280;hc=225;gradT=(Text-T)*hc;\""
     defaultT["boundaryField"]["topoutside"]["timelines"] = ()
-    defaultT["boundaryField"]["bottominside"] = OrderedDict(String,Any)
+    defaultT["boundaryField"]["bottominside"] = OrderedDict()
     defaultT["boundaryField"]["bottominside"]["type"] = "groovyBC"
     defaultT["boundaryField"]["bottominside"]["value"] = "uniform 300"
     defaultT["boundaryField"]["bottominside"]["gradientExpression"] = "\"gradT\""
     defaultT["boundaryField"]["bottominside"]["fractionExpression"] = "\"0\""
     defaultT["boundaryField"]["bottominside"]["variables"] = "\"Text=340;hc=225;gradT=(Text-T)*hc;\""
     defaultT["boundaryField"]["bottominside"]["timelines"] = ()
-    defaultT["boundaryField"]["bottomoutside"] = OrderedDict(String,Any)
+    defaultT["boundaryField"]["bottomoutside"] = OrderedDict()
     defaultT["boundaryField"]["bottomoutside"]["type"] = "groovyBC"
     defaultT["boundaryField"]["bottomoutside"]["value"] = "uniform 300"
     defaultT["boundaryField"]["bottomoutside"]["gradientExpression"] = "\"gradT\""
@@ -337,28 +337,28 @@ function create_defaultT()
 end
 
 function create_defaultPhi()
-    defaultPhi = OrderedDict(String,Any)
+    defaultPhi = OrderedDict()
     defaultPhi["dimensions"] = "[0 3 -1 0 0 0 0]"
 
     defaultPhi["internalField"] = "uniform 0"
 
-    defaultPhi["boundaryField"] = OrderedDict(String,Any)
-    defaultPhi["boundaryField"]["front"] = OrderedDict(String,String)
+    defaultPhi["boundaryField"] = OrderedDict()
+    defaultPhi["boundaryField"]["front"] = OrderedDict()
     defaultPhi["boundaryField"]["front"]["type"] = "empty"
     defaultPhi["boundaryField"]["front"]["value"] = "uniform 0" # nonuniform 0()
-    defaultPhi["boundaryField"]["back"] = OrderedDict(String,String)
+    defaultPhi["boundaryField"]["back"] = OrderedDict()
     defaultPhi["boundaryField"]["back"]["type"] = "empty"
     defaultPhi["boundaryField"]["back"]["value"] = "uniform 0" # nonuniform 0()
-    defaultPhi["boundaryField"]["topinside"] = OrderedDict(String,String)
+    defaultPhi["boundaryField"]["topinside"] = OrderedDict()
     defaultPhi["boundaryField"]["topinside"]["type"] = "calculated"
     defaultPhi["boundaryField"]["topinside"]["value"] = "uniform 0" # nonuniform 0()
-    defaultPhi["boundaryField"]["topoutside"] = OrderedDict(String,String)
+    defaultPhi["boundaryField"]["topoutside"] = OrderedDict()
     defaultPhi["boundaryField"]["topoutside"]["type"] = "calculated"
     defaultPhi["boundaryField"]["topoutside"]["value"] = "uniform 0" # nonuniform 0()
-    defaultPhi["boundaryField"]["bottominside"] = OrderedDict(String,String)
+    defaultPhi["boundaryField"]["bottominside"] = OrderedDict()
     defaultPhi["boundaryField"]["bottominside"]["type"] = "calculated"
     defaultPhi["boundaryField"]["bottominside"]["value"] = "uniform 0" # nonuniform 0()
-    defaultPhi["boundaryField"]["bottomoutside"] = OrderedDict(String,String)
+    defaultPhi["boundaryField"]["bottomoutside"] = OrderedDict()
     defaultPhi["boundaryField"]["bottomoutside"]["type"] = "calculated"
     defaultPhi["boundaryField"]["bottomoutside"]["value"] = "uniform 0" # nonuniform 0()
     
@@ -366,26 +366,26 @@ function create_defaultPhi()
 end
 
 function create_defaultU()
-    defaultU = OrderedDict(String,Any)
+    defaultU = OrderedDict()
     defaultU["dimensions"] = "[0 1 -1 0 0 0 0]"
 
     defaultU["internalField"] = "uniform (0 0 0)"
 
-    defaultU["boundaryField"] = OrderedDict(String,Any)
-    defaultU["boundaryField"]["front"] = OrderedDict(String,String)
+    defaultU["boundaryField"] = OrderedDict()
+    defaultU["boundaryField"]["front"] = OrderedDict()
     defaultU["boundaryField"]["front"]["type"] = "empty"
-    defaultU["boundaryField"]["back"] = OrderedDict(String,String)
+    defaultU["boundaryField"]["back"] = OrderedDict()
     defaultU["boundaryField"]["back"]["type"] = "empty"
-    defaultU["boundaryField"]["topinside"] = OrderedDict(String,String)
+    defaultU["boundaryField"]["topinside"] = OrderedDict()
     defaultU["boundaryField"]["topinside"]["type"] = "fixedValue"
     defaultU["boundaryField"]["topinside"]["value"] = "uniform (0 0 0)" 
-    defaultU["boundaryField"]["topoutside"] = OrderedDict(String,String)
+    defaultU["boundaryField"]["topoutside"] = OrderedDict()
     defaultU["boundaryField"]["topoutside"]["type"] = "fixedValue"
     defaultU["boundaryField"]["topoutside"]["value"] = "uniform (0 0 0)"
-    defaultU["boundaryField"]["bottominside"] = OrderedDict(String,String)
+    defaultU["boundaryField"]["bottominside"] = OrderedDict()
     defaultU["boundaryField"]["bottominside"]["type"] = "fixedValue"
     defaultU["boundaryField"]["bottominside"]["value"] = "uniform (0 0 0)"
-    defaultU["boundaryField"]["bottomoutside"] = OrderedDict(String,String)
+    defaultU["boundaryField"]["bottomoutside"] = OrderedDict()
     defaultU["boundaryField"]["bottomoutside"]["type"] = "fixedValue"
     defaultU["boundaryField"]["bottomoutside"]["value"] = "uniform (0 0 0)"
     
@@ -393,26 +393,26 @@ function create_defaultU()
 end
 
 function create_defaultP()
-    defaultP = OrderedDict(String,Any)
+    defaultP = OrderedDict()
     defaultP["dimensions"] = "[0 2 -2 0 0 0 0]"
 
     defaultP["internalField"] = "uniform 0"
 
-    defaultP["boundaryField"] = OrderedDict(String,Any)
-    defaultP["boundaryField"]["front"] = OrderedDict(String,String)
+    defaultP["boundaryField"] = OrderedDict()
+    defaultP["boundaryField"]["front"] = OrderedDict()
     defaultP["boundaryField"]["front"]["type"] = "empty"
-    defaultP["boundaryField"]["back"] = OrderedDict(String,String)
+    defaultP["boundaryField"]["back"] = OrderedDict()
     defaultP["boundaryField"]["back"]["type"] = "empty"
-    defaultP["boundaryField"]["topinside"] = OrderedDict(String,String)
+    defaultP["boundaryField"]["topinside"] = OrderedDict()
     defaultP["boundaryField"]["topinside"]["type"] = "calculated"
     defaultP["boundaryField"]["topinside"]["value"] = "uniform 0" # nonuniform 0()
-    defaultP["boundaryField"]["topoutside"] = OrderedDict(String,String)
+    defaultP["boundaryField"]["topoutside"] = OrderedDict()
     defaultP["boundaryField"]["topoutside"]["type"] = "calculated"
     defaultP["boundaryField"]["topoutside"]["value"] = "uniform 0" # nonuniform 0()
-    defaultP["boundaryField"]["bottominside"] = OrderedDict(String,String)
+    defaultP["boundaryField"]["bottominside"] = OrderedDict()
     defaultP["boundaryField"]["bottominside"]["type"] = "calculated"
     defaultP["boundaryField"]["bottominside"]["value"] = "uniform 0" # nonuniform 0()
-    defaultP["boundaryField"]["bottomoutside"] = OrderedDict(String,String)
+    defaultP["boundaryField"]["bottomoutside"] = OrderedDict()
     defaultP["boundaryField"]["bottomoutside"]["type"] = "calculated"
     defaultP["boundaryField"]["bottomoutside"]["value"] = "uniform 0" # nonuniform 0()
     
@@ -422,7 +422,7 @@ end
 
 
 function create_defaultMeshParam()
-    meshParam = OrderedDict(String,Any)
+    meshParam = OrderedDict()
     meshParam["baseMeshDir"] = "/users/a/r/areagan/scratch/run/2014-10-23-all-meshes/"
     meshParam["dim"] = 2
     meshParam["x"] = 250
@@ -432,7 +432,7 @@ function create_defaultMeshParam()
 end
 
 function create_defaultMesh()
-    mesh = OrderedDict(String,Any)
+    mesh = OrderedDict()
     mesh["points"] = zeros(Float64,3,1) # (-0.0001 -0.375 0)
     mesh["faces"] = zeros(Int64,4,1) # 4(2 84 85 3)
     mesh["owner"] = zeros(Int64,1,1) # 1
