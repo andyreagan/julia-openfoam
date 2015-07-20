@@ -4,8 +4,20 @@
 # to do the DA and run experiments
 # currently supported arguments are as follows:
 # 
-# julia -p N runEnsemble.jl [suffix] [end_assimilation] [max_shift] [obs_spacing]
+# julia -p N runEnsemble.jl [suffix] [start_run] [truth_offset] [window] [runtime] [max_shift] [obs_spacing] [initialize_ensemble_dirs] [n_ens]
 
+directory_suffix = ARGS[1]
+start_run = int(ARGS[2])
+truth_offset = int(ARGS[3])
+window = int(ARGS[4])
+runtime = int(ARGS[5])
+max_shift = int(ARGS[6])
+obs_spacing = int(ARGS[7])
+create_new_directories = bool(int(ARGS[8]))
+Nens = int(ARGS[9])
+
+truth_times = (truth_offset+start_run):window:(truth_offset+start_run+runtime)
+ens_times = (start_run):window:(start_run+runtime)
 
 @everywhere include("DA/DA.jl")
 @everywhere include("foamLia/foamLia.jl")
@@ -13,7 +25,7 @@
 @everywhere using foamLia
 println("modules loaded")
 
-include("ensembleFunctions.jl")
+@everywhere include("ensembleFunctions.jl")
 
 println("beginning real test")
 println("setting parameters")
@@ -24,9 +36,7 @@ hc = 220
 endTime = 20
 deltaT = .1
 writeInterval = 1
-obs_spacing = int(ARGS[4])
 
-# truthFolder = "/users/a/r/areagan/scratch/run/ensembleTest/truth-$(topT)-$(bottomT)"
 truthFolder = "/users/a/r/areagan/scratch/run/BCTest-$(topT)-$(bottomT)"
 println("truth run is at $(truthFolder)")
 println("opening truth run")
@@ -42,108 +52,99 @@ println("reading in mesh")
 faces,cells = readMesh(truthCase)
 println("reshaping mesh")
 points,indices = reshapeMesh(truthCase)
-# println("size of points is $(size(set))")
 
-# set these things, and then go fill an observations vector
-window = 10
-start_assimilation = 100
-# end_assimilation = 290 # 1990
-end_assimilation = int(ARGS[2])
-# 100:10:290 is 20 timesteps
-
-readFlux(truthCase,start_assimilation,faces)
-
-# println("building the observations vector, full")
-# observations = buildObservations(truthCase,start_assimilation,end_assimilation,window,points)
-# println("$(size(observations))")
-
-Nens = 20
-create_new_directories = true
-directory_suffix = ARGS[1]
-# create_new_directories = true
-# directory_suffix = "slide-004"
-# create_new_directories = true
-# directory_suffix = "longer-002"
 ens = initializeEnsemble(Nens,topT,bottomT,deltaT,writeInterval,hc,create_new_directories,truthCase,directory_suffix)
-# make sure that phi is loaded into time 0
 
-# check the boundary field setting?
-# ens[1].T["boundaryField"]["front"]["type"] = "full"
-# println("this should be empty:")
-# println(ens[2].T["boundaryField"]["front"]["type"])
-# println(ens[1].T["valueReshaped"][1,:])
-# println(ens[2].T["valueReshaped"][1,:])
-# println(ens[3].T["valueReshaped"][1,:])
-
-delta = 0.5
+stddev = 0.5
+delta = 0.0
 sigma = 0.0
-R = 10
-# this control the max shift
-# set to 0 for no sliding
-# max_shift = 8
-max_shift = int(ARGS[3])
-# example to get the proper indices
-# mod([-2,-1,0,1,2],1000)+1
-# linspace(-2,2,5) for the inside
-# linspace(i-R,i+R,R*2+1)
+# this is the sides
+R = 15
+# this is the center
+Rc = 10
 
-# forecast = zeros(Float64,length(start_assimilation:window:end_assimilation),size(points)[1],size(points)[2])
-# analysis = zeros(Float64,length(start_assimilation:window:end_assimilation),size(points)[1],size(points)[2])
-# forecast = cell(length(start_assimilation:window:end_assimilation))
-# analysis = cell(length(start_assimilation:window:end_assimilation))
+x,y = size(points) # 1000,40
+Tscaling = 1.0
 
-t = 1
+# this is the size of the local covariance
+num_local_vars = (R*2+Rc)*40
+num_observations = int(floor(num_local_vars/obs_spacing))
+# build the observation operator
+obs_operator = zeros(num_observations,num_local_vars)
+i = 0;
+for obs_counter=1:obs_spacing:num_local_vars
+    i = i+1
+    obs_operator[i,obs_counter] = 1
+end
+obs_error = eye(num_observations)*stddev
 
-# f,a = assimilate(observations,t,R,points,Nens,ens)
-# analysis[t] = a
-# forecast[t] = f
+max_vel = 0.01
 
-ass_times = start_assimilation:window:end_assimilation
-forecastFlux = zeros(Nens,length(ass_times))
-analysisFlux = zeros(Nens,length(ass_times))
-truthFlux = zeros(length(ass_times))
-
-for t=0:length(ass_times)-1
+for t=1:length(truth_times)-1
     println("--------------------------------------------------------------------------------")
     println("--------------------------------------------------------------------------------")
-    println("time $(t)")
-    for j=1:Nens
-        forecastFlux[j,t+1] = mean(readVarSpec(ens[j],stringG(ass_times[t+1]-ass_times[1]),"phi",faces[3]))
-    end
-    println("forecast flux:")
-    println(forecastFlux[:,t+1])
+    println("loop $(t-1)")
+
     # go read in the observation right now
-    obs = readVar(truthCase,stringG(ass_times[t+1]),"T")
+    obs = readVar(truthCase,stringG(truth_times[t]),"T")
     obs_reshaped = zeros(size(points))
     for i in 1:length(points)
         obs_reshaped[i] = obs[points[i]]
     end
+    
     if max_shift > 0
         println("reading in truth velocity information")
-        U = readVar(truthCase,stringG(ass_times[t+1]),"U")
+        U = readVar(truthCase,stringG(truth_times[t]),"U")
     else
         # we don't care about velocity
         U = 0
     end
-    assimilate(obs_reshaped,ass_times[t+1]-ass_times[1],R,points,Nens,ens,max_shift,U,obs_spacing)
-    for j=1:Nens
-        analysisFlux[j,t+1] = mean(readVarSpec(ens[j],stringG(ass_times[t+1]-ass_times[1]),"phi",faces[3]))
+    # assimilate(obs_reshaped,ass_times[t+1]-ass_times[1],R,points,Nens,ens,max_shift,U,obs_spacing)
+
+    X_f = zeros(Float64,(R*2+Rc)*y,Nens) # 15*40,20
+
+    for i=1:Nens
+        # read in the value
+        ens[i].T["value"] = readVar(ens[i],stringG(ens_times[t]),"T")
+        # reshape the values
+        ens[i].T["valueReshaped"] = zeros(size(points))
+        for j in 1:length(points)
+            ens[i].T["valueReshaped"][j] = ens[i].T["value"][points[j]]
+        end
     end
-    truthFlux[t+1] = mean(readVarSpec(truthCase,stringG(ass_times[t+1]),"phi",faces[3]))
-    println("truth flux:")
-    println(truthFlux[t+1])
-    # analysis[t+1] = a
-    # forecast[t+1] = f
-    runEnsembleP(ens,ass_times[t+1]-ass_times[1],window)
+
+    @parallel (+) for i in 0:Rc:979
+        println("assimilating at x=$(i+1) through x=$(i+Rc)")
+        if max_shift > 0
+            local_shift = compute_shift(i,indices,points,x,y,U,Rc,max_vel,max_shift)
+        else
+            local_shift = 0
+        end
+        local_obs = obs_reshaped[mod(linspace(i-R+local_shift,i+R+Rc-1+local_shift,R*2+Rc),x)+1,:]
+        local_obs_flat = reshape(local_obs',length(local_obs))
+	
+        for j=1:Nens
+            local_ens = ens[j].T["valueReshaped"][mod(linspace(i-R+local_shift,i+R+Rc-1+local_shift,R*2+Rc),x)+1,:]
+            X_f[:,j] = reshape(local_ens',length(local_obs))
+        end
+    
+        X_a = EnKF(X_f,local_obs_flat[1:obs_spacing:end],obs_operator,obs_error,delta)
+      
+        for j=1:Nens
+            ens[j].T["value"][reshape(points[i+1:i+Rc,:]',Rc*y)] = X_a[(R+local_shift)*y+1:(R+Rc+local_shift)*y,j]
+        end
+	
+	0
+    end
+    
+    # write it out
+    for i=1:Nens
+        ens[i].T["internalField"] = string("nonuniform List<scalar>\n$(length(ens[i].T["value"]))\n(\n",join(ens[i].T["value"],"\n"),"\n)\n") # "uniform 300"
+        writeVolScalarField(ens[i],ens[i].T,"T",string(ens_times[t]))
+    end
+    
+    runEnsembleP(ens,ens_times[t],ens_times[t+1])
 end
-
-cd("/users/a/r/areagan/work/2014/11-julia-openfoam")
-
-trial = 1
-# save those forecasts!
-writecsv("forecastFlux-$(directory_suffix)-trial$(dec(trial,3)).csv",forecastFlux)
-writecsv("analysisFlux-$(directory_suffix)-trial$(dec(trial,3)).csv",analysisFlux)
-writecsv("truthFlux-$(directory_suffix)-trial$(dec(trial,3)).csv",truthFlux)
 
 
 
