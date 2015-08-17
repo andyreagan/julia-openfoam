@@ -27,5 +27,10 @@ cd $PBS_O_WORKDIR
 echo "julia version:"
 which julia
 
-julia -n 0 runEnsemble.jl "lessobs-004" "0" "100" "10" "200" "0" "5" "1" "20"
+# julia -p 0 runEnsemble.jl "lessobs-001" "0" "100" "10" "200" "0" "5" "1" "20"
+# julia -p 0 runEnsemble.jl "lessobs-002" "0" "100" "10" "200" "0" "10" "1" "20"
+# julia -p 0 runEnsemble.jl "lessobs-003" "0" "100" "10" "200" "0" "20" "1" "20"
+# julia -p 0 runEnsemble.jl "sliding-001" "0" "100" "10" "200" "2" "1" "1" "20"
+# julia -p 0 runEnsemble.jl "sliding-002" "0" "100" "10" "200" "5" "1" "1" "20"
+julia -p 0 runEnsemble.jl "sliding-003" "0" "100" "10" "200" "10" "1" "1" "20"
 
