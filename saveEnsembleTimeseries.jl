@@ -9,9 +9,13 @@ include("ensembleFunctions.jl")
 # truthFolder = ARGS[1]
 directory_suffix = ARGS[1]
 
+# # get the ensemble number to open
+# ens_num = ARGS[2]
+
 # use this just to open all of the ensembles
 topT = 260
 bottomT = 350
+
 Nens = 20
 ens = Array(OpenFoam,Nens)
 for i=1:Nens

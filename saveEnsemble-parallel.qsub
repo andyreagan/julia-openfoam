@@ -1,5 +1,6 @@
 # This job needs 1 compute node with 8 processor per node.
-#PBS -l nodes=1:ppn=8,pmem=2gb,pvmem=2gb
+# #PBS -l nodes=1:ppn=8,pmem=2gb,pvmem=2gb
+#PBS -l nodes=1:ppn=1,pmem=8gb,pvmem=9gb
 
 # It should be allowed to run for up to 30min.
 #PBS -l walltime=30:00:00
@@ -31,7 +32,8 @@ which julia
 # julia -p "$(($PBS_NP-1))"
 # julia -p 7 runEnsemble.jl "parallel-001" "0" "100" "10" "2000" "0" "1" "1" "20"
 # julia -p 7 runEnsemble.jl "bigtest-001" "0" "100" "10" "2000" "0" "1" "1" "20"
-julia -p 7 runEnsemble.jl "bigtest-0${TEST}" "0" "100" "10" "2000" "${SHIFT}" "${OBS_SPACING}" "1" "20"
+# julia -p 7 runEnsemble.jl "bigtest-0${TEST}" "0" "100" "10" "2000" "${SHIFT}" "${OBS_SPACING}" "1" "20"
+julia saveEnsembleTimeseries.jl "bigtest-0${TEST}"
 
 
 
