@@ -16,8 +16,7 @@ obs_spacing = int(ARGS[7])
 create_new_directories = bool(int(ARGS[8]))
 Nens = int(ARGS[9])
 
-truth_times = (truth_offset+start_run):window:(truth_offset+start_run+runtime)
-ens_times = (start_run):window:(start_run+runtime)
+
 
 @everywhere include("DA/DA.jl")
 @everywhere include("foamLia/foamLia.jl")
@@ -79,6 +78,20 @@ end
 obs_error = eye(num_observations)*stddev
 
 max_vel = 0.01
+
+if !create_new_directories
+    # if we didn't make the new directories, go ahead and find the start time as the earliest end time of the ensemble
+    end_times = zeros(Nens)
+    for i=1:Nens
+        # read in the value
+        my_times = findTimes(ens[i])
+        end_times[i] = maximum(my_times)
+    end
+    start_run = minimum(end_times)
+end
+
+truth_times = (truth_offset+start_run):window:(truth_offset+start_run+runtime)
+ens_times = (start_run):window:(start_run+runtime)
 
 for t=1:length(truth_times)-1
     println("--------------------------------------------------------------------------------")

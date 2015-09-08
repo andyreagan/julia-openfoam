@@ -31,7 +31,7 @@ which julia
 # julia -p "$(($PBS_NP-1))"
 # julia -p 7 runEnsemble.jl "parallel-001" "0" "100" "10" "2000" "0" "1" "1" "20"
 # julia -p 7 runEnsemble.jl "bigtest-001" "0" "100" "10" "2000" "0" "1" "1" "20"
-julia -p 7 runEnsemble.jl "bigtest-$(printf "%05d\n" ${TEST})" "0" "100" "10" "2000" "${SHIFT}" "${OBS_SPACING}" "1" "20"
+julia -p 7 runEnsemble.jl "bigtest-$(printf "%05d\n" ${TEST})" "0" "100" "10" "2000" "${SHIFT}" "${OBS_SPACING}" "0" "20"
 
 
 

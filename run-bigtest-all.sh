@@ -7,9 +7,17 @@ do
 	export TEST=$((j+4*(i-1)))
 	export OBS_SPACING=${spacings[i-1]}
 	export SHIFT=${shifts[j-1]}
-	# echo "running TEST=${TEST} with OBS_SPACING=${OBS_SPACING} and SHIFT=${SHIFT}"
+	echo "running TEST=${TEST} with OBS_SPACING=${OBS_SPACING} and SHIFT=${SHIFT}"
+        # # first we run the actual test.
+        # # this hurts the VACC.
 	# qsub -V runEnsemble-parallel.qsub
-        # julia saveEnsembleTimeseries.jl "bigtest-0${TEST}"
+
+        # then we run it again (until they are all done)
+        qsub -V runEnsemble-parallel-restart.qsub
+
+        # then we save the ensemble timeseries
+        
+        # julia saveEnsembleTimeseries.jl "bigtest-$(printf "%05d\n" ${TEST})"
         
         # if [ -f "results/forecastFlux-bigtest-0${TEST}-full.csv" ];
         # then
@@ -29,3 +37,4 @@ do
         # fi
     done
 done
+
