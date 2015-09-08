@@ -87,7 +87,7 @@ if !create_new_directories
         my_times = findTimes(ens[i])
         end_times[i] = maximum(my_times)
     end
-    start_run = minimum(end_times)
+    start_run = int(minimum(end_times))
 end
 
 truth_times = (truth_offset+start_run):window:(truth_offset+start_run+runtime)
