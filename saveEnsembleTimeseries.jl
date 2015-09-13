@@ -29,7 +29,15 @@ truth = OpenFoam(truthFolder)
 faces,cells = readMesh(truth)
 # points,indices = reshapeMesh(truthCase)
 
-ens_times = findTimes(ens[1])
+end_times = zeros(Nens)
+for i=1:Nens
+    # read in the value
+    my_times = findTimes(ens[i])
+    end_times[i] = maximum(my_times)
+end
+end_run = int(minimum(end_times))
+
+ens_times = 1:1:end_run
 truth_times = ens_times + 100
 truth_flux = zeros(length(ens_times))
 ens_flux = zeros(Nens,length(ens_times))

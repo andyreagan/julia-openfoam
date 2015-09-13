@@ -13,11 +13,13 @@ do
 	# qsub -V runEnsemble-parallel.qsub
 
         # then we run it again (until they are all done)
-        qsub -V runEnsemble-parallel-restart.qsub
+        # qsub -V runEnsemble-parallel-restart.qsub
 
         # then we save the ensemble timeseries
         
         # julia saveEnsembleTimeseries.jl "bigtest-$(printf "%05d\n" ${TEST})"
+
+        julia cleanEnsemble.jl "bigtest-$(printf "%05d\n" ${TEST})"
         
         # if [ -f "results/forecastFlux-bigtest-0${TEST}-full.csv" ];
         # then

@@ -22,10 +22,37 @@ end
 
 ens_times = findTimes(ens[1])
 
-for i=1:length(ens_times)-1
-    println(ens_times[i])
-    t = ens_times[i]
+end_times = zeros(Nens)
+for i=1:Nens
+    # read in the value
+    my_times = findTimes(ens[i])
+    end_times[i] = maximum(my_times)
+end
+end_run = int(minimum(end_times))
+println(end_times)
+
+for t=2:1:end_run-1
+    println("would remove $(t)")
     for j=1:Nens
         rm(ens[j].caseFolder*"/"*stringG(t),recursive=true)
     end
 end
+
+# go remove any extra time
+for j=1:Nens
+    my_times = findTimes(ens[j])
+    if int(maximum(my_times))>end_run
+        println("would also remove $(end_run+1):$(end_run+20) for ens $(j)")
+        for t=end_run+1:end_run+20
+            rm(ens[j].caseFolder*"/"*stringG(t),recursive=true)
+        end
+    end
+end
+
+# for i=1:length(ens_times)-1
+#     println(ens_times[i])
+#     t = ens_times[i]
+#     for j=1:Nens
+#         rm(ens[j].caseFolder*"/"*stringG(t),recursive=true)
+#     end
+# end
