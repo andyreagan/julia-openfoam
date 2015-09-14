@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  17 AUG 2015 16:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  13 SEP 2015 23:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -349,90 +349,6 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 28.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 (./thermosyphon-paper.body.tex
-
-Package natbib Warning: Citation `weather-violence2013' on page 1 undefined on 
-input line 4.
-
-
-Package natbib Warning: Citation `ginsberg2008detecting' on page 1 undefined on
- input line 4.
-
-
-Package natbib Warning: Citation `sornette2006predictability' on page 1 undefin
-ed on input line 4.
-
-
-Package natbib Warning: Citation `asur2010predicting' on page 1 undefined on in
-put line 4.
-
-
-Package natbib Warning: Citation `savely1972' on page 1 undefined on input line
- 4.
-
-
-Package natbib Warning: Citation `yang2006' on page 1 undefined on input line 1
-0.
-
-
-Package natbib Warning: Citation `keller1966' on page 1 undefined on input line
- 15.
-
-
-Package natbib Warning: Citation `welander1967' on page 1 undefined on input li
-ne 15.
-
-
-Package natbib Warning: Citation `creveling1975stability' on page 1 undefined o
-n input line 15.
-
-
-Package natbib Warning: Citation `gorman1984' on page 1 undefined on input line
- 15.
-
-
-Package natbib Warning: Citation `gorman1986' on page 1 undefined on input line
- 15.
-
-
-Package natbib Warning: Citation `ehrhard1990dynamical' on page 1 undefined on 
-input line 15.
-
-
-Package natbib Warning: Citation `yuen1999' on page 1 undefined on input line 1
-5.
-
-
-Package natbib Warning: Citation `jiang2003' on page 1 undefined on input line 
-15.
-
-
-Package natbib Warning: Citation `burroughs2005reduced' on page 1 undefined on 
-input line 15.
-
-
-Package natbib Warning: Citation `desrayaud2006numerical' on page 1 undefined o
-n input line 15.
-
-
-Package natbib Warning: Citation `yang2006' on page 1 undefined on input line 1
-5.
-
-
-Package natbib Warning: Citation `ridouane2010' on page 1 undefined on input li
-ne 15.
-
-
-Package natbib Warning: Citation `louisos2013' on page 1 undefined on input lin
-e 16.
-
-
-Package natbib Warning: Citation `jasak2007' on page 1 undefined on input line 
-19.
-
-
-Package natbib Warning: Citation `harris2011predicting' on page 1 undefined on 
-input line 24.
-
 <figures/harris-tellus-2012-loop.pdf, id=1, 558.83395pt x 562.03494pt>
 File: figures/harris-tellus-2012-loop.pdf Graphic file (type pdf)
 
@@ -440,25 +356,12 @@ File: figures/harris-tellus-2012-loop.pdf Graphic file (type pdf)
 Package pdftex.def Info: figures/harris-tellus-2012-loop.pdf used on input line
  27.
 (pdftex.def)             Requested size: 229.49844pt x 230.81316pt.
-
-
-Package natbib Warning: Citation `gorman1986' on page 1 undefined on input line
- 36.
-
-
-Package natbib Warning: Citation `ehrhard1990dynamical' on page 1 undefined on 
-input line 36.
-
-
-Package natbib Warning: Citation `harris2011predicting' on page 1 undefined on 
-input line 38.
-
-[1{/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+ [1{/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 
 LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix]
  on input line 43.
 
-<figures/221TimeSeries.pdf, id=20, 422.40712pt x 334.70125pt>
+<figures/221TimeSeries.pdf, id=19, 422.40712pt x 334.70125pt>
 File: figures/221TimeSeries.pdf Graphic file (type pdf)
 
 <use figures/221TimeSeries.pdf>
@@ -466,19 +369,7 @@ Package pdftex.def Info: figures/221TimeSeries.pdf used on input line 48.
 (pdftex.def)             Requested size: 229.49844pt x 181.84933pt.
 
 
-Package natbib Warning: Citation `glenn2013' on page 2 undefined on input line 
-53.
-
-
-Package natbib Warning: Citation `glenn2013' on page 2 undefined on input line 
-53.
-
-
 LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-Package natbib Warning: Citation `glenn2013' on page 2 undefined on input line 
-71.
 
 
 Underfull \hbox (badness 1484) in paragraph at lines 70--72
@@ -494,10 +385,6 @@ Underfull \hbox (badness 1331) in paragraph at lines 73--81
 Underfull \hbox (badness 1874) in paragraph at lines 73--81
  \OT1/cmr/m/n/10 transmitting clear THV from McMaster- 
  []
-
-
-Package natbib Warning: Citation `issa1986solution' on page 2 undefined on inpu
-t line 90.
 
 
 Underfull \hbox (badness 2486) in paragraph at lines 87--92
@@ -522,7 +409,7 @@ Underfull \hbox (badness 2726) in paragraph at lines 93--98
 
 [2 <./figures/harris-tellus-2012-loop.pdf> <./figures/221TimeSeries.pdf>]
 </Users/andyreagan/work/2013/05-data-assimilation/OpenFOAM/figures/heating_zoom
-_mesh4.png, id=115, 750.805pt x 551.05875pt>
+_mesh4.png, id=114, 750.805pt x 551.05875pt>
 File: /Users/andyreagan/work/2013/05-data-assimilation/OpenFOAM/figures/heating
 _zoom_mesh4.png Graphic file (type png)
 
@@ -533,7 +420,7 @@ OAM/figures/heating_zoom_mesh4.png used on input line 101.
 (pdftex.def)             Requested size: 229.49844pt x 168.43843pt.
 
 </Users/andyreagan/work/2013/05-data-assimilation/OpenFOAM/figures/3D-mesh2.png
-, id=116, 789.95125pt x 558.085pt>
+, id=115, 789.95125pt x 558.085pt>
 File: /Users/andyreagan/work/2013/05-data-assimilation/OpenFOAM/figures/3D-mesh
 2.png Graphic file (type png)
 
@@ -543,44 +430,19 @@ Package pdftex.def Info: /Users/andyreagan/work/2013/05-data-assimilation/OpenF
 OAM/figures/3D-mesh2.png used on input line 111.
 (pdftex.def)             Requested size: 229.49844pt x 162.13855pt.
 
-<figures/TLM-verification003_noname.pdf, id=117, 472.76625pt x 467.7475pt>
+<figures/TLM-verification003_noname.pdf, id=116, 472.76625pt x 467.7475pt>
 File: figures/TLM-verification003_noname.pdf Graphic file (type pdf)
 
 <use figures/TLM-verification003_noname.pdf>
 Package pdftex.def Info: figures/TLM-verification003_noname.pdf used on input l
 ine 144.
 (pdftex.def)             Requested size: 229.49844pt x 227.06422pt.
-
-
-Package natbib Warning: Citation `lorenc1986analysis' on page 3 undefined on in
-put line 154.
-
-
-Package natbib Warning: Citation `kalnay2003' on page 3 undefined on input line
- 162.
-
-
-Package natbib Warning: Citation `danforth2007estimating' on page 3 undefined o
-n input line 169.
-
-
-Package natbib Warning: Citation `li2009accounting' on page 3 undefined on inpu
-t line 169.
-
-[3 </Users/andyreagan/work/2013/05-data-assimilation/OpenFOAM/figures/heating_z
-oom_mesh4.png> </Users/andyreagan/work/2013/05-data-assimilation/OpenFOAM/figur
-es/3D-mesh2.png (PNG copy)>]
+ [3 </Users/andyreagan/work/2013/05-data-assimilation/OpenFOAM/figures/heating_
+zoom_mesh4.png> </Users/andyreagan/work/2013/05-data-assimilation/OpenFOAM/figu
+res/3D-mesh2.png (PNG copy)>]
 
 LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix]
  on input line 170.
-
-
-LaTeX Warning: Reference `fig:TLMverification' on page 4 undefined on input lin
-e 195.
-
-
-Package natbib Warning: Citation `bishop2001adaptive' on page 4 undefined on in
-put line 206.
 
 <figures/window_experiment_plot002.pdf, id=122, 465.74pt x 392.46625pt>
 File: figures/window_experiment_plot002.pdf Graphic file (type pdf)
@@ -602,159 +464,112 @@ Package pdftex.def Info: figures/ETKF_390s_infl_error.pdf used on input line 22
 LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix]
  on input line 240.
 
-
-Package natbib Warning: Citation `kalnay20074' on page 5 undefined on input lin
-e 245.
-
-
-Package natbib Warning: Citation `ott2004local' on page 5 undefined on input li
-ne 246.
-
-
-Package natbib Warning: Citation `hunt2007efficient' on page 5 undefined on inp
-ut line 257.
-
 [5 <./figures/window_experiment_plot002.pdf> <./figures/ETKF_390s_infl_error.pd
 f>]
-
-LaTeX Warning: Reference `fig:sliding_spag' on page 6 undefined on input line 2
-84.
-
-
-LaTeX Warning: Reference `fig:sliding_results' on page 6 undefined on input lin
-e 286.
-
-<../figures/loop-spaghetti-slide-004-full.png, id=172, 722.7pt x 361.35pt>
-File: ../figures/loop-spaghetti-slide-004-full.png Graphic file (type png)
-
-<use ../figures/loop-spaghetti-slide-004-full.png>
-Package pdftex.def Info: ../figures/loop-spaghetti-slide-004-full.png used on i
+<../figures/loop-spaghetti-slide-004-full.pdf, id=172, 589.1401pt x 317.75902pt
+>
+File: ../figures/loop-spaghetti-slide-004-full.pdf Graphic file (type pdf)
+ <use ../figures/loop-spaghetti-slide-004-full.pdf>
+Package pdftex.def Info: ../figures/loop-spaghetti-slide-004-full.pdf used on i
 nput line 293.
-(pdftex.def)             Requested size: 229.49844pt x 114.74664pt.
-File: ../figures/loop-spaghetti-slide-004-full.png Graphic file (type png)
+(pdftex.def)             Requested size: 229.49844pt x 123.7849pt.
 
-<use ../figures/loop-spaghetti-slide-004-full.png>
-Package pdftex.def Info: ../figures/loop-spaghetti-slide-004-full.png used on i
-nput line 308.
-(pdftex.def)             Requested size: 229.49844pt x 114.74664pt.
+<../figures/2015-09-13-23-04-consuela.pdf, id=173, 420.03598pt x 366.67363pt>
+File: ../figures/2015-09-13-23-04-consuela.pdf Graphic file (type pdf)
+
+<use ../figures/2015-09-13-23-04-consuela.pdf>
+Package pdftex.def Info: ../figures/2015-09-13-23-04-consuela.pdf used on input
+ line 308.
+(pdftex.def)             Requested size: 229.49844pt x 200.3395pt.
 
 <../figures/DMD/DMD_modes_pre_reversals.png, id=174, 1011.78pt x 578.16pt>
 File: ../figures/DMD/DMD_modes_pre_reversals.png Graphic file (type png)
 
 <use ../figures/DMD/DMD_modes_pre_reversals.png>
 Package pdftex.def Info: ../figures/DMD/DMD_modes_pre_reversals.png used on inp
-ut line 320.
+ut line 319.
 (pdftex.def)             Requested size: 229.49844pt x 131.13902pt.
 
-<../figures/DMD/DMD_mode_2_79_phaseplane-003.png, id=175, 867.24pt x 867.24pt>
+<../figures/DMD/DMD_mode_2_79_phaseplane-003.png, id=176, 867.24pt x 867.24pt>
 File: ../figures/DMD/DMD_mode_2_79_phaseplane-003.png Graphic file (type png)
 
 <use ../figures/DMD/DMD_mode_2_79_phaseplane-003.png>
 Package pdftex.def Info: ../figures/DMD/DMD_mode_2_79_phaseplane-003.png used o
-n input line 333.
+n input line 332.
 (pdftex.def)             Requested size: 229.49844pt x 229.48668pt.
 
-Underfull \hbox (badness 1824) in paragraph at lines 342--347
+Underfull \hbox (badness 1824) in paragraph at lines 341--346
 []\OT1/cmr/m/n/10 To incor-po-rate lim-it-ed obser-va-tions into a high-
  []
 
+[6 <../figures/loop-spaghetti-slide-004-full.pdf> <../figures/2015-09-13-23-04-
+consuela.pdf
 
-LaTeX Warning: Reference `fig:DMD_modes' on page 6 undefined on input line 353.
-
-
-
-LaTeX Warning: Reference `fig:DMD_phaseplane' on page 6 undefined on input line
- 354.
-
-[6 <../figures/loop-spaghetti-slide-004-full.png>]
+pdfTeX warning: pdflatex (file ../figures/2015-09-13-23-04-consuela.pdf): PDF i
+nclusion: multiple pdfs with page group included in a single page
+>]
 
 LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix]
- on input line 355.
+ on input line 349.
 
-) (./thermosyphon-paper.acknowledgments.tex) (./thermosyphon-paper.biblio.tex
-(./thermosyphon-paper-revtex4.bbl
-
-LaTeX Warning: Reference `LastBibItem' on page 7 undefined on input line 1.
-
-[7 <../figures/DMD/DMD_modes_pre_reversals.png> <../figures/DMD/DMD_mode_2_79_p
-haseplane-003.png>]
-Underfull \hbox (badness 1838) in paragraph at lines 5--10
+) (./thermosyphon-paper.acknowledgments.tex [7 <../figures/DMD/DMD_modes_pre_re
+versals.png> <../figures/DMD/DMD_mode_2_79_phaseplane-003.png>])
+(./thermosyphon-paper.biblio.tex (./thermosyphon-paper-revtex4.bbl
+Underfull \hbox (badness 1960) in paragraph at lines 5--10
  []\OT1/cmr/m/n/9 Asur, S. and B. A. Huber-man (2010).  Pre-dict-
  []
 
 
-Underfull \hbox (badness 1383) in paragraph at lines 5--10
+Underfull \hbox (badness 1622) in paragraph at lines 5--10
  \OT1/cmr/m/it/9 IEEE/WIC/ACM Inter-na-tion-al Con-fer-ence on\OT1/cmr/m/n/9 , 
 Vol-
  []
 
 
-Underfull \hbox (badness 1158) in paragraph at lines 124--127
+Underfull \hbox (badness 1248) in paragraph at lines 124--127
  []\OT1/cmr/m/n/9 Kalnay, E., H. Li, T. Miyoshi, S.-C. YANG, and
  []
 
-)) (./thermosyphon-paper.supplementary.tex)
-Underfull \hbox (badness 1253) in paragraph at lines 1--55
-\OT1/cmr/m/n/10 pushed the bound-ary of com-pu-ta-tion-al pow-er, and
- []
-
+))
 
 Class revtex4 Warning: Environment acknowledgements is obsolete;
 Use acknowledgments instead.
 
-
-Class revtex4 Warning: Endnote numbers changed: rerun LaTeX.
-
-
-Package natbib Warning: There were undefined citations.
-
-[8] (./thermosyphon-paper-revtex4.aux
-
-Package natbib Warning: Citation(s) may have changed.
-(natbib)                Rerun to get citations correct.
-
-)
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right .
-
-
- ) 
+[8] (./thermosyphon-paper-revtex4.aux) ) 
 Here is how much of TeX's memory you used:
- 5126 strings out of 493117
- 69848 string characters out of 6135433
- 186599 words of memory out of 5000000
- 8452 multiletter control sequences out of 15000+600000
+ 5128 strings out of 493117
+ 69947 string characters out of 6135433
+ 186789 words of memory out of 5000000
+ 8457 multiletter control sequences out of 15000+600000
  12100 words of font info for 46 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 39i,13n,40p,370b,324s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
-></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
-</usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></
-usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></u
-sr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></us
-r/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/
-local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/lo
-cal/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/loca
-l/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/
-texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/tex
-live/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texliv
-e/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2
-014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2014
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2014/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2014/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2014/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2014/texmf
--dist/fonts/type1/public/amsfonts/cm/cmti7.pfb></usr/local/texlive/2014/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/local/texlive/2014/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2014/texmf-dist
-/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on thermosyphon-paper-revtex4.pdf (8 pages, 1255282 bytes).
+ 39i,13n,40p,370b,328s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2014/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2014/texmf-dist/font
+s/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2014/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmbx9.pfb></usr/local/texlive/2014/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2014/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2014/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmmi9.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmr10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmr6.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmr7.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmr8.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmr9.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmsy10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmsy6.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/c
+msy7.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmt
+i10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmti
+7.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.
+pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.p
+fb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/symbols/msam
+10.pfb>
+Output written on thermosyphon-paper-revtex4.pdf (8 pages, 1219622 bytes).
 PDF statistics:
- 256 PDF objects out of 1000 (max. 8388607)
- 179 compressed objects within 2 object streams
+ 316 PDF objects out of 1000 (max. 8388607)
+ 196 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 51 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 56 words of extra memory for PDF output out of 10000 (max. 10000000)
 
