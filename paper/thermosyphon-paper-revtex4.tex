@@ -35,22 +35,38 @@
 
 \input{\filenamebase.biblio}
 
-%% trying to do a supplementary here
+\clearpage
+\pagebreak
 
-%% label things by supplementary
-%% \renewcommand{\thepage}{S\arabic{page}}  
-%% \renewcommand{\thesection}{S\arabic{section}}   
+%% %% trying to do a supplementary here
+
+%% %% label things by supplementary
+%% \renewcommand{\thepage}{S\arabic{page}}
+%% \renewcommand{\thesection}{S\arabic{section}}
 %% \renewcommand{\thetable}{S\arabic{table}}   
 %% \renewcommand{\thefigure}{S\arabic{figure}}
 
-%% \setboolean{twocolswitch}{false}
+%% supplementary
 
-%% going to have to make a new file for this...
+%% following records the starting page number of the supplementary
+%% section in a file called startsupp.txt
+%% enables script-based breaking of manuscript and supplementary
+\newwrite\tempfile
+\immediate\openout\tempfile=startsupp.txt
+\immediate\write\tempfile{\thepage}
+\immediate\closeout\tempfile
 
-%% \appendix
+\setcounter{page}{1}
+\renewcommand{\thepage}{S\arabic{page}}
+\renewcommand{\thefigure}{S\arabic{figure}}
+\renewcommand{\thetable}{S\arabic{table}}
+\setcounter{figure}{0}
+\setcounter{table}{0}
 
-%% \section{Supplementary}
+\appendix
 
-%% \input{\filenamebase.supplementary}
+\section{Supplementary}
+
+\input{\filenamebase.supplementary}
 
 \end{document}

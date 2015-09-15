@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  15 SEP 2015 14:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  15 SEP 2015 16:49
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -471,7 +471,7 @@ t>
 File: ../figures/loop-spaghetti-slide-004-full.pdf Graphic file (type pdf)
  <use ../figures/loop-spaghetti-slide-004-full.pdf>
 Package pdftex.def Info: ../figures/loop-spaghetti-slide-004-full.pdf used on i
-nput line 293.
+nput line 296.
 (pdftex.def)             Requested size: 229.49844pt x 123.38246pt.
 
 <../figures/2015-09-13-23-04-consuela.pdf, id=173, 420.03598pt x 366.67363pt>
@@ -479,14 +479,14 @@ File: ../figures/2015-09-13-23-04-consuela.pdf Graphic file (type pdf)
 
 <use ../figures/2015-09-13-23-04-consuela.pdf>
 Package pdftex.def Info: ../figures/2015-09-13-23-04-consuela.pdf used on input
- line 305.
+ line 308.
 (pdftex.def)             Requested size: 229.49844pt x 200.3395pt.
 
 <../figures/DMD/DMD_modes_pre_reversals.pdf, id=174, 654.15797pt x 405.37384pt>
 File: ../figures/DMD/DMD_modes_pre_reversals.pdf Graphic file (type pdf)
 <use ../figures/DMD/DMD_modes_pre_reversals.pdf>
 Package pdftex.def Info: ../figures/DMD/DMD_modes_pre_reversals.pdf used on inp
-ut line 316.
+ut line 319.
 (pdftex.def)             Requested size: 229.49844pt x 142.21698pt.
 
 <../figures/DMD/DMD_mode_2_79_phaseplane-003.pdf, id=175, 474.71886pt x 463.189
@@ -494,10 +494,10 @@ ut line 316.
 File: ../figures/DMD/DMD_mode_2_79_phaseplane-003.pdf Graphic file (type pdf)
  <use ../figures/DMD/DMD_mode_2_79_phaseplane-003.pdf>
 Package pdftex.def Info: ../figures/DMD/DMD_mode_2_79_phaseplane-003.pdf used o
-n input line 328.
+n input line 331.
 (pdftex.def)             Requested size: 229.49844pt x 223.92589pt.
 
-Underfull \hbox (badness 1824) in paragraph at lines 336--341
+Underfull \hbox (badness 1824) in paragraph at lines 339--344
 []\OT1/cmr/m/n/10 To incor-po-rate lim-it-ed obser-va-tions into a high-
  []
 
@@ -511,13 +511,12 @@ nclusion: multiple pdfs with page group included in a single page
 LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix]
  on input line 344.
 
-) (./thermosyphon-paper.acknowledgments.tex) (./thermosyphon-paper.biblio.tex
-(./thermosyphon-paper-revtex4.bbl [7 <../figures/DMD/DMD_modes_pre_reversals.pd
-f> <../figures/DMD/DMD_mode_2_79_phaseplane-003.pdf
+) (./thermosyphon-paper.acknowledgments.tex [7 <../figures/DMD/DMD_modes_pre_re
+versals.pdf> <../figures/DMD/DMD_mode_2_79_phaseplane-003.pdf
 
 pdfTeX warning: pdflatex (file ../figures/DMD/DMD_mode_2_79_phaseplane-003.pdf)
 : PDF inclusion: multiple pdfs with page group included in a single page
->]
+>]) (./thermosyphon-paper.biblio.tex (./thermosyphon-paper-revtex4.bbl
 Underfull \hbox (badness 1960) in paragraph at lines 5--10
  []\OT1/cmr/m/n/9 Asur, S. and B. A. Huber-man (2010).  Pre-dict-
  []
@@ -533,45 +532,57 @@ Underfull \hbox (badness 1248) in paragraph at lines 124--127
  []\OT1/cmr/m/n/9 Kalnay, E., H. Li, T. Miyoshi, S.-C. YANG, and
  []
 
-))
+)) [8]
+\tempfile=\write3
+\openout3 = `startsupp.txt'.
+
+ (./thermosyphon-paper.supplementary.tex)
+Underfull \hbox (badness 1253) in paragraph at lines 1--71
+\OT1/cmr/m/n/10 pushed the bound-ary of com-pu-ta-tion-al pow-er, and
+ []
+
 
 Class revtex4 Warning: Environment acknowledgements is obsolete;
 Use acknowledgments instead.
 
-[8] (./thermosyphon-paper-revtex4.aux) ) 
+[1] (./thermosyphon-paper-revtex4.aux)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right .
+
+
+ ) 
 Here is how much of TeX's memory you used:
- 5130 strings out of 493117
- 69999 string characters out of 6135433
- 187183 words of memory out of 5000000
- 8459 multiletter control sequences out of 15000+600000
+ 5138 strings out of 493117
+ 70151 string characters out of 6135433
+ 157078 words of memory out of 5000000
+ 8461 multiletter control sequences out of 15000+600000
  12100 words of font info for 46 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  39i,13n,40p,370b,328s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2014/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2014/texmf-dist/font
-s/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2014/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmbx9.pfb></usr/local/texlive/2014/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2014/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2014/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmmi9.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmr10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmr6.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmr7.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmr8.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmr9.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmsy10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmsy6.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/c
-msy7.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmt
-i10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmti
-7.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.
-pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.p
-fb>
-Output written on thermosyphon-paper-revtex4.pdf (8 pages, 1077669 bytes).
+</usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
+></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
+</usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></
+usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></u
+sr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></us
+r/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/
+local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/lo
+cal/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/loca
+l/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/
+texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/tex
+live/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texliv
+e/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2
+014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2014
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2014/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2014/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2014/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2014/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmti7.pfb></usr/local/texlive/2014/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/local/texlive/2014/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on thermosyphon-paper-revtex4.pdf (9 pages, 1079103 bytes).
 PDF statistics:
- 375 PDF objects out of 1000 (max. 8388607)
- 203 compressed objects within 3 object streams
+ 378 PDF objects out of 1000 (max. 8388607)
+ 205 compressed objects within 3 object streams
  0 named destinations out of 1000 (max. 500000)
  56 words of extra memory for PDF output out of 10000 (max. 10000000)
 
