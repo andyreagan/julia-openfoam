@@ -283,7 +283,10 @@ Since we first saw a modest improvement in the prediction skill with full temper
 
 In Figure \ref{fig:sliding_spag} we see that the over an assimilation of 200 seconds, the ensemble converges on the hidden, true state.
 To test the performace of flow reversal prediction, we take the average of the ensemble flow direction (the average of each value of $\phi$) as the predicted flow direction, and count how often we predict reversals both when they do and do not occur.
-Varying both the number of model variables and the strength of convariance shifting in Figure \ref{fig:sliding_results}.
+Varying both the number of model variables and the strength of convariance shifting in Figure \ref{fig:sliding_results}, we find that covariance shifting improves flow reversal prediction skill even when overservations are decreased.
+With full observations (spacing of 1), we have a the best predictions with a covariance shift of 2.
+For 1/2 and 1/5 observations (a spacing of 2 (5) to obvserve every other (fifth) variable), we again have the best predictions with a shift of 2.
+And for a spacing of 10, observing every 10th variable, we achieve greater prediction skill with a covariance shift of 10.
 
 Computing the average flow direction inside a localized covariance zone is straighforward, and computationally easy since the velocity is immediately available, making incorporation of this scheme into any data assimilation method easy.
 Since observations are also sparse in large weather models, we expect that using an adaptive local covariance scheme could lead to improved prediction skill.
@@ -296,9 +299,6 @@ Since observations are also sparse in large weather models, we expect that using
     Here, as in most of the experiments, only temperature is observered and assimilated.
     Flux is computed as in Equation 4, on the left hand side of the thermosyphon.
     Assimilation takes place every 10 model seconds.
-    \todo{Fix x scale to be in seconds}.
-    \todo{Crop margins}
-    \todo{Remove title}    
   }
   \label{fig:sliding_spag}
 \end{figure}
@@ -316,31 +316,29 @@ Since observations are also sparse in large weather models, we expect that using
 
 \begin{figure}[t]
   \centering
-  \includegraphics[width=0.45\textwidth]{../figures/DMD/DMD_modes_pre_reversals.png}
+  \includegraphics[width=0.45\textwidth]{../figures/DMD/DMD_modes_pre_reversals.pdf}
   \caption[]{
     The $\log_{10}$ average projection onto each DMD mode for different sets of model states.
     DMD constructed as snapshots every 10 seconds for the first 900 seconds of model time, and model states from the first 2000 seconds are all projected onto the DMD modes.
     All states average shown in black, and the average of the subset of states that occur 1 second, 3 seconds, 5 seconds, and 7 seconds before a reversal are shown in other colors.
     The symmetry of the loop generates modes that often come in pairs.
-    \todo{fix font size}    
       }
   \label{fig:DMD_modes}
 \end{figure}
 
 \begin{figure}[t]
   \centering
-  \includegraphics[width=0.45\textwidth]{../figures/DMD/DMD_mode_2_79_phaseplane-003.png}
+  \includegraphics[width=0.45\textwidth]{../figures/DMD/DMD_mode_2_79_phaseplane-003.pdf}
   \caption[]{
     This butterfly-shaped phase plane shows the value of the projection onto modes 2 and 79 for each time in the first 2000 timesteps of our ground truth model run.
     In blue and green stars the states that occur directly before a flow are highlighted, and are isolated into separate quadrants of phase space.
-    \todo{fix tick size, label size, add legend (maybe add second panel with some other mode phase portraits (mode 21)?}
   }
   \label{fig:DMD_phaseplane}
 \end{figure}
 
 To incorporate limited observations into a high-dimensional CFD simulation, we combine ideas from both CFD literature and data assimilation to make predictions.
 %% We perform data assimilation in a subspace composed of the leading modes from a DMD of a series of loop snapshots.
-A Dynamic Mode Decomposition is performed using the ``standard'' algorithm of Tu \todo{cite}, using snapshots every 10 seconds for the first 900 seconds of model time.
+A Dynamic Mode Decomposition is performed using the ``standard'' algorithm of Tu \cite{tu2013dynamic}, using snapshots every 10 seconds for the first 900 seconds of model time.
 A full picture of this timeseries can be found in the Supplementary.
 The ``standard'' algorithm is as follows with $X$ and $Y$ taken as the first and last $N-1$ columns of the snapshot matrix $D$:
 \begin{align*} X &= U\Sigma V~~~ \text{take SVD of $X$}\\

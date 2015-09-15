@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  13 SEP 2015 23:14
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  15 SEP 2015 14:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -466,39 +466,38 @@ LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix]
 
 [5 <./figures/window_experiment_plot002.pdf> <./figures/ETKF_390s_infl_error.pd
 f>]
-<../figures/loop-spaghetti-slide-004-full.pdf, id=172, 589.1401pt x 317.75902pt
->
+<../figures/loop-spaghetti-slide-004-full.pdf, id=172, 591.05351pt x 317.75902p
+t>
 File: ../figures/loop-spaghetti-slide-004-full.pdf Graphic file (type pdf)
  <use ../figures/loop-spaghetti-slide-004-full.pdf>
 Package pdftex.def Info: ../figures/loop-spaghetti-slide-004-full.pdf used on i
 nput line 293.
-(pdftex.def)             Requested size: 229.49844pt x 123.7849pt.
+(pdftex.def)             Requested size: 229.49844pt x 123.38246pt.
 
 <../figures/2015-09-13-23-04-consuela.pdf, id=173, 420.03598pt x 366.67363pt>
 File: ../figures/2015-09-13-23-04-consuela.pdf Graphic file (type pdf)
 
 <use ../figures/2015-09-13-23-04-consuela.pdf>
 Package pdftex.def Info: ../figures/2015-09-13-23-04-consuela.pdf used on input
- line 308.
+ line 305.
 (pdftex.def)             Requested size: 229.49844pt x 200.3395pt.
 
-<../figures/DMD/DMD_modes_pre_reversals.png, id=174, 1011.78pt x 578.16pt>
-File: ../figures/DMD/DMD_modes_pre_reversals.png Graphic file (type png)
+<../figures/DMD/DMD_modes_pre_reversals.pdf, id=174, 654.15797pt x 405.37384pt>
+File: ../figures/DMD/DMD_modes_pre_reversals.pdf Graphic file (type pdf)
+<use ../figures/DMD/DMD_modes_pre_reversals.pdf>
+Package pdftex.def Info: ../figures/DMD/DMD_modes_pre_reversals.pdf used on inp
+ut line 316.
+(pdftex.def)             Requested size: 229.49844pt x 142.21698pt.
 
-<use ../figures/DMD/DMD_modes_pre_reversals.png>
-Package pdftex.def Info: ../figures/DMD/DMD_modes_pre_reversals.png used on inp
-ut line 319.
-(pdftex.def)             Requested size: 229.49844pt x 131.13902pt.
+<../figures/DMD/DMD_mode_2_79_phaseplane-003.pdf, id=175, 474.71886pt x 463.189
+85pt>
+File: ../figures/DMD/DMD_mode_2_79_phaseplane-003.pdf Graphic file (type pdf)
+ <use ../figures/DMD/DMD_mode_2_79_phaseplane-003.pdf>
+Package pdftex.def Info: ../figures/DMD/DMD_mode_2_79_phaseplane-003.pdf used o
+n input line 328.
+(pdftex.def)             Requested size: 229.49844pt x 223.92589pt.
 
-<../figures/DMD/DMD_mode_2_79_phaseplane-003.png, id=176, 867.24pt x 867.24pt>
-File: ../figures/DMD/DMD_mode_2_79_phaseplane-003.png Graphic file (type png)
-
-<use ../figures/DMD/DMD_mode_2_79_phaseplane-003.png>
-Package pdftex.def Info: ../figures/DMD/DMD_mode_2_79_phaseplane-003.png used o
-n input line 332.
-(pdftex.def)             Requested size: 229.49844pt x 229.48668pt.
-
-Underfull \hbox (badness 1824) in paragraph at lines 341--346
+Underfull \hbox (badness 1824) in paragraph at lines 336--341
 []\OT1/cmr/m/n/10 To incor-po-rate lim-it-ed obser-va-tions into a high-
  []
 
@@ -510,11 +509,15 @@ nclusion: multiple pdfs with page group included in a single page
 >]
 
 LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix]
- on input line 349.
+ on input line 344.
 
-) (./thermosyphon-paper.acknowledgments.tex [7 <../figures/DMD/DMD_modes_pre_re
-versals.png> <../figures/DMD/DMD_mode_2_79_phaseplane-003.png>])
-(./thermosyphon-paper.biblio.tex (./thermosyphon-paper-revtex4.bbl
+) (./thermosyphon-paper.acknowledgments.tex) (./thermosyphon-paper.biblio.tex
+(./thermosyphon-paper-revtex4.bbl [7 <../figures/DMD/DMD_modes_pre_reversals.pd
+f> <../figures/DMD/DMD_mode_2_79_phaseplane-003.pdf
+
+pdfTeX warning: pdflatex (file ../figures/DMD/DMD_mode_2_79_phaseplane-003.pdf)
+: PDF inclusion: multiple pdfs with page group included in a single page
+>]
 Underfull \hbox (badness 1960) in paragraph at lines 5--10
  []\OT1/cmr/m/n/9 Asur, S. and B. A. Huber-man (2010).  Pre-dict-
  []
@@ -537,10 +540,10 @@ Use acknowledgments instead.
 
 [8] (./thermosyphon-paper-revtex4.aux) ) 
 Here is how much of TeX's memory you used:
- 5128 strings out of 493117
- 69947 string characters out of 6135433
- 186789 words of memory out of 5000000
- 8457 multiletter control sequences out of 15000+600000
+ 5130 strings out of 493117
+ 69999 string characters out of 6135433
+ 187183 words of memory out of 5000000
+ 8459 multiletter control sequences out of 15000+600000
  12100 words of font info for 46 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  39i,13n,40p,370b,328s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -564,12 +567,11 @@ msy7.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmt
 i10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmti
 7.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.
 pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.p
-fb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/symbols/msam
-10.pfb>
-Output written on thermosyphon-paper-revtex4.pdf (8 pages, 1219622 bytes).
+fb>
+Output written on thermosyphon-paper-revtex4.pdf (8 pages, 1077669 bytes).
 PDF statistics:
- 316 PDF objects out of 1000 (max. 8388607)
- 196 compressed objects within 2 object streams
+ 375 PDF objects out of 1000 (max. 8388607)
+ 203 compressed objects within 3 object streams
  0 named destinations out of 1000 (max. 500000)
  56 words of extra memory for PDF output out of 10000 (max. 10000000)
 
