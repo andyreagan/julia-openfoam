@@ -56,6 +56,9 @@
 \immediate\write\tempfile{\thepage}
 \immediate\closeout\tempfile
 
+\setboolean{twocolswitch}{false}
+\onecolumngrid
+
 \setcounter{page}{1}
 \renewcommand{\thepage}{S\arabic{page}}
 \renewcommand{\thefigure}{S\arabic{figure}}

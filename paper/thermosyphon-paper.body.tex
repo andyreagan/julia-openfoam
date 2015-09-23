@@ -139,24 +139,12 @@ The canonical choices of $\sigma = 10, \beta = 8/3$ and $\rho = 28$ produce the 
 From these tests, we have found the optimal data assimilation parameters (inflation factors) for predicting time-series with this system.
 Having done so, we focus our efforts on making prediction using computational fluid dynamics models.
 
-
-\begin{figure}[t]
-  \centering
-  \includegraphics[width=0.45\textwidth]{figures/TLM-verification003_noname.pdf}
-  \caption[The future error predicted by the TLM is compared to the error growth in Lorenz '63 system for an initial perturbation with standard deviation of 0.1, averaged over 1000 TLM integrations]{
-    The future error predicted by the TLM is compared to the error growth in Lorenz '63 system for an initial perturbation with standard deviation of 0.1, averaged over 1000 TLM integrations.
-    The $\epsilon$ is not the error predicted by the TLM, but rather the error of the TLM in predicting the error growth.
-  }
-  \label{fig:TLMverification}
-\end{figure}
-
 We first implement the 3D-Var filter.
 Simply put, 3D-Var is the variational (cost-function) approach to finding the analysis.
 It has been shown that 3D-var solves the same statistical problem as optimal interpolation (OI) \cite{lorenc1986analysis}.
 The usefulness of the variational approach comes from the computational efficiency, when solved with an iterative method.
 The multivariate 3D-Var is thus finding the $\mbx _a$ that minimizes the cost function
 \begin{equation} J(\mbx) = (\mbx - \mbx_b) ^T \mbB ^{-1} (\mbx - \mbx_b) + (\mby_o + H(\mbx))^T\mbR (\mby_o - H(\mbx)) .\end{equation}
-
 
 Next, we implemented the ``gold-standard'' Extended Kalman Filter (EKF).
 The tangent linear model (TLM) is precisely the model (written as a matrix) that transforms a perturbation at time $t$ to a perturbation at time $t+\Delta t$, analytically equivalent to the Jacobian of the model.
@@ -180,22 +168,7 @@ where $\mbR_i$ is the observation error covariance.
 Since we are making observations of the truth with random normal errors of standard deviation $\mbe$, the observational error covariance matrix $\mbR$ is a diagonal matrix with $\epsilon$ along the diagonal.
 The most difficult (and most computationally expensive) part of the EKF is deriving and integrating the TLM.
 For this reason, the EKF is not used operationally, and later we will turn to statistical approximations of the EKF using ensembles of model forecasts.
-Next, we go into more detail regarding the TLM.
-
-The TLM is the model which advances an initial perturbation $\delta \mbx_{i}$ at timestep $i$ to a final perturbation $\delta \mbx_{i+1}$ at timestep $i+1$.
-The dynamical system we are interested in, Lorenz '63, is given as a system of ODE's:
-\[ \frac{d\mbx}{dt} = F(\mbx) .\]
-We integrate this system using a numerical scheme of our choice (in the given examples we use a second-order Runge-Kutta method), to obtain a model $M$ discretized in time.
-\[ \mbx(t) = M[ \mbx(t_0) ] .\]
-Introducing a small perturbation $\mby$, we can approximate our model $M$ applied to $\mbx(t_0) + \mby(t_0)$ with a Taylor series around $\mbx(t_0)$:
-\begin{align*} M[ \mbx(t_0) + \mby(t_0) ] &= M [ \mbx(t_0) ] + \frac{\partial M}{\partial \mbx} \mby(t_0) + O [ \mby(t_0) ^2 ]\\ &\approx \mbx(t) + \frac{\partial M}{\partial \mbx} \mby(t_0) .\end{align*}
-We can then solve for the linear evolution of the small perturbation $\mby(t_0)$ as 
-\begin{equation} \frac{d\mby }{dt } = \mathbf{J} \mby \label{eq:ODETLM} \end{equation}
-where $\mathbf{J} = \partial F / \partial \mbx$ is the Jacobian of $F$.
-We can solve the above system of linear ordinary differential equations using the same numerical scheme as we did for the nonlinear model.
-To verify our implementation of the TLM, we propagate a small error in the Lorenz '63 system and plot the difference between that error and the TLM predicted error, for each variable (Figure \ref{fig:TLMverification}).
-
-
+With our CFD model we have no such TLM, and we present more detail on the TLM approachas applicable to the Lorenz '63 system in Appendix C.
 
 The computational cost of the EKF is mitigated through the approximation of the error covariance matrix $\mbP_f$ from the model itself, without the use of a TLM.
 One such approach is the use of a forecast ensemble, where a collection of models (ensemble members) are used to statistically sample model error propagation.

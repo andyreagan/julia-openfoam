@@ -11,7 +11,6 @@
 \usepackage{amssymb}
 \usepackage[titletoc,toc,title]{appendix}
 \usepackage{titlesec}
-\usepackage{listings,color}
 \usepackage{cite}
 \usepackage{tabularx}
 \usepackage[makeroom]{cancel}
@@ -576,7 +575,7 @@ The second method distributes ensemble members around the analysis forecast with
 It has been show that the perturbed observation approach introduces additional sampling error that reduces the analysis covariance accuracy and increases the probability of of underestimating analysis error covariance \shortcite{hamill2001distance}.
 For the examples given, we demonstrate both methods.
 
-With a finite ensemble size this method is only an approximation and therefore in practice it often fails to capture the full spread of error.
+With a finite ensemble size, the ensemble method is only an approximation and therefore in practice it often fails to capture the full spread of error.
 To better capture the model variance, additive and multiplicative inflation factors are used to obtain a good estimate of the error covariance matrix (Section 2.6).
 The spread of ensemble members in the $x_1$ variable of the Lorenz model, as distance from the analysis, can be seen in Figure \ref{fig:EnKFhist}.
 

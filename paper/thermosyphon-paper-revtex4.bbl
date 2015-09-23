@@ -1,5 +1,10 @@
 \begin{thebibliography}{}
 
+\bibitem[\protect\citeauthoryear{Anderson}{Anderson}{2001}]{anderson2001new}
+Anderson, M.~J. (2001).
+\newblock A new method for non-parametric multivariate analysis of variance.
+\newblock {\em Austral Ecology\/}~{\em 26\/}(1), 32--46.
+
 \bibitem[\protect\citeauthoryear{Asur and Huberman}{Asur and
   Huberman}{2010}]{asur2010predicting}
 Asur, S. and B.~A. Huberman (2010).
@@ -20,6 +25,12 @@ Bishop, C.~H., B.~J. Etherton, and S.~J. Majumdar (2001).
 \newblock Adaptive sampling with the ensemble transform kalman filter. part i:
   Theoretical aspects.
 \newblock {\em Monthly weather review\/}~{\em 129\/}(3), 420--436.
+
+\bibitem[\protect\citeauthoryear{Burgers, Jan~van Leeuwen, and Evensen}{Burgers
+  et~al.}{1998}]{burgers1998analysis}
+Burgers, G., P.~Jan~van Leeuwen, and G.~Evensen (1998).
+\newblock Analysis scheme in the ensemble kalman filter.
+\newblock {\em Monthly weather review\/}~{\em 126\/}(6), 1719--1724.
 
 \bibitem[\protect\citeauthoryear{Burroughs, Coutsias, and Romero}{Burroughs
   et~al.}{2005}]{burroughs2005reduced}
@@ -53,6 +64,18 @@ Desrayaud, G., A.~Fichera, and M.~Marcoux (2006).
 Ehrhard, P. and U.~M{\"u}ller (1990).
 \newblock Dynamical behaviour of natural convection in a single-phase loop.
 \newblock {\em Journal of Fluid mechanics\/}~{\em 217}, 487--518.
+
+\bibitem[\protect\citeauthoryear{Evensen}{Evensen}{2003}]{evensen2003ensemble}
+Evensen, G. (2003).
+\newblock The ensemble kalman filter: Theoretical formulation and practical
+  implementation.
+\newblock {\em Ocean dynamics\/}~{\em 53\/}(4), 343--367.
+
+\bibitem[\protect\citeauthoryear{Ferziger and Peri{\'c}}{Ferziger and
+  Peri{\'c}}{1996}]{ferziger1996computational}
+Ferziger, J.~H. and M.~Peri{\'c} (1996).
+\newblock {\em Computational methods for fluid dynamics}, Volume~3.
+\newblock Springer Berlin.
 
 \bibitem[\protect\citeauthoryear{Ginsberg, Mohebbi, Patel, Brammer, Smolinski,
   and Brilliant}{Ginsberg et~al.}{2008}]{ginsberg2008detecting}
@@ -163,6 +186,26 @@ Ott, E., B.~R. Hunt, I.~Szunyogh, A.~V. Zimin, E.~J. Kostelich, M.~Corazza,
 \newblock A local ensemble kalman filter for atmospheric data assimilation.
 \newblock {\em Tellus A\/}~{\em 56\/}(5), 415--428.
 
+\bibitem[\protect\citeauthoryear{Patankar and Spalding}{Patankar and
+  Spalding}{1972}]{patankar1972calculation}
+Patankar, S.~V. and D.~B. Spalding (1972).
+\newblock A calculation procedure for heat, mass and momentum transfer in
+  three-dimensional parabolic flows.
+\newblock {\em International Journal of Heat and Mass Transfer\/}~{\em
+  15\/}(10), 1787--1806.
+
+\bibitem[\protect\citeauthoryear{Rall}{Rall}{1981}]{autodiff1981}
+Rall, L. (1981).
+\newblock {\em Automatic Differentiation: Techniques and Applications (Lecture
+  Notes in Computer Science)}.
+\newblock Springer.
+
+\bibitem[\protect\citeauthoryear{Reagan}{Reagan}{2013}]{reagan2013}
+Reagan, A. (2013).
+\newblock Predicting flow reversals in a computational fluid dynamics simulated
+  thermosyphon using data assimilation.
+\newblock {\em arXiv:1312.2142\/}.
+
 \bibitem[\protect\citeauthoryear{Ridouane, Danforth, and Hitt}{Ridouane
   et~al.}{2010}]{ridouane2010}
 Ridouane, E.~H., C.~M. Danforth, and D.~L. Hitt (2010).
@@ -182,6 +225,13 @@ Savely, R., B.~Cockrell, , and S.~Pines (1972).
 Sornette, D. and W.-X. Zhou (2006).
 \newblock Predictability of large future changes in major financial indices.
 \newblock {\em International Journal of Forecasting\/}~{\em 22\/}(1), 153--168.
+
+\bibitem[\protect\citeauthoryear{Tippett, Anderson, Bishop, Hamill, and
+  Whitaker}{Tippett et~al.}{2003}]{tippett2003ensemble}
+Tippett, M.~K., J.~L. Anderson, C.~H. Bishop, T.~M. Hamill, and J.~S. Whitaker
+  (2003).
+\newblock Ensemble square root filters*.
+\newblock {\em Monthly Weather Review\/}~{\em 131\/}(7), 1485--1490.
 
 \bibitem[\protect\citeauthoryear{Tu, Rowley, Luchtenburg, Brunton, and Kutz}{Tu
   et~al.}{2013}]{tu2013dynamic}

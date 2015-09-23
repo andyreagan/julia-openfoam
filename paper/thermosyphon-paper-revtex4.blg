@@ -9,51 +9,53 @@ Warning--no number and no volume in harris2011predicting
 Warning--page numbers missing in harris2011predicting
 Warning--page numbers missing in weather-violence2013
 Warning--no volume for jiang2003
+Warning--no number and no volume in reagan2013
+Warning--page numbers missing in reagan2013
 Warning--no number and no volume in savely1972
 Warning--page numbers missing in savely1972
 Warning--no number and no volume in tu2013dynamic
 Warning--page numbers missing in tu2013dynamic
 Warning--page numbers missing in welander1967
 Warning--no volume for yuen1999
-You've used 32 entries,
+You've used 40 entries,
             2861 wiz_defined-function locations,
-            818 strings with 10639 characters,
-and the built_in function-call counts, 24717 in all, are:
-= -- 1994
-> -- 2096
-< -- 3
-+ -- 644
-- -- 684
-* -- 2450
-:= -- 4504
-add.period$ -- 97
-call.type$ -- 32
-change.case$ -- 261
-chr.to.int$ -- 32
-cite$ -- 44
-duplicate$ -- 580
-empty$ -- 1354
-format.name$ -- 788
-if$ -- 4571
+            860 strings with 11764 characters,
+and the built_in function-call counts, 29956 in all, are:
+= -- 2424
+> -- 2460
+< -- 4
++ -- 754
+- -- 812
+* -- 2916
+:= -- 5474
+add.period$ -- 121
+call.type$ -- 40
+change.case$ -- 315
+chr.to.int$ -- 40
+cite$ -- 54
+duplicate$ -- 722
+empty$ -- 1684
+format.name$ -- 932
+if$ -- 5520
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 32
-newline$ -- 163
-num.names$ -- 320
-pop$ -- 179
+missing$ -- 42
+newline$ -- 203
+num.names$ -- 400
+pop$ -- 218
 preamble$ -- 1
-purify$ -- 454
+purify$ -- 558
 quote$ -- 0
-skip$ -- 597
+skip$ -- 746
 stack$ -- 0
-substring$ -- 1286
-swap$ -- 191
-text.length$ -- 3
+substring$ -- 1589
+swap$ -- 237
+text.length$ -- 4
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 630
-warning$ -- 12
-while$ -- 292
+type$ -- 770
+warning$ -- 14
+while$ -- 374
 width$ -- 0
-write$ -- 422
-(There were 12 warnings)
+write$ -- 527
+(There were 14 warnings)

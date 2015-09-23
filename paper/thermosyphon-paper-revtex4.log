@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  23 SEP 2015 09:49
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  23 SEP 2015 10:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -459,145 +459,119 @@ File: /Users/andyreagan/work/2013/05-data-assimilation/OpenFOAM/figures/3D-mesh
 Package pdftex.def Info: /Users/andyreagan/work/2013/05-data-assimilation/OpenF
 OAM/figures/3D-mesh2.png used on input line 112.
 (pdftex.def)             Requested size: 229.49844pt x 162.13855pt.
-
-<figures/TLM-verification003_noname.pdf, id=116, 472.76625pt x 467.7475pt>
-File: figures/TLM-verification003_noname.pdf Graphic file (type pdf)
-
-<use figures/TLM-verification003_noname.pdf>
-Package pdftex.def Info: figures/TLM-verification003_noname.pdf used on input l
-ine 145.
-(pdftex.def)             Requested size: 229.49844pt x 227.06422pt.
  [3 </Users/andyreagan/work/2013/05-data-assimilation/OpenFOAM/figures/heating_
 zoom_mesh4.png> </Users/andyreagan/work/2013/05-data-assimilation/OpenFOAM/figu
 res/3D-mesh2.png (PNG copy)>]
-
-LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix]
- on input line 166.
-
-[4 <./figures/TLM-verification003_noname.pdf>]
-<figures/window_experiment_plot002.pdf, id=141, 465.74pt x 392.46625pt>
+<figures/window_experiment_plot002.pdf, id=121, 465.74pt x 392.46625pt>
 File: figures/window_experiment_plot002.pdf Graphic file (type pdf)
 
 <use figures/window_experiment_plot002.pdf>
 Package pdftex.def Info: figures/window_experiment_plot002.pdf used on input li
-ne 214.
+ne 187.
 (pdftex.def)             Requested size: 229.49844pt x 193.38806pt.
 
-<figures/ETKF_390s_infl_error.pdf, id=142, 495.8525pt x 394.47375pt>
+<figures/ETKF_390s_infl_error.pdf, id=122, 495.8525pt x 394.47375pt>
 File: figures/ETKF_390s_infl_error.pdf Graphic file (type pdf)
 
 <use figures/ETKF_390s_infl_error.pdf>
-Package pdftex.def Info: figures/ETKF_390s_infl_error.pdf used on input line 22
-6.
+Package pdftex.def Info: figures/ETKF_390s_infl_error.pdf used on input line 19
+9.
 (pdftex.def)             Requested size: 229.49844pt x 182.57367pt.
- [5 <./figures/window_experiment_plot002.pdf> <./figures/ETKF_390s_infl_error.p
-df>]
-<../figures/loop-spaghetti-slide-004-full.pdf, id=172, 591.05351pt x 317.75902p
+ [4 <./figures/window_experiment_plot002.pdf>]
+
+LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix]
+ on input line 222.
+
+[5 <./figures/ETKF_390s_infl_error.pdf>]
+<../figures/loop-spaghetti-slide-004-full.pdf, id=154, 591.05351pt x 317.75902p
 t>
 File: ../figures/loop-spaghetti-slide-004-full.pdf Graphic file (type pdf)
  <use ../figures/loop-spaghetti-slide-004-full.pdf>
 Package pdftex.def Info: ../figures/loop-spaghetti-slide-004-full.pdf used on i
-nput line 297.
+nput line 270.
 (pdftex.def)             Requested size: 229.49844pt x 123.38246pt.
 
-<../figures/2015-09-13-23-04-consuela.pdf, id=173, 420.03598pt x 366.67363pt>
+<../figures/2015-09-13-23-04-consuela.pdf, id=155, 420.03598pt x 366.67363pt>
 File: ../figures/2015-09-13-23-04-consuela.pdf Graphic file (type pdf)
 
 <use ../figures/2015-09-13-23-04-consuela.pdf>
 Package pdftex.def Info: ../figures/2015-09-13-23-04-consuela.pdf used on input
- line 309.
+ line 282.
 (pdftex.def)             Requested size: 229.49844pt x 200.3395pt.
 
-<../figures/DMD/DMD_modes_pre_reversals.pdf, id=174, 654.15797pt x 405.37384pt>
+<../figures/DMD/DMD_modes_pre_reversals.pdf, id=156, 654.15797pt x 405.37384pt>
 File: ../figures/DMD/DMD_modes_pre_reversals.pdf Graphic file (type pdf)
 <use ../figures/DMD/DMD_modes_pre_reversals.pdf>
 Package pdftex.def Info: ../figures/DMD/DMD_modes_pre_reversals.pdf used on inp
-ut line 320.
+ut line 293.
 (pdftex.def)             Requested size: 229.49844pt x 142.21698pt.
 
-<figures/combined-phase-potrait-2-79-labeled.pdf, id=175, 351.3125pt x 124.465p
+<figures/combined-phase-potrait-2-79-labeled.pdf, id=157, 351.3125pt x 124.465p
 t>
 File: figures/combined-phase-potrait-2-79-labeled.pdf Graphic file (type pdf)
  <use figures/combined-phase-potrait-2-79-labeled.pdf>
 Package pdftex.def Info: figures/combined-phase-potrait-2-79-labeled.pdf used o
-n input line 349.
+n input line 322.
 (pdftex.def)             Requested size: 499.79782pt x 177.08528pt.
 
-<figures/covariance-localization-schematic-labeled-002.pdf, id=176, 352.31625pt
+<figures/covariance-localization-schematic-labeled-002.pdf, id=158, 352.31625pt
  x 390.45876pt>
 File: figures/covariance-localization-schematic-labeled-002.pdf Graphic file (t
 ype pdf)
 
 <use figures/covariance-localization-schematic-labeled-002.pdf>
 Package pdftex.def Info: figures/covariance-localization-schematic-labeled-002.
-pdf used on input line 361.
+pdf used on input line 334.
 (pdftex.def)             Requested size: 229.49844pt x 254.3433pt.
 
-
-LaTeX Warning: Reference `fig:DMD-timeseries' on page 6 undefined on input line
- 375.
-
-
-Underfull \hbox (badness 1824) in paragraph at lines 372--377
+Underfull \hbox (badness 1824) in paragraph at lines 345--350
 []\OT1/cmr/m/n/10 To incor-po-rate lim-it-ed obser-va-tions into a high-
  []
 
-[6 <../figures/loop-spaghetti-slide-004-full.pdf>]
+[6 <../figures/loop-spaghetti-slide-004-full.pdf> <../figures/2015-09-13-23-04-
+consuela.pdf
 
-LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix]
- on input line 380.
-
-) (./thermosyphon-paper.acknowledgments.tex) (./thermosyphon-paper.biblio.tex
-(./thermosyphon-paper-revtex4.bbl [7 <../figures/2015-09-13-23-04-consuela.pdf>
- <../figures/DMD/DMD_modes_pre_reversals.pdf
+pdfTeX warning: pdflatex (file ../figures/2015-09-13-23-04-consuela.pdf): PDF i
+nclusion: multiple pdfs with page group included in a single page
+> <../figures/DMD/DMD_modes_pre_reversals.pdf
 
 pdfTeX warning: pdflatex (file ../figures/DMD/DMD_modes_pre_reversals.pdf): PDF
  inclusion: multiple pdfs with page group included in a single page
->]
-Underfull \hbox (badness 1960) in paragraph at lines 5--10
+>]) (./thermosyphon-paper.acknowledgments.tex) (./thermosyphon-paper.biblio.tex
+(./thermosyphon-paper-revtex4.bbl
+Underfull \hbox (badness 1960) in paragraph at lines 10--15
  []\OT1/cmr/m/n/9 Asur, S. and B. A. Huber-man (2010).  Pre-dict-
  []
 
 
-Underfull \hbox (badness 1622) in paragraph at lines 5--10
+Underfull \hbox (badness 1622) in paragraph at lines 10--15
  \OT1/cmr/m/it/9 IEEE/WIC/ACM Inter-na-tion-al Con-fer-ence on\OT1/cmr/m/n/9 , 
 Vol-
  []
 
 
-Underfull \hbox (badness 5681) in paragraph at lines 13--16
+Underfull \hbox (badness 5681) in paragraph at lines 18--21
  []\OT1/cmr/m/n/9 Bauer, P., A. Thor-pe, and G. Brunet (2015).
  []
 
+[7 <./figures/combined-phase-potrait-2-79-labeled.pdf>]
 
-Underfull \hbox (badness 1248) in paragraph at lines 130--133
+LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix]
+ on input line 23.
+
+
+Underfull \hbox (badness 1248) in paragraph at lines 153--156
  []\OT1/cmr/m/n/9 Kalnay, E., H. Li, T. Miyoshi, S.-C. YANG, and
  []
 
-[8 <./figures/combined-phase-potrait-2-79-labeled.pdf>]
-
-LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix]
- on input line 134.
-
-)) [9 <./figures/covariance-localization-schematic-labeled-002.pdf>]
+[8 <./figures/covariance-localization-schematic-labeled-002.pdf>])) [9]
 \tempfile=\write3
 \openout3 = `startsupp.txt'.
 
 
 (./thermosyphon-paper.supplementary.tex
-
-Package natbib Warning: Citation `reagan2013' on page S1 undefined on input lin
-e 13.
-
-
-Package natbib Warning: Citation `patankar1972calculation' on page S1 undefined
- on input line 37.
-
-
-Package natbib Warning: Citation `ferziger1996computational' on page S1 undefin
-ed on input line 38.
-
 LaTeX Font Info:    Try loading font information for OMS+cmr on input line 41.
+
 (/usr/local/texlive/2014/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
@@ -614,145 +588,117 @@ File: lstlang1.sty 2014/03/04 1.5c listings language file
 File: lstmisc.sty 2014/03/04 1.5c (Carsten Heinz)
 )
 (/Users/andyreagan/work/2013/09-reagan-thesis/code/buoyantBoussinesqPimpleFoam/
-buoyantBoussinesqPimpleFoam-edited.C)
-(/Users/andyreagan/work/2013/09-reagan-thesis/code/buoyantBoussinesqPimpleFoam/
-buoyantBoussinesqPimpleFoam-edited.C)
-(/Users/andyreagan/work/2013/09-reagan-thesis/code/buoyantBoussinesqPimpleFoam/
 buoyantBoussinesqPimpleFoam-edited.C [1])
 (/Users/andyreagan/work/2013/09-reagan-thesis/code/buoyantBoussinesqPimpleFoam/
-UEqn.H)
+buoyantBoussinesqPimpleFoam-edited.C)
+(/Users/andyreagan/work/2013/09-reagan-thesis/code/buoyantBoussinesqPimpleFoam/
+buoyantBoussinesqPimpleFoam-edited.C)
+(/Users/andyreagan/work/2013/09-reagan-thesis/code/buoyantBoussinesqPimpleFoam/
+UEqn.H) [2]
 (/Users/andyreagan/work/2013/09-reagan-thesis/code/buoyantBoussinesqPimpleFoam/
 TEqn.H)
 (/Users/andyreagan/work/2013/09-reagan-thesis/code/buoyantBoussinesqPimpleFoam/
-pEqn.H)
-Underfull \hbox (badness 1354) in paragraph at lines 92--94
-\OT1/cmr/m/n/10 This ``pEqn.H'' is then re-run until con-ver-gence is
- []
+pEqn.H) [3] [4] [5] [6]
+<figures/TLM-verification003_noname.pdf, id=428, 472.76625pt x 467.7475pt>
+File: figures/TLM-verification003_noname.pdf Graphic file (type pdf)
 
-[2]
-Overfull \hbox (104.3367pt too wide) detected at line 118
-\OMS/cmsy/m/n/10 ^^@\OML/cmm/m/it/10 ^^Yr[][]^^^[] \OMS/cmsy/m/n/10 ^^@ \OML/cm
-m/m/it/10 ^^Z[]^^^r[]R[]^^^f[] \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 ^^Z[]\OT1/
-cmr/m/n/10 (1 \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 ^^Z\OT1/cmr/m/n/10 (\OML/cm
-m/m/it/10 T \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 T[]\OT1/cmr/m/n/10 ))\OML/cmm
-/m/it/10 ^^Yr[]R[]^^^g []\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 ^^^\OT1/cmr/m/n/10 )
- = \OML/cmm/m/it/10 ^^Z[]^^Yr[]R[]^^^[]:
- []
+<use figures/TLM-verification003_noname.pdf>
+Package pdftex.def Info: figures/TLM-verification003_noname.pdf used on input l
+ine 197.
+(pdftex.def)             Requested size: 229.49844pt x 227.06422pt.
 
+<figures/TLM-explanation.pdf, id=429, 687.56876pt x 343.2825pt>
+File: figures/TLM-explanation.pdf Graphic file (type pdf)
 
-Overfull \hbox (41.29733pt too wide) detected at line 120
-\OMS/cmsy/m/n/10 ^^@[]\OML/cmm/m/it/10 ^^^ [] \OT1/cmr/m/n/10 = \OML/cmm/m/it/1
-0 ^^Z[][]^^^[]:
- []
+<use figures/TLM-explanation.pdf>
+Package pdftex.def Info: figures/TLM-explanation.pdf used on input line 207.
+(pdftex.def)             Requested size: 453.89969pt x 226.61952pt.
 
+<figures/EnKF-histogram-analysis.pdf, id=430, 501.875pt x 412.54124pt>
+File: figures/EnKF-histogram-analysis.pdf Graphic file (type pdf)
 
-LaTeX Warning: Reference `eq:EMeg1' on page S3 undefined on input line 135.
-
-
-LaTeX Warning: Reference `eq:EMeg2' on page S3 undefined on input line 135.
+<use figures/EnKF-histogram-analysis.pdf>
+Package pdftex.def Info: figures/EnKF-histogram-analysis.pdf used on input line
+ 220.
+(pdftex.def)             Requested size: 402.89658pt x 331.198pt.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 142--144
-\OT1/cmr/m/n/10 where $\OML/cmm/m/it/10 p\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 x\OT
-1/cmr/m/n/10 )$ can be defined as $\OML/cmm/m/it/10 p\OT1/cmr/m/n/10 (\OML/cmm/
-m/it/10 x\OT1/cmr/m/n/10 ) =
- []
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<figures/EnKF_spaghetti.pdf, id=431, 515.94037pt x 395.85973pt>
+File: figures/EnKF_spaghetti.pdf Graphic file (type pdf)
+
+<use figures/EnKF_spaghetti.pdf>
+Package pdftex.def Info: figures/EnKF_spaghetti.pdf used on input line 237.
+(pdftex.def)             Requested size: 504.9028pt x 387.39021pt.
 
 
-Underfull \hbox (badness 2005) in paragraph at lines 142--144
-[] \OML/cmm/m/it/10 =\OT1/cmr/m/n/10 9$ such that $\OML/cmm/m/it/10 p$ \OT1/cmr
-/m/n/10 is ana-lyt-ic at
- []
+LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-
-LaTeX Warning: Reference `eq:EM10' on page S3 undefined on input line 147.
-
-
-LaTeX Warning: Reference `eq:EMeq' on page S3 undefined on input line 147.
-
-[3]
-Underfull \hbox (badness 10000) in paragraph at lines 165--166
-[]\OT1/cmr/m/n/10 Through care-ful con-sid-er-a-tion of these non-
- []
-
-
-Underfull \hbox (badness 1472) in paragraph at lines 165--166
-\OT1/cmr/m/n/10 dimensional vari-able trans-for-ma-tions we ver-i-fy that
- []
-
-
-<../figures/DMD/DMD-data-timeseries-longer-wide.pdf, id=436, 923.36533pt x 353.
+[7] [8 <./figures/TLM-verification003_noname.pdf> <./figures/TLM-explanation.pd
+f>] [9 <./figures/EnKF-histogram-analysis.pdf>] [10 <./figures/EnKF_spaghetti.p
+df>]
+<../figures/DMD/DMD-data-timeseries-longer-wide.pdf, id=497, 923.36533pt x 353.
 89401pt>
 File: ../figures/DMD/DMD-data-timeseries-longer-wide.pdf Graphic file (type pdf
 )
  <use ../figures/DMD/DMD-data-timeseries-longer-wide.pdf>
 Package pdftex.def Info: ../figures/DMD/DMD-data-timeseries-longer-wide.pdf use
-d on input line 175.
+d on input line 263.
 (pdftex.def)             Requested size: 499.79782pt x 191.5589pt.
 
-<../figures/DMD/eigenvalues-both-labeled.pdf, id=437, 479.7925pt x 240.9pt>
+<../figures/DMD/eigenvalues-both-labeled.pdf, id=498, 479.7925pt x 240.9pt>
 File: ../figures/DMD/eigenvalues-both-labeled.pdf Graphic file (type pdf)
 
 <use ../figures/DMD/eigenvalues-both-labeled.pdf>
 Package pdftex.def Info: ../figures/DMD/eigenvalues-both-labeled.pdf used on in
-put line 185.
+put line 273.
 (pdftex.def)             Requested size: 499.79782pt x 250.94911pt.
 )
 
 Class revtex4 Warning: Environment acknowledgements is obsolete;
 Use acknowledgments instead.
 
-
-Package natbib Warning: There were undefined citations.
-
-[4] [5 <../figures/DMD/DMD-data-timeseries-longer-wide.pdf> <../figures/DMD/eig
-envalues-both-labeled.pdf
+[11 <../figures/DMD/DMD-data-timeseries-longer-wide.pdf> <../figures/DMD/eigenv
+alues-both-labeled.pdf
 
 pdfTeX warning: pdflatex (file ../figures/DMD/eigenvalues-both-labeled.pdf): PD
 F inclusion: multiple pdfs with page group included in a single page
->] (./thermosyphon-paper-revtex4.aux)
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right .
-
-
- ) 
+>] (./thermosyphon-paper-revtex4.aux) ) 
 Here is how much of TeX's memory you used:
- 6755 strings out of 493117
- 95317 string characters out of 6135433
- 538933 words of memory out of 5000000
- 10028 multiletter control sequences out of 15000+600000
+ 6797 strings out of 493117
+ 96417 string characters out of 6135433
+ 528289 words of memory out of 5000000
+ 10067 multiletter control sequences out of 15000+600000
  12268 words of font info for 47 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 40i,13n,63p,442b,1520s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
-></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
-</usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></
-usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></u
-sr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></us
-r/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/
-local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/lo
-cal/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/loca
-l/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/
-texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/tex
-live/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texliv
-e/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2
-014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2014
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2014/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2014/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2014/texmf
--dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2014/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2014/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmti7.pfb></usr/local/texlive/2014/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/local/texlive/2014/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2014/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmtt8.pfb>
-Output written on thermosyphon-paper-revtex4.pdf (14 pages, 1722598 bytes).
+ 40i,13n,63p,473b,1605s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2014/texmf-dist/font
+s/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2014/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2014/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmbx9.pfb></usr/local/texlive/2014/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2014/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmmi9.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmr10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmr5.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmr6.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmr7.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmr8.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmr9.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+sy10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cms
+y6.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7
+.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.
+pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmti7.pf
+b></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb>
+</usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><
+/usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
+Output written on thermosyphon-paper-revtex4.pdf (20 pages, 1853111 bytes).
 PDF statistics:
- 611 PDF objects out of 1000 (max. 8388607)
- 349 compressed objects within 4 object streams
+ 668 PDF objects out of 1000 (max. 8388607)
+ 390 compressed objects within 4 object streams
  0 named destinations out of 1000 (max. 500000)
- 71 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 86 words of extra memory for PDF output out of 10000 (max. 10000000)
 

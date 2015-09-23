@@ -92,6 +92,8 @@ The final operation being the conversion of pressure to hydrostatic pressure,
 \begin{equation*} p _\text{rgh} = p - \rho _k g_h . \end{equation*}
 This ``pEqn.H'' is then re-run until convergence is achieved, and the PISO loop begins again.
 
+\clearpage
+\pagebreak
 \section{The Ehrhard and M\"{u}ller Equations}
 
 Following the derivation by Harris \cite{harris2011predicting}, itself a representation of the derivation of Gorman \cite{gorman1986} and namesakes Ehrhard and M\"{u}ller \cite{ehrhard1990dynamical}, we derive the equations governing a closed loop thermosyphon.
@@ -164,11 +166,97 @@ and
 
 Through careful consideration of these non-dimensional variable transformations we verify that $x_1$ is representative of the mean fluid velocity, $x_2$ of the temperature difference between the 3 and 9 o'clock positions on the thermosyphon, and $x_3$ the deviation from the vertical temperature profile in a conduction state \cite{harris2011predicting}.
 
+\clearpage
+\pagebreak
 \section{Data Assimiliation}
 
+The TLM is the model which advances an initial perturbation $\delta \mbx_{i}$ at timestep $i$ to a final perturbation $\delta \mbx_{i+1}$ at timestep $i+1$.
+The dynamical system we are interested in, Lorenz '63, is given as a system of ODE's:
+\[ \frac{d\mbx}{dt} = F(\mbx) .\]
+We integrate this system using a numerical scheme of our choice (in the given examples we use a second-order Runge-Kutta method), to obtain a model $M$ discretized in time.
+\[ \mbx(t) = M[ \mbx(t_0) ] .\]
+Introducing a small perturbation $\mby$, we can approximate our model $M$ applied to $\mbx(t_0) + \mby(t_0)$ with a Taylor series around $\mbx(t_0)$:
+\begin{align*} M[ \mbx(t_0) + \mby(t_0) ] &= M [ \mbx(t_0) ] + \frac{\partial M}{\partial \mbx} \mby(t_0) + O [ \mby(t_0) ^2 ]\\ &\approx \mbx(t) + \frac{\partial M}{\partial \mbx} \mby(t_0) .\end{align*}
+We can then solve for the linear evolution of the small perturbation $\mby(t_0)$ as 
+\begin{equation} \frac{d\mby }{dt } = \mathbf{J} \mby \label{eq:ODETLM} \end{equation}
+where $\mathbf{J} = \partial F / \partial \mbx$ is the Jacobian of $F$.
+We can solve the above system of linear ordinary differential equations using the same numerical scheme as we did for the nonlinear model.
 
+One problem with solving the system of equations given by Equation \ref{eq:ODETLM} is that the Jacobian matrix of discretized code is not necessarily identical to the discretization of the Jacobian operator for the analytic system.
+This is a problem because we need to have the TLM of our model $M$, which is the time-space discretization of the solution to $d\mbx/dt = F(\mbx)$.
+We can apply our numerical method to the $d\mbx/dt = F(\mbx)$ to obtain $M$ explicitly, and then take the Jacobian of the result.
+This method is, however, prohibitively costly, since Runge-Kutta methods are implicit.
+It is therefore desirable to take the derivative of the numerical scheme directly, and apply this differentiated numerical scheme to the system of equations $F(\mbx)$ to obtain the TLM.
+A schematic of this scenario is illustrated in Figure \ref{fig:TLMscheme}.
+To that the derivative of numerical code for implementing the EKF on models larger than 3 dimensions (i.e. global weather models written in Fortan), automatic code differentiation is used \cite{autodiff1981}.
 
-\section{More on DMD Methodology}
+To verify our implementation of the TLM, we propagate a small error in the Lorenz '63 system and plot the difference between that error and the TLM predicted error, for each variable (Figure \ref{fig:TLMverification}).
+
+\begin{figure*}
+  \centering
+  \includegraphics[width=0.45\textwidth]{figures/TLM-verification003_noname.pdf}
+  \caption[The future error predicted by the TLM is compared to the error growth in Lorenz '63 system for an initial perturbation with standard deviation of 0.1, averaged over 1000 TLM integrations]{
+    The future error predicted by the TLM is compared to the error growth in Lorenz '63 system for an initial perturbation with standard deviation of 0.1, averaged over 1000 TLM integrations.
+    The $\epsilon$ is not the error predicted by the TLM, but rather the error of the TLM in predicting the error growth.
+  }
+  \label{fig:TLMverification}
+\end{figure*}
+
+\begin{figure*}
+  \centering
+  \includegraphics[width=0.89\textwidth]{figures/TLM-explanation.pdf}
+  \caption[An explanation of how and why the best way to obtain a TLM is with a differentiated numerical scheme]{
+    An explanation of how and why the best way to obtain a TLM is with a differentiated numerical scheme.
+  }
+  \label{fig:TLMscheme}
+\end{figure*}
+
+With a finite ensemble size, the ensemble method is only an approximation and therefore in practice it often fails to capture the full spread of error.
+To better capture the model variance, additive and multiplicative inflation factors are used to obtain a good estimate of the error covariance matrix (Section 2.6).
+The spread of ensemble members in the $x_1$ variable of the Lorenz model, as distance from the analysis, can be seen in Figure \ref{fig:EnKFhist}.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.79\textwidth]{figures/EnKF-histogram-analysis.pdf}
+  \caption[The difference of ensemble forecasts from the analysis is reported for 760 assimilation windows in one model run of length 200, with 10 ensemble members and an assimilation window of length 0.261]{
+    The difference of ensemble forecasts from the analysis is reported for 760 assimilation windows in one model run of length 200, with 10 ensemble members and an assimilation window of length 0.261.
+    This has the same shape of as the difference between ensemble forecasts and the mean of the forecasts (not shown).
+    This spread of ensemble forecasts is what allows us to estimate the error covariance of the forecast model, and appears to be normally distributed.
+  }
+  \label{fig:EnKFhist}
+\end{figure}
+
+In computing the error covariance $\mbP_f$ from the ensemble, we wish to add up the error covariance of each forecast with respect to the mean forecast. 
+But this would underestimate the error covariance, since the forecast we're comparing against was used in the ensemble average (to obtain the mean forecast).
+Therefore, to compute the error covariance matrix for each forecast, that forecast itself is excluded from the ensemble average forecast.
+
+We can see the classic spaghetti of the ensemble with this filter implemented on Lorenz 63 in Figure \ref{fig:spaghetti}.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.99\textwidth]{figures/EnKF_spaghetti.pdf}
+  \caption[A sample time-series of the ensembles used in the EnKF]{
+    A sample time-series of the ensembles used in the EnKF.
+    In all tests, as seen here, 10 ensemble members are used.
+    For this run, 384 assimilation cycles were performed with a window length of 0.26 model time units.
+  }
+  \label{fig:spaghetti}
+\end{figure}
+
+We denote the forecast within an ensemble filter as the average of the individual ensemble forecasts, and an explanation for this choice is substantiated by Burgers \cite{burgers1998analysis}.
+The general EnKF which we use is most similar to that of Burgers.
+Many algorithms based on the EnKF have been proposed and include the Ensemble Transform Kalman Filter (ETKF) \cite{ott2004local}, Ensemble Analysis Filter (EAF) \cite{anderson2001new}, Ensemble Square Root Filter (EnSRF) \cite{tippett2003ensemble}, Local Ensemble Kalman Filter (LEKF) \cite{ott2004local}, and the Local Ensemble Transform Kalman Filter (LETKF) \cite{hunt2007efficient}.
+A comprehensive overview through 2003 is provided by Evensen \cite{evensen2003ensemble}.
+For further details on the most advanced methods, beyond what is provided in the body of the paper, we direct the reader the above references and the derivations provided in \cite{reagan2013}.
+
+\clearpage
+\pagebreak
+\section{Additional DMD Details}
+
+The general algoritm for DMD was provided in Section III(C), and here we supply more results of the DMD procedure.
+The timeseries from which we computed the decomposition is shownn in Figure \ref{fig:DMD-timeseries}.
+
+The real and imaginary components of the DMD eigenvalues are shown in both unmapped and mapped form in Figure \ref{fig:DMD-eigenvalues}.
 
 \begin{figure*}
   \centering
