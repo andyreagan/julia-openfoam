@@ -15,45 +15,45 @@ Warning--no number and no volume in tu2013dynamic
 Warning--page numbers missing in tu2013dynamic
 Warning--page numbers missing in welander1967
 Warning--no volume for yuen1999
-You've used 31 entries,
+You've used 32 entries,
             2861 wiz_defined-function locations,
-            811 strings with 10507 characters,
-and the built_in function-call counts, 23972 in all, are:
-= -- 1933
-> -- 2035
+            818 strings with 10639 characters,
+and the built_in function-call counts, 24717 in all, are:
+= -- 1994
+> -- 2096
 < -- 3
-+ -- 624
-- -- 666
-* -- 2372
-:= -- 4372
-add.period$ -- 94
-call.type$ -- 31
-change.case$ -- 253
-chr.to.int$ -- 31
-cite$ -- 43
-duplicate$ -- 562
-empty$ -- 1312
-format.name$ -- 766
-if$ -- 4432
++ -- 644
+- -- 684
+* -- 2450
+:= -- 4504
+add.period$ -- 97
+call.type$ -- 32
+change.case$ -- 261
+chr.to.int$ -- 32
+cite$ -- 44
+duplicate$ -- 580
+empty$ -- 1354
+format.name$ -- 788
+if$ -- 4571
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 31
-newline$ -- 158
-num.names$ -- 310
-pop$ -- 174
+missing$ -- 32
+newline$ -- 163
+num.names$ -- 320
+pop$ -- 179
 preamble$ -- 1
-purify$ -- 440
+purify$ -- 454
 quote$ -- 0
-skip$ -- 580
+skip$ -- 597
 stack$ -- 0
-substring$ -- 1245
-swap$ -- 185
+substring$ -- 1286
+swap$ -- 191
 text.length$ -- 3
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 610
+type$ -- 630
 warning$ -- 12
-while$ -- 284
+while$ -- 292
 width$ -- 0
-write$ -- 409
+write$ -- 422
 (There were 12 warnings)

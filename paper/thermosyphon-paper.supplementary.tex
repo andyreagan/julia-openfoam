@@ -1,2 +1,192 @@
-Numerical weather prediction has since constantly pushed the boundary of computational power, and required a better understanding of atmospheric processes to make better predictions.
-In this direction, we make use of advanced computational resources in the context of a simplified atmospheric experiment to improve prediction skill.
+\section{Computational Details and Explicit Equations Used}
+
+%% Numerical weather prediction has since constantly pushed the boundary of computational power, and required a better understanding of atmospheric processes to make better predictions.
+%% In this direction, we make use of advanced computational resources in the context of a simplified atmospheric experiment to improve prediction skill.
+
+In this section, we first present the governing equations for the flow in our thermal convection loop experiment.
+A spatial and temporal discretization of the governing equations is then necessary so that they may be solved numerically.
+After discretization, we must specify the boundary conditions.
+With the mesh and boundary conditions in place, we can then simulate the flow with a computational fluid dynamics solver.
+
+We now discuss the equations, mesh, boundary conditions, and solver in more detail.
+With these considerations, we present our simulations of the thermosyphon.
+For a complete derivation of the equations used, see \cite{reagan2013}.
+
+\subsection{Governing Equations}
+We consider the incompressible Navier-Stokes equations with the Boussinesq approximation to model the flow of water inside a thermal convection loop.
+Here we present the main equations that are solved numerically, noting the assumptions that were necessary in their derivation.
+In Appendix C a more complete derivation of the equations governing the fluid flow, and the numerical for our problem, is presented.
+In standard notation, for $u,v,w$ the velocity in the $x,y,z$ direction, respectively, the continuity equation for an incompressible fluid is
+\begin{equation} \frac{\partial u}{\partial x} + \frac{\partial v}{\partial y} + \frac{\partial w}{\partial z} = 0. \label{eq:NScontIco} \end{equation}
+
+The momentum equations, presented compactly in tensor notation with bars representing averaged quantities, are given by
+\begin{equation} \rho_\text{ref} \left ( \frac{\partial \bar{u}_i}{\partial t} + \frac{\partial}{\partial x_j} \left( \bar{u}_j \bar{u}_i \right) \right )
+= -\frac{\partial \bar{p}} {\partial{x_i}} +  \mu \frac{\partial \bar{u}_i}{\partial x_j^2} + \bar{\rho} g_i \end{equation}
+for $\rho_\text{ref}$ the reference density, $\rho$ the density from the Boussinesq approximation, $p$ the pressure, $\mu$ the viscocity, and $g_i$ gravity in the $i$-direction.
+Note that $g_i = 0$ for $i \in \{ x,y\}$ since gravity is assumed to be the $z$ direction.
+The energy equation is given by
+\begin{equation} \frac{\partial }{\partial t} \left ( \rho \overline{e}\right ) + \frac{\partial}{\partial x_j} \left ( \rho \overline{e} \overline{u}_j \right ) 
+= 
+- \frac{\partial q_k^*}{\partial x_k}
+- \frac{\partial \overline{q}_k}{\partial x_k}
+\end{equation}
+for $e$ the total internal energy and $q$ the flux (where $q = \overline{q} + q^*$ is the averaging notation).
+
+\subsection{Implementation}
+
+The PISO (Pressure-Implicit with Splitting of Operators) algorithm derives from the work of \cite{issa1986solution}, and is complementary to the SIMPLE (Semi-Implicit Method for Pressure-Linked Equations) \cite{patankar1972calculation} iterative method.
+The main difference of the PISO and SIMPLE algorithms is that in the PISO, no under-relaxation is applied and the momentum corrector step is performed more than once \cite{ferziger1996computational}.
+They sum up the algorithm in nine steps:
+\begin{itemize}
+\item Set the boundary conditions
+\item Solve the discretized momentum equation to compute an intermediate velocity field
+\item Compute the mass fluxes at the cell faces
+\item Solve the pressure equation
+\item Correct the mass fluxes at the cell faces
+\item Correct the velocity with respect to the new pressure field
+\item Update the boundary conditions
+\item Repeat from step \#3 for the prescribed number of times
+\item Repeat (with increased time step).
+\end{itemize}
+
+The solver itself has 647 dependencies, of which I present only a fraction.
+The main code is straight forward, relying on include statements to load the libraries and equations to be solved.
+\lstset{language=C++,
+        basicstyle=\ttfamily\scriptsize\singlespacing,
+        keywordstyle=\color{blue},
+        stringstyle=\color{red},
+        commentstyle=\color{green},
+        morecomment=[l][\color{magenta}]{\#},
+        frame=L,
+        xleftmargin=\parindent,
+                                numbersep=5pt,
+        breaklines=true,                breakatwhitespace=false,            escapeinside={\%*}{*)} 
+}
+
+\lstinputlisting[language=C++,firstline=48,lastline=53]{/Users/andyreagan/work/2013/09-reagan-thesis/code/buoyantBoussinesqPimpleFoam/buoyantBoussinesqPimpleFoam-edited.C}
+
+The main function is then
+
+\lstinputlisting[language=C++,firstline=57,lastline=70]{/Users/andyreagan/work/2013/09-reagan-thesis/code/buoyantBoussinesqPimpleFoam/buoyantBoussinesqPimpleFoam-edited.C}
+
+We then enter the main loop.
+This is computed for each time step, prescribed before the solver is applied.
+Note that the capacity is available for adaptive time steps, choosing to keep the Courant number below some threshold, but I do not use this.
+For the distributed ensemble of model runs, it is important that each model complete in nearly the same time, so that the analysis is not waiting on one model and therefore under-utilizing the available resources.
+
+\lstinputlisting[language=C++,firstline=71,lastline=88]{/Users/andyreagan/work/2013/09-reagan-thesis/code/buoyantBoussinesqPimpleFoam/buoyantBoussinesqPimpleFoam-edited.C}
+
+Opening up the equation for $U$ we see that Equation
+
+\lstinputlisting[language=C++]{/Users/andyreagan/work/2013/09-reagan-thesis/code/buoyantBoussinesqPimpleFoam/UEqn.H}
+
+Solving for $T$ is 
+
+\lstinputlisting[language=C++]{/Users/andyreagan/work/2013/09-reagan-thesis/code/buoyantBoussinesqPimpleFoam/TEqn.H}
+
+Finally, we solve for the pressure $p$ in ``pEqn.H'':
+
+\lstinputlisting[language=C++]{/Users/andyreagan/work/2013/09-reagan-thesis/code/buoyantBoussinesqPimpleFoam/pEqn.H}
+
+The final operation being the conversion of pressure to hydrostatic pressure,
+\begin{equation*} p _\text{rgh} = p - \rho _k g_h . \end{equation*}
+This ``pEqn.H'' is then re-run until convergence is achieved, and the PISO loop begins again.
+
+\section{The Ehrhard and M\"{u}ller Equations}
+
+Following the derivation by Harris \cite{harris2011predicting}, itself a representation of the derivation of Gorman \cite{gorman1986} and namesakes Ehrhard and M\"{u}ller \cite{ehrhard1990dynamical}, we derive the equations governing a closed loop thermosyphon.
+
+Similar to the derivation of the governing equations of computational fluid dynamics, we start with a small but finite volume inside the loop.
+Here, however, the volume is described by $\pi r^2 R \text{d} \phi$ for $r$ the interior loop size (such that $\pi r^2$ is the area of a slice) and $R\text{d}\phi$ the arc length (width) of the slice.
+Newton's second law states that momentum is conserved, such that the sum of the forces acting upon our finite volume is equal to the change in momentum of this volume.
+Therefore we have the basic starting point for forces $\sum F$ and velocity $u$ as
+\begin{equation} \sum F = \rho \pi r^2 R \text{d}\phi \diff{u}{t} .\end{equation}
+The sum of the forces is $\sum F = F_{\{p,f,g\}}$ for net pressure, fluid shear, and gravity, respectively.
+We write these as
+\begin{align} & F_p = -\pi r^2 \text{d} \phi \pdiff{p}{\phi}\\
+& F_w = -\rho \pi r^2 \text{d} \phi f_w\\
+& F_g = -\rho \pi r^2 \text{d} \phi g \sin (\phi)\end{align}
+where $\partial p /\partial \phi$ is the pressure gradient, $f_w$ is the wall friction force, and $g \sin (\phi)$ is the vertical component of gravity acting on the volume.
+
+We now introduce the Boussinesq approximation which states that both variations in fluid density are linear in temperature $T$ and density variation is insignificant except when multiplied by gravity.
+The consideration manifests as
+\begin{equation*} \rho = \rho (T) \simeq \rho _\text{ref} (1 - \beta (T - T_\text{ref}) \end{equation*}
+where $\rho _0$ is the reference density and $T_\text{ref}$ is the reference temperature, and $\beta$ is the thermal expansion coefficient.
+The second consideration of the Boussinesq approximation allows us to replace $\rho$ with this $\rhoref$ in all terms except for $F_g$.
+We now write momentum equation as
+\begin{equation} -\pi r^2 \dphi \pdiff{p}{\phi} - \rhoref \phi r^2 R \dphi f_w
+- \rhoref (1 - \rho (T- T_\text{ref}) ) \pi r^2 R \dphi g \sin (\phi) = \rhoref \pi r^2 R \dphi \diff{u}{t}. \end{equation}
+Canceling the common $\pi r^2$, dividing by $R$, and pulling out $\dphi$ on the LHS we have
+\begin{equation} -\dphi \left ( \pdiff{p}{\phi}  \frac{1}{R} - \rhoref f_w - \rhoref (1 - \rho (T- T_\text{ref}) ) g \sin (\phi) \right ) = \rhoref \dphi \diff{u}{t}. \label{eq:EM07} \end{equation}
+We integrate this equation over $\phi$ to eliminate many of the terms, specifically we have
+\begin{align*}
+& \int _{0} ^{2\pi} -\dphi \pdiff{p}{\phi} \frac{1}{R} \rightarrow 0\\
+& \int _{0} ^{2\pi} -\dphi \rhoref g \sin (\phi) \rightarrow 0\\
+& \int _{0} ^{2\pi} -\dphi \rhoref \beta T_\text{ref} g \sin (\phi) \rightarrow 0.\end{align*}
+Since $u$ (and hence $\diff{u}{\phi}$) and $f_w$ do not depend on $\phi$, we can pull these outside an integral over $\phi$ and therefore the momentum equation is now 
+\begin{equation*} 2\pi f_w \rho _0 + \int _{0} ^{2\pi} \dphi \rhoref \beta T g \sin (\phi) = 2\pi \diff{u}{\phi} \rhoref .\end{equation*}
+Diving out $2\pi$ and pull constants out of the integral we have our final form of the momentum equation
+\begin{equation} f_w \rhoref + \frac{\rhoref \beta g }{2 \pi} \int _{0} ^{2\pi} \dphi T \sin (\phi) = \diff{u}{\phi} \rhoref \label{eq:EM10}.\end{equation}
+Now considering the conservation of energy within the thermosyphon, the energy change within a finite volume must be balanced by transfer within the thermosyphon and to the walls.
+The internal energy change is given by
+\begin{equation} \rhoref \pi r^2 R \dphi \left ( \pdiff{T}{t} + \frac{u}{R}\pdiff{T}{\phi} \right ) \label{eq:EMeg1}\end{equation}
+which must equal the energy transfer through the wall, which is, for $T_w$ the wall temperature:
+\begin{equation} \dot{q} = -\pi r^2 R \dphi h_w (T - T_w) . \label{eq:EMeg2} \end{equation}
+Combining Equations \ref{eq:EMeg1} and \ref{eq:EMeg2} (and canceling terms) we have the energy equation:
+\begin{equation} \left ( \pdiff{T}{t} + \frac{u}{R}\pdiff{T}{\phi} \right ) = \frac{-h_w}{\rhoref c_p} \left( T - T_w \right ) \label{eq:EMeq}.\end{equation}
+The $f_w$ which we have yet to define and $h_w$ are fluid-wall coefficients and can be described by \cite{ehrhard1990dynamical}:
+\begin{align*} & h_w = h_{w_0} \left ( 1 + K h(|x_1|) \right ) \\
+& f_w = \frac{1}{2} \rhoref f_{w_0} u .\end{align*}
+We have introduced an additional function $h$ to describe the behavior of the dimensionless velocity $x_1 \alpha u$.
+This function is defined piece-wise as 
+\begin{equation*} h (x) = \left \{ \begin{array}{ll} x^{1/3} & ~~\text{when} ~x \geq 1\\ p (x) & ~~\text{when} ~ x <1 \end{array} \right. \end{equation*} 
+where $p(x)$ can be defined as $p(x) = \left( 44x^2 -55 x^3 + 20x^4 \right ) /9$ such that $p$ is analytic at 0 \cite{harris2011predicting}.
+
+Taking the lowest modes of a Fourier expansion for $T$ for an approximate solution, we consider:
+\begin{equation} T(\phi , t) = C_0 (t) + S(t) \sin (\phi ) + C(t) \cos (\phi) . \end{equation}
+By substituting this form into Equations \ref{eq:EM10} and \ref{eq:EMeq} and integrating, we obtain a system of three equations for our solution.
+We then follow the particular nondimensionalization choice of Harris et al such that we obtain the following ODE system, which we refer to as the Ehrhard-M\"{u}ller equations:
+\begin{align}
+& \diff{x_1}{t'} = \alpha (x_2 - x_1),\\
+& \diff{x_2}{t'} = \beta x_1 - x_2 (1 + Kh(|x_1|)) - x_1x_3,\\
+& \diff{x_3}{t'} = x_1x_2 - x_3 (1 + Kh(|x_1|)) .\end{align}
+The nondimensionalization is given by the change of variables
+\begin{align}
+& t' = \frac{h_{w_0}}{\rhoref c_p}t,\\
+& x_1 = \frac{\rhoref c_p }{R h_{w_0}} u, \\
+& x_2 = \frac{1}{2} \frac{\rhoref c_p \beta g}{ R h_{w_0} f_{w_0}} \Delta T_{3-9}, \\
+& x_3 = \frac{1}{2} \frac{\rhoref c_p \beta g}{ R h_{w_0} f_{w_0}} \left ( \frac{4}{\pi} \Delta T_w - \Delta T_{6-12} \right ) 
+\end{align}
+and
+\begin{align}
+& \alpha = \frac{1}{2} R c_p f_{w_0} / h_{w_0} ,\\
+& \gamma = \frac{2}{\pi} \frac{\rhoref c_p \beta g}{Rh_{w_0} f_{w_0}} \Delta T_w. \end{align}
+
+Through careful consideration of these non-dimensional variable transformations we verify that $x_1$ is representative of the mean fluid velocity, $x_2$ of the temperature difference between the 3 and 9 o'clock positions on the thermosyphon, and $x_3$ the deviation from the vertical temperature profile in a conduction state \cite{harris2011predicting}.
+
+\section{Data Assimiliation}
+
+
+
+\section{More on DMD Methodology}
+
+\begin{figure*}
+  \centering
+  \includegraphics[width=0.98\textwidth]{../figures/DMD/DMD-data-timeseries-longer-wide.pdf}
+  \caption[]{
+    Flux timeseries on which DMD was performed.    
+  }
+  \label{fig:DMD-timeseries}  
+\end{figure*}
+
+%% ~/work/2015/08-kitchentabletools/pdftile.pl 1 2 .7 0 0 l 10 "" "A: DMD Eigenvalues" DMD-eigenvalues-tu-wU.pdf "B: DMD Eigenvalues (mapped)" DMD-eigenvalues-mapped-tu-wU.pdf eigenvalues-both-labeled
+\begin{figure*}
+  \centering
+  \includegraphics[width=0.98\textwidth]{../figures/DMD/eigenvalues-both-labeled.pdf}
+  \caption[]{
+    Eigenvalues of DMD Modes.
+  }
+  \label{fig:DMD-eigenvalues}  
+\end{figure*}
+
+
