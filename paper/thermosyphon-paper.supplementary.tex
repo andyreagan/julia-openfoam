@@ -141,7 +141,7 @@ The $f_w$ which we have yet to define and $h_w$ are fluid-wall coefficients and 
 & f_w = \frac{1}{2} \rhoref f_{w_0} u .\end{align*}
 We have introduced an additional function $h$ to describe the behavior of the dimensionless velocity $x_1 \alpha u$.
 This function is defined piece-wise as 
-\begin{equation*} h (x) = \left \{ \begin{array}{ll} x^{1/3} & ~~\text{when} ~x \geq 1\\ p (x) & ~~\text{when} ~ x <1 \end{array} \right. \end{equation*} 
+\begin{equation} h (x) = \left \{ \begin{array}{ll} x^{1/3} & ~~\text{when} ~x \geq 1\\ p (x) & ~~\text{when} ~ x <1 \end{array} \right. \label{eq:h_defined} \end{equation} 
 where $p(x)$ can be defined as $p(x) = \left( 44x^2 -55 x^3 + 20x^4 \right ) /9$ such that $p$ is analytic at 0 \cite{harris2011predicting}.
 
 Taking the lowest modes of a Fourier expansion for $T$ for an approximate solution, we consider:

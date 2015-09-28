@@ -1,48 +1,49 @@
 \section{Introduction}
 
-Prediction of the future state of complex systems is integral to the functioning of our society.
-Some of these systems include weather \cite{weather-violence2013}, health \cite{ginsberg2008detecting}, the economy \cite{sornette2006predictability}, marketing \cite{asur2010predicting} and engineering \cite{savely1972}.
-For weather in particular, this prediction is made using supercomputers integrating numerical weather models, projecting our current best guess of the weather into the future.
-The accuracy of these predictions depend on the accuracy of the models themselves, and the quality of our knowledge of the current state of the atmosphere.
+Prediction of the future state of complex systems is a fundamental challenge of science and engineering, and ultimately integral to the functioning of society.
+Some of these systems include weather \cite{weather-violence2013}, health \cite{ginsberg2008detecting}, the economy \cite{sornette2006predictability}, marketing \cite{asur2010predicting} and transportation \cite{savely1972}.
+For weather in particular, predictions are made using supercomputers integrating numerical weather models, projecting our current best guess of the weather into the future.
+The accuracy of these predictions depends on the accuracy of the models themselves, and the quality of our knowledge of the current state of the atmosphere.
 
 Model accuracy has improved with better meteorological understanding of weather processes and advances in computing technology \cite{bauer2015quiet}.
-To solve the initial value problem, techniques developed over the past 50 years are now broadly known as {\em data assimilation}.
+To solve the initial value problem, techniques developed over the past 50 years are now broadly known as {\em data assimilation} (DA).
 Formally, data assimilation is the process of using all available information, including short-range model forecasts and physical observations, to estimate the current state of a system as accurately as possible \cite{yang2006}.
-This best-guess of the current state is often referred to as the {\em analysis} state.
+The best-guess of the current state is often referred to as the {\em analysis} state.
 
-We employ a fluid dynamics experiment as a test-bed for improving numerical weather prediction algorithms, focusing specifically on data assimilation methods.
-This approach is inspired by the historical development of current methodologies, and provides a tractable system for rigorous analysis.
+Here, we employ a fluid dynamics experiment as a test bed for improving numerical weather prediction algorithms, focusing specifically on data assimilation methods.
+Our approach is inspired by the historical development of current methodologies, and provides a tractable system for rigorous analysis.
 The experiment is a thermal convection loop, which by design simplifies our problem into the prediction of convection.
+The thermosyphon, a type of natural convection loop or non-mechanical heat pump, can be likened to a toy model of climate \cite{harris2011predicting}.
 The dynamics of thermal convection loops have been explored under both periodic \cite{keller1966} and chaotic \cite{welander1967,creveling1975stability,gorman1984,gorman1986,ehrhard1990dynamical,yuen1999,jiang2003,burroughs2005reduced,desrayaud2006numerical,yang2006,ridouane2010} regimes.
-A full characterization of the computational behavior of a loop under flux boundary conditions by Louisos et. al. describes four regimes: chaotic convection with reversals, high Ra aperiodic stable convection, steady stable convection, and conduction/quasi-conduction \cite{louisos2013}.
+A full characterization of the computational behavior of a loop under flux boundary conditions by Louisos et. al. describes four regimes: chaotic convection with reversals, high Rayleigh number (Ra) aperiodic stable convection, steady stable convection, and conduction/quasi-conduction \cite{louisos2013}.
 For the remainder of this work, we focus on the chaotic flow regime.
 
-Computational simulations of the thermal convection loop are performed with the open-source finite volume C++ library OpenFOAM \cite{jasak2007}.
-The open-source nature of this software enables its integration with the data assimilation framework that this work provides.
+We perform all computational simulations of the thermal convection loop with the open-source finite volume C++ library OpenFOAM \cite{jasak2007}.
+The open-source nature of this software enables its integration with the data assimilation framework that our present work provides.
 
 \section{Physical Experiment and Computational Model}
 
-The thermosyphon, a type of natural convection loop or non-mechanical heat pump, can be likened to a toy model of climate \cite{harris2011predicting}.
 \begin{figure}[t!]
   \centering
   \includegraphics[width=0.45\textwidth]{figures/harris-tellus-2012-loop.pdf}
-  \caption[Schematic of the experimental, and computational, setup from Harris et al (2012)]{
-    Schematic of the experimental, and computational, setup from Harris et al (2012).
+  \caption[Schematic of the experimental, and computational, setup from Harris \etal (2012)]{
+    Schematic of the experimental, and computational, setup from Harris \etal (2012).
     The loop radius is given by $R$ and inner radius by $r$.
-    The top temperature is labeled $T_c$ and bottom temperature $T_h$, gravity $g$ is defined downward, the angle $\phi$ is prescribed from the 6 o'clock position, and temperature difference $\Delta T_{3-9}$ is labeled.
+    The top temperature is labeled $T_c$ and bottom temperature $T_h$, gravity $g$ is defined downward, the angle $\phi$ is prescribed from the 6 o'clock position, and temperature difference between 3 o'clock and 9 o'clock posititions $\Delta T_{3-9}$ is labeled.
   }
   \label{fig:thermosyphons}
 \end{figure}
 
 The reduced order system describing a thermal convection loop was originally derived by Gorman \cite{gorman1986} and Ehrhard and M\"{u}ller \cite{ehrhard1990dynamical}.
 Here we present this three dimensional system in non-dimensionalized form.
-In Appendix B we present a more complete derivation of these equations, following the derivation of Harris \cite{harris2011predicting}.
-For $x_{\{1,2,3\}}$ the mean fluid velocity, temperature different $\Delta T_{3-9}$, and deviation from conductive temperature profile, respectively, these equations are:
+In Appendix B, we present a more complete derivation of these equations, following the derivation of Harris \cite{harris2011predicting}.
+For the mean fluid velocity $\diff{x_1}{t}$, temperature difference between the 3 o'clock and 9 o'clock positions $\diff{x_2}{t}$ (also referred to presently as $\Delta T_{3-9}$), and deviation from conductive temperature profile $\diff{x_3}{t}$, these equations are:
 \begin{align}
 & \diff{x_1}{t} = \alpha (x_2 - x_1),\\
 & \diff{x_2}{t} = \beta x_1 - x_2 (1 + Kh(|x_1|)) - x_1x_3,\\
-& \diff{x_3}{t} = x_1x_2 - x_3 (1 + Kh(|x_1|)) .\end{align}
-The parameters $\alpha$ and $\beta$, along with scaling factors for time and each model variable can be fit to data using standard parameter estimation techniques.
+  & \diff{x_3}{t} = x_1x_2 - x_3 (1 + Kh(|x_1|)) .\end{align}
+The function $h(x)$ is a defined piecewise analytic polynomial, and is provided in the full derivation as Equation \ref{eq:h_defined}.
+The parameters $\alpha$, $\beta$, and $K$, along with scaling factors for time and each model variable can be fit to data using standard parameter estimation techniques.
 
 \begin{figure}[h!]
   \centering
@@ -62,7 +63,7 @@ The parameters $\alpha$ and $\beta$, along with scaling factors for time and eac
 %%   {
 %%     The Thermal Convection Loop experiment, inlaid with a time series of the temperature difference $\Delta T_{3-9}$ whose sign indicates the flow direction.
 %%     Fluorescent balls are lit by a black-light and move with the flow.
-%%     As the timeseries indicates, the flow changes direction aperiodically, giving rise to the chaotic behavior that we model.
+%%     As the time series indicates, the flow changes direction aperiodically, giving rise to the chaotic behavior that we model.
 %%     A video of the loop, from which this is a snapshot, can be viewed at \url{http://www.youtube.com/watch?feature=player_embedded&v=Vbni-7veJ-c}.
 %%           }
 %%   \label{fig:chrisLoop}
@@ -71,14 +72,14 @@ The parameters $\alpha$ and $\beta$, along with scaling factors for time and eac
 Operated by Dave Hammond, UVM's Scientific Electronics Technician, the experimental thermosyphons access the chaotic regime of state space found in the principled governing equations.
 We quote the detailed setup from Darcy Glenn's undergraduate thesis \cite{glenn2013}:
 \begin{quote}
-The [thermosyphon] was a bent semi-flexible plastic tube with a 10-foot heating rope wrapped around the bottom half of the upright circle.
-The tubing used was light-transmitting clear THV from McMaster-Carr, with an inner diameter of 7/8 inch, a wall thickness of 1/16 inch, and a maximum operating temperature of 200F.
-The outer diameter of the circular thermosyphon was 32.25 inches.
-This produced a ratio of about 1:36 inner tubing radius to outside thermosyphon radius.
-There were 1 inch 'windows' when the heating cable was coiled in a helix pattern around the outside of the tube, so the heating is not exactly uniform.
-The bottom half was then insulated using aluminum foil, which allowed fluid in the bottom half to reach 176F.
-A forcing of 57 V, or 105 Watts, was required for the heating cable so that chaotic motion was observed.
-Temperature was measured at the 3 o'clock and 9 o'clock positions using unsheathed copper thermocouples from Omega.
+The [thermosyphon] is a bent semi-flexible plastic tube with a 10-foot heating rope wrapped around the bottom half of the upright circle.
+The tubing used is light-transmitting clear THV from McMaster-Carr, with an inner diameter of 7/8 inch, a wall thickness of 1/16 inch, and a maximum operating temperature of 200F.
+The outer diameter of the circular thermosyphon is 32.25 inches.
+Together, the tubing inner diameter and outer diameter of the thermosyphon produce a ratio of approximately 1:36.
+There are 1 inch 'windows' when the heating cable is coiled in a helix pattern around the outside of the tube, so the heating is not exactly uniform.
+The bottom half is then insulated using aluminum foil, which allowed fluid in the bottom half to reach 176F.
+A forcing of 57 V, or 105 Watts, is required for the heating cable so that chaotic motion is observed.
+Temperature is measured at the 3 o'clock and 9 o'clock positions using unsheathed copper thermocouples from Omega.
 \end{quote}
 We first test our ability to predict this experimental thermosyphon using synthetic data.
 %% Synthetic data tests are the first step, since the data being predicted is generated by the predictive model.
@@ -89,13 +90,13 @@ We consider the incompressible Navier-Stokes equations with the Boussinesq appro
 For brevity, we omit the equations themselves, and include them in the Appendix.
 The solver in OpenFOAM that we use, with some modification, is \verb|buoyantBoussinesqPimpleFoam|.
 Solving is accomplished by the Pressure-Implicit Split Operator (PISO) algorithm \cite{issa1986solution}.
-Modification of the code was necessary for laminar operation.
+We find that modification of the code is necessary for laminar operation.
 
-Both 2-dimensional and 3-dimensional meshes were created using OpenFOAM's native meshing utility \verb|blockMesh|.
-After creating a mesh, we consider refining the mesh near the walls to capture boundary layer phenomena and renumbering the mesh for solving speed.
-To refine the mesh near walls, we used the \verb|refineWallMesh| utility, 
-Lastly, the mesh is renumbered using the \verb|renumberMesh| utility, which implements the Cuthill-McKee algorithm to minimize the adjacency matrix bandwidth, defined as the maximum distance from diagonal of nonzero entry.
-The 2D mesh contains 40,000 points (40 across the diameter and 1000 around).
+We create both 2-dimensional and 3-dimensional meshes using OpenFOAM's native meshing utility \verb|blockMesh|.
+After creating a mesh, we refine the mesh near the walls to capture boundary layer phenomena and renumber the mesh for solving speed.
+We use the \verb|refineWallMesh| utility to refine the mesh near walls, and the \verb|renumberMesh| utility to renumber the mesh.
+%% which implements the Cuthill-McKee algorithm to minimize the adjacency matrix bandwidth, defined as the maximum distance from diagonal of nonzero entry.
+The resulting 2D mesh contains 40,000 points (40 across the diameter and 1000 around).
 
 \begin{figure}[t]
   \centering
@@ -118,9 +119,9 @@ The 2D mesh contains 40,000 points (40 across the diameter and 1000 around).
   \label{fig:CFDmesh2}
 \end{figure}
 
-Available boundary conditions (BCs) that were found to be stable in OpenFOAM's solver were constant gradient, fixed value conditions, and turbulent heat flux.
-Simulations with a fixed flux BC is implemented through the \verb|externalWallHeatFluxTemperature| library were unstable and resulted in physically unrealistic results.
-Constant gradient simulations were stable, but the behavior was empirically different from our physical system.
+Available boundary conditions (BCs) we find to be stable in OpenFOAM's solver are constant gradient, fixed value conditions, and turbulent heat flux.
+Simulations with a fixed flux BC is implemented through the \verb|externalWallHeatFluxTemperature| library are unstable and resulted in physically unrealistic results.
+Constant gradient simulations are stable, but the behavior is empirically different from our physical system.
 While it is possible that a fixed value BC is acceptable due to the thermal diffusivity and thickness of the walls of the experimental setup, we find that this is also inadequate.
 We employ the third-party library \verb|groovyBC| to use a gradient condition that computes a flux using a fixed external temperature and fixed wall heat transfer coefficient.
 
@@ -134,41 +135,41 @@ where $f(i)$ corresponds the face perpendicular to the loop angle at cell $i$ an
 
 \subsection{Data Assimilation}
 
-Tests of the data assimilation algorithms described here are performed with the Lorenz '63 system, which is analogous to the above equations with Lorenz's $\beta = 1$, and $K = 0$.
-The canonical choices of $\sigma = 10, \beta = 8/3$ and $\rho = 28$ produce the well known butterfly attractor, and are used for all examples here.
-From these tests, we have found the optimal data assimilation parameters (inflation factors) for predicting time-series with this system.
-Having done so, we focus our efforts on making prediction using computational fluid dynamics models.
+We perform tests of the data assimilation algorithms described here with the Lorenz '63 system, which is analogous to the above equations with Lorenz's $\beta = 1$, and $K = 0$.
+The canonical choices of $\sigma = 10, \beta = 8/3$ and $\rho = 28$ produce the well known butterfly attractor, and we use these values for all examples here.
+From these tests, we find the optimal data assimilation parameters (inflation factors) for predicting time series with this system.
+Having done so, we then focus our efforts on making prediction using computational fluid dynamics models.
 
 We first implement the 3D-Var filter.
 Simply put, 3D-Var is the variational (cost-function) approach to finding the analysis.
 It has been shown that 3D-var solves the same statistical problem as optimal interpolation (OI) \cite{lorenc1986analysis}.
 The usefulness of the variational approach comes from the computational efficiency, when solved with an iterative method.
-The multivariate 3D-Var is thus finding the $\mbx _a$ that minimizes the cost function
+Specifically, the multivariate 3D-Var amounts to finding the $\mbx _a$ that minimizes the cost function
 \begin{equation} J(\mbx) = (\mbx - \mbx_b) ^T \mbB ^{-1} (\mbx - \mbx_b) + (\mby_o + H(\mbx))^T\mbR (\mby_o - H(\mbx)) .\end{equation}
 
-Next, we implemented the ``gold-standard'' Extended Kalman Filter (EKF).
+Next, we implement the ``gold-standard'' Extended Kalman Filter (EKF).
 The tangent linear model (TLM) is precisely the model (written as a matrix) that transforms a perturbation at time $t$ to a perturbation at time $t+\Delta t$, analytically equivalent to the Jacobian of the model.
-Using the notation of Kalnay \cite{kalnay2003}, this amounts to making a forecast with the nonlinear model $M$, and updating the error covariance matrix $\mbP$ with the TLM $L$, and adjoint model $L^T$
+Using the notation of Kalnay \cite{kalnay2003}, this amounts to making a forecast with the nonlinear model $M$, and updating the error covariance matrix $\mbP$ with the TLM $L$, and adjoint model $L^T$:
 
-\begin{align*} \mbx^f (t_i) &= M _{i-1} [\mbx ^a (t_{i-1} ) ]\\
+\begin{align*} \mbx^f (t_i) &= M _{i-1} [\mbx ^a (t_{i-1} ) ],\\
 \mbP^f (t_i ) &= L_{i-1} \mbP^a (t_{i-1} ) L^T _{i-1} + \mathbf{Q} (t_{i-1} ) \end{align*}
 
 where $\mathbf{Q}$ is the noise covariance matrix (model error).
 In the experiments with Lorenz '63 presented in this section, $\mathbf{Q} = 0$ since our model is perfect.
-In NWP, $\mathbf{Q}$ must be approximated, e.g. using statistical moments on the analysis increments \cite{danforth2007estimating,li2009accounting}.
+In numerical weather prediction, $\mathbf{Q}$ must be approximated, e.g., using statistical moments on the analysis increments \cite{danforth2007estimating,li2009accounting}.
 
 The analysis step is then written as (for $H$ the observation operator):
-\begin{align} \mbx^a (t_i ) &= \mbx^f (t_i) + \mbK_i \mbd_i\\
+\begin{align} \mbx^a (t_i ) &= \mbx^f (t_i) + \mbK_i \mbd_i,\\
 \mbP^a (t_i) &= (\mathbf{I} - \mbK_i \mbH_i )\mbP^f (t_i) \end{align}
 where
 \[ \mbd_i = \mby_i^o - \mbH[x^f (t_i) ] \]
-is the innovation. The Kalman gain matrix is computed to minimize the analysis error covariance $P^a _i$ as
+is the innovation. We compute the Kalman gain matrix to minimize the analysis error covariance $P^a _i$ as
 \[ \mbK_i = \mbP^f (t_i) \mbH_i ^T [ \mbR_i + \mbH_i \mbP^f (t_i) \mbH^T ] ^{-1} \]
 where $\mbR_i$ is the observation error covariance.
 Since we are making observations of the truth with random normal errors of standard deviation $\mbe$, the observational error covariance matrix $\mbR$ is a diagonal matrix with $\epsilon$ along the diagonal.
 The most difficult (and most computationally expensive) part of the EKF is deriving and integrating the TLM.
 For this reason, the EKF is not used operationally, and later we will turn to statistical approximations of the EKF using ensembles of model forecasts.
-With our CFD model we have no such TLM, and we present more detail on the TLM approachas applicable to the Lorenz '63 system in Appendix C.
+With our CFD model we have no such TLM, and we provide more detail on the TLM approachas applicable to the Lorenz '63 system in Appendix C.
 
 The computational cost of the EKF is mitigated through the approximation of the error covariance matrix $\mbP_f$ from the model itself, without the use of a TLM.
 One such approach is the use of a forecast ensemble, where a collection of models (ensemble members) are used to statistically sample model error propagation.
@@ -179,14 +180,14 @@ The only difference between this approach and the EKF, in general, is that the f
 
 The ETKF introduced by Bishop is one type of square root filter, and we present it here to provide background for the formulation of the LETKF \cite{bishop2001adaptive}.
 For a square root filter in general, we begin by writing the covariance matrices as the product of their matrix square roots.
-Because $\mbP_a,\mbP_f$ are symmetric positive-definite (by definition) we can write
+Because $\mbP_a$ and $\mbP_f$ are symmetric positive-definite (by definition), we can write
 \begin{equation} \mbP_a = \mbZ_a \mbZ_a^T ~~,~~~ \mbP_f = \mbZ_f \mbZ_f^T \end{equation}
 
 \begin{figure}[t]
   \centering
   \includegraphics[width=0.45\textwidth]{figures/window_experiment_plot002.pdf}
   \caption[The RMS error is reported for our EKF and EnKF filters]{
-    The RMS error (not scaled by climatology) is reported for our EKF and EnKF filters, measured as the difference between forecast and truth at the end of an assimiliation window for the latter 2500 assimiliation windows in a 3000 assimilation window model run.
+    The RMS error (not scaled by climatology) for our EKF and EnKF filters, measured as the difference between forecast and truth at the end of an assimiliation window for the latter 2500 assimiliation windows in a 3000 assimilation window model run.
     Error is measured in the only observed variable, $x_1$.
     Increasing the assimilation window led to an decrease in predictive skill, as expected.
     Additive and multiplicative covariance inflation is the same as Harris et. al (2011).
@@ -207,59 +208,59 @@ Because $\mbP_a,\mbP_f$ are symmetric positive-definite (by definition) we can w
 
 \end{figure}
 
-for $\mbZ_a,\mbZ_f$ the matrix square roots of $\mbP_a,\mbP_f$ respectively.
+where $\mbZ_a$ and $\mbZ_f$ are the matrix square roots of $\mbP_a$ and $\mbP_f$.
 We are not concerned that this decomposition is not unique, and note that $\mbZ$ must have the same rank as $\mbP$ which will prove computationally advantageous.
 The power of the SRF is now seen as we represent the columns of the matrix $\mbZ_f$ as the difference from the ensemble members from the ensemble mean, to avoid forming the full forecast covariance matrix $\mbP_f$.
 The ensemble members are updated by applying the model $M$ to the states $\mbZ_f$ such that an update is performed by
 \begin{equation} \mbZ_f = M \mbZ_a .\end{equation}
-To summarize, the steps for the ETKF are to (1) form $\mbZ_f^T\mbH^T\mbR^{-1}\mbH\mbZ_f$, assuming $\mathbf{R}^{-1}$ is easy, and (2) compute its eigenvalue decomposition, and apply it to $\mbZ_f$.
+To summarize, the steps for the ETKF are to (1) form $\mbZ_f^T\mbH^T\mbR^{-1}\mbH\mbZ_f$, assuming that computing $\mathbf{R}^{-1}$ is easy, and (2) compute its eigenvalue decomposition, and apply it to $\mbZ_f$.
 
 The LEKF implements a strategy that becomes important for large simulations: localization.
 Namely, the analysis is computed for each grid-point using only local observations, without the need to build matrices that represent the entire analysis space.
-This localization removes long-distance correlations from $\mathbf{B}$ and allows greater flexibility in the global analysis by allowing different linear combinations of ensemble members at different spatial locations \cite{kalnay20074}.
-The general formulation of the LEKF by Ott \cite{ott2004local} goes as follows, quoting directly:
+Localization removes long-distance correlations from $\mathbf{B}$ and allows greater flexibility in the global analysis by allowing different linear combinations of ensemble members at different spatial locations \cite{kalnay20074}.
+The general formulation of the LEKF by Ott goes as follows, quoting directly from \cite{ott2004local}:
 \begin{enumerate}
-\item Globally advance each ensemble member to the next analysis timestep. Steps 2-5 are performed for each grid point
-\item Create local vectors from each ensemble member
-\item Project that point's local vectors from each ensemble member into a low dimensional subspace as represented by perturbations from the mean
-\item Perform the data assimilation step to obtain a local analysis mean and covariance
-\item Generate local analysis ensemble of states
-\item Form a new global analysis ensemble from all of the local analyses
+\item Globally advance each ensemble member to the next analysis timestep. Steps 2--5 are performed for each grid point.
+\item Create local vectors from each ensemble member.
+\item Project that point's local vectors from each ensemble member into a low dimensional subspace as represented by perturbations from the mean.
+\item Perform the data assimilation step to obtain a local analysis mean and covariance.
+\item Generate local analysis ensemble of states.
+\item Form a new global analysis ensemble from all of the local analyses.
 \item Wash, rinse, and repeat.
 \end{enumerate}
 
 Proposed by Hunt in 2007 with the stated objective of computational efficiency, the LETKF is named from its most similar algorithms from which it draws \cite{hunt2007efficient}.
 With the formulation of the LEKF and the ETKF given, the LETKF can be  described as a synthesis of the advantages of both of these approaches.
-This is the method that was sufficiently efficient for implementation on the full OpenFOAM CFD model of 240,000 model variables, and so we present it in more detail and follow the notation of Hunt et al (2007). 
+The LETKF is the method sufficiently efficient for implementation on the full OpenFOAM CFD model of 240,000 model variables, and so we present it in more detail and follow the notation of Hunt \etal (2007). 
 As in the LEKF, we explicitly perform the analysis for each grid point of the model.
 The choice of observations to use for each grid point can be selected a priori, and tuned adaptively.
-Starting with a collection of background forecast vectors $\{ \mbx_{b(i)} \,:\,i=1..k \}$, we perform steps 1 and 2 in a global variable space, then steps 3-8 for each grid point:
+Starting with a collection of background forecast vectors $\{ \mbx_{b(i)}:\,i=1,\ldots,k \}$, we perform steps 1 and 2 in a global variable space, then steps 3--8 for each grid point:
 \begin{enumerate}
-\item apply $H$ to $\mbx_{b(i)}$ to form $\mby_{b(i)}$, average the $\mby_b$ for $\overline{\mby_b}$, and form $\mbY b$.
-\item similarly form $\mbX_b$. (now for each grid point)
-\item form the local vectors
-\item compute $\mathbf{C}=(\mbY_b)^T\mbR^{-1}$ (perhaps by solving $\mbR \mathbf{C}^T = \mbY_b$
-\item compute $\tilde{\mbP}_a = \left( (k-1)\mathbf{I} / \rho + \mathbf{C} \mbY _b \right ) ^{-1}$ where $\rho > 1$ is a tun-able covariance inflation factor
-\item compute $\mbW_a = \left ( (k-1) \tilde{\mbP} _a \right ) ^{1/2}$
-\item compute $\overline{\mbw} _a  = \tilde{\mbP}_a \mathbf{C} \left ( \mby_o - \overline{\mby} _b \right )$ and add it to the column of $\mbW_a$
-\item multiply $\mbX_b$ by each $\mbw_{a(i)}$ and add $\tilde{\mbx}_b$ to get $\left\{ \mbx_{a(i)}\,:\,i=1..k\right \}$ to complete each grid point
-\item combine all of the local analysis into the global analysis.
+\item Apply $H$ to $\mbx_{b(i)}$ to form $\mby_{b(i)}$, average the $\mby_b$ for $\overline{\mby_b}$, and form $\mbY b$.
+\item Similarly form $\mbX_b$. Now for each grid point:
+\item Form the local vectors.
+\item Compute $\mathbf{C}=(\mbY_b)^T\mbR^{-1}$ (perhaps by solving $\mbR \mathbf{C}^T = \mbY_b$.
+\item Compute $\tilde{\mbP}_a = \left( (k-1)\mathbf{I} / \rho + \mathbf{C} \mbY _b \right ) ^{-1}$ where $\rho > 1$ is a tun-able covariance inflation factor.
+\item Compute $\mbW_a = \left ( (k-1) \tilde{\mbP} _a \right ) ^{1/2}$.
+\item Compute $\overline{\mbw} _a  = \tilde{\mbP}_a \mathbf{C} \left ( \mby_o - \overline{\mby} _b \right )$ and add it to the column of $\mbW_a$.
+\item Multiply $\mbX_b$ by each $\mbw_{a(i)}$ and add $\tilde{\mbx}_b$ to get $\left\{ \mbx_{a(i)}:\,i=1,\ldots,k\right \}$ to complete each grid point.
+\item Combine all of the local analysis into the global analysis.
 \end{enumerate}
-The LETKF is implemented on our mesh using the full 40 cells across with zone sizes of center 10, and sides 15, resulting in 1600 local variables for 100 zones.
+We implement the LETKF on our mesh using the full 40 cells across with zone sizes of center 10, and sides 15, resulting in 1600 local variables for 100 zones.
 In parallel, these 100 local computations can all be carried out simultaneously over an arbitrary number of processors.
 
-\subsection{Limited observation with adaptive local covariance}
+\subsection{Limited observations \& adaptive covariance}
 
 An initial test of prediction skill with limited observations in a twin model experiment showed that we needed 1000 spatial measurements of the temperature to predict flow reversals within 1 assimilation window.
 In an attempt to decrease the required observations to a experimentally realizable number, we implement a simple, adaptively localized covariance for data assimilation.
 Using the ``square'' sections of the loop to localize, we shift the zone to the left or right to follow the dominate flow direction at the center of that local window.
 Since we first saw a modest improvement in the prediction skill with full temperature observations, we hope that this improvement increases and is sufficient to get down to needing as few as 32 observations to predict reversals 1 assimilation window (of length 10 seconds) into the future.
 
-In Figure \ref{fig:sliding_spag} we see that the over an assimilation of 200 seconds, the ensemble converges on the hidden, true state.
+In Figure \ref{fig:sliding_spag} we see that over an assimilation of 200 seconds, the ensemble converges on the hidden, true state.
 To test the performace of flow reversal prediction, we take the average of the ensemble flow direction (the average of each value of $\phi$) as the predicted flow direction, and count how often we predict reversals both when they do and do not occur.
 Varying both the number of model variables and the strength of convariance shifting in Figure \ref{fig:sliding_results}, we find that covariance shifting improves flow reversal prediction skill even when overservations are decreased.
-With full observations (spacing of 1), we have a the best predictions with a covariance shift of 2.
-For 1/2 and 1/5 observations (a spacing of 2 (5) to obvserve every other (fifth) variable), we again have the best predictions with a shift of 2.
+With full observations (spacing of 1), we obtain a the best predictions with a covariance shift of 2.
+For 1/2 and 1/5 observations [a spacing of 2 (5) to obvserve every other (fifth) variable], we again have the best predictions with a shift of 2.
 And for a spacing of 10, observing every 10th variable, we achieve greater prediction skill with a covariance shift of 10.
 
 Computing the average flow direction inside a localized covariance zone is straighforward, and computationally easy since the velocity is immediately available, making incorporation of this scheme into any data assimilation method easy.
@@ -311,7 +312,7 @@ Since observations are also sparse in large weather models, we expect that using
 %%   \label{fig:DMD_phaseplane}
 %% \end{figure}
 
-%% the stacked figures are made by pasting the png timeseries on top of the png loops in preview, and stretching the png timeseries to be from the left edge to .25 on x, then centering vertically using the dragging circles, and horizontally by eye
+%% the stacked figures are made by pasting the png time series on top of the png loops in preview, and stretching the png time series to be from the left edge to .25 on x, then centering vertically using the dragging circles, and horizontally by eye
 %% then we combine them into labeled and unlabeled versions like this:
 %% ~/work/2015/08-kitchentabletools/pdftile.pl 1 3 .3 0 0 l 12 "" "" DMD-mode02-tu-Wu-stacked.png "" DMD-mode79-tu-Wu-stacked.png "" ../../figures/DMD/DMD_mode_2_79_phaseplane-003.pdf combined-phase-potrait-2-79
 %% but here, first go modify pdftile to wrap the titles in a ``footnotesize''
@@ -321,9 +322,9 @@ Since observations are also sparse in large weather models, we expect that using
   \centering
   \includegraphics[width=0.98\textwidth]{figures/combined-phase-potrait-2-79-labeled.pdf}
   \caption[]{
-    Panel A: The temperature profile of the thermosyphon of Mode 2, with inset of the projection of timeseries states onto Mode 2 (the projection coefficient).
-    Panel B: Likewise, the temperature profile of the thermosyphon of Mode 79, with inset of the projection of timeseries states onto Mode 79 (the projection coefficient).
-    Panel C: This butterfly-shaped phase plane shows the value of the projection onto modes 2 and 79 for each time in the first 2000 timesteps of our ground truth model run.
+    Panel A: The temperature profile of the thermosyphon of Mode 2, with inset of the projection of time series states onto Mode 2 (the projection coefficient).
+    Panel B: Likewise, the temperature profile of the thermosyphon of Mode 79, with inset of the projection of time series states onto Mode 79 (the projection coefficient).
+    Panel C: A butterfly-shaped phase plane shows the value of the projection onto modes 2 and 79 for each time in the first 2000 timesteps of our ground truth model run.
     In blue and green stars the states that occur directly before a flow are highlighted, and are isolated into separate quadrants of phase space.
   }
   \label{fig:DMD_phaseplane}
@@ -336,7 +337,7 @@ Since observations are also sparse in large weather models, we expect that using
     Schematic of the adaptive covariance localization.
     In Panel A we see a zonal (square) covariance that is most similar to the covariance used for both control sliding covariance.
     Panel B shows a localized covariance using a ``local radius'', and Panel C shows an idealized, fully adaptive covariance.
-    While we were motivated by localization around flow structures like Panel C, we simply shifted the covariance in Panel A so that our method is most general and computationally efficient.
+    While we are motivated by localization around flow structures like Panel C, we simply shifted the covariance in Panel A so that our method is most general and computationally efficient.
   }
   \label{fig:covariance-localization-schematic}
 \end{figure}
@@ -344,13 +345,13 @@ Since observations are also sparse in large weather models, we expect that using
 
 To incorporate limited observations into a high-dimensional CFD simulation, we combine ideas from both CFD literature and data assimilation to make predictions.
 %% We perform data assimilation in a subspace composed of the leading modes from a DMD of a series of loop snapshots.
-A Dynamic Mode Decomposition is performed using the ``standard'' algorithm of Tu \cite{tu2013dynamic}, using snapshots every 10 seconds for the first 900 seconds of model time.
-A full picture of this timeseries can be found Appendix C, Figure \ref{fig:DMD-timeseries}.
+We emply the Dynamic Mode Decomposition, specifically the ``standard'' algorithm of Tu \cite{tu2013dynamic}, using snapshots every 10 seconds for the first 900 seconds of model time.
+A full picture of this time series can be found Appendix C, Figure \ref{fig:DMD-timeseries}.
 The ``standard'' algorithm is as follows with $X$ and $Y$ taken as the first and last $N-1$ columns of the snapshot matrix $D$:
-\begin{align*} X &= U\Sigma V~~~ \text{take SVD of $X$}\\
-  \tilde{A} &= U^T Y V \Sigma ^{-1}~~~ \text{build the $A$ matrix}\\
-  \tilde{A}w &= \lambda w~~~ \text{compute eigenvectors and values}\\
-  \hat{\theta}w &= U w~~~ \text{compute corresponding modes}\end{align*}
+\begin{align*} X &= U\Sigma V \tag*{(Take SVD of $X$.)}\\
+  \tilde{A} &= U^T Y V \Sigma ^{-1} \tag*{(Build the $A$ matrix.)}\\
+  \tilde{A}w &= \lambda w \tag*{(Compute eigenvectors and values.)}\\
+  \hat{\theta}w &= U w \tag*{(Compute corresponding modes.)}\end{align*}
 
 In this reduced space, we extract the modes that correspond to the instability leading to flow reversals.
 For modes 21 and 79, we directly observe in Figure \ref{fig:DMD_modes} that the average projection from states just 1 second before reversal is the most different from the average stat projection, and the further away from the reversal, the more similiar the states become to the average.
@@ -358,18 +359,18 @@ In Figure \ref{fig:DMD_phaseplane} we see that the dominant dynamics from mode 2
 
 \section{Results}
 
-The first output of this work is a general data assimilation framework for MATLAB and Julia.
+The first output of our work is a general data assimilation framework for MATLAB and Julia.
 By utilizing an object-oriented (OO) design, the model and data assimilation algorithm code are separate and can be changed independently.
 The principal advantage of this approach is the ease of incorporation of new models and DA techniques (code available at \url{https://github.com/andyreagan/julia-openfoam}).
 
 We first present the results pertaining to the accuracy of forecasts for synthetic data (twin model experiments).
 There are many possible experiments given the choice of assimilation window, data assimilation algorithm, localization scheme, model resolution, observational density, observed variables, and observation quality.
-We focused on considering the effect of observations and observational locations on the resulting forecast skill, and found that there was a threshold for the required number of observations to make useful predictions.
+We focused on considering the effect of observations and observational locations on the resulting forecast skill, and we find that there is a threshold for the required number of observations to make useful predictions.
 In general, we see that increasing observational density leads to improved forecast accuracy.
 With too few observations, the data assimilation is unable to recover the underlying dynamics.
 Using adaptively localized covariance holds promise for data assimilation with data-scarce models, to overcome the lack of data.
 
-The ability of DMD to recover the lower dimensional dynamics was expected but with 120000 variables is nonetheless an accomplishment.
+The ability of DMD to recover the lower dimensional dynamics is expected but with 120,000 variables is nonetheless an accomplishment.
 When modeling systems for which there are unknown but useful dimension reductions, as demonstrated here, DMD can be a useful tool.
 
 The numerical coupling of CFD to experiment by DA should be generally useful to improve the skill of CFD predictions in even data-poor experiments, which can provide better knowledge of unobservable quantities of interest in fluid flow.
