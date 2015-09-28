@@ -14,8 +14,7 @@ For a complete derivation of the equations used, see \cite{reagan2013}.
 
 \subsection{Governing Equations}
 We consider the incompressible Navier-Stokes equations with the Boussinesq approximation to model the flow of water inside a thermal convection loop.
-Here we present the main equations that are solved numerically, noting the assumptions that were necessary in their derivation.
-In Appendix C a more complete derivation of the equations governing the fluid flow, and the numerical for our problem, is presented.
+Here we present the main equations that are solved numerically, noting the assumptions that are necessary in their derivation.
 In standard notation, for $u,v,w$ the velocity in the $x,y,z$ direction, respectively, the continuity equation for an incompressible fluid is
 \begin{equation} \frac{\partial u}{\partial x} + \frac{\partial v}{\partial y} + \frac{\partial w}{\partial z} = 0. \label{eq:NScontIco} \end{equation}
 
@@ -38,14 +37,14 @@ The PISO (Pressure-Implicit with Splitting of Operators) algorithm derives from 
 The main difference of the PISO and SIMPLE algorithms is that in the PISO, no under-relaxation is applied and the momentum corrector step is performed more than once \cite{ferziger1996computational}.
 They sum up the algorithm in nine steps:
 \begin{itemize}
-\item Set the boundary conditions
-\item Solve the discretized momentum equation to compute an intermediate velocity field
-\item Compute the mass fluxes at the cell faces
-\item Solve the pressure equation
-\item Correct the mass fluxes at the cell faces
-\item Correct the velocity with respect to the new pressure field
-\item Update the boundary conditions
-\item Repeat from step \#3 for the prescribed number of times
+\item Set the boundary conditions.
+\item Solve the discretized momentum equation to compute an intermediate velocity field.
+\item Compute the mass fluxes at the cell faces.
+\item Solve the pressure equation.
+\item Correct the mass fluxes at the cell faces.
+\item Correct the velocity with respect to the new pressure field.
+\item Update the boundary conditions.
+\item Repeat from step \#3 for the prescribed number of times.
 \item Repeat (with increased time step).
 \end{itemize}
 
@@ -227,7 +226,7 @@ The spread of ensemble members in the $x_1$ variable of the Lorenz model, as dis
 \end{figure}
 
 In computing the error covariance $\mbP_f$ from the ensemble, we wish to add up the error covariance of each forecast with respect to the mean forecast. 
-But this would underestimate the error covariance, since the forecast we're comparing against was used in the ensemble average (to obtain the mean forecast).
+But this would underestimate the error covariance, since the forecast we're comparing against is used in the ensemble average (to obtain the mean forecast).
 Therefore, to compute the error covariance matrix for each forecast, that forecast itself is excluded from the ensemble average forecast.
 
 We can see the classic spaghetti of the ensemble with this filter implemented on Lorenz 63 in Figure \ref{fig:spaghetti}.
@@ -238,7 +237,7 @@ We can see the classic spaghetti of the ensemble with this filter implemented on
   \caption[A sample time-series of the ensembles used in the EnKF]{
     A sample time-series of the ensembles used in the EnKF.
     In all tests, as seen here, 10 ensemble members are used.
-    For this run, 384 assimilation cycles were performed with a window length of 0.26 model time units.
+    For this run, 384 assimilation cycles are performed with a window length of 0.26 model time units.
   }
   \label{fig:spaghetti}
 \end{figure}
@@ -253,7 +252,7 @@ For further details on the most advanced methods, beyond what is provided in the
 \pagebreak
 \section{Additional DMD Details}
 
-The general algoritm for DMD was provided in Section III(C), and here we supply more results of the DMD procedure.
+The general algoritm for DMD is provided in Section III(C), and here we supply more results of the DMD procedure.
 The timeseries from which we computed the decomposition is shownn in Figure \ref{fig:DMD-timeseries}.
 
 The real and imaginary components of the DMD eigenvalues are shown in both unmapped and mapped form in Figure \ref{fig:DMD-eigenvalues}.
@@ -262,7 +261,7 @@ The real and imaginary components of the DMD eigenvalues are shown in both unmap
   \centering
   \includegraphics[width=0.98\textwidth]{../figures/DMD/DMD-data-timeseries-longer-wide.pdf}
   \caption[]{
-    Flux timeseries on which DMD was performed.    
+    Flux timeseries on which DMD is performed.    
   }
   \label{fig:DMD-timeseries}  
 \end{figure*}

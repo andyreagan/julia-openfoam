@@ -22,10 +22,9 @@
 \citation{glenn2013}
 \citation{issa1986solution}
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Schematic of the experimental, and computational, setup from Harris \textit  {et al.}(2012)}}{2}{}}
-\newlabel{fig:thermosyphons}{{1}{2}{}{}{}}
+\newlabel{fig:thermosyphon-schematic}{{1}{2}{}{}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces A time series of the physical thermosyphon, from the Undergraduate Honor's Thesis of Darcy Glenn {\cite {glenn2013}}}}{2}{}}
-\newlabel{fig:chrisLoop}{{2}{2}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {A}Computational Setup}{2}{}}
+\newlabel{fig:thermosyphon-physical-timeseries}{{2}{2}{}{}{}}
 \citation{lorenc1986analysis}
 \citation{kalnay2003}
 \@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces A snapshot of the mesh used for CFD simulations}}{3}{}}
@@ -41,24 +40,26 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces The RMS error is reported for our EKF and EnKF filters}}{4}{}}
 \newlabel{fig:window_test}{{5}{4}{}{}{}}
 \citation{hunt2007efficient}
+\citation{tu2013dynamic}
 \@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces The RMS error averaged over 100 model runs of length 1000 windows is reported for the ETKF for varying additive and multiplicative inflation factors}}{5}{}}
 \newlabel{fig:ETKF_cov_tuning_390s}{{6}{5}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {B}Limited observations \& adaptive covariance}{5}{}}
-\citation{tu2013dynamic}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B}Adaptive covariance localization}{5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C}Dynamic mode decomposition}{6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {IV}Results}{6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A}Data assimilation}{6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B}Limited observations \& adaptive covariance}{6}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces }}{6}{}}
 \newlabel{fig:sliding_spag}{{7}{6}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {C}DMD experiment}{6}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces }}{6}{}}
-\newlabel{fig:sliding_results}{{8}{6}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces }}{6}{}}
-\newlabel{fig:DMD_modes}{{9}{6}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C}Dynamic mode decomposition}{6}{}}
 \bibdata{thermosyphon-paper}
 \bibcite{anderson2001new}{{1}{2001}{{Anderson}}{{Anderson}}}
 \bibcite{asur2010predicting}{{2}{2010}{{Asur and Huberman}}{{Asur and Huberman}}}
 \bibcite{bauer2015quiet}{{3}{2015}{{Bauer et~al.}}{{Bauer, Thorpe, and Brunet}}}
-\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces }}{7}{}}
-\newlabel{fig:DMD_phaseplane}{{10}{7}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {IV}Results}{7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces }}{7}{}}
+\newlabel{fig:sliding_results}{{8}{7}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces }}{7}{}}
+\newlabel{fig:DMD_modes}{{9}{7}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {V}Concluding Remarks}{7}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {}Acknowledgments}{7}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {}References}{7}{}}
 \bibcite{bishop2001adaptive}{{4}{2001}{{Bishop et~al.}}{{Bishop, Etherton, and Majumdar}}}
@@ -84,12 +85,12 @@
 \bibcite{kalnay20074}{{24}{2007}{{Kalnay et~al.}}{{Kalnay, Li, Miyoshi, YANG, and BALLABRERA-POY}}}
 \bibcite{keller1966}{{25}{1966}{{Keller}}{{Keller}}}
 \bibcite{li2009accounting}{{26}{2009}{{Li et~al.}}{{Li, Kalnay, Miyoshi, and Danforth}}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces }}{8}{}}
+\newlabel{fig:DMD_phaseplane}{{10}{8}{}{}{}}
 \bibcite{lorenc1986analysis}{{27}{1986}{{Lorenc}}{{Lorenc}}}
 \bibcite{louisos2013}{{28}{2013}{{Louisos et~al.}}{{Louisos, Hitt, and Danforth}}}
 \bibcite{ott2004local}{{29}{2004}{{Ott et~al.}}{{Ott, Hunt, Szunyogh, Zimin, Kostelich, Corazza, Kalnay, Patil, and Yorke}}}
 \bibcite{patankar1972calculation}{{30}{1972}{{Patankar and Spalding}}{{Patankar and Spalding}}}
-\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces }}{8}{}}
-\newlabel{fig:covariance-localization-schematic}{{11}{8}{}{}{}}
 \bibcite{autodiff1981}{{31}{1981}{{Rall}}{{Rall}}}
 \bibcite{reagan2013}{{32}{2013}{{Reagan}}{{Reagan}}}
 \bibcite{ridouane2010}{{33}{2010}{{Ridouane et~al.}}{{Ridouane, Danforth, and Hitt}}}
@@ -101,6 +102,8 @@
 \bibcite{yang2006}{{39}{2006}{{Yang et~al.}}{{Yang, Baker, Li, Cordes, Huff, Nagpal, Okereke, Villafane, Kalnay, and Duane}}}
 \bibcite{yuen1999}{{40}{1999}{{Yuen and Bau}}{{Yuen and Bau}}}
 \global \chardef \firstnote@num40\relax 
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces }}{9}{}}
+\newlabel{fig:covariance-localization-schematic}{{11}{9}{}{}{}}
 \newlabel{LastBibItem}{{40}{9}{}{}{}}
 \citation{reagan2013}
 \citation{issa1986solution}
