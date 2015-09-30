@@ -45,10 +45,13 @@ For the mean fluid velocity $\diff{x_1}{t}$, temperature difference between the 
 The function $h(x)$ is a defined piecewise analytic polynomial, and is provided in the full derivation as Equation \ref{eq:h_defined}.
 The parameters $\alpha$, $\beta$, and $K$, along with scaling factors for time and each model variable can be fit to data using standard parameter estimation techniques.
 
+%% generated figure by /Users/andyreagan/work/2013/05-data-assimilation/thermosyphon/timeseries-plot.ipynb
 \begin{figure}[h!]
   \centering
-  \includegraphics[width=0.45\textwidth]{figures/221TimeSeries.pdf}
+  %% \includegraphics[width=0.45\textwidth]{figures/221TimeSeries.pdf}
+  \includegraphics[width=0.5\textwidth]{/Users/andyreagan/work/2013/05-data-assimilation/thermosyphon/2015-09-30-12-26-221-timeseries.pdf}
   \caption[A time series of the physical thermosyphon, from the Undergraduate Honor's Thesis of Darcy Glenn {\protect \cite{glenn2013}}]{
+    %% \the\textwidth %% 510.0pt
     A time series of the physical thermosyphon, from the Undergraduate Honor's Thesis of Darcy Glenn {\protect \cite{glenn2013}}.
     The temperature difference (plotted) is taken as the difference between temperature sensors in the 3 and 9 o'clock positions.
     The sign of the temperature difference indicates the flow direction, where positive values are clockwise flow.
@@ -186,19 +189,20 @@ Because $\mbP_a$ and $\mbP_f$ are symmetric positive-definite (by definition), w
 
 \begin{figure}[t]
   \centering
-  \includegraphics[width=0.45\textwidth]{figures/window_experiment_plot002.pdf}
+  %% \includegraphics[width=0.45\textwidth]{figures/window_experiment_plot002.pdf}
+  \includegraphics[width=0.50\textwidth]{/Users/andyreagan/work/2013/05-data-assimilation/src/experiments/windowExperiment/2015-09-30-14-17-window-experiment.pdf}
   \caption[The RMS error is reported for our EKF and EnKF filters]{
-    The RMS error (not scaled by climatology) for our EKF and EnKF filters, measured as the difference between forecast and truth at the end of an assimiliation window for the latter 2500 assimiliation windows in a 3000 assimilation window model run.
+    The RMS error (not scaled by climatology) for our EKF and EnKF filters, measured as the difference between forecast and truth at the end of an assimiliation window for the latter 2500 assimiliation windows in a 3000 assimilation window Lorenz '63 run.
     Error is measured in the only observed variable, $x_1$.
     Increasing the assimilation window led to an decrease in predictive skill, as expected.
-    Additive and multiplicative covariance inflation is the same as Harris et. al (2011).
   }
   \label{fig:window_test}
 \end{figure}
 
 \begin{figure}[t]
   \centering
-  \includegraphics[width=0.45\textwidth]{figures/ETKF_390s_infl_error.pdf}
+  %% \includegraphics[width=0.45\textwidth]{figures/ETKF_390s_infl_error.pdf}
+  \includegraphics[width=0.48\textwidth]{/Users/andyreagan/work/2013/05-data-assimilation/src/experiments/covInflTest/2015-09-30-15-35-ETKF-390s.pdf}
   \caption[The RMS error averaged over 100 model runs of length 1000 windows is reported for the ETKF for varying additive and multiplicative inflation factors]{
     The RMS error averaged over 100 model runs of length 1000 windows is reported for the ETKF for varying additive and multiplicative inflation factors $\Delta$ and $\mu$.
     Each of the 100 model runs starts with a random IC, and the analysis forecast starts randomly.
@@ -299,11 +303,12 @@ Since observations are also sparse in large weather models, we expect that using
 
 \begin{figure}[t]
   \centering
-  \includegraphics[width=0.45\textwidth]{../figures/loop-spaghetti-slide-004-full.pdf}
+  %% \includegraphics[width=0.45\textwidth]{../figures/loop-spaghetti-slide-004-full.pdf}
+  \includegraphics[width=0.48\textwidth]{../figures/2015-09-30-15-48-loop-spaghetti.pdf}
   \caption[]{
     Convergence of 20 ensembles using sliding windows, starting from initially random states.
     Here, as in most of the experiments, only temperature is observered and assimilated.
-    Flux is computed as in Equation 4, on the left hand side of the thermosyphon.
+    Flux is computed as in Equation 4, on the left hand side of the thermosyphon, and scaled by a factor of $10^8$.
     Assimilation takes place every 10 model seconds.
   }
   \label{fig:sliding_spag}
