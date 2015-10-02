@@ -316,7 +316,7 @@ Since observations are also sparse in large weather models, we expect that using
 
 \begin{figure}[t]
   \centering
-  \includegraphics[width=0.45\textwidth]{../figures/2015-09-13-23-04-consuela.pdf}
+  \includegraphics[width=0.45\textwidth]{../figures/2015-09-30-19-59-consuela-2.pdf}
   \caption[]{
     Prediction skill as fraction of reversals that we correctly predicted across different numbers of observations and sliding windows of localized covariance.
   }
@@ -327,7 +327,8 @@ Since observations are also sparse in large weather models, we expect that using
 
 \begin{figure}[t]
   \centering
-  \includegraphics[width=0.45\textwidth]{../figures/DMD/DMD_modes_pre_reversals.pdf}
+  %% \includegraphics[width=0.45\textwidth]{../figures/DMD/DMD_modes_pre_reversals.pdf}
+  \includegraphics[width=0.45\textwidth]{../2015-10-02-12-51-DMD_modes_pre_reversals.pdf}
   \caption[]{
     The $\log_{10}$ average projection onto each DMD mode for different sets of model states.
     DMD constructed as snapshots every 10 seconds for the first 900 seconds of model time, and model states from the first 2000 seconds are all projected onto the DMD modes.
@@ -354,12 +355,20 @@ Since observations are also sparse in large weather models, we expect that using
 %% but here, first go modify pdftile to wrap the titles in a ``footnotesize''
 %% ~/work/2015/08-kitchentabletools/pdftile.pl 1 3 .34 0 0 l 10 "" "A: Mode 2" DMD-mode02-tu-Wu-stacked.png "B: Mode 79" DMD-mode79-tu-Wu-stacked.png "C: Phase Plane" ../../figures/DMD/DMD_mode_2_79_phaseplane-003.pdf combined-phase-potrait-2-79-labeled
 
+%% ~/work/2015/08-kitchentabletools/pdftile.pl 1 3 .3 0 0 l 12 "" "" DMD-mode-02-python-test-006-crop.pdf "" DMD-mode-79-python-test-006-crop.pdf "" 2015-10-02-11-46-DMD-mode-2-79-phaseplane.pdf combined-phase-potrait-2-79-python
+%% ~/work/2015/08-kitchentabletools/pdftile.pl 1 3 .3 0 0 l 12 "" "" DMD-mode-02-python-test-006-crop.pdf "" DMD-mode-79-python-test-006-crop.pdf "" 2015-10-02-11-53-DMD-mode-2-79-phaseplane-crop.pdf combined-phase-potrait-2-79-python
+%% ~/work/2015/08-kitchentabletools/pdftile.pl 1 3 .3 3 3 l 12 "" "" DMD-mode-02-python-test-006-crop.pdf "" DMD-mode-79-python-test-006-crop.pdf "" 2015-10-02-11-56-DMD-mode-2-79-phaseplane-crop.pdf combined-phase-potrait-2-79-python
+%% ~/work/2015/08-kitchentabletools/pdftile.pl 1 3 .3 3 3 l 12 "" "" paper/overlay-02-crop.pdf "" paper/overlay-79-crop.pdf "" 2015-10-02-11-56-DMD-mode-2-79-phaseplane-crop.pdf combined-phase-potrait-2-79-python
 \begin{figure*}
   \centering
-  \includegraphics[width=0.98\textwidth]{figures/combined-phase-potrait-2-79-labeled.pdf}
+  \includegraphics[width=0.98\textwidth]{../combined-phase-potrait-2-79-python.pdf}
+  %% \includegraphics[width=0.98\textwidth]{../DMD-mode-79-python-test-006-crop-timeseries.pdf}
   \caption[]{
     Panel A: The temperature profile of the thermosyphon of Mode 2, with inset of the projection of time series states onto Mode 2 (the projection coefficient).
+    The color scale on the thermosyphon scales from red to blue over the values 1 to 0 in the DMD mode.
+    The inset figure is the projection coefficient from time 100 to time 5000, with the projection range being shown from -300 to 300 (as in Panel C) and the starred reversals labeled as in Panel C.
     Panel B: Likewise, the temperature profile of the thermosyphon of Mode 79, with inset of the projection of time series states onto Mode 79 (the projection coefficient).
+    The color scale and inset figure axes are the same as Panel A.
     Panel C: A butterfly-shaped phase plane shows the value of the projection onto modes 2 and 79 for each time in the first 2000 timesteps of our ground truth model run.
     In blue and green stars the states that occur directly before a flow are highlighted, and are isolated into separate quadrants of phase space.
   }
