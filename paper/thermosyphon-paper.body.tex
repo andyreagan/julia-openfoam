@@ -50,11 +50,11 @@ We first test our ability to predict this experimental thermosyphon using synthe
 
 %% generated figure by /Users/andyreagan/work/2013/05-data-assimilation/thermosyphon/timeseries-plot.ipynb
 \begin{figure}[h]
-  %% \centering
-  %% \includegraphics[width=0.5\textwidth]{/Users/andyreagan/work/2013/05-data-assimilation/thermosyphon/2015-09-30-12-26-221-timeseries.pdf}
+  \centering
+  \includegraphics[width=0.5\textwidth]{/Users/andyreagan/work/2013/05-data-assimilation/thermosyphon/2015-09-30-12-26-221-timeseries.pdf}
   \caption[A time series of the physical thermosyphon, from the Undergraduate Honor's Thesis of Darcy Glenn {\protect \cite{glenn2013}}]{
     %% \the\textwidth %% 510.0pt
-    \textbf{A time series of the physical thermosyphon, from the Undergraduate Honor's Thesis of Darcy Glenn {\protect \cite{glenn2013}}.}
+    A time series of the physical thermosyphon, from the Undergraduate Honor's Thesis of Darcy Glenn {\protect \cite{glenn2013}}.
     The temperature difference (plotted) is taken as the difference between temperature sensors in the 3 and 9 o'clock positions.
     The sign of the temperature difference indicates the flow direction, where positive values are clockwise flow.
   }
@@ -62,8 +62,8 @@ We first test our ability to predict this experimental thermosyphon using synthe
 \end{figure}
 
 \begin{figure}[h]
-  %% \centering
-  %% \includegraphics[width=0.45\textwidth]{figures/harris-tellus-2012-loop.pdf}
+  \centering
+  \includegraphics[width=0.45\textwidth]{figures/harris-tellus-2012-loop.pdf}
   \caption[Schematic of the experimental, and computational, setup from Harris \etal (2012)]{
     Schematic of the experimental, and computational, setup from Harris \etal (2012).
     The loop radius is given by $R$ and inner radius by $r$.
@@ -89,8 +89,8 @@ We use the \verb|refineWallMesh| utility to refine the mesh near walls, and the 
 The resulting 2D mesh contains 80,000 points (80 across the diameter and 1000 around).
 
 \begin{figure}[h]
-  %% \centering
-  %% \includegraphics[width=0.45\textwidth]{/Users/andyreagan/work/2013/05-data-assimilation/OpenFOAM/figures/heating_zoom_mesh4.png}
+  \centering
+  \includegraphics[width=0.45\textwidth]{/Users/andyreagan/work/2013/05-data-assimilation/OpenFOAM/figures/heating_zoom_mesh4.png}
   \caption[A snapshot of the mesh used for CFD simulations]{
 
     \textbf{A snapshot of the mesh used for CFD simulations.}
@@ -101,8 +101,8 @@ The resulting 2D mesh contains 80,000 points (80 across the diameter and 1000 ar
 \end{figure}
 
 \begin{figure}[h]
-  %% \centering
-  %% \includegraphics[width=0.45\textwidth]{/Users/andyreagan/work/2013/05-data-assimilation/OpenFOAM/figures/3D-mesh2.png}
+  \centering
+  \includegraphics[width=0.45\textwidth]{/Users/andyreagan/work/2013/05-data-assimilation/OpenFOAM/figures/3D-mesh2.png}
   \caption[The 3D mesh viewed as a wire-frame from within]{
   The 3D mesh viewed as a wire-frame from within.
   Here there are 900 cells in each slice (not shown), for a total mesh size of 81,000 cells.
@@ -175,29 +175,6 @@ For a square root filter in general, we begin by writing the covariance matrices
 Because $\mbP_a$ and $\mbP_f$ are symmetric positive-definite (by definition), we can write
 \begin{equation} \mbP_a = \mbZ_a \mbZ_a^T ~~,~~~ \mbP_f = \mbZ_f \mbZ_f^T \end{equation}
 
-\begin{figure}[h]
-  %% \centering
-  %% \includegraphics[width=0.50\textwidth]{/Users/andyreagan/work/2013/05-data-assimilation/src/experiments/windowExperiment/2015-09-30-14-17-window-experiment.pdf}
-  \caption[The RMS error is reported for our EKF and EnKF filters]{
-    The RMS error (not scaled by climatology) for our EKF and EnKF filters, measured as the difference between forecast and truth at the end of an assimiliation window for the latter 2500 assimiliation windows in a 3000 assimilation window Lorenz '63 run.
-    Error is measured in the only observed variable, $x_1$.
-    Increasing the assimilation window led to an decrease in predictive skill, as expected.
-  }
-  \label{fig:window_test}
-\end{figure}
-
-\begin{figure}[h]
-  %% \centering
-  %% \includegraphics[width=0.48\textwidth]{/Users/andyreagan/work/2013/05-data-assimilation/src/experiments/covInflTest/2015-09-30-15-35-ETKF-390s.pdf}
-  \caption[The RMS error averaged over 100 model runs of length 1000 windows is reported for the ETKF for varying additive and multiplicative inflation factors]{
-    The RMS error averaged over 100 model runs of length 1000 windows is reported for the ETKF for varying additive and multiplicative inflation factors $\Delta$ and $\mu$.
-    Each of the 100 model runs starts with a random IC, and the analysis forecast starts randomly.
-    The window length here is 390 seconds.
-    The filter performance RMS is computed as the RMS value of the difference between forecast and truth at the assimilation window for the latter 500 windows, allowing a spin-up of 500 windows.
-  }
-  \label{fig:ETKF_cov_tuning_390s}
-\end{figure}
-
 where $\mbZ_a$ and $\mbZ_f$ are the matrix square roots of $\mbP_a$ and $\mbP_f$.
 We are not concerned that this decomposition is not unique, and note that $\mbZ$ must have the same rank as $\mbP$ which will prove computationally advantageous.
 The power of the SRF is now seen as we represent the columns of the matrix $\mbZ_f$ as the difference from the ensemble members from the ensemble mean, to avoid forming the full forecast covariance matrix $\mbP_f$.
@@ -245,6 +222,29 @@ Using the ``square'' sections of the loop to localize, we shift the zone to the 
 In Fig. \ref{fig:covariance-localization-schematic} a schematic of localization using square, circular, and adaptive location shows a situation in which adaptive localization will potentially capture more relevant information for finding the analysis state of any given cell.
 As we note in the caption of Fig. \ref{fig:covariance-localization-schematic}, while we are motivated by localization around flow structures like Panel C, we simply shift the covariance in Panel A so that our method is most general and computationally efficient.
 
+%% ~/work/2015/08-kitchentabletools/pdftile 3 1 .9 0 0 c 10 "" "" foamlab_slides002.pdf "" foamlab_slides003.pdf "" foamlab_slides004.pdf covariance-localization-schematic
+%% ~/work/2015/08-kitchentabletools/pdftile.pl 3 1 .9 0 0 c 10 "" "" foamlab_slides002.pdf "" foamlab_slides003.pdf "" foamlab_slides004.pdf covariance-localization-schematic
+%% open covariance-localization-schematic.pdf 
+%% ~/work/2015/08-kitchentabletools/pdftile.pl 3 1 .9 0 0 c 10 "" "A: Square Covariance" foamlab_slides002.pdf "B: Circular Covariance" foamlab_slides003.pdf "C: Adaptive Covariance" foamlab_slides004.pdf covariance-localization-schematic-labeled
+%% ~/work/2015/08-kitchentabletools/pdftile.pl 3 1 .9 0 0 c 12 "" "A: Square Covariance" foamlab_slides002.pdf "B: Circular Covariance" foamlab_slides003.pdf "C: Adaptive Covariance" foamlab_slides004.pdf covariance-localization-schematic-labeled-002
+%% try to make it bigger, but fontsize only goes to 12
+%% ~/work/2015/08-kitchentabletools/pdftile.pl 3 1 .9 0 0 c 14 "" "A: Square Covariance" foamlab_slides002.pdf "B: Circular Covariance" foamlab_slides003.pdf "C: Adaptive Covariance" foamlab_slides004.pdf covariance-localization-schematic-labeled-003
+%% edit the pdftile.pl to give it a Large
+%% ~/work/2015/08-kitchentabletools/pdftile.pl 3 1 .9 0 0 c 12 "" "A: Square Covariance" foamlab_slides002.pdf "B: Circular Covariance" foamlab_slides003.pdf "C: Adaptive Covariance" foamlab_slides004.pdf covariance-localization-schematic-labeled-004
+%% ~/work/2015/08-kitchentabletools/pdftile-adjustlabelsize.pl 3 1 .9 0 0 c Large "" "A: Square Covariance" foamlab_slides002.pdf "B: Circular Covariance" foamlab_slides003.pdf "C: Adaptive Covariance" foamlab_slides004.pdf covariance-localization-schematic-labeled-005
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.45\textwidth]{figures/covariance-localization-schematic-labeled-004.pdf}
+  \caption[]{
+    Schematic of the adaptive covariance localization.
+    In Panel A we see a zonal (square) covariance that is most similar to the covariance used for both control experiments and sliding covariance experiments.
+    Panel B shows a localized covariance using a ``local radius'', and Panel C shows an idealized, fully adaptive covariance.
+    While we are motivated by localization around flow structures like Panel C, we simply shift the covariance in Panel A so that our method is most general and computationally efficient.
+  }
+  \label{fig:covariance-localization-schematic}
+\end{figure}
+
 Denote the velocity vector of cells on a perpendicular slice of the loop at $\vec{U}$, the tangent vector to the slice $\vec{U}$ by $\vec{T}$, the zone width as $z_{\text{max}}$ and then the localization shift $\alpha_{\text{local}}$ for that slice of the loop is taken to be
 \begin{equation} \alpha_{\text{local}} = \text{floor} \left( (\vec{U} \cdot \vec{T})/\max (U) \times z_{\text{max}} \right) . \end{equation}
 
@@ -268,9 +268,32 @@ We confirm the performance of the DA methods described above by testing each (on
 As the time between observations increases, the nonlinearity of the Lorenz '63 system results in the failure of the EKF and difficultly for the EnKF with small ensemble size.
 The ETKF and EnSRF perform the best of the methods tested and we chose the ETKF for future use with the CFD model.
 
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.50\textwidth]{/Users/andyreagan/work/2013/05-data-assimilation/src/experiments/windowExperiment/2015-09-30-14-17-window-experiment.pdf}
+  \caption[The RMS error is reported for our EKF and EnKF filters]{
+    The RMS error (not scaled by climatology) for our EKF and EnKF filters, measured as the difference between forecast and truth at the end of an assimiliation window for the latter 2500 assimiliation windows in a 3000 assimilation window Lorenz '63 run.
+    Error is measured in the only observed variable, $x_1$.
+    Increasing the assimilation window led to an decrease in predictive skill, as expected.
+  }
+  \label{fig:window_test}
+\end{figure}
+
 The results in Fig. \ref{fig:window_test} rely on tuned covariance inflation, both additive and multiplicative, pre-computed for each window and DA technique.
 We choose optimal additive inflation $\mu$ and multiplicative inflation $\Delta$ by selecting for the lowest error in an exhaustive search through a maximum factors of $1.5$ in each, an example is shown in Fig. \ref{fig:ETKF_cov_tuning_390s}.
 We use these optimal data assimilation parameters (inflation factors) for the remainder of this work.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.48\textwidth]{/Users/andyreagan/work/2013/05-data-assimilation/src/experiments/covInflTest/2015-09-30-15-35-ETKF-390s.pdf}
+  \caption[The RMS error averaged over 100 model runs of length 1000 windows is reported for the ETKF for varying additive and multiplicative inflation factors]{
+    The RMS error averaged over 100 model runs of length 1000 windows is reported for the ETKF for varying additive and multiplicative inflation factors $\Delta$ and $\mu$.
+    Each of the 100 model runs starts with a random IC, and the analysis forecast starts randomly.
+    The window length here is 390 seconds.
+    The filter performance RMS is computed as the RMS value of the difference between forecast and truth at the assimilation window for the latter 500 windows, allowing a spin-up of 500 windows.
+  }
+  \label{fig:ETKF_cov_tuning_390s}
+\end{figure}
 
 \subsection{Limited observations \& adaptive covariance}
 
@@ -285,12 +308,9 @@ With full observations (spacing of 1), we obtain a the best predictions with a c
 For 1/2 and 1/5 observations [a spacing of 2 (5) to observe every other (fifth) variable], we again have the best predictions with a shift of 2.
 And for a spacing of 10, observing every 10th variable, we achieve greater prediction skill with a covariance shift of 10.
 
-Computing the average flow direction inside a localized covariance zone is straightforward, and computationally easy since the velocity is immediately available, making incorporation of this scheme into any data assimilation method easy.
-Since observations are also sparse in large weather models, we expect that using an adaptive local covariance scheme could lead to improved prediction skill with sparse observations \cite{bishop2011a}.
-
 \begin{figure}[h]
-  %% \centering
-  %% \includegraphics[width=0.48\textwidth]{../figures/2015-10-12-09-36-loop-spaghetti.pdf}
+  \centering
+  \includegraphics[width=0.48\textwidth]{../figures/2015-10-12-09-36-loop-spaghetti.pdf}
   \caption[]{
     Convergence of 20 ensembles using sliding windows, starting from initially random states.
     Here, as in most of the experiments, only temperature is observed and assimilated.
@@ -301,75 +321,18 @@ Since observations are also sparse in large weather models, we expect that using
 \end{figure}
 
 \begin{figure}[h]
-  %% \centering
-  %% \includegraphics[width=0.45\textwidth]{../figures/2015-09-30-19-59-consuela-2.pdf}
+  \centering
+  \includegraphics[width=0.45\textwidth]{../figures/2015-09-30-19-59-consuela-2.pdf}
   \caption[]{
     Prediction skill as fraction of reversals that we correctly predicted across different numbers of observations and sliding windows of localized covariance.
   }
   \label{fig:sliding_results}
 \end{figure}
 
+Computing the average flow direction inside a localized covariance zone is straightforward, and computationally easy since the velocity is immediately available, making incorporation of this scheme into any data assimilation method easy.
+Since observations are also sparse in large weather models, we expect that using an adaptive local covariance scheme could lead to improved prediction skill with sparse observations \cite{bishop2011a}.
+
 \subsection{Dynamic mode decomposition}
-
-\begin{figure}[h]
-  %% \centering
-  %% \includegraphics[width=0.45\textwidth]{../figures/2015-10-02-12-51-DMD_modes_pre_reversals.pdf}
-  \caption[]{
-    The $\log_{10}$ average projection onto each DMD mode for different sets of model states.
-    DMD constructed as snapshots every 10 seconds for the first 900 seconds of model time, and model states from the first 2000 seconds are all projected onto the DMD modes.
-    All states average shown in black, and the average of the subset of states that occur 1 second, 3 seconds, 5 seconds, and 7 seconds before a reversal are shown in other colors.
-    The symmetry of the loop generates modes that often come in pairs.
-      }
-  \label{fig:DMD_modes}
-\end{figure}
-
-%% the stacked figures are made by pasting the png time series on top of the png loops in preview, and stretching the png time series to be from the left edge to .25 on x, then centering vertically using the dragging circles, and horizontally by eye
-%% then we combine them into labeled and unlabeled versions like this:
-%% ~/work/2015/08-kitchentabletools/pdftile.pl 1 3 .3 0 0 l 12 "" "" DMD-mode02-tu-Wu-stacked.png "" DMD-mode79-tu-Wu-stacked.png "" ../../figures/DMD/DMD_mode_2_79_phaseplane-003.pdf combined-phase-potrait-2-79
-%% but here, first go modify pdftile to wrap the titles in a ``footnotesize''
-%% ~/work/2015/08-kitchentabletools/pdftile.pl 1 3 .34 0 0 l 10 "" "A: Mode 2" DMD-mode02-tu-Wu-stacked.png "B: Mode 79" DMD-mode79-tu-Wu-stacked.png "C: Phase Plane" ../../figures/DMD/DMD_mode_2_79_phaseplane-003.pdf combined-phase-potrait-2-79-labeled
-
-%% ~/work/2015/08-kitchentabletools/pdftile.pl 1 3 .3 0 0 l 12 "" "" DMD-mode-02-python-test-006-crop.pdf "" DMD-mode-79-python-test-006-crop.pdf "" 2015-10-02-11-46-DMD-mode-2-79-phaseplane.pdf combined-phase-potrait-2-79-python
-%% ~/work/2015/08-kitchentabletools/pdftile.pl 1 3 .3 0 0 l 12 "" "" DMD-mode-02-python-test-006-crop.pdf "" DMD-mode-79-python-test-006-crop.pdf "" 2015-10-02-11-53-DMD-mode-2-79-phaseplane-crop.pdf combined-phase-potrait-2-79-python
-%% ~/work/2015/08-kitchentabletools/pdftile.pl 1 3 .3 3 3 l 12 "" "" DMD-mode-02-python-test-006-crop.pdf "" DMD-mode-79-python-test-006-crop.pdf "" 2015-10-02-11-56-DMD-mode-2-79-phaseplane-crop.pdf combined-phase-potrait-2-79-python
-%% ~/work/2015/08-kitchentabletools/pdftile.pl 1 3 .3 3 3 l 12 "" "" paper/overlay-02-crop.pdf "" paper/overlay-79-crop.pdf "" 2015-10-02-11-56-DMD-mode-2-79-phaseplane-crop.pdf combined-phase-potrait-2-79-python
-\begin{figure}
-  %% \centering
-  %% \includegraphics[width=0.98\textwidth]{../figures/combined-phase-potrait-2-79-python.pdf}
-  \caption[]{
-    Panel A: The temperature profile of the thermosyphon of Mode 2, with inset of the projection of time series states onto Mode 2 (the projection coefficient).
-    The color scale on the thermosyphon spans the values 1 to 0 in the DMD mode.
-    The inset figure is the projection coefficient from time 100 to time 5000, with the projection range being shown from -300 to 300 (as in Panel C) and the starred reversals labeled as in Panel C.
-    Panel B: Likewise, the temperature profile of the thermosyphon of Mode 79, with inset of the projection of time series states onto Mode 79 (the projection coefficient).
-    The color scale and inset figure axes are the same as Panel A.
-    Panel C: A butterfly-shaped phase plane shows the value of the projection onto modes 2 and 79 for each time in the first 2000 time steps of our ground truth model run.
-    In blue and green stars the states that occur directly before a flow are highlighted, and are isolated into separate quadrants of phase space.
-  }
-  \label{fig:DMD_phaseplane}
-\end{figure}
-
-%% ~/work/2015/08-kitchentabletools/pdftile 3 1 .9 0 0 c 10 "" "" foamlab_slides002.pdf "" foamlab_slides003.pdf "" foamlab_slides004.pdf covariance-localization-schematic
-%% ~/work/2015/08-kitchentabletools/pdftile.pl 3 1 .9 0 0 c 10 "" "" foamlab_slides002.pdf "" foamlab_slides003.pdf "" foamlab_slides004.pdf covariance-localization-schematic
-%% open covariance-localization-schematic.pdf 
-%% ~/work/2015/08-kitchentabletools/pdftile.pl 3 1 .9 0 0 c 10 "" "A: Square Covariance" foamlab_slides002.pdf "B: Circular Covariance" foamlab_slides003.pdf "C: Adaptive Covariance" foamlab_slides004.pdf covariance-localization-schematic-labeled
-%% ~/work/2015/08-kitchentabletools/pdftile.pl 3 1 .9 0 0 c 12 "" "A: Square Covariance" foamlab_slides002.pdf "B: Circular Covariance" foamlab_slides003.pdf "C: Adaptive Covariance" foamlab_slides004.pdf covariance-localization-schematic-labeled-002
-%% try to make it bigger, but fontsize only goes to 12
-%% ~/work/2015/08-kitchentabletools/pdftile.pl 3 1 .9 0 0 c 14 "" "A: Square Covariance" foamlab_slides002.pdf "B: Circular Covariance" foamlab_slides003.pdf "C: Adaptive Covariance" foamlab_slides004.pdf covariance-localization-schematic-labeled-003
-%% edit the pdftile.pl to give it a Large
-%% ~/work/2015/08-kitchentabletools/pdftile.pl 3 1 .9 0 0 c 12 "" "A: Square Covariance" foamlab_slides002.pdf "B: Circular Covariance" foamlab_slides003.pdf "C: Adaptive Covariance" foamlab_slides004.pdf covariance-localization-schematic-labeled-004
-%% ~/work/2015/08-kitchentabletools/pdftile-adjustlabelsize.pl 3 1 .9 0 0 c Large "" "A: Square Covariance" foamlab_slides002.pdf "B: Circular Covariance" foamlab_slides003.pdf "C: Adaptive Covariance" foamlab_slides004.pdf covariance-localization-schematic-labeled-005
-
-\begin{figure}[h]
-  %% \centering
-  %% \includegraphics[width=0.45\textwidth]{figures/covariance-localization-schematic-labeled-004.pdf}
-  \caption[]{
-    Schematic of the adaptive covariance localization.
-    In Panel A we see a zonal (square) covariance that is most similar to the covariance used for both control experiments and sliding covariance experiments.
-    Panel B shows a localized covariance using a ``local radius'', and Panel C shows an idealized, fully adaptive covariance.
-    While we are motivated by localization around flow structures like Panel C, we simply shift the covariance in Panel A so that our method is most general and computationally efficient.
-  }
-  \label{fig:covariance-localization-schematic}
-\end{figure}
 
 To incorporate limited observations into a high-dimensional CFD simulation, we combine ideas from both CFD literature and data assimilation to make predictions.
 %% We perform data assimilation in a subspace composed of the leading modes from a DMD of a series of loop snapshots.
@@ -384,10 +347,47 @@ To look at all of the modes at once, we examine the average magnitude of the pro
 The magnitude of the mode projection of a predictive mode before a reversal should stand out against the projection average across all states, and decay back towards the average further from the reversal in time.
 For modes 21 and 79, we directly observe in Fig. \ref{fig:DMD_modes} that the average projection from states just 1 second before reversal is the most different from the average state projection, and the further away from the reversal the more similar the states become to the average.
 
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.45\textwidth]{../figures/2015-10-02-12-51-DMD_modes_pre_reversals.pdf}
+  \caption[]{
+    The $\log_{10}$ average projection onto each DMD mode for different sets of model states.
+    DMD constructed as snapshots every 10 seconds for the first 900 seconds of model time, and model states from the first 2000 seconds are all projected onto the DMD modes.
+    All states average shown in black, and the average of the subset of states that occur 1 second, 3 seconds, 5 seconds, and 7 seconds before a reversal are shown in other colors.
+    The symmetry of the loop generates modes that often come in pairs.
+      }
+  \label{fig:DMD_modes}
+\end{figure}
+
 We are particularly interested in whether the mode projection time series is predictive of flow reversals, as is true with the hidden system.
 The insets of Panel A and Panel B in Fig. \ref{fig:DMD_phaseplane} show two such timeseries, with stars indicating the time of flow reversals.
 Individually, these modes increase in amplitude when flow reversals happen.
 As a dominant mode, the time series of Mode 2 tracks closely to the timeseries from which the modes were generated, while the dynamics of the projection of Mode 79 are less obvious.
+
+%% the stacked figures are made by pasting the png time series on top of the png loops in preview, and stretching the png time series to be from the left edge to .25 on x, then centering vertically using the dragging circles, and horizontally by eye
+%% then we combine them into labeled and unlabeled versions like this:
+%% ~/work/2015/08-kitchentabletools/pdftile.pl 1 3 .3 0 0 l 12 "" "" DMD-mode02-tu-Wu-stacked.png "" DMD-mode79-tu-Wu-stacked.png "" ../../figures/DMD/DMD_mode_2_79_phaseplane-003.pdf combined-phase-potrait-2-79
+%% but here, first go modify pdftile to wrap the titles in a ``footnotesize''
+%% ~/work/2015/08-kitchentabletools/pdftile.pl 1 3 .34 0 0 l 10 "" "A: Mode 2" DMD-mode02-tu-Wu-stacked.png "B: Mode 79" DMD-mode79-tu-Wu-stacked.png "C: Phase Plane" ../../figures/DMD/DMD_mode_2_79_phaseplane-003.pdf combined-phase-potrait-2-79-labeled
+
+%% ~/work/2015/08-kitchentabletools/pdftile.pl 1 3 .3 0 0 l 12 "" "" DMD-mode-02-python-test-006-crop.pdf "" DMD-mode-79-python-test-006-crop.pdf "" 2015-10-02-11-46-DMD-mode-2-79-phaseplane.pdf combined-phase-potrait-2-79-python
+%% ~/work/2015/08-kitchentabletools/pdftile.pl 1 3 .3 0 0 l 12 "" "" DMD-mode-02-python-test-006-crop.pdf "" DMD-mode-79-python-test-006-crop.pdf "" 2015-10-02-11-53-DMD-mode-2-79-phaseplane-crop.pdf combined-phase-potrait-2-79-python
+%% ~/work/2015/08-kitchentabletools/pdftile.pl 1 3 .3 3 3 l 12 "" "" DMD-mode-02-python-test-006-crop.pdf "" DMD-mode-79-python-test-006-crop.pdf "" 2015-10-02-11-56-DMD-mode-2-79-phaseplane-crop.pdf combined-phase-potrait-2-79-python
+%% ~/work/2015/08-kitchentabletools/pdftile.pl 1 3 .3 3 3 l 12 "" "" paper/overlay-02-crop.pdf "" paper/overlay-79-crop.pdf "" 2015-10-02-11-56-DMD-mode-2-79-phaseplane-crop.pdf combined-phase-potrait-2-79-python
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.98\textwidth]{../figures/combined-phase-potrait-2-79-python.pdf}
+  \caption[]{
+    Panel A: The temperature profile of the thermosyphon of Mode 2, with inset of the projection of time series states onto Mode 2 (the projection coefficient).
+    The color scale on the thermosyphon spans the values 1 to 0 in the DMD mode.
+    The inset figure is the projection coefficient from time 100 to time 5000, with the projection range being shown from -300 to 300 (as in Panel C) and the starred reversals labeled as in Panel C.
+    Panel B: Likewise, the temperature profile of the thermosyphon of Mode 79, with inset of the projection of time series states onto Mode 79 (the projection coefficient).
+    The color scale and inset figure axes are the same as Panel A.
+    Panel C: A butterfly-shaped phase plane shows the value of the projection onto modes 2 and 79 for each time in the first 2000 time steps of our ground truth model run.
+    In blue and green stars the states that occur directly before a flow are highlighted, and are isolated into separate quadrants of phase space.
+  }
+  \label{fig:DMD_phaseplane}
+\end{figure}
 
 By combining the state projection onto specific mode time series into a phase plane, the combined signal from two modes is used for discovering states that separate reversals in direction and from other states in the phase plane.
 In Fig. \ref{fig:DMD_phaseplane} we see that the dominant dynamics from mode 2 plotted with those of mode 79 are able to strongly separate reversals into quadrants of the low-dimensional space.
