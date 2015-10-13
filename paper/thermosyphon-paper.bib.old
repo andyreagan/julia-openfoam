@@ -1,0 +1,792 @@
+@book{autodiff1981,
+  Author = {L.B. Rall},
+  Title = {Automatic Differentiation: Techniques and Applications (Lecture Notes in Computer Science)},
+  Publisher = {Springer},
+  Year = {1981},
+  ISBN = {3540108610},
+  URL = {http://www.amazon.com/Automatic-Differentiation-Techniques-Applications-Computer/dp/3540108610%3FSubscriptionId%3D0JYN1NVW651KCA56C102%26tag%3Dtechkie-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D3540108610}
+}
+@article{bishop2001adaptive,
+  title={Adaptive sampling with the ensemble transform Kalman filter. Part I: Theoretical aspects},
+  author={Bishop, Craig H and Etherton, Brian J and Majumdar, Sharanya J},
+  journal={Monthly weather review},
+  volume={129},
+  number={3},
+  pages={420--436},
+  year={2001}
+}
+@article{tippett2003ensemble,
+  title={Ensemble square root filters*},
+  author={Tippett, Michael K and Anderson, Jeffrey L and Bishop, Craig H and Hamill, Thomas M and Whitaker, Jeffrey S},
+  journal={Monthly Weather Review},
+  volume={131},
+  number={7},
+  pages={1485--1490},
+  year={2003}
+}
+@article{hamill2001distance,
+  title={Distance-dependent filtering of background error covariance estimates in an ensemble Kalman filter},
+  author={Hamill, Thomas M and Whitaker, Jeffrey S and Snyder, Chris},
+  journal={Monthly Weather Review},
+  volume={129},
+  number={11},
+  pages={2776--2790},
+  year={2001}
+}
+@article{anderson2001new,
+  title={A new method for non-parametric multivariate analysis of variance},
+  author={Anderson, Marti J},
+  journal={Austral Ecology},
+  volume={26},
+  number={1},
+  pages={32--46},
+  year={2001},
+  publisher={Wiley Online Library}
+}
+@book{fisher,
+  title={Developments in 4D-Var and Kalman filtering},
+  author={Fisher, Michael and Andersson, Erik},
+  year={2001},
+  publisher={European Centre for Medium-Range Weather Forecasts}
+}
+@article{clayton2012operational,
+  title={Operational implementation of a hybrid ensemble/4D-Var global data assimilation system at the Met Office},
+  author={Clayton, AM and Lorenc, AC and Barker, DM},
+  journal={Quarterly Journal of the Royal Meteorological Society},
+  year={2012},
+  publisher={Wiley Online Library}
+}
+@article{kalnay20074,
+  title={4-D-Var or ensemble Kalman filter?},
+  author={Kalnay, Eugenia and Li, Hong and Miyoshi, Takemasa and YANG, SHU-CHIH and BALLABRERA-POY, JOAQUIM},
+  journal={Tellus A},
+  volume={59},
+  number={5},
+  pages={758--773},
+  year={2007},
+  publisher={Wiley Online Library}
+}
+@article{dee1998data,
+  title={Data assimilation in the presence of forecast bias},
+  author={Dee, Dick P and Da Silva, Arlindo M},
+  journal={Quarterly Journal of the Royal Meteorological Society},
+  volume={124},
+  number={545},
+  pages={269--295},
+  year={1998},
+  publisher={Wiley Online Library}
+}
+@book{kalnay2003,
+  title={Atmospheric modeling, data assimilation, and predictability},
+  author={Kalnay, Eugenia},
+  year={2003},
+  publisher={Cambridge university press}
+}
+@book{eliassen1954,
+  title={Upper Air Network Requirements for Numerical Weather Prediction: Report of a Working Group of the Commission for Aerology},
+  author={World Meteorological Organization. Commission for Aerology and Eliassen, Arnt and Bessemoulin, J},
+  year={1960},
+  publisher={Secretariat of the World Meteorological Organization}
+}
+@article{thompson1990,
+  title={Charney and the revival of NWP},
+  author={Thompson, P.D.},
+  year={1990},
+  journal={The Atmosphere - a challenge},
+  publisher={American Meterological Society, Boston MA},
+  pages={93-119}
+}
+@article{charney1950,
+  title={Dynamic forecasting by numerical process},
+  author={Charney, JG},
+  journal={Compendium of Meteorology, American Meteorological Society, Boston},
+  pages={470--482},
+  year={1951}
+}
+@article{louisos2013,
+  title={Chaotic flow in a 2D natural convection loop with heat flux boundaries},
+  author={Louisos, William F and Hitt, Darren L and Danforth, Christopher M},
+  journal={International Journal of Heat and Mass Transfer},
+  volume={61},
+  pages={565--576},
+  year={2013},
+  publisher={Elsevier}
+}
+@article{gandin1965,
+  title={Objective analysis of meteorological fields Gidrometeorologicheskoe Izdatel'-stvo, Leningrad, 1960},
+  author={Gandin, LS},
+  journal={Translated from Russian into English, Israel Program for Scientific Translations, Jerusalem},
+  pages={242},
+  year={1965}
+}
+@article{saltzman1962finite,
+  title={Finite amplitude free convection as an initial value problem-I},
+  author={Saltzman, Barry},
+  journal={Journal of the Atmospheric Sciences},
+  volume={19},
+  number={4},
+  pages={329--341},
+  year={1962}
+}
+@article{yang2006,
+  title={Data Assimilation as Synchronization of Truth and Model: Experiments with the Three-Variable Lorenz System*},
+  author={Yang, Shu-Chih and Baker, Debra and Li, Hong and Cordes, Katy and Huff, Morgan and Nagpal, Geetika and Okereke, Ena and Villafane, Josue and Kalnay, Eugenia and Duane, Gregory S},
+  journal={Journal of the atmospheric sciences},
+  volume={63},
+  number={9},
+  pages={2340--2354},
+  year={2006}
+}
+@article{allgaier2012empirical,
+  title={Empirical correction of a toy climate model},
+  author={Allgaier, Nicholas A and Harris, Kameron D and Danforth, Christopher M},
+  journal={Physical Review E},
+  volume={85},
+  number={2},
+  pages={026201},
+  year={2012},
+  publisher={APS}
+}
+@article{devaney2003introduction,
+  title={An introduction to chaotic dynamical systems},
+  author={Devaney, Robert L},
+  year={2003},
+  publisher={$\{$Westview Pr (Short Disc)$\}$}
+}
+@book{alligood1996chaos,
+  title={Chaos},
+  author={Alligood, Kathleen T and Sauer, Tim D and Yorke, James A},
+  year={1996},
+  publisher={Springer}
+}
+@article{navon1992variational,
+  title={Variational data assimilation with an adiabatic version of the NMC spectral model},
+  author={Navon, I Michael and Zou, Xiaolei and Derber, J and Sela, J},
+  journal={Monthly weather review},
+  volume={120},
+  number={7},
+  pages={1433--1446},
+  year={1992}
+}
+@phdthesis{Mitchell2012PhD,
+Author = {Mitchell, Lewis},
+pages = {155},
+school = {The University of Sydney},
+title = {{Incorporating climatological information into ensemble data assimilation}},
+year = {2012}
+}
+@unpublished{glenn2013,
+  author = {Glenn, Darcy},
+  title = {Characterizing weather in  a thermosyphon: an atmosphere that hangs on a wall},
+  note = {Undergraduate Honors Thesis, University of Vermont},
+  year = {2013},
+  month = {may}
+}
+@article{danforthFP,
+  author  = {Johnson, Tim},
+  title   = {'Toy climate' simulates hurricanes},
+  journal = {The Burlington Free Press},
+  year    = {2009},
+  volume  = {Vermont},
+  pages   = {C.1},
+  month   = {sep},
+  url     = {http://pqasb.pqarchiver.com/burlingtonfreepress/doc/439875449.html?FMT=ABS\&FMTS=ABS:FT\&date=Sep+17%2C+2009\&author=Johnson%2C+Tim\&pub=The+Burlington+Free+Press\&edition=\&startpage=\&desc=%27Toy+climate%27+simulates+hurricanes}
+}
+@article{harris2011predicting,
+  title={Predicting flow reversals in chaotic natural convection using data assimilation},
+  author={Harris, Kameron Decker and Ridouane, El Hassan and Hitt, Darren L and Danforth, Christopher M},
+  journal={arXiv preprint arXiv:1108.5685},
+  year={2011}
+}
+@article{reagan2013,
+  title={Predicting Flow Reversals in a Computational Fluid Dynamics Simulated Thermosyphon using Data Assimilation},
+  author={Reagan, Andrew},
+  journal={arXiv:1312.2142},
+  year={2013}
+}
+@article{annan2004efficient,
+  title={Efficient parameter estimation for a highly chaotic system},
+  author={Annan, JD and Hargreaves, JC},
+  journal={Tellus A},
+  volume={56},
+  number={5},
+  pages={520--526},
+  year={2004},
+  publisher={Wiley Online Library}
+}
+@inproceedings{asur2010predicting,
+  title={Predicting the future with social media},
+  author={Asur, Sitaram and Huberman, Bernardo A},
+  booktitle={Web Intelligence and Intelligent Agent Technology (WI-IAT), 2010 IEEE/WIC/ACM International Conference on},
+  volume={1},
+  pages={492--499},
+  year={2010},
+  organization={IEEE}
+}
+@article{beine1992integrated,
+  title={Integrated design of prestressed cast-iron pressure vessel and passive heat removal system for the reactor cell of a 200 MWth modular reactor},
+  author={Beine, B and Kaminski, V and Von Lensa, W},
+  journal={Nuclear engineering and design},
+  volume={136},
+  number={1},
+  pages={135--141},
+  year={1992},
+  publisher={Elsevier}
+}
+@article{kwant1992prism,
+  title={PRISM—liquid metal cooled reactor plant design and performance},
+  author={Kwant, W and Boardman, CE},
+  journal={Nuclear engineering and design},
+  volume={136},
+  number={1},
+  pages={111--120},
+  year={1992},
+  publisher={Elsevier}
+}
+@article{beitelmal2002two,
+  title={Two-Phase Loop: Compact Thermosyphon},
+  author={Beitelmal, Monem H and Patel, Chandrakant D},
+  journal={Approved for External Publication},
+  year={2002}
+}
+@article{cherry2006next,
+  title={Next Stop, Lhasa},
+  author={Cherry, B and Dan, Z and Lustgarten, A},
+  journal={Fortune},
+  volume={153},
+  pages={154},
+  year={2006},
+  publisher={Time Inc.}
+}
+@article{belessiotis2002analytical,
+  title={Analytical approach of thermosyphon solar domestic hot water system performance},
+  author={Belessiotis, Vassilis and Mathioulakis, Emmanouil},
+  journal={Solar Energy},
+  volume={72},
+  number={4},
+  pages={307--315},
+  year={2002},
+  publisher={Pergamon}
+}
+@article{bollen2011twitter,
+  title={Twitter mood predicts the stock market},
+  author={Bollen, Johan and Mao, Huina and Zeng, Xiaojun},
+  journal={Journal of Computational Science},
+  volume={2},
+  number={1},
+  pages={1--8},
+  year={2011},
+  publisher={Elsevier}
+}
+@article{burroughs2005reduced,
+  title={A reduced-order partial differential equation model for the flow in a thermosyphon},
+  author={Burroughs, EA and Coutsias, EA and Romero, LA},
+  journal={Journal of Fluid Mechanics},
+  volume={543},
+  pages={203--238},
+  year={2005},
+  publisher={Cambridge Univ Press}
+}
+@article{compo2006feasibility,
+  title={Feasibility of a 100-year reanalysis using only surface pressure data},
+  author={Compo, Gilbert P and Whitaker, Jeffrey S and Sardeshmukh, Prashant D},
+  journal={Bulletin of the American Meteorological Society},
+  volume={87},
+  number={2},
+  pages={175--190},
+  year={2006}
+}
+@article{creveling1975stability,
+  title={Stability characteristics of a single-phase free convection loop},
+  author={Creveling, HF and PAZ, DE and Baladi, JY and Schoenhals, RJ},
+  journal={Journal of Fluid Mechanics},
+  volume={67},
+  number={part 1},
+  pages={65--84},
+  year={1975},
+  publisher={Cambridge Univ Press}
+}
+@article{danforth2007estimating,
+  title={Estimating and correcting global weather model error},
+  author={Danforth, Christopher M and Kalnay, Eugenia and Miyoshi, Takemasa},
+  journal={Monthly weather review},
+  volume={135},
+  number={2},
+  pages={281--299},
+  year={2007}
+}
+@article{danforth2006making,
+  title={Making forecasts for chaotic physical processes},
+  author={Danforth, Christopher M and Yorke, James A},
+  journal={Physical review letters},
+  volume={96},
+  number={14},
+  pages={144102},
+  year={2006},
+  publisher={APS}
+}
+@article{evensen2003ensemble,
+  title={The ensemble Kalman filter: Theoretical formulation and practical implementation},
+  author={Evensen, Geir},
+  journal={Ocean dynamics},
+  volume={53},
+  number={4},
+  pages={343--367},
+  year={2003},
+  publisher={Springer}
+}
+@book{evensen2009data,
+  title={Data assimilation: the ensemble Kalman filter},
+  author={Evensen, Geir},
+  year={2009},
+  publisher={Springer}
+}
+@article{houtekamer2001sequential,
+  title={A sequential ensemble Kalman filter for atmospheric data assimilation},
+  author={Houtekamer, Peter L and Mitchell, Herschel L},
+  journal={Monthly Weather Review},
+  volume={129},
+  number={1},
+  pages={123--137},
+  year={2001}
+}
+@book{stokes,
+  title={On the Friction of Fluids in Motion, and the Equilibrium and Motion of Elastic Solids},
+  author={Stokes, Sir George Gabriel},
+  year={1846}
+}
+@article{navier,
+  title={M{\'e}moire sur les lois du mouvement des fluides},
+  author={Navier, CLMH},
+  journal={M{\'e}moires de l’Acad{\'e}mie Royale des Sciences de l’Institut de France},
+  volume={6},
+  pages={389--440},
+  year={1823}
+}
+@article{houtekamer1998data,
+  title={Data assimilation using an ensemble Kalman filter technique},
+  author={Houtekamer, Peter L and Mitchell, Herschel L},
+  journal={Monthly Weather Review},
+  volume={126},
+  number={3},
+  pages={796--811},
+  year={1998}
+}
+@inproceedings{achtelik2009visual,
+  title={Visual tracking and control of a quadcopter using a stereo camera system and inertial sensors},
+  author={Achtelik, Markus and Zhang, Tianguang and Kuhnlenz, Kolja and Buss, Martin},
+  booktitle={Mechatronics and Automation, 2009. ICMA 2009. International Conference on},
+  pages={2863--2869},
+  year={2009},
+  organization={IEEE}
+}
+@article{talagrand1997assimilation,
+  title={Assimilation of observations, an introduction},
+  author={Talagrand, Olivier},
+  journal={JOURNAL-METEOROLOGICAL SOCIETY OF JAAN SERIES 2},
+  volume={75},
+  pages={81--99},
+  year={1997},
+  publisher={THE METEOROLOGICAL SOCIETY OF JAPAN}
+}
+@article{desrayaud2006numerical,
+  title={Numerical investigation of natural circulation in a 2D-annular closed-loop thermosyphon},
+  author={Desrayaud, Gilles and Fichera, Alberto and Marcoux, Manuel},
+  journal={International journal of heat and fluid flow},
+  volume={27},
+  number={1},
+  pages={154--166},
+  year={2006},
+  publisher={Elsevier}
+}
+@misc{detman1968thermos,
+  title={THERMOS IPHON DEPP POOL REACTOR},
+  author={Detman, Roger F},
+  year={1968},
+  month=jul # "~16",
+  publisher={Google Patents},
+  note={US Patent 3,393,127}
+}
+@article{doblas2000multi,
+  title={Multi-model spread and probabilistic seasonal forecasts in PROVOST},
+  author={Doblas-Reyes, Francisco J and D{\'e}qu{\'e}, Michel and Piedelievre, Jean-Philippe},
+  journal={Quarterly Journal of the Royal Meteorological Society},
+  volume={126},
+  number={567},
+  pages={2069--2087},
+  year={2000},
+  publisher={Wiley Online Library}
+}
+@MISC{CPUthermo,
+  author  = {Bernhard, K},
+  title   = {CPU Vapor Cooling Thermosyphon},
+  year    = {2005},
+  month = nov,
+  howpublished  = {\url{http://www.overclockers.com/cpu-vapor-cooling-thermosyphon/}}
+}
+@article{WSJthermo,
+  author  = {Carlton, J},
+  title   = {Keeping It Frozen},
+  journal = {The Wall Street Journal},
+  year    = {2009},
+  volume  = {Environment},
+  month   = {dec},
+  url     = {http://online.wsj.com/news/articles/SB10001424052748704576204574531373037560240}
+}
+@article{Xu2008experimental,
+title = {Experimental validation of passive permafrost cooling systems },
+journal = {Cold Regions Science and Technology },
+volume = {53},
+number = {3},
+pages = {283 - 297},
+year = {2008},
+note = {<ce:title>The Qinghai–Tibet Railroad: A milestone project and its environmental impact</ce:title> },
+issn = {0165-232X},
+doi = {http://dx.doi.org/10.1016/j.coldregions.2007.09.002},
+url = {http://www.sciencedirect.com/science/article/pii/S0165232X07001802},
+author = {Jianfeng Xu and Douglas J. Goering},
+keywords = {Permafrost},
+keywords = {Passive cooling},
+keywords = {Air convection},
+keywords = {Thermosyphon }
+}
+@book{ferziger1996computational,
+  title={Computational methods for fluid dynamics},
+  author={Ferziger, Joel H and Peri{\'c}, Milovan},
+  volume={3},
+  year={1996},
+  publisher={Springer Berlin}
+}
+@book{anderson1995computational,
+  title={Computational fluid dynamics},
+  author={Anderson, John D and others},
+  volume={206},
+  year={1995},
+  publisher={McGraw-Hill New York}
+}
+@incollection{anderson2009governing,
+  title={Governing equations of fluid dynamics},
+  author={Anderson Jr, JD},
+  booktitle={Computational fluid dynamics},
+  pages={15--51},
+  year={2009},
+  publisher={Springer}
+}
+@article{ehrhard1990dynamical,
+  title={Dynamical behaviour of natural convection in a single-phase loop},
+  author={Ehrhard, Peter and M{\"u}ller, Ulrich},
+  journal={Journal of Fluid mechanics},
+  volume={217},
+  pages={487--518},
+  year={1990},
+  publisher={Cambridge Univ Press}
+}
+@article{ginsberg2008detecting,
+  title={Detecting influenza epidemics using search engine query data},
+  author={Ginsberg, Jeremy and Mohebbi, Matthew H and Patel, Rajan S and Brammer, Lynnette and Smolinski, Mark S and Brilliant, Larry},
+  journal={Nature},
+  volume={457},
+  number={7232},
+  pages={1012--1014},
+  year={2008},
+  publisher={Nature Publishing Group}
+}
+@inproceedings{hines2011estimating,
+  title={Estimating dynamic instability risk by measuring critical slowing down},
+  author={Hines, Paul DH and Cotilla-Sanchez, Eduardo and O'hara, Benjamin and Danforth, Christopher},
+  booktitle={Power and Energy Society General Meeting, 2011 IEEE},
+  pages={1--5},
+  year={2011},
+  organization={IEEE}
+}
+@article{lorenc1981global,
+  title={A global three-dimensional multivariate statistical interpolation scheme},
+  author={Lorenc, AC},
+  journal={Monthly Weather Review},
+  volume={109},
+  number={4},
+  pages={701--721},
+  year={1981}
+}
+@misc{edwards1984likelihood,
+  title={Likelihood: An account of the statistical concept of likelihood and its application to scientific inferences},
+  author={Edwards, Anthony William Fairbank},
+  year={1984},
+  publisher={Cambridge: Cambridge University Press}
+}
+@inproceedings{purser1984new,
+  title={A new approach to the optimal assimilation of meteorological data by iterative Bayesian analysis},
+  author={Purser, R James},
+  booktitle={Conference on Weather Forecasting and Analysis, 10 th, Clearwater Beach, FL},
+  pages={102--105},
+  year={1984}
+}
+@article{lorenc1986analysis,
+  title={Analysis methods for numerical weather prediction},
+  author={Lorenc, Andrew C},
+  journal={Quarterly Journal of the Royal Meteorological Society},
+  volume={112},
+  number={474},
+  pages={1177--1194},
+  year={1986},
+  publisher={Wiley Online Library}
+}
+@article{lorenz1963,
+  title={Deterministic nonperiodic flow},
+  author={Lorenz, Edward N},
+  journal={Journal of the atmospheric sciences},
+  volume={20},
+  number={2},
+  pages={130--141},
+  year={1963}
+}
+@article{sornette2006predictability,
+  title={Predictability of large future changes in major financial indices},
+  author={Sornette, Didier and Zhou, Wei-Xing},
+  journal={International Journal of Forecasting},
+  volume={22},
+  number={1},
+  pages={153--168},
+  year={2006},
+  publisher={Elsevier}
+}
+@article{ridouane2010,
+  title={A 2-D numerical study of chaotic flow in a natural convection loop},
+  author={Ridouane, El Hassan and Danforth, Christopher M and Hitt, Darren L},
+  journal={International Journal of Heat and Mass Transfer},
+  volume={53},
+  number={1},
+  pages={76--84},
+  year={2010},
+  publisher={Elsevier}
+}
+@article{ridouane2011numerical,
+  title={A numerical investigation of 3-D flow regimes in a toroidal natural convection loop},
+  author={Ridouane, El Hassan and Hitt, Darren L and Danforth, Christopher M},
+  journal={International Journal of Heat and Mass Transfer},
+  volume={54},
+  number={25},
+  pages={5253--5261},
+  year={2011},
+  publisher={Elsevier}
+}
+@article{welander1967,
+  title={On the oscillatory instability of a differentially heated fluid loop},
+  author={Welander, P},
+  journal={International Geophysics Series},
+  volume={59},
+  publisher={Academic Press, Amsterdam},
+  year={1995}
+}
+@article{box1978statistics,
+  title={Statistics for experimenters: an introduction to design, data analysis, and model building},
+  author={Box, George EP and Hunter, William G and Hunter, J Stuart},
+  year={1978},
+  publisher={John Wiley \& Sons}
+}
+@article{savely1972,
+  title={Apollo Experience Report - Onboard Navigational and Alignment Software},
+  author={Savely, RT and Cockrell, BF and and Pines, S},
+  year={1972},
+  publisher={NASA, Washington DC},
+  journal={Technical Report}
+}
+@book{richardson1965,
+  title={Weather prediction by numerical process},
+  author={Richardson, Lewis Fry and Chapman, Sydney},
+  year={1922},
+  publisher={Dover publications New York, 1965 Reprint}
+}
+@article{kalman1961new,
+  title={New results in linear prediction and filtering theory},
+  author={Kalman, R and Bucy, R},
+  journal={Trans. AMSE J. Basic Eng. D},
+  volume={83},
+  pages={95--108},
+  year={1961}
+}
+@article{siouris1997tracking,
+  title={Tracking an incoming ballistic missile using an extended interval Kalman filter},
+  author={Siouris, George M and Chen, Guanrong and Wang, Jianrong},
+  journal={Aerospace and Electronic Systems, IEEE Transactions on},
+  volume={33},
+  number={1},
+  pages={232--240},
+  year={1997},
+  publisher={IEEE}
+}
+@article{li2009accounting,
+  title={Accounting for model errors in ensemble data assimilation},
+  author={Li, Hong and Kalnay, Eugenia and Miyoshi, Takemasa and Danforth, Christopher M},
+  journal={Monthly Weather Review},
+  volume={137},
+  number={10},
+  pages={3407--3419},
+  year={2009}
+}
+@MISC{danforth2013blog,
+author = {Danforth, Christopher M},
+title = {2013},
+month = mar,
+year = {2009},
+howpublished={\url{http://mpe2013.org/2013/03/17/chaos-in-an-atmosphere-hanging-on-a-wall/}}
+}
+@MISC{MCRN501,
+  Author = {Jones, Christopher K},
+  Institution = {University of North Carolina},
+  Howpublished = {University Lecture},
+  Year = {2013},
+  Title = {MCRN 501: Climate Dynamics}
+}
+@MISC{ESMpicture,
+author = {Gardiner, Lisa},
+title = {What is a Climate Model?},
+month = jul,
+year = {2007},
+howpublished={\url{http://www.windows2universe.org/earth/climate/cli_models2.html}}
+}
+@inproceedings{jasak2007,
+  title={OpenFOAM: A C++ library for complex physics simulations},
+  author={Jasak, Hrvoje and Jemcov, Aleksandar and Tukovic, Zeljko},
+  booktitle={International Workshop on Coupled Methods in Numerical Dynamics, IUC, Dubrovnik, Croatia},
+  pages={1--20},
+  year={2007}
+}
+@article{keller1966,
+  title={Periodic oscillations in a model of thermal convection},
+  author={Keller, Joseph B},
+  journal={J. Fluid Mech},
+  volume={26},
+  number={3},
+  pages={599--606},
+  year={1966},
+  publisher={Cambridge Univ Press}
+}
+@article{gorman1984,
+  title={Chaotic flow regimes in a convection loop},
+  author={Gorman, M and Widmann, PJ},
+  year={1984},
+  journal={Phys. Rev. Lett.},
+  number={52},
+  pages={2241--2244}
+}
+@article{gorman1986,
+  title={Nonlinear dynamics of a convection loop: a quantitative comparison of experiment with theory},
+  author={Gorman, M and Widmann, PJ and Robbins, KA},
+  year={1986},
+  journal={Physica D},
+  number={19},
+  pages={255--267}
+}
+@article{yuen1999,
+  title={Optimal and adaptive control of chaotic convection},
+  author={Yuen, PK and Bau, HH},
+  year={1999},
+  journal={Phys. Fluids},
+  number={11},
+  pages={1435--1448}
+}
+@article{jiang2003,
+  title={Spatial and temporal stabilities of flow in a natural circulation loop: influences of thermal boundary condition},
+  author={Jiang, YY and Shoji, M},
+  year={2003},
+  journal={J Heat Trans.},
+  number={125},
+  pages={612--623}
+}
+@article{issa1986solution,
+  title={Solution of the implicitly discretised fluid flow equations by operator-splitting},
+  author={Issa, Raad I},
+  journal={Journal of Computational physics},
+  volume={62},
+  number={1},
+  pages={40--65},
+  year={1986},
+  publisher={Elsevier}
+}
+@article{patankar1972calculation,
+  title={A calculation procedure for heat, mass and momentum transfer in three-dimensional parabolic flows},
+  author={Patankar, Suhas V and Spalding, D Brian},
+  journal={International Journal of Heat and Mass Transfer},
+  volume={15},
+  number={10},
+  pages={1787--1806},
+  year={1972},
+  publisher={Elsevier}
+}
+@article{lorenc2003potential,
+  title={The potential of the ensemble Kalman filter for NWP—a comparison with 4D-Var},
+  author={Lorenc, Andrew C},
+  journal={Quarterly Journal of the Royal Meteorological Society},
+  volume={129},
+  number={595},
+  pages={3183--3203},
+  year={2003},
+  publisher={Wiley Online Library}
+}
+@article{ott2004local,
+  title={A local ensemble Kalman filter for atmospheric data assimilation},
+  author={Ott, Edward and Hunt, Brian R and Szunyogh, Istvan and Zimin, Aleksey V and Kostelich, Eric J and Corazza, Matteo and Kalnay, Eugenia and Patil, DJ and Yorke, James A},
+  journal={Tellus A},
+  volume={56},
+  number={5},
+  pages={415--428},
+  year={2004},
+  publisher={Wiley Online Library}
+}
+@article{hunt2004four,
+  title={Four-dimensional ensemble Kalman filtering},
+  author={Hunt, BR and Kalnay, E and Kostelich, EJ and Ott, E and Patil, DJ and Sauer, T and Szunyogh, I and Yorke, JA and Zimin, AV},
+  journal={Tellus A},
+  volume={56},
+  number={4},
+  pages={273--277},
+  year={2004},
+  publisher={Wiley Online Library}
+}
+@article{hunt2007efficient,
+  title={Efficient data assimilation for spatiotemporal chaos: A local ensemble transform Kalman filter},
+  author={Hunt, Brian R and Kostelich, Eric J and Szunyogh, Istvan},
+  journal={Physica D: Nonlinear Phenomena},
+  volume={230},
+  number={1},
+  pages={112--126},
+  year={2007},
+  publisher={Elsevier}
+}
+@article{burgers1998analysis,
+  title={Analysis scheme in the ensemble Kalman filter},
+  author={Burgers, Gerrit and Jan van Leeuwen, Peter and Evensen, Geir},
+  journal={Monthly weather review},
+  volume={126},
+  number={6},
+  pages={1719--1724},
+  year={1998}
+}
+@article{weather-violence2013,
+author = {Hsiang, Solomon M. and Burke, Marshall and Miguel, Edward}, 
+title = {Quantifying the Influence of Climate on Human Conflict},
+volume = {341}, 
+number = {6151}, 
+year = {2013}, 
+doi = {10.1126/science.1235367}, 
+URL = {http://www.sciencemag.org/content/341/6151/1235367.abstract}, 
+eprint = {http://www.sciencemag.org/content/341/6151/1235367.full.pdf}, 
+journal = {Science} 
+}
+@article{tu2013dynamic,
+  title={On dynamic mode decomposition: theory and applications},
+  author={Tu, Jonathan H and Rowley, Clarence W and Luchtenburg, Dirk M and Brunton, Steven L and Kutz, J Nathan},
+  journal={arXiv preprint arXiv:1312.0041},
+  year={2013}
+}
+@article{bauer2015quiet,
+  title={The quiet revolution of numerical weather prediction},
+  author={Bauer, Peter and Thorpe, Alan and Brunet, Gilbert},
+  journal={Nature},
+  volume={525},
+  number={7567},
+  pages={47--55},
+  year={2015},
+  publisher={Nature Publishing Group}
+}

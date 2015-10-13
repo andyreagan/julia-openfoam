@@ -1,262 +1,240 @@
-\begin{thebibliography}{}
+\begin{thebibliography}{10}
 
-\bibitem[\protect\citeauthoryear{Anderson}{Anderson}{2001}]{anderson2001new}
-Anderson, M.~J. (2001).
-\newblock A new method for non-parametric multivariate analysis of variance.
-\newblock {\em Austral Ecology\/}~{\em 26\/}(1), 32--46.
+\bibitem{weather-violence2013}
+Solomon~M. Hsiang, Marshall Burke, and Edward Miguel.
+\newblock Quantifying the influence of climate on human conflict.
+\newblock {\em Science}, 341(6151), 2013.
 
-\bibitem[\protect\citeauthoryear{Asur and Huberman}{Asur and
-  Huberman}{2010}]{asur2010predicting}
-Asur, S. and B.~A. Huberman (2010).
+\bibitem{ginsberg2008detecting}
+Jeremy Ginsberg, Matthew~H Mohebbi, Rajan~S Patel, Lynnette Brammer, Mark~S
+  Smolinski, and Larry Brilliant.
+\newblock Detecting influenza epidemics using search engine query data.
+\newblock {\em Nature}, 457(7232):1012--1014, 2008.
+
+\bibitem{sornette2006predictability}
+Didier Sornette and Wei-Xing Zhou.
+\newblock Predictability of large future changes in major financial indices.
+\newblock {\em International Journal of Forecasting}, 22(1):153--168, 2006.
+
+\bibitem{asur2010predicting}
+Sitaram Asur and Bernardo~A Huberman.
 \newblock Predicting the future with social media.
 \newblock In {\em Web Intelligence and Intelligent Agent Technology (WI-IAT),
-  2010 IEEE/WIC/ACM International Conference on}, Volume~1, pp.\  492--499.
-  IEEE.
+  2010 IEEE/WIC/ACM International Conference on}, volume~1, pages 492--499.
+  IEEE, 2010.
 
-\bibitem[\protect\citeauthoryear{Bauer, Thorpe, and Brunet}{Bauer
-  et~al.}{2015}]{bauer2015quiet}
-Bauer, P., A.~Thorpe, and G.~Brunet (2015).
-\newblock The quiet revolution of numerical weather prediction.
-\newblock {\em Nature\/}~{\em 525\/}(7567), 47--55.
-
-\bibitem[\protect\citeauthoryear{Bishop, Etherton, and Majumdar}{Bishop
-  et~al.}{2001}]{bishop2001adaptive}
-Bishop, C.~H., B.~J. Etherton, and S.~J. Majumdar (2001).
-\newblock Adaptive sampling with the ensemble transform kalman filter. part i:
-  Theoretical aspects.
-\newblock {\em Monthly weather review\/}~{\em 129\/}(3), 420--436.
-
-\bibitem[\protect\citeauthoryear{Burgers, Jan~van Leeuwen, and Evensen}{Burgers
-  et~al.}{1998}]{burgers1998analysis}
-Burgers, G., P.~Jan~van Leeuwen, and G.~Evensen (1998).
-\newblock Analysis scheme in the ensemble kalman filter.
-\newblock {\em Monthly weather review\/}~{\em 126\/}(6), 1719--1724.
-
-\bibitem[\protect\citeauthoryear{Burroughs, Coutsias, and Romero}{Burroughs
-  et~al.}{2005}]{burroughs2005reduced}
-Burroughs, E., E.~Coutsias, and L.~Romero (2005).
-\newblock A reduced-order partial differential equation model for the flow in a
-  thermosyphon.
-\newblock {\em Journal of Fluid Mechanics\/}~{\em 543}, 203--238.
-
-\bibitem[\protect\citeauthoryear{Creveling, PAZ, Baladi, and
-  Schoenhals}{Creveling et~al.}{1975}]{creveling1975stability}
-Creveling, H., D.~PAZ, J.~Baladi, and R.~Schoenhals (1975).
-\newblock Stability characteristics of a single-phase free convection loop.
-\newblock {\em Journal of Fluid Mechanics\/}~{\em 67\/}(part 1), 65--84.
-
-\bibitem[\protect\citeauthoryear{Danforth, Kalnay, and Miyoshi}{Danforth
-  et~al.}{2007}]{danforth2007estimating}
-Danforth, C.~M., E.~Kalnay, and T.~Miyoshi (2007).
-\newblock Estimating and correcting global weather model error.
-\newblock {\em Monthly weather review\/}~{\em 135\/}(2), 281--299.
-
-\bibitem[\protect\citeauthoryear{Desrayaud, Fichera, and Marcoux}{Desrayaud
-  et~al.}{2006}]{desrayaud2006numerical}
-Desrayaud, G., A.~Fichera, and M.~Marcoux (2006).
-\newblock Numerical investigation of natural circulation in a 2d-annular
-  closed-loop thermosyphon.
-\newblock {\em International journal of heat and fluid flow\/}~{\em 27\/}(1),
-  154--166.
-
-\bibitem[\protect\citeauthoryear{Ehrhard and M{\"u}ller}{Ehrhard and
-  M{\"u}ller}{1990}]{ehrhard1990dynamical}
-Ehrhard, P. and U.~M{\"u}ller (1990).
-\newblock Dynamical behaviour of natural convection in a single-phase loop.
-\newblock {\em Journal of Fluid mechanics\/}~{\em 217}, 487--518.
-
-\bibitem[\protect\citeauthoryear{Evensen}{Evensen}{2003}]{evensen2003ensemble}
-Evensen, G. (2003).
-\newblock The ensemble kalman filter: Theoretical formulation and practical
-  implementation.
-\newblock {\em Ocean dynamics\/}~{\em 53\/}(4), 343--367.
-
-\bibitem[\protect\citeauthoryear{Ferziger and Peri{\'c}}{Ferziger and
-  Peri{\'c}}{1996}]{ferziger1996computational}
-Ferziger, J.~H. and M.~Peri{\'c} (1996).
-\newblock {\em Computational methods for fluid dynamics}, Volume~3.
-\newblock Springer Berlin.
-
-\bibitem[\protect\citeauthoryear{Ginsberg, Mohebbi, Patel, Brammer, Smolinski,
-  and Brilliant}{Ginsberg et~al.}{2008}]{ginsberg2008detecting}
-Ginsberg, J., M.~H. Mohebbi, R.~S. Patel, L.~Brammer, M.~S. Smolinski, and
-  L.~Brilliant (2008).
-\newblock Detecting influenza epidemics using search engine query data.
-\newblock {\em Nature\/}~{\em 457\/}(7232), 1012--1014.
-
-\bibitem[\protect\citeauthoryear{Glenn}{Glenn}{2013}]{glenn2013}
-Glenn, D. (2013, may).
-\newblock Characterizing weather in a thermosyphon: an atmosphere that hangs on
-  a wall.
-\newblock Undergraduate Honors Thesis, University of Vermont.
-
-\bibitem[\protect\citeauthoryear{Gorman and Widmann}{Gorman and
-  Widmann}{1984}]{gorman1984}
-Gorman, M. and P.~Widmann (1984).
-\newblock Chaotic flow regimes in a convection loop.
-\newblock {\em Phys. Rev. Lett.\/}~(52), 2241--2244.
-
-\bibitem[\protect\citeauthoryear{Gorman, Widmann, and Robbins}{Gorman
-  et~al.}{1986}]{gorman1986}
-Gorman, M., P.~Widmann, and K.~Robbins (1986).
-\newblock Nonlinear dynamics of a convection loop: a quantitative comparison of
-  experiment with theory.
-\newblock {\em Physica D\/}~(19), 255--267.
-
-\bibitem[\protect\citeauthoryear{Harris, Ridouane, Hitt, and Danforth}{Harris
-  et~al.}{2011}]{harris2011predicting}
-Harris, K.~D., E.~H. Ridouane, D.~L. Hitt, and C.~M. Danforth (2011).
-\newblock Predicting flow reversals in chaotic natural convection using data
-  assimilation.
-\newblock {\em arXiv preprint arXiv:1108.5685\/}.
-
-\bibitem[\protect\citeauthoryear{Hsiang, Burke, and Miguel}{Hsiang
-  et~al.}{2013}]{weather-violence2013}
-Hsiang, S.~M., M.~Burke, and E.~Miguel (2013).
-\newblock Quantifying the influence of climate on human conflict.
-\newblock {\em Science\/}~{\em 341\/}(6151).
-
-\bibitem[\protect\citeauthoryear{Hunt, Kostelich, and Szunyogh}{Hunt
-  et~al.}{2007}]{hunt2007efficient}
-Hunt, B.~R., E.~J. Kostelich, and I.~Szunyogh (2007).
-\newblock Efficient data assimilation for spatiotemporal chaos: A local
-  ensemble transform kalman filter.
-\newblock {\em Physica D: Nonlinear Phenomena\/}~{\em 230\/}(1), 112--126.
-
-\bibitem[\protect\citeauthoryear{Issa}{Issa}{1986}]{issa1986solution}
-Issa, R.~I. (1986).
-\newblock Solution of the implicitly discretised fluid flow equations by
-  operator-splitting.
-\newblock {\em Journal of Computational physics\/}~{\em 62\/}(1), 40--65.
-
-\bibitem[\protect\citeauthoryear{Jasak, Jemcov, and Tukovic}{Jasak
-  et~al.}{2007}]{jasak2007}
-Jasak, H., A.~Jemcov, and Z.~Tukovic (2007).
-\newblock Openfoam: A c++ library for complex physics simulations.
-\newblock In {\em International Workshop on Coupled Methods in Numerical
-  Dynamics, IUC, Dubrovnik, Croatia}, pp.\  1--20.
-
-\bibitem[\protect\citeauthoryear{Jiang and Shoji}{Jiang and
-  Shoji}{2003}]{jiang2003}
-Jiang, Y. and M.~Shoji (2003).
-\newblock Spatial and temporal stabilities of flow in a natural circulation
-  loop: influences of thermal boundary condition.
-\newblock {\em J Heat Trans.\/}~(125), 612--623.
-
-\bibitem[\protect\citeauthoryear{Kalnay}{Kalnay}{2003}]{kalnay2003}
-Kalnay, E. (2003).
-\newblock {\em Atmospheric modeling, data assimilation, and predictability}.
-\newblock Cambridge university press.
-
-\bibitem[\protect\citeauthoryear{Kalnay, Li, Miyoshi, YANG, and
-  BALLABRERA-POY}{Kalnay et~al.}{2007}]{kalnay20074}
-Kalnay, E., H.~Li, T.~Miyoshi, S.-C. YANG, and J.~BALLABRERA-POY (2007).
-\newblock 4-d-var or ensemble kalman filter?
-\newblock {\em Tellus A\/}~{\em 59\/}(5), 758--773.
-
-\bibitem[\protect\citeauthoryear{Keller}{Keller}{1966}]{keller1966}
-Keller, J.~B. (1966).
-\newblock Periodic oscillations in a model of thermal convection.
-\newblock {\em J. Fluid Mech\/}~{\em 26\/}(3), 599--606.
-
-\bibitem[\protect\citeauthoryear{Li, Kalnay, Miyoshi, and Danforth}{Li
-  et~al.}{2009}]{li2009accounting}
-Li, H., E.~Kalnay, T.~Miyoshi, and C.~M. Danforth (2009).
-\newblock Accounting for model errors in ensemble data assimilation.
-\newblock {\em Monthly Weather Review\/}~{\em 137\/}(10), 3407--3419.
-
-\bibitem[\protect\citeauthoryear{Lorenc}{Lorenc}{1986}]{lorenc1986analysis}
-Lorenc, A.~C. (1986).
-\newblock Analysis methods for numerical weather prediction.
-\newblock {\em Quarterly Journal of the Royal Meteorological Society\/}~{\em
-  112\/}(474), 1177--1194.
-
-\bibitem[\protect\citeauthoryear{Louisos, Hitt, and Danforth}{Louisos
-  et~al.}{2013}]{louisos2013}
-Louisos, W.~F., D.~L. Hitt, and C.~M. Danforth (2013).
-\newblock Chaotic flow in a 2d natural convection loop with heat flux
-  boundaries.
-\newblock {\em International Journal of Heat and Mass Transfer\/}~{\em 61},
-  565--576.
-
-\bibitem[\protect\citeauthoryear{Ott, Hunt, Szunyogh, Zimin, Kostelich,
-  Corazza, Kalnay, Patil, and Yorke}{Ott et~al.}{2004}]{ott2004local}
-Ott, E., B.~R. Hunt, I.~Szunyogh, A.~V. Zimin, E.~J. Kostelich, M.~Corazza,
-  E.~Kalnay, D.~Patil, and J.~A. Yorke (2004).
-\newblock A local ensemble kalman filter for atmospheric data assimilation.
-\newblock {\em Tellus A\/}~{\em 56\/}(5), 415--428.
-
-\bibitem[\protect\citeauthoryear{Patankar and Spalding}{Patankar and
-  Spalding}{1972}]{patankar1972calculation}
-Patankar, S.~V. and D.~B. Spalding (1972).
-\newblock A calculation procedure for heat, mass and momentum transfer in
-  three-dimensional parabolic flows.
-\newblock {\em International Journal of Heat and Mass Transfer\/}~{\em
-  15\/}(10), 1787--1806.
-
-\bibitem[\protect\citeauthoryear{Rall}{Rall}{1981}]{autodiff1981}
-Rall, L. (1981).
-\newblock {\em Automatic Differentiation: Techniques and Applications (Lecture
-  Notes in Computer Science)}.
-\newblock Springer.
-
-\bibitem[\protect\citeauthoryear{Reagan}{Reagan}{2013}]{reagan2013}
-Reagan, A. (2013).
-\newblock Predicting flow reversals in a computational fluid dynamics simulated
-  thermosyphon using data assimilation.
-\newblock {\em arXiv:1312.2142\/}.
-
-\bibitem[\protect\citeauthoryear{Ridouane, Danforth, and Hitt}{Ridouane
-  et~al.}{2010}]{ridouane2010}
-Ridouane, E.~H., C.~M. Danforth, and D.~L. Hitt (2010).
-\newblock A 2-d numerical study of chaotic flow in a natural convection loop.
-\newblock {\em International Journal of Heat and Mass Transfer\/}~{\em
-  53\/}(1), 76--84.
-
-\bibitem[\protect\citeauthoryear{Savely, Cockrell, , and Pines}{Savely
-  et~al.}{1972}]{savely1972}
-Savely, R., B.~Cockrell, , and S.~Pines (1972).
+\bibitem{savely1972}
+RT~Savely, BF~Cockrell, , and S~Pines.
 \newblock Apollo experience report - onboard navigational and alignment
   software.
-\newblock {\em Technical Report\/}.
+\newblock {\em Technical Report}, 1972.
 
-\bibitem[\protect\citeauthoryear{Sornette and Zhou}{Sornette and
-  Zhou}{2006}]{sornette2006predictability}
-Sornette, D. and W.-X. Zhou (2006).
-\newblock Predictability of large future changes in major financial indices.
-\newblock {\em International Journal of Forecasting\/}~{\em 22\/}(1), 153--168.
+\bibitem{bauer2015quiet}
+Peter Bauer, Alan Thorpe, and Gilbert Brunet.
+\newblock The quiet revolution of numerical weather prediction.
+\newblock {\em Nature}, 525(7567):47--55, 2015.
 
-\bibitem[\protect\citeauthoryear{Tippett, Anderson, Bishop, Hamill, and
-  Whitaker}{Tippett et~al.}{2003}]{tippett2003ensemble}
-Tippett, M.~K., J.~L. Anderson, C.~H. Bishop, T.~M. Hamill, and J.~S. Whitaker
-  (2003).
-\newblock Ensemble square root filters*.
-\newblock {\em Monthly Weather Review\/}~{\em 131\/}(7), 1485--1490.
-
-\bibitem[\protect\citeauthoryear{Tu, Rowley, Luchtenburg, Brunton, and Kutz}{Tu
-  et~al.}{2013}]{tu2013dynamic}
-Tu, J.~H., C.~W. Rowley, D.~M. Luchtenburg, S.~L. Brunton, and J.~N. Kutz
-  (2013).
-\newblock On dynamic mode decomposition: theory and applications.
-\newblock {\em arXiv preprint arXiv:1312.0041\/}.
-
-\bibitem[\protect\citeauthoryear{Welander}{Welander}{1995}]{welander1967}
-Welander, P. (1995).
-\newblock On the oscillatory instability of a differentially heated fluid loop.
-\newblock {\em International Geophysics Series\/}~{\em 59}.
-
-\bibitem[\protect\citeauthoryear{Yang, Baker, Li, Cordes, Huff, Nagpal,
-  Okereke, Villafane, Kalnay, and Duane}{Yang et~al.}{2006}]{yang2006}
-Yang, S.-C., D.~Baker, H.~Li, K.~Cordes, M.~Huff, G.~Nagpal, E.~Okereke,
-  J.~Villafane, E.~Kalnay, and G.~S. Duane (2006).
+\bibitem{yang2006}
+Shu-Chih Yang, Debra Baker, Hong Li, Katy Cordes, Morgan Huff, Geetika Nagpal,
+  Ena Okereke, Josue Villafane, Eugenia Kalnay, and Gregory~S Duane.
 \newblock Data assimilation as synchronization of truth and model: Experiments
   with the three-variable lorenz system*.
-\newblock {\em Journal of the atmospheric sciences\/}~{\em 63\/}(9),
-  2340--2354.
+\newblock {\em Journal of the atmospheric sciences}, 63(9):2340--2354, 2006.
 
-\bibitem[\protect\citeauthoryear{Yuen and Bau}{Yuen and Bau}{1999}]{yuen1999}
-Yuen, P. and H.~Bau (1999).
+\bibitem{harris2011predicting}
+Kameron~Decker Harris, El~Hassan Ridouane, Darren~L Hitt, and Christopher~M
+  Danforth.
+\newblock Predicting flow reversals in chaotic natural convection using data
+  assimilation.
+\newblock {\em arXiv preprint arXiv:1108.5685}, 2011.
+
+\bibitem{keller1966}
+Joseph~B Keller.
+\newblock Periodic oscillations in a model of thermal convection.
+\newblock {\em J. Fluid Mech}, 26(3):599--606, 1966.
+
+\bibitem{welander1967}
+P~Welander.
+\newblock On the oscillatory instability of a differentially heated fluid loop.
+\newblock {\em International Geophysics Series}, 59, 1995.
+
+\bibitem{creveling1975stability}
+HF~Creveling, DE~PAZ, JY~Baladi, and RJ~Schoenhals.
+\newblock Stability characteristics of a single-phase free convection loop.
+\newblock {\em Journal of Fluid Mechanics}, 67(part 1):65--84, 1975.
+
+\bibitem{gorman1984}
+M~Gorman and PJ~Widmann.
+\newblock Chaotic flow regimes in a convection loop.
+\newblock {\em Phys. Rev. Lett.}, (52):2241--2244, 1984.
+
+\bibitem{gorman1986}
+M~Gorman, PJ~Widmann, and KA~Robbins.
+\newblock Nonlinear dynamics of a convection loop: a quantitative comparison of
+  experiment with theory.
+\newblock {\em Physica D}, (19):255--267, 1986.
+
+\bibitem{ehrhard1990dynamical}
+Peter Ehrhard and Ulrich M{\"u}ller.
+\newblock Dynamical behaviour of natural convection in a single-phase loop.
+\newblock {\em Journal of Fluid mechanics}, 217:487--518, 1990.
+
+\bibitem{yuen1999}
+PK~Yuen and HH~Bau.
 \newblock Optimal and adaptive control of chaotic convection.
-\newblock {\em Phys. Fluids\/}~(11), 1435--1448.
+\newblock {\em Phys. Fluids}, (11):1435--1448, 1999.
+
+\bibitem{jiang2003}
+YY~Jiang and M~Shoji.
+\newblock Spatial and temporal stabilities of flow in a natural circulation
+  loop: influences of thermal boundary condition.
+\newblock {\em J Heat Trans.}, (125):612--623, 2003.
+
+\bibitem{burroughs2005reduced}
+EA~Burroughs, EA~Coutsias, and LA~Romero.
+\newblock A reduced-order partial differential equation model for the flow in a
+  thermosyphon.
+\newblock {\em Journal of Fluid Mechanics}, 543:203--238, 2005.
+
+\bibitem{desrayaud2006numerical}
+Gilles Desrayaud, Alberto Fichera, and Manuel Marcoux.
+\newblock Numerical investigation of natural circulation in a 2d-annular
+  closed-loop thermosyphon.
+\newblock {\em International journal of heat and fluid flow}, 27(1):154--166,
+  2006.
+
+\bibitem{ridouane2010}
+El~Hassan Ridouane, Christopher~M Danforth, and Darren~L Hitt.
+\newblock A 2-d numerical study of chaotic flow in a natural convection loop.
+\newblock {\em International Journal of Heat and Mass Transfer}, 53(1):76--84,
+  2010.
+
+\bibitem{louisos2013}
+William~F Louisos, Darren~L Hitt, and Christopher~M Danforth.
+\newblock Chaotic flow in a 2d natural convection loop with heat flux
+  boundaries.
+\newblock {\em International Journal of Heat and Mass Transfer}, 61:565--576,
+  2013.
+
+\bibitem{glenn2013}
+Darcy Glenn.
+\newblock Characterizing weather in a thermosyphon: an atmosphere that hangs on
+  a wall.
+\newblock Undergraduate Honors Thesis, University of Vermont, may 2013.
+
+\bibitem{jasak2007}
+Hrvoje Jasak, Aleksandar Jemcov, and Zeljko Tukovic.
+\newblock Openfoam: A c++ library for complex physics simulations.
+\newblock In {\em International Workshop on Coupled Methods in Numerical
+  Dynamics, IUC, Dubrovnik, Croatia}, pages 1--20, 2007.
+
+\bibitem{issa1986solution}
+Raad~I Issa.
+\newblock Solution of the implicitly discretised fluid flow equations by
+  operator-splitting.
+\newblock {\em Journal of Computational physics}, 62(1):40--65, 1986.
+
+\bibitem{lorenc1986analysis}
+Andrew~C Lorenc.
+\newblock Analysis methods for numerical weather prediction.
+\newblock {\em Quarterly Journal of the Royal Meteorological Society},
+  112(474):1177--1194, 1986.
+
+\bibitem{kalnay2003}
+Eugenia Kalnay.
+\newblock {\em Atmospheric modeling, data assimilation, and predictability}.
+\newblock Cambridge university press, 2003.
+
+\bibitem{danforth2007estimating}
+Christopher~M Danforth, Eugenia Kalnay, and Takemasa Miyoshi.
+\newblock Estimating and correcting global weather model error.
+\newblock {\em Monthly weather review}, 135(2):281--299, 2007.
+
+\bibitem{li2009accounting}
+Hong Li, Eugenia Kalnay, Takemasa Miyoshi, and Christopher~M Danforth.
+\newblock Accounting for model errors in ensemble data assimilation.
+\newblock {\em Monthly Weather Review}, 137(10):3407--3419, 2009.
+
+\bibitem{danforth2008using}
+Christopher~M Danforth and Eugenia Kalnay.
+\newblock Using singular value decomposition to parameterize state-dependent
+  model errors.
+\newblock {\em Journal of the Atmospheric Sciences}, 65(4):1467--1478, 2008.
+
+\bibitem{bishop2001adaptive}
+Craig~H Bishop, Brian~J Etherton, and Sharanya~J Majumdar.
+\newblock Adaptive sampling with the ensemble transform kalman filter. part i:
+  Theoretical aspects.
+\newblock {\em Monthly weather review}, 129(3):420--436, 2001.
+
+\bibitem{kalnay2007a}
+Eugenia Kalnay, Hong Li, Takemasa Miyoshi, Shu-Chih Yang, and Joaquim
+  Ballabrera-Poy.
+\newblock 4-d-var or ensemble kalman filter?
+\newblock {\em Tellus A}, 59(5):758--773, 2007.
+
+\bibitem{ott2004local}
+Edward Ott, Brian~R Hunt, Istvan Szunyogh, Aleksey~V Zimin, Eric~J Kostelich,
+  Matteo Corazza, Eugenia Kalnay, DJ~Patil, and James~A Yorke.
+\newblock A local ensemble kalman filter for atmospheric data assimilation.
+\newblock {\em Tellus A}, 56(5):415--428, 2004.
+
+\bibitem{hunt2007efficient}
+Brian~R Hunt, Eric~J Kostelich, and Istvan Szunyogh.
+\newblock Efficient data assimilation for spatiotemporal chaos: A local
+  ensemble transform kalman filter.
+\newblock {\em Physica D: Nonlinear Phenomena}, 230(1):112--126, 2007.
+
+\bibitem{tu2013dynamic}
+Jonathan~H Tu, Clarence~W Rowley, Dirk~M Luchtenburg, Steven~L Brunton, and
+  J~Nathan Kutz.
+\newblock On dynamic mode decomposition: theory and applications.
+\newblock {\em arXiv preprint arXiv:1312.0041}, 2013.
+
+\bibitem{reagan2013}
+Andrew Reagan.
+\newblock Predicting flow reversals in a computational fluid dynamics simulated
+  thermosyphon using data assimilation.
+\newblock {\em arXiv:1312.2142}, 2013.
+
+\bibitem{patankar1972calculation}
+Suhas~V Patankar and D~Brian Spalding.
+\newblock A calculation procedure for heat, mass and momentum transfer in
+  three-dimensional parabolic flows.
+\newblock {\em International Journal of Heat and Mass Transfer},
+  15(10):1787--1806, 1972.
+
+\bibitem{ferziger1996computational}
+Joel~H Ferziger and Milovan Peri{\'c}.
+\newblock {\em Computational methods for fluid dynamics}, volume~3.
+\newblock Springer Berlin, 1996.
+
+\bibitem{autodiff1981}
+L.B. Rall.
+\newblock {\em Automatic Differentiation: Techniques and Applications (Lecture
+  Notes in Computer Science)}.
+\newblock Springer, 1981.
+
+\bibitem{burgers1998analysis}
+Gerrit Burgers, Peter Jan~van Leeuwen, and Geir Evensen.
+\newblock Analysis scheme in the ensemble kalman filter.
+\newblock {\em Monthly weather review}, 126(6):1719--1724, 1998.
+
+\bibitem{anderson2001new}
+Marti~J Anderson.
+\newblock A new method for non-parametric multivariate analysis of variance.
+\newblock {\em Austral Ecology}, 26(1):32--46, 2001.
+
+\bibitem{tippett2003ensemble}
+Michael~K Tippett, Jeffrey~L Anderson, Craig~H Bishop, Thomas~M Hamill, and
+  Jeffrey~S Whitaker.
+\newblock Ensemble square root filters*.
+\newblock {\em Monthly Weather Review}, 131(7):1485--1490, 2003.
+
+\bibitem{evensen2003ensemble}
+Geir Evensen.
+\newblock The ensemble kalman filter: Theoretical formulation and practical
+  implementation.
+\newblock {\em Ocean dynamics}, 53(4):343--367, 2003.
 
 \end{thebibliography}

@@ -18,18 +18,32 @@ Here we present the main equations that are solved numerically, noting the assum
 In standard notation, for $u,v,w$ the velocity in the $x,y,z$ direction, respectively, the continuity equation for an incompressible fluid is
 \begin{equation} \frac{\partial u}{\partial x} + \frac{\partial v}{\partial y} + \frac{\partial w}{\partial z} = 0. \label{eq:NScontIco} \end{equation}
 
-The momentum equations, presented compactly in tensor notation with bars representing averaged quantities, are given by
+The momentum equations, in tensor notation with bars representing averaged quantities (long timesteps are used, requiring integration), are
 \begin{equation} \rho_\text{ref} \left ( \frac{\partial \bar{u}_i}{\partial t} + \frac{\partial}{\partial x_j} \left( \bar{u}_j \bar{u}_i \right) \right )
-= -\frac{\partial \bar{p}} {\partial{x_i}} +  \mu \frac{\partial \bar{u}_i}{\partial x_j^2} + \bar{\rho} g_i \end{equation}
-for $\rho_\text{ref}$ the reference density, $\rho$ the density from the Boussinesq approximation, $p$ the pressure, $\mu$ the viscocity, and $g_i$ gravity in the $i$-direction.
+= -\frac{\partial \bar{p}} {\partial{x_i}} +  \mu \frac{\partial \bar{u}_i}{\partial x_j^2} + \rhoref \left(1 - \beta (T - T_\text{ref})\right) g_i \end{equation}
+for $\rho_\text{ref}$ the reference density with the Boussinesq approximation included, $p$ the pressure, $\mu$ the viscosity, and $g_i$ gravity in the $i$-direction.
 Note that $g_i = 0$ for $i \in \{ x,y\}$ since gravity is assumed to be the $z$ direction.
-The energy equation is given by
-\begin{equation} \frac{\partial }{\partial t} \left ( \rho \overline{e}\right ) + \frac{\partial}{\partial x_j} \left ( \rho \overline{e} \overline{u}_j \right ) 
-= 
-- \frac{\partial q_k^*}{\partial x_k}
-- \frac{\partial \overline{q}_k}{\partial x_k}
+%% The energy equation is given by
+%% \begin{equation} \frac{\partial }{\partial t} \left ( \rho \overline{e}\right ) + \frac{\partial}{\partial x_j} \left ( \rho \overline{e} \overline{u}_j \right ) 
+%% = 
+%% - \frac{\partial q_k^*}{\partial x_k}
+%% - \frac{\partial \overline{q}_k}{\partial x_k}
+%% \end{equation}
+%% for $e$ the total internal energy and $q$ the flux (where $q = \overline{q} + q^*$ is the averaging notation).
+Since the model is incompressible, of course our energy equation includes only temperature, and is given by
+    %%     fvm::ddt(T)
+    %%   + fvm::div(phi, T)
+    %%   - fvm::laplacian(alphaEff, T)
+    %%  ==
+    %%     radiation->ST(rhoCpRef, T)
+    %%   + fvOptions(T)
+    %% );
+\begin{equation} \partialdiff{T}{t} + \partialdiff{}{x_j} \left ( \rhoref T \overline{u}_j \right ) - \frac{\partial ^2 \alpha T}{\partial x_j \partial x_i}
+  =
+  - \frac{\partial q_k^*}{\partial x_k}
+  - \frac{\partial \overline{q}_k}{\partial x_k}
 \end{equation}
-for $e$ the total internal energy and $q$ the flux (where $q = \overline{q} + q^*$ is the averaging notation).
+for $T$ the temperature and $q$ the flux (where $q = \overline{q} + q^*$ is the averaging notation).
 
 \subsection{Implementation}
 
@@ -91,6 +105,21 @@ The final operation being the conversion of pressure to hydrostatic pressure,
 \begin{equation*} p _\text{rgh} = p - \rho _k g_h . \end{equation*}
 This ``pEqn.H'' is then re-run until convergence is achieved, and the PISO loop begins again.
 
+\begin{figure}[h!]
+  \centering
+    \includegraphics[width=0.79\textwidth]{/Users/andyreagan/work/2013/05-data-assimilation/src/experiments/meshVerification/Flux-end-20-times.pdf}
+  \caption[Long-term behavior for different meshes]
+  {
+    With a fixed choice of solver, boundary conditions, and initial conditions that lead to a stable convective state, we present the long-term behavior of the velocity face flux at the top slice for different meshes.
+    The face flux is reported as the average for the last 20 times saves for which the velocity flux is summed across a slice perpendicular to the loop, here we show the top slice.
+    We choose a fixed time step of 0.005 for each simulation, and run the solver for 60 hours on 8 cores.
+    The computational limit of mesh creation was a memory limit at 818280 cells, so we present results for meshes starting at 1600 cells and cells decreasing in size by a factor of 1.25 in both $y$ and $z$ up to a mesh of 523584 cells.
+    For meshes with more than 80,000 cells we see that the solutions are very similar.
+    The smaller meshes generate increasing unstable flow behavior, leading to oscillations of flux and then flow reversals for the smallest meshes of size 2500 and 1600 cells.
+  }
+  \label{fig:meshverification}
+\end{figure}
+
 \clearpage
 \pagebreak
 \section{The Ehrhard and M\"{u}ller Equations}
@@ -146,7 +175,7 @@ where $p(x)$ can be defined as $p(x) = \left( 44x^2 -55 x^3 + 20x^4 \right ) /9$
 Taking the lowest modes of a Fourier expansion for $T$ for an approximate solution, we consider:
 \begin{equation} T(\phi , t) = C_0 (t) + S(t) \sin (\phi ) + C(t) \cos (\phi) . \end{equation}
 By substituting this form into Equations \ref{eq:EM10} and \ref{eq:EMeq} and integrating, we obtain a system of three equations for our solution.
-We then follow the particular nondimensionalization choice of Harris et al such that we obtain the following ODE system, which we refer to as the Ehrhard-M\"{u}ller equations:
+We then follow the particular nondimensionalization choice of Harris \etal such that we obtain the following ODE system, which we refer to as the Ehrhard-M\"{u}ller equations:
 \begin{align}
 & \diff{x_1}{t'} = \alpha (x_2 - x_1),\\
 & \diff{x_2}{t'} = \beta x_1 - x_2 (1 + Kh(|x_1|)) - x_1x_3,\\
@@ -252,10 +281,10 @@ For further details on the most advanced methods, beyond what is provided in the
 \pagebreak
 \section{Additional DMD Details}
 
-The general algoritm for DMD is provided in Section III(C), and here we supply more results of the DMD procedure.
-The timeseries from which we computed the decomposition is shownn in Figure \ref{fig:DMD-timeseries}.
+The general algorithm for DMD is provided in Section III(C), and here we supply more results of the DMD procedure.
+The timeseries from which we computed the decomposition is shown in Figure \ref{fig:DMD-timeseries}.
 
-The real and imaginary components of the DMD eigenvalues are shown in both unmapped and mapped form in Figure \ref{fig:DMD-eigenvalues}.
+The real and imaginary components of the DMD eigenvalues are shown in both un-mapped and mapped form in Figure \ref{fig:DMD-eigenvalues}.
 
 \begin{figure*}
   \centering
