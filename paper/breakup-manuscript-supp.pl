@@ -4,7 +4,8 @@ $pdffile = $ARGV[0];
 ($manufile = $pdffile) =~ s/\.pdf$/-manuscript.pdf/;
 ($suppfile = $pdffile) =~ s/\.pdf$/-supplementary.pdf/;
 
-$supp_firstpage = `cat startsupp.txt`;
+$supp_firstpage = $ARGV[1];
+# $supp_firstpage = `cat startsupp.txt`;
 chomp($supp_firstpage);
 $manulastpage = $supp_firstpage - 1;
 

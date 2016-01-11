@@ -1,4 +1,5 @@
-\section{Computational Details and Explicit Equations Used}
+\subsection*{S1 Computational Details and Explicit Equations Used}
+\label{S1}
 
 %% Numerical weather prediction has since constantly pushed the boundary of computational power, and required a better understanding of atmospheric processes to make better predictions.
 %% In this direction, we make use of advanced computational resources in the context of a simplified atmospheric experiment to improve prediction skill.
@@ -12,7 +13,6 @@ We now discuss the equations, mesh, boundary conditions, and solver in more deta
 With these considerations, we present our simulations of the thermosyphon.
 For a complete derivation of the equations used, see \cite{reagan2013}.
 
-\subsection{Governing Equations}
 We consider the incompressible Navier-Stokes equations with the Boussinesq approximation to model the flow of water inside a thermal convection loop.
 Here we present the main equations that are solved numerically, noting the assumptions that are necessary in their derivation.
 In standard notation, for $u,v,w$ the velocity in the $x,y,z$ direction, respectively, the continuity equation for an incompressible fluid is
@@ -44,8 +44,6 @@ Since the model is incompressible, of course our energy equation includes only t
   - \frac{\partial \overline{q}_k}{\partial x_k}
 \end{equation}
 for $T$ the temperature and $q$ the flux (where $q = \overline{q} + q^*$ is the averaging notation).
-
-\subsection{Implementation}
 
 The PISO (Pressure-Implicit with Splitting of Operators) algorithm derives from the work of \cite{issa1986solution}, and is complementary to the SIMPLE (Semi-Implicit Method for Pressure-Linked Equations) \cite{patankar1972calculation} iterative method.
 The main difference of the PISO and SIMPLE algorithms is that in the PISO, no under-relaxation is applied and the momentum corrector step is performed more than once \cite{ferziger1996computational}.
@@ -105,6 +103,8 @@ The final operation being the conversion of pressure to hydrostatic pressure,
 \begin{equation*} p _\text{rgh} = p - \rho _k g_h . \end{equation*}
 This ``pEqn.H'' is then re-run until convergence is achieved, and the PISO loop begins again.
 
+We verify convergence of the solution in a steady flow state regime in Fig \ref{fig:meshverification}.
+
 \begin{figure}[h!]
   \centering
     \includegraphics[width=0.79\textwidth]{/Users/andyreagan/work/2013/05-data-assimilation/src/experiments/meshVerification/Flux-end-20-times.pdf}
@@ -122,7 +122,8 @@ This ``pEqn.H'' is then re-run until convergence is achieved, and the PISO loop 
 
 \clearpage
 \pagebreak
-\section{The Ehrhard and M\"{u}ller Equations}
+\subsection*{S2 The Ehrhard and M\"{u}ller Equations}
+\label{S2}
 
 Following the derivation by Harris \cite{harris2011predicting}, itself a representation of the derivation of Gorman \cite{gorman1986} and namesakes Ehrhard and M\"{u}ller \cite{ehrhard1990dynamical}, we derive the equations governing a closed loop thermosyphon.
 
@@ -196,7 +197,8 @@ Through careful consideration of these non-dimensional variable transformations 
 
 \clearpage
 \pagebreak
-\section{Data Assimiliation}
+\subsection*{S3 Data Assimiliation}
+\label{S3}
 
 The TLM is the model which advances an initial perturbation $\delta \mbx_{i}$ at timestep $i$ to a final perturbation $\delta \mbx_{i+1}$ at timestep $i+1$.
 The dynamical system we are interested in, Lorenz '63, is given as a system of ODE's:
@@ -218,32 +220,35 @@ It is therefore desirable to take the derivative of the numerical scheme directl
 A schematic of this scenario is illustrated in Figure \ref{fig:TLMscheme}.
 To that the derivative of numerical code for implementing the EKF on models larger than 3 dimensions (i.e. global weather models written in Fortan), automatic code differentiation is used \cite{autodiff1981}.
 
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.89\textwidth]{figures/TLM-explanation.pdf}
+  \caption[An explanation of how and why the best way to obtain a TLM is with a differentiated numerical scheme]{
+    An explanation of how and why the best way to obtain a TLM is with a differentiated numerical scheme.
+    Both the Lorenz ODE and TLM ODE System can be solved by RK2/4, but the analytic Jacobian of TLM that would is not the same as the derivative of the numerical method.
+    In particular, the derivative of the RK2/4 integrator is used to obtain a TLM that most accurately propogates error growth in the Lorenz '63 system.
+  }
+  \label{fig:TLMscheme}
+\end{figure}
+
 To verify our implementation of the TLM, we propagate a small error in the Lorenz '63 system and plot the difference between that error and the TLM predicted error, for each variable (Figure \ref{fig:TLMverification}).
 
-\begin{figure*}
+\begin{figure}[h]
   \centering
   \includegraphics[width=0.45\textwidth]{figures/TLM-verification003_noname.pdf}
   \caption[The future error predicted by the TLM is compared to the error growth in Lorenz '63 system for an initial perturbation with standard deviation of 0.1, averaged over 1000 TLM integrations]{
     The future error predicted by the TLM is compared to the error growth in Lorenz '63 system for an initial perturbation with standard deviation of 0.1, averaged over 1000 TLM integrations.
     The $\epsilon$ is not the error predicted by the TLM, but rather the error of the TLM in predicting the error growth.
+    We see an intially linear error growth for small time, which is overcome by the nonlinearity of the Lorenz system for longer time.
   }
   \label{fig:TLMverification}
-\end{figure*}
-
-\begin{figure*}
-  \centering
-  \includegraphics[width=0.89\textwidth]{figures/TLM-explanation.pdf}
-  \caption[An explanation of how and why the best way to obtain a TLM is with a differentiated numerical scheme]{
-    An explanation of how and why the best way to obtain a TLM is with a differentiated numerical scheme.
-  }
-  \label{fig:TLMscheme}
-\end{figure*}
+\end{figure}
 
 With a finite ensemble size, the ensemble method is only an approximation and therefore in practice it often fails to capture the full spread of error.
-To better capture the model variance, additive and multiplicative inflation factors are used to obtain a good estimate of the error covariance matrix (Section 2.6).
+To better capture the model variance, additive and multiplicative inflation factors are used to obtain a good estimate of the error covariance matrix (\nameref{fig:ETKF_cov_tuning_390s} Section).
 The spread of ensemble members in the $x_1$ variable of the Lorenz model, as distance from the analysis, can be seen in Figure \ref{fig:EnKFhist}.
 
-\begin{figure}[h!]
+\begin{figure}[h]
   \centering
   \includegraphics[width=0.79\textwidth]{figures/EnKF-histogram-analysis.pdf}
   \caption[The difference of ensemble forecasts from the analysis is reported for 760 assimilation windows in one model run of length 200, with 10 ensemble members and an assimilation window of length 0.261]{
@@ -260,13 +265,14 @@ Therefore, to compute the error covariance matrix for each forecast, that foreca
 
 We can see the classic spaghetti of the ensemble with this filter implemented on Lorenz 63 in Figure \ref{fig:spaghetti}.
 
-\begin{figure}[h!]
+\begin{figure}[h]
   \centering
   \includegraphics[width=0.99\textwidth]{figures/EnKF_spaghetti.pdf}
   \caption[A sample time-series of the ensembles used in the EnKF]{
     A sample time-series of the ensembles used in the EnKF.
     In all tests, as seen here, 10 ensemble members are used.
     For this run, 384 assimilation cycles are performed with a window length of 0.26 model time units.
+    We can see that the ensemble member state after assimilation better represents the uncertainty of the analysis state and enables some ensemble members to stay close to the true state.
   }
   \label{fig:spaghetti}
 \end{figure}
@@ -279,30 +285,38 @@ For further details on the most advanced methods, beyond what is provided in the
 
 \clearpage
 \pagebreak
-\section{Additional DMD Details}
+\subsection*{S4 Additional DMD Details}
+\label{S4}
 
-The general algorithm for DMD is provided in Section III(C), and here we supply more results of the DMD procedure.
+The general algorithm for DMD is provided in the \nameref{dmd_section} Section, and here we supply more results of the DMD procedure.
 The timeseries from which we computed the decomposition is shown in Figure \ref{fig:DMD-timeseries}.
 
-The real and imaginary components of the DMD eigenvalues are shown in both un-mapped and mapped form in Figure \ref{fig:DMD-eigenvalues}.
-
-\begin{figure*}
+\begin{figure}[h]
   \centering
   \includegraphics[width=0.98\textwidth]{../figures/DMD/DMD-data-timeseries-longer-wide.pdf}
   \caption[]{
-    Flux timeseries on which DMD is performed.    
+    Flux timeseries on which DMD is performed.
+    We report the flux as the sum of the face flux values on a slice of the loop at the 9 o'clock position.
+    In this flux timeseries we see dynamics visually similar to the $x_1$ variable of the Lorenz 63 system.
+    Residence time in either flow direction is aperiodic and unstable with the flow speed oscillating within a single direction with growing amplitude until reversing.
   }
   \label{fig:DMD-timeseries}  
-\end{figure*}
+\end{figure}
+
+The real and imaginary components of the DMD eigenvalues are shown in both un-mapped and mapped form in Figure \ref{fig:DMD-eigenvalues}.
 
 %% ~/work/2015/08-kitchentabletools/pdftile.pl 1 2 .7 0 0 l 10 "" "A: DMD Eigenvalues" DMD-eigenvalues-tu-wU.pdf "B: DMD Eigenvalues (mapped)" DMD-eigenvalues-mapped-tu-wU.pdf eigenvalues-both-labeled
-\begin{figure*}
+\begin{figure}[h]
   \centering
   \includegraphics[width=0.98\textwidth]{../figures/DMD/eigenvalues-both-labeled.pdf}
   \caption[]{
-    Eigenvalues of DMD Modes.
+    Eigenvalues of DMD Modes presented in both raw and scaled (mapped) form.
+    In Panel A we see the eigenvalue of each DMD mode on the complex plane, with an inset unit circle.
+    Those eigenvalues with magnitude greater than 1 are shown in red.
+    In Panel B we see the same eigenvalues on the complex plane, transformed by the base 10 logarithm.
+    Again we color in red those eigenvalues with real part greater than 0.
   }
   \label{fig:DMD-eigenvalues}  
-\end{figure*}
+\end{figure}
 
 

@@ -1,1 +1,1 @@
-submission-materials/plos2015.bst
+submission-materials/plos/plos2015.bst

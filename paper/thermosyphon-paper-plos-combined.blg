@@ -1,0 +1,85 @@
+This is BibTeX, Version 0.99d (TeX Live 2014)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: thermosyphon-paper-plos-combined.aux
+The style file: plos-style.bst
+I found no \bibdata command---while reading file thermosyphon-paper-plos-combined.aux
+Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
+Reallocated global_strs (elt_size=20001) to 20 items from 10.
+Reallocated glb_str_end (elt_size=4) to 20 items from 10.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Warning--I didn't find a database entry for "weather-violence2013"
+Warning--I didn't find a database entry for "ginsberg2008detecting"
+Warning--I didn't find a database entry for "sornette2006predictability"
+Warning--I didn't find a database entry for "asur2010predicting"
+Warning--I didn't find a database entry for "savely1972"
+Warning--I didn't find a database entry for "bauer2015quiet"
+Warning--I didn't find a database entry for "yang2006"
+Warning--I didn't find a database entry for "harris2011predicting"
+Warning--I didn't find a database entry for "keller1966"
+Warning--I didn't find a database entry for "welander1967"
+Warning--I didn't find a database entry for "creveling1975stability"
+Warning--I didn't find a database entry for "gorman1984"
+Warning--I didn't find a database entry for "gorman1986"
+Warning--I didn't find a database entry for "ehrhard1990dynamical"
+Warning--I didn't find a database entry for "yuen1999"
+Warning--I didn't find a database entry for "jiang2003"
+Warning--I didn't find a database entry for "burroughs2005reduced"
+Warning--I didn't find a database entry for "desrayaud2006numerical"
+Warning--I didn't find a database entry for "ridouane2010"
+Warning--I didn't find a database entry for "louisos2013"
+Warning--I didn't find a database entry for "glenn2013"
+Warning--I didn't find a database entry for "jasak2007"
+Warning--I didn't find a database entry for "issa1986solution"
+Warning--I didn't find a database entry for "lorenc1986analysis"
+Warning--I didn't find a database entry for "kalnay2003"
+Warning--I didn't find a database entry for "danforth2007estimating"
+Warning--I didn't find a database entry for "li2009accounting"
+Warning--I didn't find a database entry for "danforth2008using"
+Warning--I didn't find a database entry for "bishop2001adaptive"
+Warning--I didn't find a database entry for "kalnay2007a"
+Warning--I didn't find a database entry for "ott2004local"
+Warning--I didn't find a database entry for "hunt2007efficient"
+Warning--I didn't find a database entry for "tu2013dynamic"
+Warning--I didn't find a database entry for "bishop2011a"
+You've used 0 entries,
+            3170 wiz_defined-function locations,
+            671 strings with 4984 characters,
+and the built_in function-call counts, 30 in all, are:
+= -- 0
+> -- 0
+< -- 0
++ -- 0
+- -- 0
+* -- 2
+:= -- 19
+add.period$ -- 0
+call.type$ -- 0
+change.case$ -- 0
+chr.to.int$ -- 0
+cite$ -- 0
+duplicate$ -- 0
+empty$ -- 1
+format.name$ -- 0
+if$ -- 1
+int.to.chr$ -- 0
+int.to.str$ -- 0
+missing$ -- 0
+newline$ -- 3
+num.names$ -- 0
+pop$ -- 0
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 1
+stack$ -- 0
+substring$ -- 0
+swap$ -- 0
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 0
+while$ -- 0
+width$ -- 0
+write$ -- 2
+(There was 1 error message)

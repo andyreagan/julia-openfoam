@@ -26,7 +26,7 @@ cd arxiv-package;
 tar cvfzph ../$1-arxiv.tgz * 1>&2;
 cd ..
 
-# cleanup
-\rm -r arxiv-package
-\rm $1-combined.tex
-\rm $1-arxiv.tgz
+# # cleanup
+# \rm -r arxiv-package
+# \rm $1-combined.tex
+# \rm $1-arxiv.tgz

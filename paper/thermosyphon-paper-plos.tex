@@ -142,8 +142,9 @@
 \pagestyle{myheadings}
 \pagestyle{fancy}
 \fancyhf{}
-\lhead{\includegraphics[width=2.0in]{plos/PLOS-submission.eps}}
-\rfoot{\thepage/\pageref{LastPage}}
+\lhead{\includegraphics[width=2.0in]{figures/PLOS-submission.eps}}
+%% \rfoot{\thepage/\pageref{LastPage}}
+\rfoot{\thepage/13}
 \renewcommand{\footrule}{\hrule height 2pt \vspace{2mm}}
 \fancyheadoffset[L]{2.25in}
 \fancyfootoffset[L]{2.25in}
@@ -282,44 +283,12 @@
 
 %% Sed non aliquet felis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris commodo justo ac dui pretium imperdiet. Sed suscipit iaculis mi at feugiat. Ut neque ipsum, luctus id lacus ut, laoreet scelerisque urna. Phasellus venenatis, tortor nec vestibulum mattis, massa tortor interdum felis, nec pellentesque metus tortor nec nisl. Ut ornare mauris tellus, vel dapibus arcu suscipit sed. Nam condimentum sem eget mollis euismod. Nullam dui urna, gravida venenatis dui et, tincidunt sodales ex. Nunc est dui, sodales sed mauris nec, auctor sagittis leo. Aliquam tincidunt, ex in facilisis elementum, libero lectus luctus est, non vulputate nisl augue at dolor. For more information, see \nameref{S1_Text}.
 
-\section*{Supporting Information}
-
-\setcounter{page}{1}
-\renewcommand{\thepage}{S\arabic{page}}
-\renewcommand{\thefigure}{S\arabic{figure}}
-\renewcommand{\thetable}{S\arabic{table}}
-\setcounter{figure}{0}
-\setcounter{table}{0}
-
-%% \input{\filenamebase.supplementary}
-
-%% % Include only the SI item label in the subsection heading. Use the \nameref{label} command to cite SI items in the text.
-%% \subsection*{S1 Video}
-%% \label{S1_Video}
-%% {\bf Bold the first sentence.}  Maecenas convallis mauris sit amet sem ultrices gravida. Etiam eget sapien nibh. Sed ac ipsum eget enim egestas ullamcorper nec euismod ligula. Curabitur fringilla pulvinar lectus consectetur pellentesque.
-
-%% \subsection*{S1 Text}
-%% \label{S1_Text}
-%% {\bf Lorem Ipsum.} Maecenas convallis mauris sit amet sem ultrices gravida. Etiam eget sapien nibh. Sed ac ipsum eget enim egestas ullamcorper nec euismod ligula. Curabitur fringilla pulvinar lectus consectetur pellentesque.
-
-%% \subsection*{S1 Fig}
-%% \label{S1_Fig}
-%% {\bf Lorem Ipsum.} Maecenas convallis mauris sit amet sem ultrices gravida. Etiam eget sapien nibh. Sed ac ipsum eget enim egestas ullamcorper nec euismod ligula. Curabitur fringilla pulvinar lectus consectetur pellentesque.
-
-%% \subsection*{S2 Fig}
-%% \label{S2_Fig}
-%% {\bf Lorem Ipsum.} Maecenas convallis mauris sit amet sem ultrices gravida. Etiam eget sapien nibh. Sed ac ipsum eget enim egestas ullamcorper nec euismod ligula. Curabitur fringilla pulvinar lectus consectetur pellentesque.
-
-%% \subsection*{S1 Table}
-%% \label{S1_Table}
-%% {\bf Lorem Ipsum.} Maecenas convallis mauris sit amet sem ultrices gravida. Etiam eget sapien nibh. Sed ac ipsum eget enim egestas ullamcorper nec euismod ligula. Curabitur fringilla pulvinar lectus consectetur pellentesque.
-
 %% \section*{Acknowledgments}
 %% Cras egestas velit mauris, eu mollis turpis pellentesque sit amet. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam id pretium nisi. Sed ac quam id nisi malesuada congue. Sed interdum aliquet augue, at pellentesque quam rhoncus vitae.
 
 \nolinenumbers
 
-\section*{References}
+%% \section*{References}
 % Either type in your references using
 % \begin{thebibliography}{}
 % \bibitem{}
@@ -347,6 +316,47 @@
 
 %% step 2
 %% \input{\currfilebase.bbl}
+
+\clearpage
+\pagebreak
+
+\section*{Supporting Information}
+
+\newwrite\tempfile
+\immediate\openout\tempfile=startsupp-plos.txt
+\immediate\write\tempfile{\thepage}
+\immediate\closeout\tempfile
+
+\rfoot{\thepage/S10}
+\setcounter{page}{1}
+\renewcommand{\thepage}{S\arabic{page}}
+\renewcommand{\thefigure}{S\arabic{figure}}
+\renewcommand{\thetable}{S\arabic{table}}
+\setcounter{figure}{0}
+\setcounter{table}{0}
+
+\input{\filenamebase.supplementary}
+
+%% % Include only the SI item label in the subsection heading. Use the \nameref{label} command to cite SI items in the text.
+%% \subsection*{S1 Video}
+%% \label{S1_Video}
+%% {\bf Bold the first sentence.}  Maecenas convallis mauris sit amet sem ultrices gravida. Etiam eget sapien nibh. Sed ac ipsum eget enim egestas ullamcorper nec euismod ligula. Curabitur fringilla pulvinar lectus consectetur pellentesque.
+
+%% \subsection*{S1 Text}
+%% \label{S1_Text}
+%% {\bf Lorem Ipsum.} Maecenas convallis mauris sit amet sem ultrices gravida. Etiam eget sapien nibh. Sed ac ipsum eget enim egestas ullamcorper nec euismod ligula. Curabitur fringilla pulvinar lectus consectetur pellentesque.
+
+%% \subsection*{S1 Fig}
+%% \label{S1_Fig}
+%% {\bf Lorem Ipsum.} Maecenas convallis mauris sit amet sem ultrices gravida. Etiam eget sapien nibh. Sed ac ipsum eget enim egestas ullamcorper nec euismod ligula. Curabitur fringilla pulvinar lectus consectetur pellentesque.
+
+%% \subsection*{S2 Fig}
+%% \label{S2_Fig}
+%% {\bf Lorem Ipsum.} Maecenas convallis mauris sit amet sem ultrices gravida. Etiam eget sapien nibh. Sed ac ipsum eget enim egestas ullamcorper nec euismod ligula. Curabitur fringilla pulvinar lectus consectetur pellentesque.
+
+%% \subsection*{S1 Table}
+%% \label{S1_Table}
+%% {\bf Lorem Ipsum.} Maecenas convallis mauris sit amet sem ultrices gravida. Etiam eget sapien nibh. Sed ac ipsum eget enim egestas ullamcorper nec euismod ligula. Curabitur fringilla pulvinar lectus consectetur pellentesque.
 
 \end{document}
 
