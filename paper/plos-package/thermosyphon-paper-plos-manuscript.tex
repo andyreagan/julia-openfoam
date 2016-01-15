@@ -159,7 +159,7 @@
 \pagestyle{myheadings}
 \pagestyle{fancy}
 \fancyhf{}
-\lhead{\includegraphics[width=2.0in]{fig0_PLOS-submission.pdf}}
+\lhead{\includegraphics[width=2.0in]{PLOS-letterhead.pdf}}
 
 \rfoot{\thepage/13}
 \renewcommand{\footrule}{\hrule height 2pt \vspace{2mm}}
@@ -191,9 +191,9 @@ Peter Sheridan Dodds\textsuperscript{1},
 Christopher M. Danforth\textsuperscript{1}
 \\
 \bigskip
-\textbf{1} Department of Mathematics \& Statistics, Vermont Complex Systems Center, Computational Story Lab, \& the Vermont Advanced Computing Core, The University of Vermont, Burlington, VT 05405
+\textbf{1} Department of Mathematics \& Statistics, Vermont Complex Systems Center, Computational Story Lab, \& the Vermont Advanced Computing Core, The University of Vermont, Burlington, VT 05405, USA
 \\
-\textbf{2} School of Engineering, Vermont Complex Systems Center \& the Vermont Advanced Computing Core, The University of Vermont, Burlington, VT 05405
+\textbf{2} School of Engineering, Vermont Complex Systems Center \& the Vermont Advanced Computing Core, The University of Vermont, Burlington, VT 05405, USA
 \\
 
 
@@ -213,7 +213,6 @@ Christopher M. Danforth\textsuperscript{1}
 * andrew.reagan@uvm.edu
 
 \end{flushleft}
-\section*{Abstract}
 \begin{abstract}
 A thermal convection loop is a annular chamber filled with water, heated on the bottom half and cooled on the top half.
 With sufficiently large forcing of heat, the direction of fluid flow in the loop oscillates chaotically, dynamics analogous to the Earth's weather.
@@ -261,7 +260,7 @@ The function $h(x)$ is a defined piece-wise analytic polynomial, and is provided
 The parameters $\alpha$, $\beta$, and $K$, along with scaling factors for time and each model variable can be fit to data using standard parameter estimation techniques.
 
 Operated by Dave Hammond, UVM's Scientific Electronics Technician, the experimental thermosyphons access the chaotic regime of state space found in the principled governing equations.
-We quote the detailed setup from Darcy Glenn's undergraduate thesis \cite{glenn2013} and provide Fig. \ref{fig:thermosyphon-schematic} for details of the experiment:
+We quote the detailed setup from Darcy Glenn's undergraduate thesis \cite{glenn2013} and provide Fig~\ref{fig:thermosyphon-schematic} for details of the experiment:
 \begin{quote}
 The [thermosyphon] is a bent semi-flexible plastic tube with a 10-foot heating rope wrapped around the bottom half of the upright circle.
 The tubing used is light-transmitting clear THV from McMaster-Carr, with an inner diameter of 7/8 inch, a wall thickness of 1/16 inch, and a maximum operating temperature of 200F.
@@ -272,12 +271,24 @@ The bottom half is then insulated using aluminum foil, which allowed fluid in th
 A forcing of 57 V, or 105 Watts, is required for the heating cable so that chaotic motion is observed.
 Temperature is measured at the 3 o'clock and 9 o'clock positions using unsheathed copper thermocouples from Omega.
 \end{quote}
-We confirm that the experiment accesses the chaotic regime of state space using a time series of the temperature difference as measured at the 3 o'clock and 9 o'clock positions in Fig. \ref{fig:thermosyphon-physical-timeseries}.
+
+\begin{figure}[h]
+  \centering
+  %% \includegraphics[width=0.45\textwidth]{fig1_harris-tellus-2012-loop.tiff}
+  \caption[Schematic of the experimental, and computational, setup from Harris \etal (2012)]{
+\textbf{    Schematic of the experimental, and computational, setup from Harris \etal (2012).
+}    The loop radius is given by $R$ and inner radius by $r$.
+    The top temperature is labeled $T_c$ and bottom temperature $T_h$, gravity $g$ is defined downward, the angle $\phi$ is prescribed from the 6 o'clock position, and temperature difference between 3 o'clock and 9 o'clock positions $\Delta T_{3-9}$ is labeled.
+  }
+  \label{fig:thermosyphon-schematic}
+\end{figure}
+
+We confirm that the experiment accesses the chaotic regime of state space using a time series of the temperature difference as measured at the 3 o'clock and 9 o'clock positions in Fig~\ref{fig:thermosyphon-physical-timeseries}.
 We first test our ability to predict this experimental thermosyphon using synthetic data.
 
 \begin{figure}[h]
   \centering
-  %% \includegraphics[width=0.5\textwidth]{fig1_2015-09-30-12-26-221-timeseries.tiff}
+  %% \includegraphics[width=0.5\textwidth]{fig2_2015-09-30-12-26-221-timeseries.tiff}
   \caption[A time series of the physical thermosyphon, from the Undergraduate Honor's Thesis of Darcy Glenn {\protect \cite{glenn2013}}]{
 \textbf{    A time series of the physical thermosyphon, from the Undergraduate Honor's Thesis of Darcy Glenn {\protect \cite{glenn2013}}.
 }    The temperature difference (plotted) is taken as the difference between temperature sensors in the 3 and 9 o'clock positions.
@@ -285,17 +296,6 @@ We first test our ability to predict this experimental thermosyphon using synthe
      We note that the experimental thermosyphon is not perfectly balanced, resulting in non-symmetric residence in each flow direction.
       }
   \label{fig:thermosyphon-physical-timeseries}
-\end{figure}
-
-\begin{figure}[h]
-  \centering
-  %% \includegraphics[width=0.45\textwidth]{fig2_harris-tellus-2012-loop.tiff}
-  \caption[Schematic of the experimental, and computational, setup from Harris \etal (2012)]{
-\textbf{    Schematic of the experimental, and computational, setup from Harris \etal (2012).
-}    The loop radius is given by $R$ and inner radius by $r$.
-    The top temperature is labeled $T_c$ and bottom temperature $T_h$, gravity $g$ is defined downward, the angle $\phi$ is prescribed from the 6 o'clock position, and temperature difference between 3 o'clock and 9 o'clock positions $\Delta T_{3-9}$ is labeled.
-  }
-  \label{fig:thermosyphon-schematic}
 \end{figure}
 
 We perform all computational simulations of the thermal convection loop with the open-source finite volume C++ library OpenFOAM \cite{jasak2007}.
@@ -307,7 +307,7 @@ The solver in OpenFOAM that we use, with some modification, is \verb|buoyantBous
 Solving is accomplished by the Pressure-Implicit Split Operator (PISO) algorithm \cite{issa1986solution}.
 We find that modification of the code is necessary for laminar operation.
 
-We create both 2-dimensional and 3-dimensional meshes using OpenFOAM's native meshing utility \verb|blockMesh| shown in Figures \ref{fig:CFDmesh1} and \ref{fig:CFDmesh2}.
+We create both 2-dimensional and 3-dimensional meshes using OpenFOAM's native meshing utility \verb|blockMesh| shown in Figs~\ref{fig:CFDmesh1} and~\ref{fig:CFDmesh2}.
 After creating a mesh, we refine the mesh near the walls to capture boundary layer phenomena and renumber the mesh for solving speed.
 We use the \verb|refineWallMesh| utility to refine the mesh near walls, and the \verb|renumberMesh| utility to renumber the mesh.
 The resulting 2D mesh contains 80,000 points (80 across the diameter and 1000 around).
@@ -442,8 +442,8 @@ In parallel, these 100 local computations can all be carried out simultaneously 
 \subsection*{Adaptive covariance localization}
 
 Using the ``square'' sections of the loop to localize, we shift the zone to the left or right to follow the dominate flow direction at the center of that local window.
-In Fig. \ref{fig:covariance-localization-schematic} a schematic of localization using square, circular, and adaptive location shows a situation in which adaptive localization will potentially capture more relevant information for finding the analysis state of any given cell.
-As we note in the caption of Fig. \ref{fig:covariance-localization-schematic}, while we are motivated by localization around flow structures like Panel C, we simply shift the covariance in Panel A so that our method is most general and computationally efficient.
+In Fig~\ref{fig:covariance-localization-schematic} a schematic of localization using square, circular, and adaptive location shows a situation in which adaptive localization will potentially capture more relevant information for finding the analysis state of any given cell.
+As we note in the caption of Fig~\ref{fig:covariance-localization-schematic}, while we are motivated by localization around flow structures like Panel C, we simply shift the covariance in Panel A so that our method is most general and computationally efficient.
 
 \begin{figure}[h]
   \centering
@@ -477,7 +477,7 @@ This projection is a vector which contains the linear coefficients on the basis 
 \subsection*{Data assimilation}
 \label{data_assimilation_section}
 
-We confirm the performance of the DA methods described above by testing each (on the Lorenz '63 system) for increasingly long times between observations, by increasing the DA window length in Fig. \ref{fig:window_test}.
+We confirm the performance of the DA methods described above by testing each (on the Lorenz '63 system) for increasingly long times between observations, by increasing the DA window length in Fig~\ref{fig:window_test}.
 As the time between observations increases, the nonlinearity of the Lorenz '63 system results in the failure of the EKF and difficultly for the EnKF with small ensemble size.
 The ETKF and EnSRF perform the best of the methods tested and we chose the ETKF for future use with the CFD model.
 
@@ -493,8 +493,8 @@ The ETKF and EnSRF perform the best of the methods tested and we chose the ETKF 
   \label{fig:window_test}
 \end{figure}
 
-The results in Fig. \ref{fig:window_test} rely on tuned covariance inflation, both additive and multiplicative, pre-computed for each window and DA technique.
-We choose optimal additive inflation $\mu$ and multiplicative inflation $\Delta$ by selecting for the lowest error in an exhaustive search through a maximum factors of $1.5$ in each, an example is shown in Fig. \ref{fig:ETKF_cov_tuning_390s}.
+The results in Fig~\ref{fig:window_test} rely on tuned covariance inflation, both additive and multiplicative, pre-computed for each window and DA technique.
+We choose optimal additive inflation $\mu$ and multiplicative inflation $\Delta$ by selecting for the lowest error in an exhaustive search through a maximum factors of $1.5$ in each, an example is shown in Fig~\ref{fig:ETKF_cov_tuning_390s}.
 We use these optimal data assimilation parameters (inflation factors) for the remainder of this work.
 
 \begin{figure}[h]
@@ -515,9 +515,9 @@ An initial test of prediction skill with limited observations in a twin model ex
 In an attempt to decrease the required observations to a experimentally realizable number, we implement a simple, adaptively localized covariance for data assimilation.
 Since we first saw a modest improvement in the prediction skill with full temperature observations, we hope that this improvement increases and is sufficient to get down to needing as few as 32 observations to predict reversals 1 assimilation window (of length 10 seconds) into the future.
 
-In Fig. \ref{fig:sliding_spag} we see that over an assimilation of 200 seconds, the ensemble converges on the hidden, true state.
+In Fig~\ref{fig:sliding_spag} we see that over an assimilation of 200 seconds, the ensemble converges on the hidden, true state.
 To test the performance of flow reversal prediction, we take the average of the ensemble flow direction (the average of each value of $\phi$) as the predicted flow direction, and count how often we predict reversals both when they do and do not occur.
-Varying both the number of model variables and the strength of covariance shifting in Fig. \ref{fig:sliding_results}, we find that covariance shifting improves flow reversal prediction skill even when spatial observation density is decreased.
+Varying both the number of model variables and the strength of covariance shifting in Fig~\ref{fig:sliding_results}, we find that covariance shifting improves flow reversal prediction skill even when spatial observation density is decreased.
 With full observations (spacing of 1), we obtain a the best predictions with a covariance shift of 2.
 For 1/2 and 1/5 observations [a spacing of 2 (5) to observe every other (fifth) variable], we again have the best predictions with a shift of 2.
 And for a spacing of 10, observing every 10th variable, we achieve greater prediction skill with a covariance shift of 10.
@@ -561,7 +561,7 @@ The time series of the model state projection onto a specific DMD mode will repr
 
 To look at all of the modes at once, we examine the average magnitude of the projection from all model states onto each mode in comparison to the projection of all states that 1,3,5, and 7 time steps before a reversal.
 The magnitude of the mode projection of a predictive mode before a reversal should stand out against the projection average across all states, and decay back towards the average further from the reversal in time.
-For modes 21 and 79, we directly observe in Fig. \ref{fig:DMD_modes} that the average projection from states just 1 second before reversal is the most different from the average state projection, and the further away from the reversal the more similar the states become to the average.
+For modes 21 and 79, we directly observe in Fig~\ref{fig:DMD_modes} that the average projection from states just 1 second before reversal is the most different from the average state projection, and the further away from the reversal the more similar the states become to the average.
 
 \begin{figure}[h]
   \centering
@@ -576,7 +576,7 @@ For modes 21 and 79, we directly observe in Fig. \ref{fig:DMD_modes} that the av
 \end{figure}
 
 We are particularly interested in whether the mode projection time series is predictive of flow reversals, as is true with the hidden system.
-The insets of Panel A and Panel B in Fig. \ref{fig:DMD_phaseplane} show two such timeseries, with stars indicating the time of flow reversals.
+The insets of Panel A and Panel B in Fig~\ref{fig:DMD_phaseplane} show two such timeseries, with stars indicating the time of flow reversals.
 Individually, these modes increase in amplitude when flow reversals happen.
 As a dominant mode, the time series of Mode 2 tracks closely to the timeseries from which the modes were generated, while the dynamics of the projection of Mode 79 are less obvious.
 
@@ -596,7 +596,7 @@ As a dominant mode, the time series of Mode 2 tracks closely to the timeseries f
 \end{figure}
 
 By combining the state projection onto specific mode time series into a phase plane, the combined signal from two modes is used for discovering states that separate reversals in direction and from other states in the phase plane.
-In Fig. \ref{fig:DMD_phaseplane} we see that the dominant dynamics from mode 2 plotted with those of mode 79 are able to strongly separate reversals into quadrants of the low-dimensional space.
+In Fig~\ref{fig:DMD_phaseplane} we see that the dominant dynamics from mode 2 plotted with those of mode 79 are able to strongly separate reversals into quadrants of the low-dimensional space.
 This result indicates that DMD could be used to improve predictability of reversals.
 
 \section*{Concluding Remarks}
@@ -862,50 +862,50 @@ Bishop CH, Hodyss D.
   Estimation.
 \newblock Monthly Weather Review. 2011 April;139(4):7.
 
-\bibitem{reagan2013}
-Reagan A.
-\newblock Predicting Flow Reversals in a Computational Fluid Dynamics Simulated
-  Thermosyphon using Data Assimilation.
-\newblock arXiv:13122142. 2013;.
+%% \bibitem{reagan2013}
+%% Reagan A.
+%% \newblock Predicting Flow Reversals in a Computational Fluid Dynamics Simulated
+%%   Thermosyphon using Data Assimilation.
+%% \newblock arXiv:13122142. 2013;.
 
-\bibitem{patankar1972calculation}
-Patankar SV, Spalding DB.
-\newblock A calculation procedure for heat, mass and momentum transfer in
-  three-dimensional parabolic flows.
-\newblock International Journal of Heat and Mass Transfer.
-  1972;15(10):1787--1806.
+%% \bibitem{patankar1972calculation}
+%% Patankar SV, Spalding DB.
+%% \newblock A calculation procedure for heat, mass and momentum transfer in
+%%   three-dimensional parabolic flows.
+%% \newblock International Journal of Heat and Mass Transfer.
+%%   1972;15(10):1787--1806.
 
-\bibitem{ferziger1996computational}
-Ferziger JH, Peri{\'c} M.
-\newblock Computational methods for fluid dynamics. vol.~3.
-\newblock Springer Berlin; 1996.
+%% \bibitem{ferziger1996computational}
+%% Ferziger JH, Peri{\'c} M.
+%% \newblock Computational methods for fluid dynamics. vol.~3.
+%% \newblock Springer Berlin; 1996.
 
-\bibitem{autodiff1981}
-Rall LB.
-\newblock Automatic Differentiation: Techniques and Applications (Lecture Notes
-  in Computer Science).
-\newblock Springer; 1981.
+%% \bibitem{autodiff1981}
+%% Rall LB.
+%% \newblock Automatic Differentiation: Techniques and Applications (Lecture Notes
+%%   in Computer Science).
+%% \newblock Springer; 1981.
 
-\bibitem{burgers1998analysis}
-Burgers G, Jan~van Leeuwen P, Evensen G.
-\newblock Analysis scheme in the ensemble Kalman filter.
-\newblock Monthly weather review. 1998;126(6):1719--1724.
+%% \bibitem{burgers1998analysis}
+%% Burgers G, Jan~van Leeuwen P, Evensen G.
+%% \newblock Analysis scheme in the ensemble Kalman filter.
+%% \newblock Monthly weather review. 1998;126(6):1719--1724.
 
-\bibitem{anderson2001new}
-Anderson MJ.
-\newblock A new method for non-parametric multivariate analysis of variance.
-\newblock Austral Ecology. 2001;26(1):32--46.
+%% \bibitem{anderson2001new}
+%% Anderson MJ.
+%% \newblock A new method for non-parametric multivariate analysis of variance.
+%% \newblock Austral Ecology. 2001;26(1):32--46.
 
-\bibitem{tippett2003ensemble}
-Tippett MK, Anderson JL, Bishop CH, Hamill TM, Whitaker JS.
-\newblock Ensemble square root filters*.
-\newblock Monthly Weather Review. 2003;131(7):1485--1490.
+%% \bibitem{tippett2003ensemble}
+%% Tippett MK, Anderson JL, Bishop CH, Hamill TM, Whitaker JS.
+%% \newblock Ensemble square root filters*.
+%% \newblock Monthly Weather Review. 2003;131(7):1485--1490.
 
-\bibitem{evensen2003ensemble}
-Evensen G.
-\newblock The ensemble Kalman filter: Theoretical formulation and practical
-  implementation.
-\newblock Ocean dynamics. 2003;53(4):343--367.
+%% \bibitem{evensen2003ensemble}
+%% Evensen G.
+%% \newblock The ensemble Kalman filter: Theoretical formulation and practical
+%%   implementation.
+%% \newblock Ocean dynamics. 2003;53(4):343--367.
 
 \end{thebibliography}
 

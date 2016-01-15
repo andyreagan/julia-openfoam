@@ -1,43 +1,17 @@
-OpenFoam + Julia
-================
+Predicting Flow Reversals in a Computational Fluid Dynamics Simulated Thermosyphon using Data Assimilation
+================================================================================
 
-So far, just some (very ugly) code to run an OpenFoam case.
-Soon, reading in the output to do numerics.
+A paper by Andrew J. Reagan, Yves Dubief, Peter Sheridan Dodds, and Christopher M. Danforth.
+See the paper on the [arXiv](http://arxiv.org/abs/1510.03389) and soon at PLoS, where it has recently been accepted.
 
-Just got it working on the VACC.
-
-2015-05-10
-
-Going to try to figure out now how the thing ran.
-
-test.jl
--simply tests the init of a case
-VACCtest.jl
--tests the init, and running a single case on the VACC
-testEnsemble.jl 
--tests the creation and execution of an ensemble of runs on the VACC
-run.qsub
--submits a job to run a openFoam through julia
-run.sh
--runs the BC test with with either the above, or nohup
-testCase
--a case for testing the initialization locally
-BCtest.jl
--simple, just runs the case from the command line args
-BCpost.jl
--reads out those cases and writes some csv files
-reshapeMesh.jl
--attempt to get out localizations for each cell
-basic.jl
--defines the foamLia module, exports all of the functions
-DA/testscript.jl
-DA/testEnKF.jl
--test of the EnKF. copied into the ijulia notebook
-DA/lorenz63.jl
--basically the same as the matlab code
--it relies on the shell script to run openfoam models (which basic.jl does a better job of)
-
-upgrades:
--always name files that define modules from the same name
+Abstract
+--------
+A thermal convection loop is a annular chamber filled with water, heated on the bottom half and cooled on the top half.
+With sufficiently large forcing of heat, the direction of fluid flow in the loop oscillates chaotically, dynamics analogous to the Earth's weather.
+As is the case for state-of-the-art weather models, we only observe the statistics over a small region of state space, making prediction difficult.
+To overcome this challenge, data assimilation (DA) methods, and specifically ensemble methods, use the computational model itself to estimate the uncertainty of the model to optimally combine these observations into an initial condition for predicting the future state.
+Here, we build and verify four distinct DA methods, and then, we perform a twin model experiment with the computational fluid dynamics simulation of the loop using the Ensemble Transform Kalman Filter (ETKF) to assimilate observations and predict flow reversals.
+We show that using adaptively shaped localized covariance outperforms static localized covariance with the ETKF, and allows for the use of less observations in predicting flow reversals.
+We also show that a Dynamic Mode Decomposition (DMD) of the temperature and velocity fields recovers the low dimensional system underlying reversals, finding specific modes which together are predictive of reversal direction.
 
 
