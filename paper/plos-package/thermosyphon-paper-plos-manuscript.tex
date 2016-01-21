@@ -156,6 +156,11 @@
 
 \usepackage{lastpage,fancyhdr,graphicx}
 \usepackage{epstopdf}
+
+\usepackage{abstract}
+\renewcommand{\abstractname}{}    % clear the title
+\renewcommand{\absnamepos}{empty} % originally center
+
 \pagestyle{myheadings}
 \pagestyle{fancy}
 \fancyhf{}
@@ -180,8 +185,7 @@
 
 \begin{flushleft}
 {\Large
-\textbf\newline{Predicting Flow Reversals in a Computational Fluid Dynamics Simulated Thermosyphon using Data Assimilation
- - Submission to PLOS Journals}
+\textbf\newline{Predicting Flow Reversals in a Computational Fluid Dynamics Simulated Thermosyphon using Data Assimilation}
 }
 \newline
 \\
@@ -213,6 +217,9 @@ Christopher M. Danforth\textsuperscript{1}
 * andrew.reagan@uvm.edu
 
 \end{flushleft}
+
+\section*{Abstract}
+\vspace{5mm}
 \begin{abstract}
 A thermal convection loop is a annular chamber filled with water, heated on the bottom half and cooled on the top half.
 With sufficiently large forcing of heat, the direction of fluid flow in the loop oscillates chaotically, dynamics analogous to the Earth's weather.
