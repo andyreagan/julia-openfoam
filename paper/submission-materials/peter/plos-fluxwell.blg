@@ -1,0 +1,51 @@
+This is BibTeX, Version 0.99d (TeX Live 2013)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: plos-fluxwell.aux
+The style file: plos2009.bst
+Database file #1: plos-fluxwell.bib
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+`journal' is a missing field, not a string, for entry williams2014a
+while executing---line 2643 of file plos2009.bst
+Warning--empty journal in williams2014a
+You've used 42 entries,
+            2441 wiz_defined-function locations,
+            736 strings with 12856 characters,
+and the built_in function-call counts, 25126 in all, are:
+= -- 2190
+> -- 411
+< -- 0
++ -- 213
+- -- 99
+* -- 1963
+:= -- 2817
+add.period$ -- 93
+call.type$ -- 42
+change.case$ -- 57
+chr.to.int$ -- 0
+cite$ -- 85
+duplicate$ -- 2589
+empty$ -- 2743
+format.name$ -- 123
+if$ -- 5588
+int.to.chr$ -- 0
+int.to.str$ -- 42
+missing$ -- 355
+newline$ -- 234
+num.names$ -- 27
+pop$ -- 674
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 324
+stack$ -- 0
+substring$ -- 3166
+swap$ -- 652
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 1
+while$ -- 160
+width$ -- 44
+write$ -- 433
+(There was 1 error message)

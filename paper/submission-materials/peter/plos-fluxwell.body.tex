@@ -1,0 +1,1177 @@
+\section*{Introduction}
+\label{sec:fluxwell.intro}
+
+Online instruments designed to measure social,
+psychological, and physical well-being at a population level are 
+becoming essential for public policy purposes and public health monitoring~\cite{CDC2013,dodds2011e}.
+These data-centric gauges both 
+empower the general public with information
+to allow comparisons of communities at all scales,
+and naturally
+complement the broad, established
+set of more readily measurable socioeconomic indicators 
+such as wage growth, crime rates, and housing prices.
+
+Overall well-being, or quality of life, depends on  many factors 
+and is complex to measure~\cite{diener1995}.
+Existing techniques for estimating population well-being range from traditional surveys~\cite{CDC2013,gallup}
+to estimates of smile-to-frown ratios captured automatically
+on camera in public spaces~\cite{feelometer}, and vary widely in the types of data they amass,
+collection methods, cost, time scales involved, and
+degree of intrusion.
+Many measures are composite in nature 
+with two examples being
+the Gallup Well-Being Index, 
+which is based on factors such as life evaluation, emotional health, physical health,
+healthy behavior, work environment, and basic access to necessary
+resources~\cite{gallup};
+and
+the Living Conditions measure developed by the United States Census Bureau,
+which is derived from housing conditions,
+neighborhood conditions, basic needs met, a ``full set'' of
+appliances, and access to help if needed~\cite{census}.
+
+With the explosive growth of online activity and social
+media around the world, the massive amount of real-time
+data created directly by populations
+of interest has become an increasingly attractive and fruitful
+source for analysis.
+Despite the
+limitation that social media users in the United States 
+are not a random sample of the US 
+population~\cite{pew}, 
+there is a wealth of information in these data sets and uneven
+sampling can often be accommodated.
+
+Indeed, online activity is now considered by many to be a promising 
+data source for detecting health
+conditions~\cite{signorini2011,prieto2014} and 
+gathering 
+public-health
+information~\cite{chew2010,paul2011},
+and within the last decade, researchers have constructed a range of
+online public-health instruments with varying degrees of success.
+
+We cover a few relevant examples in the following section, and then turn
+to measuring ``caloric content'' of text, the focus of our present work.
+
+\subsection*{Previous work}
+\label{subsec:fluxwell.previouswork}
+
+In the difficult realm of predicting pandemics~\cite{watts2005a}, 
+Google Flu Trends~\cite{googleflutrends2015a}---initially 
+based very simply on search terms---enjoyed early success and acclaim 
+but proved (unsurprisingly)
+to be imperfect in need of a more sophisticated approach~\cite{lazer2014a}.
+
+In work by several of the current authors and colleagues,
+Mitchell \etal\ measured the happiness of tweets across the US  and found
+strong correlations with other indices of well-being at city
+and state level, such as the
+Gallup Well-being Index; the Peace Index; the America's Health Ranking
+composite index of Behavior, Community and Environment, Policy and
+Clinical Care metrics; and gun violence (negative
+correlation)~\cite{mitchell2013a}. 
+Using the same instrument in 10 languages, the Hedonometer, 
+we have also shown that 
+the emotional content of tweets tracks major world
+events~\cite{dodds2011e,dodds2015a}.
+
+Paul and Dredze found that states with higher
+obesity rates have more tweets about obesity, and states with higher
+smoking rates have more tweets about cancer~\cite{paul2011}.  They also found a
+negative correlation between exercise and frequency of tweeting about
+ailments, suggesting ``Twitter
+users are less likely to become sick in states where people exercise.''
+They further found health care coverage rates to be
+negatively correlated with likelihood of posting tweets about
+diseases.  
+
+Chunara \etal\ recently found that
+activity-related interests on Facebook are negatively correlated with
+being overweight and obese, while interest in television is positively
+correlated with the same~\cite{chunara2013}.  
+
+In an analysis of online recipe queries, West \etal\ found
+that the number of patients admitted to the emergency room of a major
+urban hospital in Washington, DC for congestive heart failure (CHF)
+each month was significantly correlated with average sodium per recipe
+searched for on the Web in the same month~\cite{west2013}.
+
+Eichstaedt and colleagues~\cite{eichstaedt2015a} have demonstrated
+that psychological language on Twitter outperforms certain composite 
+socioeconomic indices in predicting heart disease at the county level.
+They were able to show in particular that the expression
+of negative emotions such as
+anger on Twitter could be taken as a kind of risk factor at
+the population scale.
+
+Finally, in work directly related to our present study,
+Abbar \etal~\cite{abbar2014a} have recently
+performed a similar analysis 
+of translating food terms used on Twitter into calories.
+They found a correlation between
+Twitter calories and obesity and diabetes rates for the US,
+and explored how food-themed interactions over social networks vary
+with connectedness, finding suggestions of social contagion.
+While our approaches and results are largely sympathetic,
+our work incorporates estimates of physical activity which we
+will show provides essential extra information regarding health;
+introduces a phrase extraction method we call serial partitioning;
+and leads to an online
+implementation of a real-time instrument as part of our
+proposed `panometer.'
+
+\subsection*{Lexicocalometrics}
+\label{subsec:fluxwell.now}
+
+It has thus become clear that we can estimate
+population-scale levels of health and well-being through social media.
+
+Here, we examine the words and phrases people post publicly about food and physical
+activity on Twitter on a statewide level for the contiguous United
+States (48 states along with the District of Columbia).
+As we explain fully below
+in Sec.~\ref{subsec:fluxwell.calories} 
+and Methods and Materials, Sec.~\ref{sec:fluxwell.methods}, 
+we group categorically similar words and phrases into lemmas,
+and we then assign caloric values to these lemmas
+using the terms and notation ``caloric input'' for food, $\calin$,
+and ``caloric output'' for activity, $\calout$.
+We define the ratio of caloric output to caloric input
+to be a third quantity, ``caloric balance'':
+\begin{equation}
+  \calbal 
+  = 
+  \frac{\calout}{\calin}.
+  \label{eq:fluxwell.calbal}
+\end{equation}
+We use ``phrase shifts''~\cite{dodds2011e} to show how 
+specific
+lemmas---e.g., ``apples'',
+``cake with frosting'', 
+``white water rafting'',
+``knitting'',
+and ``watching tv or movie''
+contribute to the caloric texture of states across the contiguous US.
+We then correlate all three values with 37
+demographic measures, 
+and we find statistically
+strong correlations with quantities such as high blood pressure, inactivity,
+diabetes levels, and obesity rates.
+For ease of language, we will generally speak of 
+phrases rather than lemmas.
+
+We have also generated an accompanying online, interactive
+instrument for exploring health patterns through the lens of ``Twitter
+calories'': the Lexicocalorimeter.
+An initial version of the instrument may be accessed at this paper's
+Online Appendices,
+\url{http://compstorylab.org/share/papers/alajajian2015a/},
+and will be housed within our larger
+measurement platform \url{http://panometer.org}
+at 
+\url{http://panometer.org/instruments/lexicocalorimeter}.
+We note that while our online instrument is based on Twitter, it may in principle
+be used on any sufficiently large text source, social media or
+otherwise, such as Facebook.
+
+From this point, we structure the core of our paper as follows.
+In Sec.~\ref{sec:fluxwell.results},
+we establish and discuss our findings in depth.
+Specifically, we:
+(1) Outline our text analysis of a Twitter corpus from 2011--2012
+(Sec.~\ref{subsec:fluxwell.calories}),
+reserving full details for Methods and Materials in Sec.~\ref{sec:fluxwell.methods};
+(2) Present caloric maps of the contiguous US
+contrasting the 48 states and DC
+through histograms and phrase shifts
+(Sec.~\ref{subsec:fluxwell.maps});
+and 
+(3) Examine how  $\calin$, $\calin$, and $\calbal$
+correlate with a suite of demographic measures.
+In the Supporting Information, 
+we provide a sample of confirmatory figures 
+as well as all shareable data sets.
+We offer concluding thoughts in Sec.~\ref{sec:fluxwell.conclusion}.
+
+\section*{Analysis and Results}
+\label{sec:fluxwell.results}
+
+\subsection*{Estimating calories from phrases}
+\label{subsec:fluxwell.calories}
+
+From a sample of around 50 million geotagged tweets 
+made during 2011 and 2012 in each of the 48
+continental states and the District of Columbia, 
+we counted the total number of times each food and physical activity
+phrase in our database was tweeted about (see Methods and Materials,
+Sec.~\ref{sec:fluxwell.methods}, and Supporting Information).  
+We then used these counts to determine the average caloric input $\calin$
+from food phrase tweets
+and the average caloric output $\calout$
+from physical activity phrase tweets as follows.
+
+First, we equate each food phrase $\foodphrase$
+with the calories per 100 grams of that food,
+using the notation
+$\calinfn{\foodphrase}$.
+(We also explored serving sizes but the databases 
+available proved far from complete.)
+We then compute the caloric input
+for a given text $T$ as:
+\begin{equation}
+  \calinfn{T}
+  = 
+  \frac{
+    \sum_{\foodphrase \in \foodphraseset}
+    \calinfn{\foodphrase}
+    \frequency{\foodphrase}{T}
+  }
+  {
+    \sum_{\foodphrase}
+    \frequency{\foodphrase}{T}
+  }
+  = 
+    \sum_{\foodphrase \in \foodphraseset}
+    \calinfn{\foodphrase}
+    \normfrequency{\foodphrase}{T},
+  \label{eq:fluxwell.calin}
+\end{equation}
+where $\frequency{\foodphrase}{T}$ 
+is the frequency of phrase $\foodphrase$ 
+in text $T$,
+$\normfrequency{\foodphrase}{T}$
+is the normalized version,
+and 
+$\foodphraseset$
+is the set of all food phrases in our database.
+
+Second, for each tweeted physical activity phrase, 
+we use an estimate of the Metabolic Equivalent of Tasks, or METs,
+which we then converted to calories expended per hour,
+assuming a weight of 80.7 kilograms, the average weight of a North American
+adult~\cite{walpole2012}.
+Analogous to $\calinfn{T}$ above, 
+we then have
+\begin{equation}
+  \caloutfn{T}
+  = 
+  \sum_{\activityphrase \in \activityphraseset}
+  \caloutfn{\activityphrase}
+  \normfrequency{\activityphrase}{T},
+  \label{eq:fluxwell.calout}
+\end{equation}
+where now 
+$\activityphraseset$
+is the set of all phrases in our activity database.
+
+We emphasize that both our food and exercise phrase data sets 
+and Twitter databases are necessarily incomplete in nature.
+The values of $\calin$ and $\calout$ are thus not meaningful as
+absolute numbers but rather have power for comparisons.
+We also acknowledge that our equivalences are crude---e.g., each mention
+of a specific food is naively turned into the calories associated with 100 grams of
+that food---and later on we address our choices in more depth.
+Nevertheless, our method is pragmatic yet---as we will
+show---effective, and offers clear directions for future improvement.
+
+For simplicity and ultimately because the results are sufficiently
+strong, we did not filter tweets beyond their geographic location.
+Tweets may thus come from individuals, restaurants, sports stores,
+resorts, news outlets, marketers, fitness apps, tourists, and so on,
+and further improvements and refinements may be achieved by
+appropriately constraining the Twitter corpus.
+
+Finally, we take the ratio of $\caloutfn{T}$ to $\calinfn{T}$
+to obtain the text's caloric balance
+$\calbalfn{T}$.
+In general, we observe that 
+a higher value of $\calbalfn{T}$ at the population scale 
+would appear to be intuitively better, up to some limit 
+indicating negative energy balance.
+We note that $\calbal = 1$ is not salient and
+should not be taken to mean a population is `balanced calorically'.
+Using the difference $\calout - \calin$ generates
+similar results but, from a framing perspective,
+we have reservations in creating a scale with a 0 point
+given the approximate nature of our measures.
+
+\subsection*{Caloric maps of the contiguous US}
+\label{subsec:fluxwell.maps}
+
+
+
+
+
+We now move to our central analysis and exploration of 
+how our lexicocalorimetric measure varies geographically.
+We start with visual representations
+and then continue on to more detailed comparisons.
+In Fig.~\ref{fig:fluxwell.maps},
+we show three choropleth maps 
+of our overall 2011--2012 measures
+of Twitter's
+caloric input $\calin$,
+caloric output $\calout$
+and
+caloric balance $\calbal$,
+for the contiguous US.
+For all three maps, quantities increase as colors move from 
+light to dark green.
+
+These maps immediately allow for some basic observations
+which we will delve into and harden up as our analysis proceeds.
+For the food calories map, we see $\calin$
+is generally largest in the Midwest and the south
+while Colorado and Maine stand out as states with
+the lowest calories.
+
+We see a different texture in the activity calories 
+map with the highest calories appearing in the
+three-state block of Wyoming, Colorado, and Utah, as well as Vermont.
+Tweet-based caloric output drops to a low in Mississippi
+and the surrounding states, while Michigan also
+appears to have a low value of $\calout$.
+
+Visually, the third map shows the highest values of $\calbal$ 
+are found for Colorado, Wyoming, and Vermont, 
+and secondarily for Maine, Minnesota, Oregon, and Utah.
+Low values of $\calbal$ appear in the region of
+Mississippi, Louisiana, Alabama, and Arkansas,
+as well as West Virginia.
+
+Visually, we see that $\calout$ is clearly more well aligned
+with $\calbal$ than $\calin$.
+The reason is that for the present version
+of the Lexicocalorimeter,
+$\calout$ has a larger dynamic
+range than $\calin$,
+roughly 250 to 285 versus 160 to 210 
+giving ratios of 
+$\frac{210}{160} \simeq 1.31$
+and
+$\frac{285}{250} \simeq 1.14$.
+We could assert that $\calin$ is fundamentally less 
+informative but: 
+\begin{enumerate}
+\item 
+  In Sec.~\ref{subsec:fluxwell.othermeasures},
+  we will find that some demographic measures correlate
+  more strongly with $\calin$ and $\calout$;
+\item 
+  We may adjust the dynamic range of either measure 
+  by rescaling, introducing a kind of tunability~\cite{dodds2011e}
+  to the instrument (a feature we will reserve for future
+  iterations);
+  and
+\item 
+  Because our food phrase database is 
+  a factor of 10
+  smaller than our activity phrase one,
+  revisions of our instrument may elevate
+  the power of $\calin$.
+\end{enumerate}
+
+To provide some support for point 1, 
+we compare $\calout$ and $\calin$ in
+Fig.~\ref{fig:fluxwell.scatterplot_calin_calout}
+(see also Fig.~\ref{fig:fluxwell.scatterplots}).
+Importantly, we see that the two measures are indeed
+not well correlated, indicating they contain
+different kinds of information
+(Pearson correlation coefficient $\rhopearson \simeq 0.13$,
+$p$-value = 0.37).
+This demonstrates why we might expect 
+$\calin$ or $\calout$ to separately correlate
+more strongly with other population-level measures,
+and justifies the incorporation of both $\calin$ and $\calout$
+into some kind of composite measure.
+
+Regarding point 2 above, we have evidently made
+a number of choices in computing $\calin$ and $\calout$
+that mean we have already introduced an arbitrary tuning
+of the ratio $\calbal$
+(e.g., assuming 100 grams of a food and an hour's worth of activity).
+Having no principled way of rescaling (i.e., one that is not
+a function of the data set being studied), 
+we have chosen to leave the measures as computed,
+but we envisage introducing tunability of the dynamic
+ranges of $\calin$ and $\calout$---altering the bias of
+the measure toward food or activity---will allow
+the Lexicocalorimeter to be refined for 
+a range of purposes such as estimating correlates of diabetes levels
+versus cancer rates (see Sec.~\ref{subsec:fluxwell.othermeasures}).
+
+For the food and activities maps,
+we also overlay the specific phrase whose increased prevalence
+most contributes to moving each population's Twitter calorie scores away
+from the overall average for the contiguous US.
+We will return to how we determine these phrases
+later with phrase shifts (Sec.~\ref{subsec:fluxwell.phraseshifts}),
+but for now we see a diverse spread of terms.
+
+We find a number of phrases make for 
+apparently reasonable representations:
+\begin{itemize}
+\item 
+``lobster'' in Maine and Massachusetts;
+\item 
+``grits'' in Georgia;
+\item 
+``skiing'' in Vermont, New Hampshire, and Utah;
+\item 
+and
+``running'' in Colorado and a number of other locations.
+\end{itemize}
+
+Prototypical unhealthy foods rise to the top in various states:
+\begin{itemize}
+\item 
+``donuts'' in Texas;
+\item 
+``cake'' in Mississippi;
+\item 
+``chocolate candy'' in Louisiana;
+\item 
+and ``cookies'' in Indiana.
+\end{itemize}
+By contrast, a few ``virtuous'' foodstuffs appear such as ``green beans''
+in Oregon and ``tomato'' in California.
+
+Our activity list also includes some rather low intensity
+ones and we see:
+\begin{itemize}
+\item 
+  ``eating'' rising to the top in Texas, the south, and a number other states;
+\item 
+  ``watching tv or movie'' in Pennsylvania and elsewhere;
+\item 
+  ``sitting'' in Tennessee;
+\item 
+  ``talking on the phone'' in Delaware;
+\item 
+  ``getting my nails done'' in New Jersey;
+\item 
+  and simply
+  ``lying down'' in Michigan.
+\end{itemize}
+
+Now, we do not pretend that these phrases all
+come from individuals diligently recording
+their present meals or activities.
+And some phrases are problematic in their 
+generality of meaning, most especially ``running''
+(the word ``run'' currently has the most meanings
+in the Oxford English Dictionary).
+Nevertheless, as we dig deeper into all the phrases
+found for a particular state, 
+we will continue to find commonsensical lexical patterns.
+
+\subsection*{Rankings for the contiguous US}
+\label{subsec:fluxwell.rankings}
+
+
+
+Having taken in the maps of our three measures
+$\calin$, $\calout$, and $\calbal$,
+we now explore the rankings quantitatively, 
+first through the histograms 
+shown in Fig.~\ref{fig:fluxwell.histograms}.
+We order the 48 states and DC by $\calbal$ (rightmost plot)
+and all bars are relative to the overall average
+of the specific measure.
+Numeric rankings for each measure are given next to each bar.
+In Figs.~\ref{fig:fluxwell.histograms-food}
+and~\ref{fig:fluxwell.histograms-activities},
+we present the same histograms re-sorted
+respectively by $\calin$ and $\calout$.
+
+As was the case for the maps, we again see that $\calbal$ is more strongly 
+driven by $\calout$ than $\calin$ due to the former's larger
+dynamic range.
+The states with the highest values of $\calbal$ achieve
+their scores through high levels of $\calout$ but
+more variable levels of $\calin$.
+Wyoming (26), Vermont (21), and Utah (24)
+are all middling in $\calin$ while 
+Colorado (48) and Maine (49) have the lowest ranks
+for caloric intake.
+At the trailing end, we see by contrast
+that low activity ranks are coupled with high ranks for caloric intake.
+
+A few of the more anomalous states are both evident
+in the $\calin$ and $\calout$ histograms and 
+as those appearing furthest away from the best line of fit
+in the scatter plot of Fig.~\ref{fig:fluxwell.scatterplot_calin_calout}.
+South Dakota has both high values of $\calin$ and $\calout$ 
+(ranks of 1 and 7)
+that arrange to give it a ranking of 25 for $\calbal$.
+Maryland ranking 43rd and 45th in $\calin$ and $\calout$,
+is the only state in the `bottom' 10 of both measures.
+
+\subsection*{Phrase shifts}
+\label{subsec:fluxwell.phraseshifts}
+
+
+
+In any study involving word- or phrase-based measures of texts,
+it is plainly essential that we demonstrate that the measures 
+involved behave reasonably by exploring the
+effects of changes in word frequencies 
+(and yet many papers fail to do so, e.g., ~\cite{golder2011a}).
+Such a requirement limits the scientific 
+value of potentially powerful ``black box'' type instruments,
+but as our measure is linear in nature, the 
+lexicocalometric contributions
+of individual terms can be laid bare.
+
+In our work on measuring happiness, we have developed and extensively used 
+``word shifts'' to show which words make a given text appear more positive
+than another text in aggregate (see~\cite{dodds2011e} and~\cite{dodds2015a}).
+Such visualizations not only provide our necessary test,
+but also allow us to draw insight from the lexical tapestry
+of texts.
+Here, we will explain and use analogously constructed phrase shifts for both 
+$\calin$ and $\calout$ to examine the states at the extremes
+of our $\calbal$ rankings, 
+Colorado and Mississippi.
+Interactive food and activity phrase shifts for the 49 regions of the contiguous US
+form a central part of our online Lexicocalorimeter:
+\url{http://panometer.org/instruments/lexicocalorimeter}.
+
+We start with two texts:
+a base ``reference text'' $\textref$,
+and a ``comparison text'' $\textcomp$ which we wish to compare
+to $\textref$.
+In this paper, we will use the Contiguous US as the reference
+text (weighting the 
+phrase distributions of each state equally),
+but in principle any text can be used (e.g., in comparing two
+states, one would be selected as a reference).
+Our interest is in determining 
+which words or phrases most contribute to or go against
+the difference in estimated calories.
+$\calinoutfn{\textcomp} - \calinoutfn{\textref}$
+where i/o stands for in or out.
+Following~\cite{dodds2011e} and using~\Req{eq:fluxwell.calin},
+we can express the difference as
+\begin{eqnarray}
+  \lefteqn{\calinoutfn{\textcomp} - \calinoutfn{\textref}} 
+  \nonumber \\ 
+  & = &
+  \sum_{\foodactivityphrase \in \foodactivityphraseset} 
+  \calinoutfn{\foodactivityphrase}
+  \Big[
+    \normfrequency{\foodactivityphrase}{\textcomp}
+    -
+    \normfrequency{\foodactivityphrase}{\textref}
+  \Big]
+  \nonumber \\ 
+  & = &
+  \sum_{\foodactivityphrase \in \foodactivityphraseset} 
+  \left[
+    \calinoutfn{\foodactivityphrase} - \calinoutfnsup{(\textrm{ref})}
+  \right]
+  \Big[
+    \normfrequency{\foodactivityphrase}{\textcomp}
+    -
+    \normfrequency{\foodactivityphrase}{\textref}
+  \Big].
+  \nonumber \\ 
+  \label{eq:fluxwell.delta}
+\end{eqnarray}
+We now have a sum contributions due 
+to all phrases. 
+We normalize these contributions
+as percentages and annotate their structure as follows:
+\begin{eqnarray}
+  \lefteqn{\delta \calinoutfn{\foodactivityphrase} =}
+  \nonumber \\
+  & &
+  \frac{100}{
+    \left|
+      \calinoutfnsup{(\textrm{comp})} - \calinoutfnsup{(\textrm{ref})}
+    \right| 
+  }
+  \underbrace{
+    \left[
+      \calinoutfn{\foodactivityphrase} - \calinoutfnsup{(\textrm{ref})}
+    \right]
+  }_{+/-}
+  \underbrace{
+    \left[
+      p_{\foodactivityphrase}^{(\textrm{comp})} - p_{\foodactivityphrase}^{(\textrm{ref})}
+    \right]
+    }_{\uparrow/\downarrow},
+    \nonumber \\ 
+  \label{eq:fluxwell.delta-final}
+\end{eqnarray}
+where $\sum_{\foodactivityphrase \in \foodactivityphraseset} 
+\delta \calinoutfn{\foodactivityphrase} = \pm 100$.
+We use the symbols $+/-$ and $\uparrow/\downarrow$ 
+to respectively encode 
+whether the calories of a phrase exceed the average
+of the reference text,
+and whether a phrase is being used more or less
+in the comparison text.
+We call $\delta \calinoutfn{\foodactivityphrase}$ the 
+``per food/activity phrase caloric expenditure shift''.
+Finally, we sort phrases by the absolute value of 
+$\delta \calinoutfn{\foodactivityphrase}$ to
+create each phrase shift.
+
+
+
+In Fig.~\ref{fig:fluxwell.wordshiftexample}, we present 
+food phrase shifts which help to illustrate why:
+\begin{itemize}
+\item 
+  Colorado ranks 48/49 for caloric input $\calin$
+  (Fig.~\ref{fig:fluxwell.wordshiftexample}A),
+\item 
+  Mississippi ranks 16/49 for caloric input $\calin$
+  (Fig.~\ref{fig:fluxwell.wordshiftexample}B),
+\item 
+  Colorado ranks 2/49 for caloric output $\calout$
+  (Fig.~\ref{fig:fluxwell.wordshiftexample}C),
+\item 
+  and Mississippi ranks 49/49 for caloric output  $\calout$
+  (Fig.~\ref{fig:fluxwell.wordshiftexample}D).
+\end{itemize}
+
+These shifts display phrases that fall into four categories:
+\begin{itemize}[leftmargin=64pt]
+\item[+$\uparrow$, yellow:]
+  Phrases representing above average quantities (here calories)
+  being used more often.
+  Examples: 
+  ``cookies'' for Mississippi in
+  Fig.~\ref{fig:fluxwell.wordshiftexample}B
+  and 
+  ``rock climbing'' for Colorado in Fig.~\ref{fig:fluxwell.wordshiftexample}C.
+\item[-$\downarrow$, pale blue:]
+  Phrases representing below average quantities
+  being used less often.
+  Examples: 
+  ``watching tv or movie'' for Mississippi in
+  Fig.~\ref{fig:fluxwell.wordshiftexample}B
+  and 
+  ``laying down'' for Colorado in
+  Fig.~\ref{fig:fluxwell.wordshiftexample}C.
+\item[+$\downarrow$, pale yellow:]
+  Phrases representing above average quantities
+  being used less often.
+  Examples: 
+  ``chocolate candy'' for Colorado in
+  Fig.~\ref{fig:fluxwell.wordshiftexample}A
+  and 
+  ``running'' for Mississippi in Fig.~\ref{fig:fluxwell.wordshiftexample}D.
+\item[-$\uparrow$, blue:]
+  Phrases representing below average quantities
+  being used more often.
+  Examples: 
+  ``reading'' for Colorado 
+  in Fig.~\ref{fig:fluxwell.wordshiftexample}A
+  and
+  ``catfish'' for Mississippi in
+  Fig.~\ref{fig:fluxwell.wordshiftexample}B.
+\end{itemize}
+Note that depending on the quantity, higher or lower may be ``better''
+and the four categories flip signs in their support.
+For example, $\calin$ and $\calout$ increase with +$\uparrow$ phrases;
+after we examine correlations with demographics in 
+Sec.~\ref{subsec:fluxwell.othermeasures},
+we will be able to interpret this as ``bad'' for $\calin$ and ``good'' for
+$\calout$.
+
+At the top of each phrase shift, the bars indicate the total
+contribution of each of the four types of phrases, and the black
+bar the net change.
+We see that the four net changes arise in different ways.
+\begin{itemize}
+\item 
+  Fig.~\ref{fig:fluxwell.wordshiftexample}A:
+  Colorado is lower than average for $\calin$ largely due
+  to tweeting more about relatively low calorie (per 100 grams) foods: ``noodles'',
+  ``egg'', ``pasta'', and ``turkey''.  
+  We also find
+  less tweets about high calorie foods such as ``candy'', ``cake'',
+  and ``cookies.''
+  Going against these phrases, we see 
+  Colorado does tweet relatively more about ``bacon'' and ``olive oil'',
+  and less about some relatively lower calorie foods ``chicken'', ``ice
+  cream'', ``shrimp'', and ``corn''.
+  We note that this does not mean these foods are low calorie
+  in absolute terms
+  (``ice cream'' is a good example),
+  just that 100 grams of them are low calorie in comparison to the US
+  baseline.
+\item 
+  Fig.~\ref{fig:fluxwell.wordshiftexample}B:
+  Mississippi almost equally tweets less about a variety
+  of low calorie foods, e.g., ``pasta'', ``banana'', and ``crab'' (pale blue bar) 
+  while also tweeting more about the complementary range
+  of such foods including ``shrimp'', ``peaches'', and ``pineapple'' (dark
+  blue bar).
+  The modest net gain is mostly due to a small increase
+  in tweeting about high calorie foods such 
+  as ``cake'', ``cookies'', and ``sausage''.
+\item 
+  Fig.~\ref{fig:fluxwell.wordshiftexample}C:
+  For physical activity, tweets from Colorado show a preponderance
+  of relatively high caloric expenditure phrases (+$\uparrow$, yellow)
+  including ``running'', ``skiing'', ``hiking'', ``snowboarding'' and
+  so on.
+  Tweeting less about low effort activities
+  is the only other contribution of any substance---Colorado 
+  tweets less about ``eating'',
+  ``laying down'',
+  and ``watching tv or movie''.
+\item 
+  Fig.~\ref{fig:fluxwell.wordshiftexample}D:
+  Mississippi's low ranking in activity is largely
+  due to tweeting less about high output activities (+$\downarrow$, pale yellow):
+  less ``running'', ``dancing'', ``walking'', and ``biking''.
+  The second most important category is an increase
+  in low output activity phrases such
+  as ``eating'', ``attending church'', and ``talking on the phone.''
+\end{itemize}
+
+In Figs.~\ref{fig:fluxwell.colorado-food},
+\ref{fig:fluxwell.mississippi-food},
+\ref{fig:fluxwell.colorado-activity},
+and
+\ref{fig:fluxwell.mississippi-activity},
+we complement the four phrase shifts
+of Fig.~\ref{fig:fluxwell.wordshiftexample}
+by showing the top 23 phrases for 
+each of four ways phrases may contribute.
+Interactive phrase shifts for all of the contiguous US are housed
+at \url{http://panometer.org/instruments/lexicocalorimeter}.
+
+Overall, we find the lexical texture afforded by our phrase shifts 
+is generally convincing,
+but we expect future improvements in our food and activity data sets
+will iron out some oddities (we again use the example of ice cream).
+We also note that phrase shifts are very sensitive and
+that terms that seem to be being evaluated incorrectly
+may easily be removed from the phrase set, and that
+doing so will minimally change the overall score for
+sufficiently large texts.
+
+\subsection*{Correlations with other health and well-being measures}
+\label{subsec:fluxwell.othermeasures}
+
+
+
+We now turn to a suite of statistical comparisons
+between our three measures---caloric input, caloric output,
+and caloric balance---and a collection of demographic quantities.
+
+We use Spearman's correlation coefficient $\rhospearman$ to examine relationships between 
+$\calin$, $\calout$, and $\calbal$ and 37 variables
+variously relating to food and physical activity, 
+``Big Five'' personality traits,
+and health and well-being rankings (a total of 111 comparisons).
+To correct for multiple comparisons, we calculate the
+$q$-value for each correlation coefficient using the
+Benjamini-Hochberg step-up procedure~\cite{benjamini1995}
+(the $q$-value is to be interpreted in the same way as a $p$-value).
+We then consider correlations in reference
+to the standard significance levels of 0.01 and 0.05.
+
+We must first acknowledge that many of the variables we test 
+against our measures are highly correlated with each other.
+The food and physical activity-related variables are in the areas of
+physical activity levels, produce intake and availability rates
+(including trends in public schools), chronic disease rates, and rates
+of unhealthy habits.  
+Many of these variables are well known to be
+influenced by diet and physical activity (e.g., obesity
+rates~\cite{cdc}), 
+and others may be less directly related (e.g., percent of
+cropland in each state harvested for fruits and
+vegetables~\cite{produce}).  
+
+To give some grounding for the full set of comparisons,
+we show in Fig.~\ref{fig:fluxwell.demog-scatterplots}
+how six demographic quantities vary with caloric balance $\calbal$.
+We see strong correlations with $|\rhospearman| \ge 0.68$,
+and the highest value for Benjamini-Hochberg $q$-value is 5.7$\times$$10^{-7}$.
+
+We present a summary of all results in Tab.~\ref{tab:fluxwell.corrTable}
+where we have ordered and numbered demographic quantities in terms of
+ascending  
+Benjamini-Hochberg $q$-values for $\calbal$.
+
+Surveying the health-based demographics,
+we found $\calbal$  
+was significantly correlated with 
+all chronic
+disease-related rates we tested against (high blood pressure (\#1),
+adult diabetes (\#4), heart disease deaths (\#6), adult overweight and
+obesity (\#7), adult obesity (\#8), childhood overweight and obesity
+(\#13), high cholesterol (\#19), and colorectal cancer (\#22)).
+All of these but colorectal
+cancer rate were also significantly correlated with $\calout$.
+
+Caloric input $\calin$ results were more mixed.  
+Rates of high blood pressure,
+adult diabetes, childhood overweight and obesity, and high cholesterol
+were not significantly correlated with $\calin$ after
+correcting for multiple comparisons.  
+
+The variables relating to
+unhealthy habits (smoking (\#16) and binge drinking rates (\#26)) both
+correlated significantly with all three of our measures with
+the one exception of binge drinking and caloric input.
+The direction of correlations for these two habits 
+are opposite each other (e.g., negative for smoking and $\calbal$, 
+positive for binge drinking and $\calbal$), consistent with 
+recent work on alcohol consumption~\cite{french2009a}.
+
+The two variables relating to physical activity rates (percent of
+population that has been physically active in past 30 days (\#2), and
+percent of population that has had no physical activity in past 30
+days (\#3)) correlated significantly with all three of our measures.
+The two measures relating to rates of physical and mental health
+(average number of poor mental health days in past 30 days (\#24), and
+average number of poor physical health days in past 30 days (\#27))
+correlated significantly with both $\calout$ and $\calbal$,
+but did not correlate significantly with $\calin$.
+
+The four variables relating to fruit and vegetable consumption rates
+all correlated significantly with all three of our measures, except
+for median daily intake of vegetables (\#18) with caloric output $\calout$.
+The variables relating to presence of produce in the state (percent of
+cropland in each state harvested for fruits and vegetables (\#33),
+percent of census tracts with a healthy food retailer within one-half
+mile (\#35), and percent of schools offering fruits and vegetables at
+celebrations (\#31)) were significantly correlated with $\calin$
+but were not correlated with $\calout$ or $\calbal$.
+Variables relating to local food (number of farmers markets per
+100,000 people (\#28) and Strolling of the Heifers locavore
+score(\#29)) were not significantly correlated with $\calin$,
+but were significantly correlated with $\calout$.
+
+Our health and well-being ranking variables included 
+the CNBC quality of life ranking (\#5), 
+Gallup Wellbeing ranking (\#9), 
+America's Health Ranking overall state rank (\#10), 
+life expectancy ranking (\#11), 
+Brain Health ranking (\#20), 
+Gini index score (\#23), and
+George Mason's overall freedom ranking (\#36).  
+Caloric balance
+correlated with all of these variables except for George Mason's
+freedom ranking (which did not correlate with any of our three
+measures).  $\calout$ correlated significantly with all of these
+measures except for the Brain Health ranking and the freedom ranking.
+caloric input $\calin$ did not correlate significantly with the CNBC quality
+of life ranking, Gini index score, or freedom ranking.
+
+Regarding correlations with the \textit{Big Five} personality traits,
+Pesta \etal\ noted that ``Neuroticism...emerged as the only
+consistent Big Five predictor of epidemiologic outcomes (e.g., rates
+of heart disease or high blood pressure) and health-related behaviors
+(e.g., rates of smoking or exercise)''~\cite{pesta}.  
+Additionally,
+``neuroticism correlates with many health-related variables, including
+depression and anxiety disorders, mortality, coping skill, death from
+cardiovascular disease, and whether one smokes tobacco''~\cite{pesta}.
+Here, in keeping with these observations, we found that neuroticism
+(\#25) was 
+indeed the only \textit{Big Five}
+personality trait that correlated significantly and negatively 
+with caloric balance.
+
+We also tested our three measures against two measures of
+socioeconomic status---median income (\#17) and percent of state with a
+bachelor's degree or higher level of education (\#21)---and found
+these correlations were significant for all three of our measures.
+
+\section*{Concluding Remarks}
+\label{sec:fluxwell.conclusion}
+
+
+
+Our Lexicocalorimeter
+has thus, when applied to Twitter,
+proved to find and demonstrate 
+a range of strong, commonsensical 
+patterns and correlations for the contiguous US.
+We invite the reader to explore our online instrument,
+a screenshot of which is shown in Fig.~\ref{fig:fluxwell.lexicocalorimeter}.
+
+Given the complex relationships between health,
+well-being, happiness, and various measures of socioeconomic status,
+it is rather difficult to say that we are only measuring health or
+only measuring well-being.  We are also measuring socioeconomic
+status to some extent.  However, the correlations between caloric
+balance and measures of socioeconomic status are not as strong as the
+correlation of caloric balance with many of the other measures.
+Given the above, we believe that the caloric content of
+tweets can be used successfully, along with other well-being and
+quality of life measures, to help gauge overall well-being in a population.
+
+There are many potential forward directions.
+A promising avenue is to incorporate tunability to
+the Lexicocalorimeter by manipulating the dynamic
+range of $\calin$ and $\calbal$. 
+Though a universal approach is unclear 
+(one constraint is that such an approach must be independent of the particular data set being studied),
+we may profit from this versatility when
+focusing on a single demographic.
+For example, if we are interested in diabetes rates,
+we could tune the instrument to obtain the best correlation
+with known levels, and thereby create a real-time
+estimator.  
+To do so, we would introduce a tunable parameter $\alpha$
+into~\Req{eq:fluxwell.calbal}:
+\begin{equation}
+  \calbal^{(\alpha)}
+  = 
+  \frac{\alpha\calout}{\calin},
+  \label{eq:fluxwell.calbalalpha}
+\end{equation}
+and find the value of $\alpha$ that gives the highest
+correlation between $\calbal^{(\alpha)}$ and diabetes
+rates for a given set of populations.
+Of course, we could use a ``black box'' method to generate
+a more optimal fit, but in basing our instrument on food and activity
+words, we have a far more principled approach that grants us
+the opportunity not just to mimic but to understand and explain patterns that we find.
+In particular, our word shifts will be of great use in showing why
+our hypothetical estimate of diabetes is varying across populations.
+
+We fully recognize
+that the Twitter population is not the same as the general population;
+Twitter users differ from the general population in terms of race,
+age, and urbanity~\cite{pew}.  
+However, we currently have no reliable
+way to know, for example, the true age, race, gender, and education
+level of individual users and as such, are not able to adjust for
+these factors.  
+While we were able to vet our food and physical
+activity lists to some extent (as described in Methods and Materials), we could
+not realistically go through every tweet to be certain that the phrase
+was being used in the way that we thought.  
+We realize that even if
+the phrases are being used as we imagine, it does not necessarily mean
+that the person who tweeted actually performed the physical activity
+or ate the tweeted-about food (West \etal\ address a similar
+issue in inferring food consumption from accessing recipes online~\cite{west2013}).
+
+We also currently do not know at what point our metric breaks down at smaller
+time scales (e.g., months or weeks) or for smaller spatial regions
+(e.g., city or county) level.  Our preliminary research shows that the
+physical activity metric on its own may be quite effective at the city
+level, but the food measure may not be accurate on a smaller scale.
+We have also found the physical activity list to be robust to random
+partitioning~\cite{williams2014a}, whereas the food list was not.  
+We believe that these preliminary findings may be due to several factors:
+(a) the size of the food list (just over 1400 phrases) is much smaller
+than the physical activity phrase list (just over 13,400 phrases); 
+(b)
+there are generally more tweets about physical activities in our
+list than the foods in our food list; 
+and (c) the amount of data
+within a city may not be a large enough sample for any food-based
+Twitter metric.
+We note that we have not tried using the
+metric on counties or Census block or tract groups, and it may be that
+these are more conducive to the metric.
+
+We propose to use crowdsourcing as a way to build a more comprehensive
+food phrase list that includes commonly eaten foods with brand names
+as well as food slang that we did not capture here.
+Ideally, we would arrive at a food phrase database similar in
+scale to that of our existing physical activity phrase list.
+However we move forward, we believe it is clear that the 
+ Lexicocalorimeter we have designed and implemented is already of some potency
+and may be improved substantively in the future.
+
+\section*{Methods and Materials}
+\label{sec:fluxwell.methods}
+
+In order to attempt to estimate the ``caloric content''
+of text-extracted phrases~\cite{williams2014a} relating to food
+(caloric input) and physical activity (caloric output), we needed
+comprehensive lists of foods and physical activities and their
+respective caloric content and expenditure information.
+Here, we explain in detail how we constructed these phrase lists 
+and assigned calories to each phrase.
+
+We provide all data in the Supporting Information
+and with the paper's Online Appendices:
+\url{http://compstorylab.org/share/papers/alajajian2015a/}.
+
+\subsection*{Calorie estimates for phrases}
+\label{subsec:fluxwell.methods-phrases-to-calories}
+
+We used the USDA National Nutrient Database~\cite{usda} to approximate
+the caloric content of foods, and the Compendium of Physical Activities
+from Arizona State University and the National Cancer
+Institute~\cite{compendium} to approximate average Metabolic
+Equivalent of Tasks (METs) for physical activities, which we converted
+to calories expended per hour of activity~\cite{compendium}.
+Because the foods listed in the USDA National Nutrient Database are
+not described in a way that people talk about food, we created a list
+of food phrases used on Twitter by starting with a kernel of basic
+food terms from the USDA's MyPlate website's food group
+pages~\cite{myplate}.
+If the food phrase was not specific, such as ``cereal'', we chose the
+most popular version of that food in the United States via an informal
+Google search at the time of the study (in this instance, Cheerios).
+If a brand name food was not in the USDA National Nutrient Database,
+we chose the closest match we could find.  
+(Please note that this means that data in appendix may be inaccurate
+when searching brand name items.)
+
+This approach yielded examples of foods in the food groups of fruits,
+vegetables, grains, proteins, dairy, oils, solid fats, and 
+``empty calories'' (e.g., junk food), 
+and built up a list of nearly 1400 food phrases used on Twitter.
+For this study, we did not include sodas or juices in our list.
+Soups, ice creams, oils and other items that may act as liquids may be
+excluded in future versions of these analyses.
+
+For physical activity, we used the physical activities listed in the
+Compendium to build up a list of nearly 14,000 physical activity
+phrases used on Twitter.
+The order of magnitude of difference between the length of the two
+lists exists because of the difference in the number of terms that
+went into creating each list and the rates at which people tweet about
+foods vs. physical activities.
+
+\subsection*{Phrase extraction}
+\label{subsec:fluxwell.methods-phrase-extraction}
+
+A major obstacle to the development of the food and physical activity
+lists is the determination of those phrases used by individuals that
+most accurately represent a food or physical activity.  Various
+methods exist which may help one ascertain information about the
+frequency of usage of higher-order lexical units~\cite{williams2014a}.
+However, we require one that not only determines reasonable estimates
+of frequency of usage, but further, does so with nuance regarding
+context.  For example, one should not count the phrase ``apple'' as
+having occurred if it appeared within a larger phrase that was
+recognized as meaningful, such as ``you're the apple of my eye.''
+Hence, we impose meaningful partitions of text by utilizing what
+we call an ``inner context model''~\cite{williams2015c}.
+In particular, we consider two phrases to be members
+of a \textit{common context} when they are maximally similar according
+to a normalized edit distance~\cite{levenshtein1966bcc} (allowing for
+just insertions and deletions). Our basic measure for a phrase's
+strength of context is then the \textit{local likelihood} (denoted
+$\ell_{\phrasesymbol}$ for a phrase $\phrasesymbol$), or rate of occurrence of the phrase
+amongst all others present in the context.  
+A phrase of length (number of words) $N$ is a member of $N$ contexts (setting $q=1$ in the context model).
+Therefore, we assume the
+phrase's context that occurs most frequently as the one by which
+likelihood is taken.
+
+To describe our method, \textit{serial partitioning}, we use a mock-up
+example.  Supposing we wish to partition the clause ``you're the apple
+of my eye'', assume further that among all the phrases contained
+within the clause, one knows
+$$\ell_{\text{you're}} < \ell_{\text{you're the}} \hspace{10pt} \text{ and } \hspace{10pt} \ell_{\text{you're the}} > \ell_{\text{you're the apple}}$$ 
+and that
+$$\ell_{\text{apple}} < \ell_{\text{apple of}} < \ell_{\text{apple of my}} < \ell_{\text{apple of my eye}},$$ 
+as this information is sufficient to exemplify the algorithm.  We
+would not have included ``you're the apple of my eye'' in our food
+phrase list, as it does not use apple in a way that pertains to eating
+food.
+
+A complete step-by-step illustration of the serial partitioning
+algorithm  for the clause ``you're the apple of my eye'' would be:
+\begin{itemize}
+\item[1.] you're the apple of my eye \hfill $\ell_\phi=0$\\
+\item[2.] \textbf{you're} the apple of my eye \hfill $\ell_{\text{you're}} > \ell_\phi$\\
+\item[3.] \textbf{you're the} apple of my eye \hfill $\ell_{\text{the}} > \ell_{\text{you're}}$\\
+\item[4.] \textbf{you're the apple} of my eye \hfill $\ell_{\text{the apple}} < \ell_{\text{you're the}}$\\
+\item[5.] \underline{you're the} apple of my eye \hfill $\ell_\phi=0$\\
+\item[6.] \underline{you're the} \textbf{apple} of my eye \hfill $\ell_{\text{apple}} > \ell_\phi$\\
+\item[$\vdots$]
+\item[9.] \underline{you're the} \textbf{apple of my eye} \\ \mbox{} \hfill $\ell_{\text{apple of my eye}} > \ell_{\text{apple of my}}$\\
+\item[10.] \underline{you're the} \underline{apple of my eye}. \hfill\\
+\end{itemize}      
+with each step explained in detail:
+\begin{enumerate}
+\item[1.]
+  The first component begins with the null phrase (likelihood 0).
+\item[2.]        
+  The first word is concatenated onto our component, producing the phrase ``you're'', whose positive likelihood keeps the process going.
+\item[3.]
+        The word ``the'' is then concatenated to form ``you're the'', whose increased likelihood keeps the process going.
+\item[4.]
+        Once the word ``apple'' is concatenated onto the growing phrase the likelihood drops.
+\item[5.]
+        Since the likelihood has dropped the previous phrase ``you're the'' is partitioned.           
+\item[6.]
+        The process resumes with the null word, and subsequent concatenation forming the new working phrase, ``apple''.
+\item[7--9.]
+        Concatenation of the words ``of'', ``my'', and ``eye'' result in increased local likelihood and so perpetuate the process.
+\item[10.]
+        Since the phrase ``apple of my eye'' is bounded by punctuation, the phrase is partitioned, whereupon the algorithm moves on to the next clause.
+\end{enumerate}
+
+We manually applied the following criteria for constructing both food and exercise
+phrase lists.
+For a phrase to be included, it had to be a phrase that used the food
+or physical activity word(s) in a way that pertained to eating or
+physical activity; we excluded phrases that were part of hashtags,
+Twitter user names, song lyrics, or names of organizations or
+businesses, and phrases that appeared four or fewer times were not
+included.
+Misspellings and alternate spellings were included if we happened upon
+them (for example, ``mash potatoes'' instead of ``mashed potatoes''),
+but we did not go out of our way to search for them.
+We queried questionable phrases to be sure that the majority of their
+uses were referring to the item of interest.
+Because we were building up from a small list, some specific versions
+of foods were included while more general forms were not.  For
+example, because we built phrases up from ``strawberry,'' ``strawberry
+jam'' was included while we did not conduct a larger search for ``jam''.
+In another example, in building phrases up from ``bacon,'' ``bacon
+wrapped dates'' turned up so we included those dates but did not
+conduct a larger search for all possible ``dates''.
+(Note: We removed the physical activities category `sexual activity'
+from the study because the task of determining meaning and context was
+too difficult.)
+
+We searched for phrases containing the physical activities in multiple
+tenses in order to capture as much information as possible.
+For example, for the activity type \textit{shoveling snow}, we
+searched for the forms of shovel, shovel\textit{ing}, and
+shovel\textit{ed}.
+Tweets were initially converted to all lowercase text, so we were
+assured that we were not missing data due to capitalization.
+To match each food phrase with its closest caloric data, we found the
+most closely corresponding food from the USDA National Nutrient
+Database, counting all vegetables and fruits in their raw form unless
+the phrase indicated otherwise.
+Similarly, we entered meats as roasted or cooked with dry heat, not fried, unless the phrase
+indicated otherwise or there was no homemade option.
+We used the nutrition content of homemade versions of foods (for
+example, baked goods) rather than store-bought foods unless the phrase
+indicated otherwise.
+Our approach, while systematic, was not exhaustive, nor is it the only
+way of taking on this challenge; there are certainly other methods
+that we expect to yield similar results.
+
+Finally, we lemmatized the food phrases by their code in the USDA
+National Nutrient Database.  If there were food phrases that were more
+general in each set of phrases that held the same code, we used the
+more general phrase as the lemma.
+
+We lemmatized the activity phrases by their METs and activity
+category.  Activity categories were largely the same as listed in the
+Compendium with slight changes due to items in Compendium being listed
+in a Miscellaneous category, etc. This yielded instances of physical
+activity phrases that were in the same activity category but were very
+different with the same METs being included in the same lemma.  From
+this level of lemmatization, we then used our best judgement to break
+these lemmas down further until proper phrases were included in each
+lemma.

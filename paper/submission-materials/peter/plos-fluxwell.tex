@@ -1,0 +1,179 @@
+% Template for PLoS
+% Version 1.0 January 2009
+%
+% To compile to pdf, run:
+% latex plos.template
+% bibtex plos.template
+% latex plos.template
+% latex plos.template
+% dvipdf plos.template
+
+\documentclass[10pt]{article}
+
+% amsmath package, useful for mathematical formulas
+\usepackage{amsmath}
+% amssymb package, useful for mathematical symbols
+\usepackage{amssymb}
+
+% graphicx package, useful for including eps and pdf graphics
+% include graphics with the command \includegraphics
+\usepackage{graphicx}
+
+% cite package, to clean up citations in the main text. Do not remove.
+\usepackage{cite}
+
+\usepackage{color} 
+
+% Use doublespacing - comment out for single spacing
+%\usepackage{setspace} 
+%\doublespacing
+
+
+% Text layout
+\topmargin 0.0cm
+\oddsidemargin 0.5cm
+\evensidemargin 0.5cm
+\textwidth 16cm 
+\textheight 21cm
+
+% Bold the 'Figure #' in the caption and separate it with a period
+% Captions will be left justified
+\usepackage[labelfont=bf,labelsep=period,justification=raggedright]{caption}
+
+% Use the PLoS provided bibtex style
+\bibliographystyle{plos2009}
+
+% Remove brackets from numbering in List of References
+\makeatletter
+\renewcommand{\@biblabel}[1]{\quad#1.}
+\makeatother
+
+
+% Leave date blank
+\date{}
+
+\pagestyle{myheadings}
+%% ** EDIT HERE **
+
+
+%% ** EDIT HERE **
+%% PLEASE INCLUDE ALL MACROS BELOW
+
+\newcommand{\revtexlatexswitch}[2]{#2}
+
+\input{fluxwell.settings}
+
+%% make tables fit
+\setlength{\tabcolsep}{2pt}
+
+%% END MACROS SECTION
+
+\begin{document}
+
+% Title must be 150 characters or less
+\begin{flushleft}
+{\Large
+\textbf{\input{plos-fluxwell.title}}
+}
+% Insert Author names, affiliations and corresponding author email.
+\bigskip\\
+\input{plos-fluxwell.formattedauthor}
+\end{flushleft}
+
+% Please keep the abstract between 250 and 300 words
+\section*{Abstract}
+
+\input{plos-fluxwell.abs}
+
+% Please keep the Author Summary between 150 and 200 words
+% Use first person. PLoS ONE authors please skip this step. 
+% Author Summary not valid for PLoS ONE submissions.   
+%% \section*{Author Summary}
+
+\input{plos-fluxwell.body}
+
+%% \input{plos-fluxwell.methods}
+
+% Do NOT remove this, even if you are not including acknowledgments
+\section*{Acknowledgments}
+
+\input{plos-fluxwell.acknowledgments}
+
+%\section*{References}
+% The bibtex filename
+\bibliography{plos-fluxwell}
+
+\clearpage
+
+\section*{Figure Legends}
+
+\clearpage
+
+\input{plos-fluxwell-figures}
+
+\clearpage
+
+\section*{Tables:}
+ 
+\clearpage
+
+\input{plos-fluxwell-tables}
+
+\clearpage
+
+\normalsize
+
+%% \section*{Supporting Information}
+
+%% \input{plos-fluxwell.supporting-information}
+
+%% \clearpage
+%% 
+\section*{Supplementary Figure Legends}
+
+\clearpage
+
+\renewcommand{\thefigure}{S\arabic{figure}}
+\setcounter{figure}{0}
+
+\input{plos-fluxwell-suppfigures}
+
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% %% supplementary section without figures or their captions
+%% but including tables and their captions
+%% 
+%% \clearpage
+%% 
+%% %% following record the starting page number of the supplementary
+%% %% section in a file called startsupp.txt
+%% %% enables script-based breaking of manuscript and supplementary
+%% \newwrite\tempfile
+%% \immediate\openout\tempfile=startsupp.txt
+%% \immediate\write\tempfile{\thepage}
+%% \immediate\closeout\tempfile
+%% 
+%% \setcounter{page}{1}
+%% \renewcommand{\thepage}{S\arabic{page}}
+%% \renewcommand{\thetable}{S\arabic{table}}
+%% \setcounter{table}{0}
+%% 
+%% %% \input{plos-fluxwell.supplementary}
+
+%% \clearpage
+
+%% \input{plos-fluxwell-suppfigures}
+
+
+%% \clearpage
+
+%% \section*{Supplementary Tables with Legends}
+
+%% \clearpage
+
+%% \input{plos-fluxwell-supptables}
+
+%% \input{plos-fluxwell.supp-captions}
+
+
+\end{document}
+

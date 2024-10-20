@@ -1,0 +1,288 @@
+\begin{thebibliography}{10}
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\urlprefix}{URL }
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi:\discretionary{}{}{}#1}\else
+  \providecommand{\doi}{doi:\discretionary{}{}{}\begingroup
+  \urlstyle{rm}\Url}\fi
+\providecommand{\bibAnnoteFile}[1]{%
+  \IfFileExists{#1}{\begin{quotation}\noindent\textsc{Key:} #1\\
+  \textsc{Annotation:}\ \input{#1}\end{quotation}}{}}
+\providecommand{\bibAnnote}[2]{%
+  \begin{quotation}\noindent\textsc{Key:} #1\\
+  \textsc{Annotation:}\ #2\end{quotation}}
+\providecommand{\eprint}[2][]{\url{#2}}
+
+\bibitem{CDC2013}
+ (2013).
+\newblock Health-related quality of life: {W}ell-being concepts.
+\newblock Health-related quality of life: Well-being concepts.
+  \url{http://www.cdc.gov/hrqol/wellbeing.htm}; Accessed March 29, 2014.
+\bibAnnoteFile{CDC2013}
+
+\bibitem{dodds2011e}
+Dodds PS, Harris KD, Kloumann IM, Bliss CA, Danforth CM (2011) Temporal
+  patterns of happiness and information in a global social network:
+  {H}edonometrics and {T}witter.
+\newblock PLoS ONE 6: e26752.
+\bibAnnoteFile{dodds2011e}
+
+\bibitem{diener1995}
+Diener E, Diener M, Diener C (1995) Factors predicting the subjective
+  well-being of nations.
+\newblock Journal of Personality and Social Psychology 69(5): 851-864.
+\bibAnnoteFile{diener1995}
+
+\bibitem{gallup}
+State of the states.
+\newblock State of the States.
+  \url{http://www.gallup.com/poll/125066/State-States.aspx}; Accessed March 29,
+  2014.
+\bibAnnoteFile{gallup}
+
+\bibitem{feelometer}
+ (2013).
+\newblock Stimmungsgasometer.
+\newblock Stimmungsgasometer. \url{http://xn--fhlometer-q9a.de/}; Accessed
+  March 29, 2014.
+\bibAnnoteFile{feelometer}
+
+\bibitem{census}
+Siebens J (2013).
+\newblock Extended measures of well-being: {L}iving conditions in the {U}nited
+  {S}rates: 2011.
+\newblock \urlprefix\url{http://www.census.gov/prod/2013pubs/p70-136.pdf}.
+\bibAnnoteFile{census}
+
+\bibitem{pew}
+Duggan M, Brenner J (2013).
+\newblock The demographics of social media users---2012.
+\newblock
+  \urlprefix\url{http://www.pewinternet.org/files/old-media//Files/Reports/2013/PIP_SocialMediaUsers.pdf}.
+\bibAnnoteFile{pew}
+
+\bibitem{signorini2011}
+Signorini A, Segre AM, Polgreen PM (2011) The use of twitter to track levels of
+  disease activity and public concern in the {U}{S} during the influenza {A}
+  {H}1{N}1 pandemic.
+\newblock PLoS ONE 6(5): e19467.
+\bibAnnoteFile{signorini2011}
+
+\bibitem{prieto2014}
+Prieto VM, Matos S, Alvarez M, Cacheda F, Oliveira JL (2014) Twitter: {A} good
+  place to detect health conditions.
+\newblock PLoS ONE 9(1): e86191.
+\bibAnnoteFile{prieto2014}
+
+\bibitem{chew2010}
+Walpole SC, Prieto-Merino D, Edwards P, Cleland J, Stevens G (2010) The weight
+  of nations: {a}n estimation of adult human biomass.
+\newblock PLoS ONE 5(11): e14118.
+\bibAnnoteFile{chew2010}
+
+\bibitem{paul2011}
+Paul MJ, Dredze M (2011) You are what you tweet: {A}analyzing {T}wittier for
+  public health.
+\newblock ICWSM .
+\bibAnnoteFile{paul2011}
+
+\bibitem{watts2005a}
+Watts DJ, Muhamad R, Medina D, Dodds PS (2005) Multiscale, resurgent epidemics
+  in a hierarchcial metapopulation model.
+\newblock Proc Natl Acad Sci 102: 11157--11162.
+\bibAnnoteFile{watts2005a}
+
+\bibitem{googleflutrends2015a}
+Google Flu Trends, \url{https://www.google.org/flutrends/}; accessed March 1,
+  2015.
+\bibAnnoteFile{googleflutrends2015a}
+
+\bibitem{lazer2014a}
+Lazer D, Kennedy R, King G, Vespignani A (2014) The parable of {G}oogle {F}lu:
+  {T}raps in {B}ig {D}ata analysis.
+\newblock Science Magazine 343: 1203--1205.
+\bibAnnoteFile{lazer2014a}
+
+\bibitem{mitchell2013a}
+Mitchell L, Frank MR, Dodds PS, Danforth CM (2013) The geography of happiness:
+  {C}onnecting {T}witter sentiment and expression, demographics, and objective
+  characteristics of place.
+\newblock PLoS ONE 8: e64417.
+\bibAnnoteFile{mitchell2013a}
+
+\bibitem{dodds2015a}
+Dodds PS, Clark EM, Desu S, Frank MR, Reagan AJ, et~al. (2015) Human language
+  reveals a universal positivity bias.
+\newblock Proc Natl Acad Sci 112: 2389--2394.
+\bibAnnoteFile{dodds2015a}
+
+\bibitem{chunara2013}
+Chunara R, Bouton L, Ayers JW, Brownstein JS (1995) Assessing the online social
+  environment for surveillance of obesity prevalence.
+\newblock PLoS ONE 8(4): e61373.
+\bibAnnoteFile{chunara2013}
+
+\bibitem{west2013}
+West R, White RW, Horvitz E (2013) From cookies to cooks: {I}nsights on dietary
+  patterns via analysis of web usage logs.
+\newblock Proceedings of the 22nd international conference on World Wide Web
+  International World Wide Web Conferences Steering Committee : 1399-1410.
+\bibAnnoteFile{west2013}
+
+\bibitem{eichstaedt2015a}
+Eichstaedt JC, Schwartz HA, Kern ML, Park G, Labarthe DR, et~al. (2015)
+  Psychological language on {T}witter predicts county-level heart disease
+  mortality.
+\newblock Psychological Science .
+\bibAnnoteFile{eichstaedt2015a}
+
+\bibitem{abbar2014a}
+Abbar S, Mejova Y, Weber I (2014).
+\newblock You tweet what you eat: {S}tudying food consumption through
+  {T}witter.
+\newblock Available at: \url{http://arxiv.org/abs/1412.4361}.
+\bibAnnoteFile{abbar2014a}
+
+\bibitem{walpole2012}
+Chew C, Eysenbach G (2012) Pandemics in the age of {T}witter: {C}ontent
+  analysis of tweets during the 2009 {H}1{N}1 outbreak.
+\newblock BMC Public Health 12:439.
+\bibAnnoteFile{walpole2012}
+
+\bibitem{golder2011a}
+Golder SA, Macy MW (2011) Diurnal and seasonal mood vary with work, sleep, and
+  daylength across diverse cultures.
+\newblock Science Magazine 333: 1878--1881.
+\bibAnnoteFile{golder2011a}
+
+\bibitem{benjamini1995}
+Benjamini Y, Hochberg Y (1995) Controlling the false discovery rate: {A}
+  practical and powerful approach to multiple testing.
+\newblock Journal of the Royal Statistical Society Series B (Methodological)
+  57(1): 289-300.
+\bibAnnoteFile{benjamini1995}
+
+\bibitem{cdc}
+Centers for disease control and prevention.
+\newblock \url{http://www.cdc.gov}, Accessed March 15, 2014.
+\bibAnnoteFile{cdc}
+
+\bibitem{produce}
+ (2013).
+\newblock State indicator report on fruits and vegetables. national {C}enter
+  for {C}hronic {D}isease {P}revention and {H}ealth {P}romotion, {D}ivision of
+  {N}utrition, {P}hysical {A}ctivity, and {O}besity. centers for {D}isease
+  {C}ontrol and {P}revention, {U}{S} {D}epartment of {H}ealth and {H}uman
+  {S}ervices.
+\newblock
+  \url{http://www.cdc.gov/nutrition/downloads/State-Indicator-Report-Fruits-Vegetables-2013.pdf},
+  Accessed March 15, 2014.
+\bibAnnoteFile{produce}
+
+\bibitem{french2009a}
+French MT, Popovici I, Maclean JC (2009) Do alcohol consumers exercise more?
+  {F}indings from a national survey.
+\newblock Am J Health Promot 24: 2--10.
+\bibAnnoteFile{french2009a}
+
+\bibitem{pesta}
+Pesta BJ, Bertsch S, McDaniel MA, Mahoney CB, Poznanski PJ (2012) Differential
+  epidemiology: {I}{Q}, neuroticism, and chronic disease by the 50 {U}.{S}.
+  states.
+\newblock Intelligence 40: 107-114.
+\bibAnnoteFile{pesta}
+
+\bibitem{williams2014a}
+Williams JR, Lessard PR, Desu S, Clark E, Bagrow JP, et~al. (2014) Zipf's law
+  holds for phrases, not words .
+\bibAnnoteFile{williams2014a}
+
+\bibitem{usda}
+ (2013).
+\newblock {U}.{S}. {D}epartment of {A}griculture, {A}gricultural {R}esearch
+  {S}ervice, {U}{S}{D}{A} {N}ational {N}utrient {D}atabase for {S}tandard
+  {R}eference, release 25.
+\newblock \urlprefix\url{http://www.ars.usda.gov/ba/bhnrc/ndl}.
+\bibAnnoteFile{usda}
+
+\bibitem{compendium}
+Ainsworth BE, Haskell WL, Herrmann SD, Meckes N, Bassett~Jr DR, et~al. (2013).
+\newblock The compendium of physical activities tracking guide. healthy
+  lifestyles research center, college of nursing \& health innovation, arizona
+  state university.
+\newblock
+  \urlprefix\url{https://sites.google.com/site/compendiumofphysicalactivities/}.
+\bibAnnoteFile{compendium}
+
+\bibitem{myplate}
+{U}{S}{D}{A} {M}y{P}late food groups.
+\newblock \urlprefix\url{http://www.choosemyplate.gov/food-groups/}.
+\newblock Accessed May 15, 2015.
+\bibAnnoteFile{myplate}
+
+\bibitem{williams2015c}
+Williams JR, Clark EM, Bagrow JP, Danforth CM, Dodds PS (2015).
+\newblock Identifying missing dictionary entries with frequency-conserving
+  context models.
+\newblock Available online at
+  \href{http://arxiv.org/abs/1503.02120}{http://arxiv.org/abs/1503.02120}.
+\bibAnnoteFile{williams2015c}
+
+\bibitem{levenshtein1966bcc}
+Levenshtein V (1966) {Binary Codes Capable of Correcting Deletions, Insertions
+  and Reversals}.
+\newblock Soviet Physics Doklady 10: 707.
+\bibAnnoteFile{levenshtein1966bcc}
+
+\bibitem{wordshiftexplanations2014a}
+blog CSL (2014).
+\newblock Hedonometer 2.0: Measuring happiness and using word shifts.
+\bibAnnoteFile{wordshiftexplanations2014a}
+
+\bibitem{america}
+Americas {H}ealth {R}ankings report---{S}tate {H}ealth {S}tatistics.
+\newblock \url{http://AmericasHealthRankings.org}, Accessed March 15, 2014.
+\bibAnnoteFile{america}
+
+\bibitem{cnbc}
+C{N}{B}{C} overall rankings 2012.
+\newblock \url{http://www.cnbc.com/id/100016697}, Accessed March 15, 2014.
+\bibAnnoteFile{cnbc}
+
+\bibitem{kff}
+State {H}ealth {F}acts---{T}he {H}enry {J}. {K}aiser {F}amily {F}oundation.
+\newblock \url{http://kff.org/statedata}, Accessed March 15, 2014.
+\bibAnnoteFile{kff}
+
+\bibitem{brain}
+America's {B}rain {H}ealth {I}ndex.
+\newblock \url{http://www.beautiful-minds.com/AmericasBrainHealthIndex},
+  Accessed March 15, 2014.
+\bibAnnoteFile{brain}
+
+\bibitem{gini}
+U{S} {C}ensus {A}merican {F}act{F}inder.
+\newblock \url{http://factfinder2.census.gov/faces/nav/jsf/pages/index.xhtml},
+  Accessed March 15, 2014.
+\bibAnnoteFile{gini}
+
+\bibitem{rentfrow}
+Rentfrow PJ, Gosling SD, Jokela M, Stillwell D, Kosinski M, et~al. (2013)
+  Divided we stand: {T}hree psychological regions of the {U}nited {S}tates and
+  their political, economic, social, and health correlates.
+\newblock Journal of Personality and Social Psychology 105(6): 996-1012.
+\bibAnnoteFile{rentfrow}
+
+\bibitem{stroll}
+Strolling of the {H}eiders {L}ocavore {I}ndex.
+\newblock \url{http://www.strollingoftheheifers.com/locavoreindex/}, Accessed
+  March 15, 2014.
+\bibAnnoteFile{stroll}
+
+\bibitem{freedom}
+ (2013).
+\newblock Freedom in the 50 states, mercatus center, george mason university.
+\newblock \url{http://freedominthe50states.org/}, Accessed March 15, 2014.
+\bibAnnoteFile{freedom}
+
+\end{thebibliography}

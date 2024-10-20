@@ -5,11 +5,11 @@ Solomon~M. Hsiang, Marshall Burke, and Edward Miguel.
 \newblock Quantifying the influence of climate on human conflict.
 \newblock {\em Science}, 341(6151), 2013.
 
-\bibitem{ginsberg2008detecting}
-Jeremy Ginsberg, Matthew~H Mohebbi, Rajan~S Patel, Lynnette Brammer, Mark~S
-  Smolinski, and Larry Brilliant.
+\bibitem{ginsberg2009a}
+J.~Ginsberg, M.~H. Mohebbi, R.~S. Patel, L.~Brammer, M.~S. Smolinski, and
+  L.~Brilliant.
 \newblock Detecting influenza epidemics using search engine query data.
-\newblock {\em Nature}, 457(7232):1012--1014, 2008.
+\newblock {\em Nature}, 459:1012--1014, 2009.
 
 \bibitem{sornette2006predictability}
 Didier Sornette and Wei-Xing Zhou.
@@ -190,6 +190,12 @@ Jonathan~H Tu, Clarence~W Rowley, Dirk~M Luchtenburg, Steven~L Brunton, and
   J~Nathan Kutz.
 \newblock On dynamic mode decomposition: theory and applications.
 \newblock {\em arXiv preprint arXiv:1312.0041}, 2013.
+
+\bibitem{bishop2011a}
+Craig~H. Bishop and Daniel Hodyss.
+\newblock Adaptive ensemble covariance localization in ensemble 4d-var state
+  estimation.
+\newblock {\em Monthly Weather Review}, 139(4):7, April 2011.
 
 \bibitem{reagan2013}
 Andrew Reagan.

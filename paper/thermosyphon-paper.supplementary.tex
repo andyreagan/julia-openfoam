@@ -74,30 +74,30 @@ The main code is straight forward, relying on include statements to load the lib
         breaklines=true,                breakatwhitespace=false,            escapeinside={\%*}{*)} 
 }
 
-\lstinputlisting[language=C++,firstline=48,lastline=53]{/Users/andyreagan/work/2013/09-reagan-thesis/code/buoyantBoussinesqPimpleFoam/buoyantBoussinesqPimpleFoam-edited.C}
+\lstinputlisting[language=C++,firstline=48,lastline=53]{/Users/andyreagan/projects/2013/09-reagan-thesis/code/buoyantBoussinesqPimpleFoam/buoyantBoussinesqPimpleFoam-edited.C}
 
 The main function is then
 
-\lstinputlisting[language=C++,firstline=57,lastline=70]{/Users/andyreagan/work/2013/09-reagan-thesis/code/buoyantBoussinesqPimpleFoam/buoyantBoussinesqPimpleFoam-edited.C}
+\lstinputlisting[language=C++,firstline=57,lastline=70]{/Users/andyreagan/projects/2013/09-reagan-thesis/code/buoyantBoussinesqPimpleFoam/buoyantBoussinesqPimpleFoam-edited.C}
 
 We then enter the main loop.
 This is computed for each time step, prescribed before the solver is applied.
 Note that the capacity is available for adaptive time steps, choosing to keep the Courant number below some threshold, but I do not use this.
 For the distributed ensemble of model runs, it is important that each model complete in nearly the same time, so that the analysis is not waiting on one model and therefore under-utilizing the available resources.
 
-\lstinputlisting[language=C++,firstline=71,lastline=88]{/Users/andyreagan/work/2013/09-reagan-thesis/code/buoyantBoussinesqPimpleFoam/buoyantBoussinesqPimpleFoam-edited.C}
+\lstinputlisting[language=C++,firstline=71,lastline=88]{/Users/andyreagan/projects/2013/09-reagan-thesis/code/buoyantBoussinesqPimpleFoam/buoyantBoussinesqPimpleFoam-edited.C}
 
 Opening up the equation for $U$ we see that Equation
 
-\lstinputlisting[language=C++]{/Users/andyreagan/work/2013/09-reagan-thesis/code/buoyantBoussinesqPimpleFoam/UEqn.H}
+\lstinputlisting[language=C++]{/Users/andyreagan/projects/2013/09-reagan-thesis/code/buoyantBoussinesqPimpleFoam/UEqn.H}
 
 Solving for $T$ is 
 
-\lstinputlisting[language=C++]{/Users/andyreagan/work/2013/09-reagan-thesis/code/buoyantBoussinesqPimpleFoam/TEqn.H}
+\lstinputlisting[language=C++]{/Users/andyreagan/projects/2013/09-reagan-thesis/code/buoyantBoussinesqPimpleFoam/TEqn.H}
 
 Finally, we solve for the pressure $p$ in ``pEqn.H'':
 
-\lstinputlisting[language=C++]{/Users/andyreagan/work/2013/09-reagan-thesis/code/buoyantBoussinesqPimpleFoam/pEqn.H}
+\lstinputlisting[language=C++]{/Users/andyreagan/projects/2013/09-reagan-thesis/code/buoyantBoussinesqPimpleFoam/pEqn.H}
 
 The final operation being the conversion of pressure to hydrostatic pressure,
 \begin{equation*} p _\text{rgh} = p - \rho _k g_h . \end{equation*}
@@ -107,7 +107,7 @@ We verify convergence of the solution in a steady flow state regime in Fig \ref{
 
 \begin{figure}[h!]
   \centering
-    \includegraphics[width=0.79\textwidth]{/Users/andyreagan/work/2013/05-data-assimilation/src/experiments/meshVerification/Flux-end-20-times.pdf}
+    \includegraphics[width=0.79\textwidth]{/Users/andyreagan/projects/2013/05-data-assimilation/src/experiments/meshVerification/Flux-end-20-times.pdf}
   \caption[Long-term behavior for different meshes]
   {
     With a fixed choice of solver, boundary conditions, and initial conditions that lead to a stable convective state, we present the long-term behavior of the velocity face flux at the top slice for different meshes.
@@ -305,7 +305,7 @@ The timeseries from which we computed the decomposition is shown in Figure \ref{
 
 The real and imaginary components of the DMD eigenvalues are shown in both un-mapped and mapped form in Figure \ref{fig:DMD-eigenvalues}.
 
-%% ~/work/2015/08-kitchentabletools/pdftile.pl 1 2 .7 0 0 l 10 "" "A: DMD Eigenvalues" DMD-eigenvalues-tu-wU.pdf "B: DMD Eigenvalues (mapped)" DMD-eigenvalues-mapped-tu-wU.pdf eigenvalues-both-labeled
+%% ~/projects/2015/08-kitchentabletools/pdftile.pl 1 2 .7 0 0 l 10 "" "A: DMD Eigenvalues" DMD-eigenvalues-tu-wU.pdf "B: DMD Eigenvalues (mapped)" DMD-eigenvalues-mapped-tu-wU.pdf eigenvalues-both-labeled
 \begin{figure}[h]
   \centering
   \includegraphics[width=0.98\textwidth]{../figures/DMD/eigenvalues-both-labeled.pdf}

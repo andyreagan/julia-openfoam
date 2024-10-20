@@ -1,0 +1,147 @@
+
+
+
+\begin{figure*}[tp!]
+    \begin{center}
+      %\includegraphics[width=\textwidth]{calorimeterMaps.eps}
+    \end{center}
+    \caption{\textbf{
+      Choropleth maps indicating 
+      \textbf{(A)} caloric input $\calin$,
+      \textbf{(B)} caloric output $\calout$,
+      and
+      \textbf{(C)} caloric balance $\calbal$
+      in the contiguous United States (including the District of 
+      Columbia) based on 50 million geotagged 
+      tweets taken from 2011-2012.
+}       Darker means higher values as per the color bars.
+      The histograms in Figs.~\ref{fig:fluxwell.histograms},
+      \ref{fig:fluxwell.histograms-food},
+      and \ref{fig:fluxwell.histograms-activities} 
+      show the specific rankings according to the three variables.
+      The phrases in \textbf{(A)} and \textbf{(B)}
+      are those whose increased usage contribute the most 
+      to a population's $\calin$ and $\calout$ differing from the average
+      (see Sec.~\ref{subsec:fluxwell.phraseshifts}).
+    }
+    \label{fig:fluxwell.maps}
+\end{figure*}
+
+
+\begin{figure}[tp!]
+    \begin{center}
+      %\includegraphics[width=\columnwidth]{stateScatter.eps}
+    \end{center}
+    \caption{\textbf{
+      Plots for the contiguous US 
+      showing the lack of correlation between
+      caloric input $\calin$ and caloric output $\calout$,
+      demonstrating their separate value
+      as they bear different kinds of information.
+}       The Pearson correlation coefficient 
+      $\rhopearson$
+      is -0.13
+      and the best line of fit slope is $m=$ -1.69.
+      Fig.~\ref{fig:fluxwell.scatterplots} adds
+      plots of 
+      $\calbal$ as a function of $\calin$ and $\calout$.
+    }
+    \label{fig:fluxwell.scatterplot_calin_calout}
+\end{figure}
+
+
+\begin{figure*}[tp!]
+    \begin{center}
+      %\includegraphics[width=\textwidth]{calorimeterBarplots_abbrevs.eps}
+    \end{center}
+    \caption{\textbf{
+      Histograms of 
+      caloric intake $\calin$ (food),
+      caloric output $\calout$ (activity), 
+      and
+      caloric balance $\calbal$
+      for the states of the contiguous US,
+      all ranked by decreasing $\calbal$.
+}       Bars indicate the difference in the three quantities from
+      the overall average with
+      colors corresponding to those used in Fig.~\ref{fig:fluxwell.maps}.
+      We provide the same set of histograms re-sorted by
+      $\calin$ and $\calout$
+      in Figs.~\ref{fig:fluxwell.histograms-food}
+      and~\ref{fig:fluxwell.histograms-activities}.
+    }
+    \label{fig:fluxwell.histograms}
+\end{figure*}
+
+
+\begin{figure*}[tbp!]
+  \begin{center}
+    %\includegraphics[width=\textwidth]{food-activity-phrase-shift003.eps} 
+  \end{center}
+    \caption{\textbf{
+      Phrase shifts showing which food phrases 
+      and physical activity phrases
+      have the most influence on Colorado and Mississippi's 
+      top and bottom ranking for caloric balance,
+      when compared
+      with the average for the contiguous United States.
+}       Note that phrases are lemmas representing phrase categories.
+      Overall, Colorado scores lower on Twitter food calories
+      (257.4 versus 271.7)      
+      and higher 
+      on physical activity calories 
+      (203.5 versus 161.3)
+      than Mississippi.
+      We provide interactive phrase shifts for 
+      as part of the paper's online
+      appendix at
+      \url{http://compstorylab.org/share/papers/alajajian2015a/}
+      and at
+      \url{http://panometer.org/instruments/lexicocalorimeter}.
+      We explain phrase (word) shifts in the main text
+      (see Eqs.~\ref{eq:fluxwell.delta} and~\ref{eq:fluxwell.delta-final}),
+      and in full depth in~\cite{dodds2011e} 
+      and~\cite{dodds2015a}
+      and online at
+      \url{http://hedonometer.org}~\cite{wordshiftexplanations2014a}.
+    }
+  \label{fig:fluxwell.wordshiftexample}
+\end{figure*}
+
+
+\begin{figure*}[tp!]
+    \begin{center}
+      %\includegraphics[width=\textwidth]{scatterPlots.eps}
+    \end{center}
+    \caption{\textbf{
+      Six demographic quantities compared with
+      caloric balance $\calbal$ for the contiguous US.
+}       The inset values
+      are the Spearman correlation coefficient $\rhospearman$,
+      and
+      the Benjamini-Hochberg $q$-value.
+      See Tab.~\ref{tab:fluxwell.corrTable} for
+      a full summary of the 37 demographic quantities
+      studied here.
+    }
+    \label{fig:fluxwell.demog-scatterplots}
+\end{figure*}
+
+
+\begin{figure*}[tp!]
+    \begin{center}
+      %\includegraphics[width=\textwidth]{2015-07-03lexicocalorimeter-dashboard.eps}
+    \end{center}
+    \caption{\textbf{
+      Screenshot of the interactive dashboard for our prototype
+      Lexicocalorimeter site (taken 2015/07/03).
+}       An archived development version can be found
+      as part of our paper's Online Appendices at
+      \url{http://compstorylab.org/share/papers/alajajian2015a/maps.html},
+      and a full dynamic implementation will be part of our
+      Panometer project at
+      \url{http://panometer.org/instruments/lexicocalorimeter}.
+    }
+    \label{fig:fluxwell.lexicocalorimeter}
+\end{figure*}
+\clearpage

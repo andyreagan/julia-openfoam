@@ -5,6 +5,8 @@
 \righthyphenmin=2
 
 \usepackage{url}
+\usepackage{nameref}
+\usepackage{hyperref}
 \usepackage{graphicx,epsfig,verbatim,enumerate}
 \usepackage{amssymb,amsmath}
 
@@ -113,8 +115,6 @@
 \newcommand{\popA}{\rm inst}
 \newcommand{\popB}{\rm pop}
 
-\setboolean{twocolswitch}{true}
-
 \newcommand{\revtexonly}[1]{#1}
 \newcommand{\plainlatexonly}[1]{}
 
@@ -152,10 +152,10 @@ We also show that a Dynamic Mode Decomposition (DMD) of the temperature and velo
 
 \maketitle
 
-\section{Introduction}
+\section*{Introduction}
 
 Prediction of the future state of complex systems is a fundamental challenge of science and engineering, and ultimately integral to the functioning of society.
-Some of these systems include weather \cite{weather-violence2013}, health \cite{ginsberg2008detecting}, the economy \cite{sornette2006predictability}, marketing \cite{asur2010predicting} and transportation \cite{savely1972}.
+Some of these systems include weather \cite{weather-violence2013}, health \cite{ginsberg2009a}, the economy \cite{sornette2006predictability}, marketing \cite{asur2010predicting} and transportation \cite{savely1972}.
 For weather in particular, predictions are made using supercomputers integrating numerical weather models, projecting our current best guess of the atmospheric state into the future.
 The accuracy of these predictions depends on the accuracy of the models themselves, and the quality of our knowledge of the current state of the atmosphere.
 
@@ -172,7 +172,7 @@ The dynamics of thermal convection loops have been explored under both periodic 
 A full characterization of the computational behavior of a loop under flux boundary conditions by Louisos et. al. describes four regimes: chaotic convection with reversals, high Rayleigh number (Ra) aperiodic stable convection, steady stable convection, and conduction/quasi-conduction \cite{louisos2013}.
 For the remainder of this work, we focus on the chaotic flow regime.
 
-\section{Physical Experiment and Computational Model}
+\section*{Physical Experiment and Computational Model}
 
 The reduced order system describing a thermal convection loop was originally derived by Gorman \cite{gorman1986} and Ehrhard and M\"{u}ller \cite{ehrhard1990dynamical}.
 Here we present this three dimensional system in non-dimensionalized form.
@@ -202,12 +202,12 @@ We first test our ability to predict this experimental thermosyphon using synthe
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=0.5\textwidth]{/Users/andyreagan/work/2013/05-data-assimilation/thermosyphon/2015-09-30-12-26-221-timeseries.pdf}
+  \includegraphics[width=0.5\textwidth]{/Users/andyreagan/projects/2013/05-data-assimilation/thermosyphon/2015-09-30-12-26-221-timeseries.pdf}
   \caption[A time series of the physical thermosyphon, from the Undergraduate Honor's Thesis of Darcy Glenn {\protect \cite{glenn2013}}]{
-        A time series of the physical thermosyphon, from the Undergraduate Honor's Thesis of Darcy Glenn {\protect \cite{glenn2013}}.
+    A time series of the physical thermosyphon, from the Undergraduate Honor's Thesis of Darcy Glenn {\protect \cite{glenn2013}}.
     The temperature difference (plotted) is taken as the difference between temperature sensors in the 3 and 9 o'clock positions.
     The sign of the temperature difference indicates the flow direction, where positive values are clockwise flow.
-  }
+      }
   \label{fig:thermosyphon-physical-timeseries}
 \end{figure}
 
@@ -238,23 +238,22 @@ The resulting 2D mesh contains 80,000 points (80 across the diameter and 1000 ar
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=0.45\textwidth]{/Users/andyreagan/work/2013/05-data-assimilation/OpenFOAM/figures/heating_zoom_mesh4.png}
+  \includegraphics[width=0.45\textwidth]{/Users/andyreagan/projects/2013/05-data-assimilation/OpenFOAM/figures/heating_zoom_mesh4.png}
   \caption[A snapshot of the mesh used for CFD simulations]{
-
-    \textbf{A snapshot of the mesh used for CFD simulations.}
-  Shown is an initial stage of heating for a fixed value boundary condition, 2D, laminar simulation with a mesh of 40000 cells without wall refinement with walls heated at 340K on the bottom half and cooled to 290K on the top half.
-  The cells have been colored with a truncated temperature range (299--301K) to highlight the flow structures.
+    A snapshot of the mesh used for CFD simulations.
+    Shown is an initial stage of heating for a fixed value boundary condition, 2D, laminar simulation with a mesh of 40000 cells without wall refinement with walls heated at 340K on the bottom half and cooled to 290K on the top half.
+    The cells have been colored with a truncated temperature range (299--301K) to highlight the flow structures.
   }
   \label{fig:CFDmesh1}
 \end{figure}
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=0.45\textwidth]{/Users/andyreagan/work/2013/05-data-assimilation/OpenFOAM/figures/3D-mesh2.png}
+  \includegraphics[width=0.45\textwidth]{/Users/andyreagan/projects/2013/05-data-assimilation/OpenFOAM/figures/3D-mesh2.png}
   \caption[The 3D mesh viewed as a wire-frame from within]{
-  The 3D mesh viewed as a wire-frame from within.
-  Here there are 900 cells in each slice (not shown), for a total mesh size of 81,000 cells.
-  Simulations using this computational mesh are prohibitively expensive for use in a real time ensemble forecasting system, but are possible offline.
+    The 3D mesh viewed as a wire-frame from within.
+    Here there are 900 cells in each slice (not shown), for a total mesh size of 81,000 cells.
+    Simulations using this computational mesh are prohibitively expensive for use in a real time ensemble forecasting system, but are possible offline.
   }
   \label{fig:CFDmesh2}
 \end{figure}
@@ -271,9 +270,9 @@ Since $\phi$ is saved as a face-value flux, we compute the mass flow rate over t
 \begin{equation} \sum _i\phi_{f(i)} \cdot v_i \cdot \rho_i\end{equation}
 where $f(i)$ corresponds the face perpendicular to the loop angle at cell $i$ and $\rho$ is reconstructed from the Boussinesq approximation $\rho = \rhoref (1-\beta(T-T_\text{ref}))$.
 
-\section{Methods}
+\section*{Methods}
 
-\subsection{Data Assimilation}
+\subsection*{Data Assimilation}
 
 We perform initial tests of the data assimilation algorithms described here with the Lorenz '63 system, which is analogous to the above equations with Lorenz's $\beta = 1$, and $K = 0$.
 The canonical choices of $\sigma = 10, \beta = 8/3$ and $\rho = 28$ produce the well known butterfly attractor, and we use these values for all examples here.
@@ -364,7 +363,7 @@ Starting with a collection of background forecast vectors $\{ \mbx_{b(i)}:\,i=1,
 We implement the LETKF on our mesh using the full 80 cells across with zone sizes of center 10, and sides 15, resulting in 3200 local variables for 100 zones.
 In parallel, these 100 local computations can all be carried out simultaneously over an arbitrary number of processors.
 
-\subsection{Adaptive covariance localization}
+\subsection*{Adaptive covariance localization}
 
 Using the ``square'' sections of the loop to localize, we shift the zone to the left or right to follow the dominate flow direction at the center of that local window.
 In Fig. \ref{fig:covariance-localization-schematic} a schematic of localization using square, circular, and adaptive location shows a situation in which adaptive localization will potentially capture more relevant information for finding the analysis state of any given cell.
@@ -385,7 +384,7 @@ As we note in the caption of Fig. \ref{fig:covariance-localization-schematic}, w
 Denote the velocity vector of cells on a perpendicular slice of the loop at $\vec{U}$, the tangent vector to the slice $\vec{U}$ by $\vec{T}$, the zone width as $z_{\text{max}}$ and then the localization shift $\alpha_{\text{local}}$ for that slice of the loop is taken to be
 \begin{equation} \alpha_{\text{local}} = \text{floor} \left( (\vec{U} \cdot \vec{T})/\max (U) \times z_{\text{max}} \right) . \end{equation}
 
-\subsection{Dynamic mode decomposition}
+\subsection*{Dynamic mode decomposition}
 
 We employ the ``standard'' algorithm of Tu to compute the Dynamic Mode Decomposition \cite{tu2013dynamic}.
 Tu's ``standard'' algorithm is as follows with $X$ and $Y$ taken as the first and last $N-1$ columns of the snapshot matrix $D$:
@@ -397,9 +396,10 @@ Tu's ``standard'' algorithm is as follows with $X$ and $Y$ taken as the first an
 Given a system state $U^*$ we project this state onto the DMD basis by taking the real part of $\Phi = \text{re}\left (U^*\cdot w\right)$ and use the psuedoinverse to compute the projection as $$(\Phi^T \cdot \Phi)^{-1} \cdot \Phi ^T \cdot U^*.$$
 This projection is a vector which contains the linear coefficients on the basis of DMD modes for the given state.
 
-\section{Results}
+\section*{Results}
 
-\subsection{Data assimilation}
+\subsection*{Data assimilation}
+\label{data_assimilation_section}
 
 We confirm the performance of the DA methods described above by testing each (on the Lorenz '63 system) for increasingly long times between observations, by increasing the DA window length in Fig. \ref{fig:window_test}.
 As the time between observations increases, the nonlinearity of the Lorenz '63 system results in the failure of the EKF and difficultly for the EnKF with small ensemble size.
@@ -407,9 +407,10 @@ The ETKF and EnSRF perform the best of the methods tested and we chose the ETKF 
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=0.50\textwidth]{/Users/andyreagan/work/2013/05-data-assimilation/src/experiments/windowExperiment/2015-09-30-14-17-window-experiment.pdf}
+  \includegraphics[width=0.50\textwidth]{/Users/andyreagan/projects/2013/05-data-assimilation/src/experiments/windowExperiment/2015-09-30-14-17-window-experiment.pdf}
   \caption[The RMS error is reported for our EKF and EnKF filters]{
-    The RMS error (not scaled by climatology) for our EKF and EnKF filters, measured as the difference between forecast and truth at the end of an assimiliation window for the latter 2500 assimiliation windows in a 3000 assimilation window Lorenz '63 run.
+    The RMS error (not scaled by climatology) for our EKF and EnKF filters.
+    Error is measured as the difference between forecast and truth at the end of an assimiliation window for the latter 2500 assimiliation windows in a 3000 assimilation window Lorenz '63 run.
     Error is measured in the only observed variable, $x_1$.
     Increasing the assimilation window led to an decrease in predictive skill, as expected.
   }
@@ -422,7 +423,7 @@ We use these optimal data assimilation parameters (inflation factors) for the re
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=0.48\textwidth]{/Users/andyreagan/work/2013/05-data-assimilation/src/experiments/covInflTest/2015-09-30-15-35-ETKF-390s.pdf}
+  \includegraphics[width=0.48\textwidth]{/Users/andyreagan/projects/2013/05-data-assimilation/src/experiments/covInflTest/2015-09-30-15-35-ETKF-390s.pdf}
   \caption[The RMS error averaged over 100 model runs of length 1000 windows is reported for the ETKF for varying additive and multiplicative inflation factors]{
     The RMS error averaged over 100 model runs of length 1000 windows is reported for the ETKF for varying additive and multiplicative inflation factors $\Delta$ and $\mu$.
     Each of the 100 model runs starts with a random IC, and the analysis forecast starts randomly.
@@ -432,7 +433,7 @@ We use these optimal data assimilation parameters (inflation factors) for the re
   \label{fig:ETKF_cov_tuning_390s}
 \end{figure}
 
-\subsection{Limited observations \& adaptive covariance}
+\subsection*{Limited observations \& adaptive covariance}
 
 An initial test of prediction skill with limited observations in a twin model experiment showed that we needed 1000 spatial measurements of the temperature to predict flow reversals within 1 assimilation window.
 In an attempt to decrease the required observations to a experimentally realizable number, we implement a simple, adaptively localized covariance for data assimilation.
@@ -462,6 +463,8 @@ And for a spacing of 10, observing every 10th variable, we achieve greater predi
   \includegraphics[width=0.45\textwidth]{../figures/2015-09-30-19-59-consuela-2.pdf}
   \caption[]{
     Prediction skill as fraction of reversals that we correctly predicted across different numbers of observations and sliding windows of localized covariance.
+    Decreasing observation density makes the prediction problem more difficult while at the same time make the data assimilation stable numerically, and we see a decrease in prediction skill with no covariance shifting.
+    With covariance shifting, skill improves for each observational density and most dramatically with less observation density.
   }
   \label{fig:sliding_results}
 \end{figure}
@@ -469,11 +472,12 @@ And for a spacing of 10, observing every 10th variable, we achieve greater predi
 Computing the average flow direction inside a localized covariance zone is straightforward, and computationally easy since the velocity is immediately available, making incorporation of this scheme into any data assimilation method easy.
 Since observations are also sparse in large weather models, we expect that using an adaptive local covariance scheme could lead to improved prediction skill with sparse observations \cite{bishop2011a}.
 
-\subsection{Dynamic mode decomposition}
+\subsection*{Dynamic mode decomposition}
+\label{dmd_section}
 
 To incorporate limited observations into a high-dimensional CFD simulation, we combine ideas from both CFD literature and data assimilation to make predictions.
 We proceed with Tu's algorithm using snapshots every 10 seconds for the first 900 seconds of model time.
-A full picture of this time series can be found Appendix C, Fig. \ref{fig:DMD-timeseries}.
+A full picture of this time series can be found in \nameref{fig:DMD-timeseries}.
 
 In this reduced space, we extract the modes that correspond to the instability leading to flow reversals.
 With a known low-dimensional model of the thermosyphon dynamics, we take this opportunity to test whether DMD can discover the underlying system.
@@ -519,7 +523,7 @@ By combining the state projection onto specific mode time series into a phase pl
 In Fig. \ref{fig:DMD_phaseplane} we see that the dominant dynamics from mode 2 plotted with those of mode 79 are able to strongly separate reversals into quadrants of the low-dimensional space.
 This result indicates that DMD could be used to improve predictability of reversals.
 
-\section{Concluding Remarks}
+\section*{Concluding Remarks}
 
 The first output of our work is a general data assimilation framework for MATLAB and Julia.
 By utilizing an object-oriented (OO) design, the model and data assimilation algorithm code are separate and can be changed independently.
@@ -552,11 +556,11 @@ Solomon~M. Hsiang, Marshall Burke, and Edward Miguel.
 \newblock Quantifying the influence of climate on human conflict.
 \newblock {\em Science}, 341(6151), 2013.
 
-\bibitem{ginsberg2008detecting}
-Jeremy Ginsberg, Matthew~H Mohebbi, Rajan~S Patel, Lynnette Brammer, Mark~S
-  Smolinski, and Larry Brilliant.
+\bibitem{ginsberg2009a}
+J.~Ginsberg, M.~H. Mohebbi, R.~S. Patel, L.~Brammer, M.~S. Smolinski, and
+  L.~Brilliant.
 \newblock Detecting influenza epidemics using search engine query data.
-\newblock {\em Nature}, 457(7232):1012--1014, 2008.
+\newblock {\em Nature}, 459:1012--1014, 2009.
 
 \bibitem{sornette2006predictability}
 Didier Sornette and Wei-Xing Zhou.
@@ -738,6 +742,12 @@ Jonathan~H Tu, Clarence~W Rowley, Dirk~M Luchtenburg, Steven~L Brunton, and
 \newblock On dynamic mode decomposition: theory and applications.
 \newblock {\em arXiv preprint arXiv:1312.0041}, 2013.
 
+\bibitem{bishop2011a}
+Craig~H. Bishop and Daniel Hodyss.
+\newblock Adaptive ensemble covariance localization in ensemble 4d-var state
+  estimation.
+\newblock {\em Monthly Weather Review}, 139(4):7, April 2011.
+
 \bibitem{reagan2013}
 Andrew Reagan.
 \newblock Predicting flow reversals in a computational fluid dynamics simulated
@@ -794,7 +804,6 @@ Geir Evensen.
 \immediate\write\tempfile{\thepage}
 \immediate\closeout\tempfile
 
-\setboolean{twocolswitch}{false}
 \onecolumngrid
 
 \setcounter{page}{1}
@@ -806,7 +815,8 @@ Geir Evensen.
 
 \appendix
 
-\section{Computational Details and Explicit Equations Used}
+\subsection*{S1 Computational Details and Explicit Equations Used}
+\label{S1}
 
 In this section, we first present the governing equations for the flow in our thermal convection loop experiment.
 A spatial and temporal discretization of the governing equations is then necessary so that they may be solved numerically.
@@ -817,7 +827,6 @@ We now discuss the equations, mesh, boundary conditions, and solver in more deta
 With these considerations, we present our simulations of the thermosyphon.
 For a complete derivation of the equations used, see \cite{reagan2013}.
 
-\subsection{Governing Equations}
 We consider the incompressible Navier-Stokes equations with the Boussinesq approximation to model the flow of water inside a thermal convection loop.
 Here we present the main equations that are solved numerically, noting the assumptions that are necessary in their derivation.
 In standard notation, for $u,v,w$ the velocity in the $x,y,z$ direction, respectively, the continuity equation for an incompressible fluid is
@@ -835,8 +844,6 @@ Since the model is incompressible, of course our energy equation includes only t
   - \frac{\partial \overline{q}_k}{\partial x_k}
 \end{equation}
 for $T$ the temperature and $q$ the flux (where $q = \overline{q} + q^*$ is the averaging notation).
-
-\subsection{Implementation}
 
 The PISO (Pressure-Implicit with Splitting of Operators) algorithm derives from the work of \cite{issa1986solution}, and is complementary to the SIMPLE (Semi-Implicit Method for Pressure-Linked Equations) \cite{patankar1972calculation} iterative method.
 The main difference of the PISO and SIMPLE algorithms is that in the PISO, no under-relaxation is applied and the momentum corrector step is performed more than once \cite{ferziger1996computational}.
@@ -867,38 +874,40 @@ The main code is straight forward, relying on include statements to load the lib
         breaklines=true,                breakatwhitespace=false,            escapeinside={\%*}{*)} 
 }
 
-\lstinputlisting[language=C++,firstline=48,lastline=53]{/Users/andyreagan/work/2013/09-reagan-thesis/code/buoyantBoussinesqPimpleFoam/buoyantBoussinesqPimpleFoam-edited.C}
+\lstinputlisting[language=C++,firstline=48,lastline=53]{/Users/andyreagan/projects/2013/09-reagan-thesis/code/buoyantBoussinesqPimpleFoam/buoyantBoussinesqPimpleFoam-edited.C}
 
 The main function is then
 
-\lstinputlisting[language=C++,firstline=57,lastline=70]{/Users/andyreagan/work/2013/09-reagan-thesis/code/buoyantBoussinesqPimpleFoam/buoyantBoussinesqPimpleFoam-edited.C}
+\lstinputlisting[language=C++,firstline=57,lastline=70]{/Users/andyreagan/projects/2013/09-reagan-thesis/code/buoyantBoussinesqPimpleFoam/buoyantBoussinesqPimpleFoam-edited.C}
 
 We then enter the main loop.
 This is computed for each time step, prescribed before the solver is applied.
 Note that the capacity is available for adaptive time steps, choosing to keep the Courant number below some threshold, but I do not use this.
 For the distributed ensemble of model runs, it is important that each model complete in nearly the same time, so that the analysis is not waiting on one model and therefore under-utilizing the available resources.
 
-\lstinputlisting[language=C++,firstline=71,lastline=88]{/Users/andyreagan/work/2013/09-reagan-thesis/code/buoyantBoussinesqPimpleFoam/buoyantBoussinesqPimpleFoam-edited.C}
+\lstinputlisting[language=C++,firstline=71,lastline=88]{/Users/andyreagan/projects/2013/09-reagan-thesis/code/buoyantBoussinesqPimpleFoam/buoyantBoussinesqPimpleFoam-edited.C}
 
 Opening up the equation for $U$ we see that Equation
 
-\lstinputlisting[language=C++]{/Users/andyreagan/work/2013/09-reagan-thesis/code/buoyantBoussinesqPimpleFoam/UEqn.H}
+\lstinputlisting[language=C++]{/Users/andyreagan/projects/2013/09-reagan-thesis/code/buoyantBoussinesqPimpleFoam/UEqn.H}
 
 Solving for $T$ is 
 
-\lstinputlisting[language=C++]{/Users/andyreagan/work/2013/09-reagan-thesis/code/buoyantBoussinesqPimpleFoam/TEqn.H}
+\lstinputlisting[language=C++]{/Users/andyreagan/projects/2013/09-reagan-thesis/code/buoyantBoussinesqPimpleFoam/TEqn.H}
 
 Finally, we solve for the pressure $p$ in ``pEqn.H'':
 
-\lstinputlisting[language=C++]{/Users/andyreagan/work/2013/09-reagan-thesis/code/buoyantBoussinesqPimpleFoam/pEqn.H}
+\lstinputlisting[language=C++]{/Users/andyreagan/projects/2013/09-reagan-thesis/code/buoyantBoussinesqPimpleFoam/pEqn.H}
 
 The final operation being the conversion of pressure to hydrostatic pressure,
 \begin{equation*} p _\text{rgh} = p - \rho _k g_h . \end{equation*}
 This ``pEqn.H'' is then re-run until convergence is achieved, and the PISO loop begins again.
 
+We verify convergence of the solution in a steady flow state regime in Fig \ref{fig:meshverification}.
+
 \begin{figure}[h!]
   \centering
-    \includegraphics[width=0.79\textwidth]{/Users/andyreagan/work/2013/05-data-assimilation/src/experiments/meshVerification/Flux-end-20-times.pdf}
+    \includegraphics[width=0.79\textwidth]{/Users/andyreagan/projects/2013/05-data-assimilation/src/experiments/meshVerification/Flux-end-20-times.pdf}
   \caption[Long-term behavior for different meshes]
   {
     With a fixed choice of solver, boundary conditions, and initial conditions that lead to a stable convective state, we present the long-term behavior of the velocity face flux at the top slice for different meshes.
@@ -913,7 +922,8 @@ This ``pEqn.H'' is then re-run until convergence is achieved, and the PISO loop 
 
 \clearpage
 \pagebreak
-\section{The Ehrhard and M\"{u}ller Equations}
+\subsection*{S2 The Ehrhard and M\"{u}ller Equations}
+\label{S2}
 
 Following the derivation by Harris \cite{harris2011predicting}, itself a representation of the derivation of Gorman \cite{gorman1986} and namesakes Ehrhard and M\"{u}ller \cite{ehrhard1990dynamical}, we derive the equations governing a closed loop thermosyphon.
 
@@ -987,7 +997,8 @@ Through careful consideration of these non-dimensional variable transformations 
 
 \clearpage
 \pagebreak
-\section{Data Assimiliation}
+\subsection*{S3 Data Assimiliation}
+\label{S3}
 
 The TLM is the model which advances an initial perturbation $\delta \mbx_{i}$ at timestep $i$ to a final perturbation $\delta \mbx_{i+1}$ at timestep $i+1$.
 The dynamical system we are interested in, Lorenz '63, is given as a system of ODE's:
@@ -1009,32 +1020,35 @@ It is therefore desirable to take the derivative of the numerical scheme directl
 A schematic of this scenario is illustrated in Figure \ref{fig:TLMscheme}.
 To that the derivative of numerical code for implementing the EKF on models larger than 3 dimensions (i.e. global weather models written in Fortan), automatic code differentiation is used \cite{autodiff1981}.
 
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.89\textwidth]{figures/TLM-explanation.pdf}
+  \caption[An explanation of how and why the best way to obtain a TLM is with a differentiated numerical scheme]{
+    An explanation of how and why the best way to obtain a TLM is with a differentiated numerical scheme.
+    Both the Lorenz ODE and TLM ODE System can be solved by RK2/4, but the analytic Jacobian of TLM that would is not the same as the derivative of the numerical method.
+    In particular, the derivative of the RK2/4 integrator is used to obtain a TLM that most accurately propogates error growth in the Lorenz '63 system.
+  }
+  \label{fig:TLMscheme}
+\end{figure}
+
 To verify our implementation of the TLM, we propagate a small error in the Lorenz '63 system and plot the difference between that error and the TLM predicted error, for each variable (Figure \ref{fig:TLMverification}).
 
-\begin{figure*}
+\begin{figure}[h]
   \centering
   \includegraphics[width=0.45\textwidth]{figures/TLM-verification003_noname.pdf}
   \caption[The future error predicted by the TLM is compared to the error growth in Lorenz '63 system for an initial perturbation with standard deviation of 0.1, averaged over 1000 TLM integrations]{
     The future error predicted by the TLM is compared to the error growth in Lorenz '63 system for an initial perturbation with standard deviation of 0.1, averaged over 1000 TLM integrations.
     The $\epsilon$ is not the error predicted by the TLM, but rather the error of the TLM in predicting the error growth.
+    We see an intially linear error growth for small time, which is overcome by the nonlinearity of the Lorenz system for longer time.
   }
   \label{fig:TLMverification}
-\end{figure*}
-
-\begin{figure*}
-  \centering
-  \includegraphics[width=0.89\textwidth]{figures/TLM-explanation.pdf}
-  \caption[An explanation of how and why the best way to obtain a TLM is with a differentiated numerical scheme]{
-    An explanation of how and why the best way to obtain a TLM is with a differentiated numerical scheme.
-  }
-  \label{fig:TLMscheme}
-\end{figure*}
+\end{figure}
 
 With a finite ensemble size, the ensemble method is only an approximation and therefore in practice it often fails to capture the full spread of error.
-To better capture the model variance, additive and multiplicative inflation factors are used to obtain a good estimate of the error covariance matrix (Section 2.6).
+To better capture the model variance, additive and multiplicative inflation factors are used to obtain a good estimate of the error covariance matrix (\nameref{fig:ETKF_cov_tuning_390s} Section).
 The spread of ensemble members in the $x_1$ variable of the Lorenz model, as distance from the analysis, can be seen in Figure \ref{fig:EnKFhist}.
 
-\begin{figure}[h!]
+\begin{figure}[h]
   \centering
   \includegraphics[width=0.79\textwidth]{figures/EnKF-histogram-analysis.pdf}
   \caption[The difference of ensemble forecasts from the analysis is reported for 760 assimilation windows in one model run of length 200, with 10 ensemble members and an assimilation window of length 0.261]{
@@ -1051,13 +1065,14 @@ Therefore, to compute the error covariance matrix for each forecast, that foreca
 
 We can see the classic spaghetti of the ensemble with this filter implemented on Lorenz 63 in Figure \ref{fig:spaghetti}.
 
-\begin{figure}[h!]
+\begin{figure}[h]
   \centering
   \includegraphics[width=0.99\textwidth]{figures/EnKF_spaghetti.pdf}
   \caption[A sample time-series of the ensembles used in the EnKF]{
     A sample time-series of the ensembles used in the EnKF.
     In all tests, as seen here, 10 ensemble members are used.
     For this run, 384 assimilation cycles are performed with a window length of 0.26 model time units.
+    We can see that the ensemble member state after assimilation better represents the uncertainty of the analysis state and enables some ensemble members to stay close to the true state.
   }
   \label{fig:spaghetti}
 \end{figure}
@@ -1070,29 +1085,37 @@ For further details on the most advanced methods, beyond what is provided in the
 
 \clearpage
 \pagebreak
-\section{Additional DMD Details}
+\subsection*{S4 Additional DMD Details}
+\label{S4}
 
-The general algorithm for DMD is provided in Section III(C), and here we supply more results of the DMD procedure.
+The general algorithm for DMD is provided in the \nameref{dmd_section} Section, and here we supply more results of the DMD procedure.
 The timeseries from which we computed the decomposition is shown in Figure \ref{fig:DMD-timeseries}.
 
-The real and imaginary components of the DMD eigenvalues are shown in both un-mapped and mapped form in Figure \ref{fig:DMD-eigenvalues}.
-
-\begin{figure*}
+\begin{figure}[h]
   \centering
   \includegraphics[width=0.98\textwidth]{../figures/DMD/DMD-data-timeseries-longer-wide.pdf}
   \caption[]{
-    Flux timeseries on which DMD is performed.    
+    Flux timeseries on which DMD is performed.
+    We report the flux as the sum of the face flux values on a slice of the loop at the 9 o'clock position.
+    In this flux timeseries we see dynamics visually similar to the $x_1$ variable of the Lorenz 63 system.
+    Residence time in either flow direction is aperiodic and unstable with the flow speed oscillating within a single direction with growing amplitude until reversing.
   }
   \label{fig:DMD-timeseries}  
-\end{figure*}
+\end{figure}
 
-\begin{figure*}
+The real and imaginary components of the DMD eigenvalues are shown in both un-mapped and mapped form in Figure \ref{fig:DMD-eigenvalues}.
+
+\begin{figure}[h]
   \centering
   \includegraphics[width=0.98\textwidth]{../figures/DMD/eigenvalues-both-labeled.pdf}
   \caption[]{
-    Eigenvalues of DMD Modes.
+    Eigenvalues of DMD Modes presented in both raw and scaled (mapped) form.
+    In Panel A we see the eigenvalue of each DMD mode on the complex plane, with an inset unit circle.
+    Those eigenvalues with magnitude greater than 1 are shown in red.
+    In Panel B we see the same eigenvalues on the complex plane, transformed by the base 10 logarithm.
+    Again we color in red those eigenvalues with real part greater than 0.
   }
   \label{fig:DMD-eigenvalues}  
-\end{figure*}
+\end{figure}
 
 \end{document}

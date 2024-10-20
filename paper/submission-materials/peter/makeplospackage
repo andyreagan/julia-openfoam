@@ -1,0 +1,12 @@
+echo 'creating fluxwell-package.tgz...';
+
+cd package;
+
+ln -sf ../correspondence/2015-10-11plos-one.pdf .
+
+ln -sf ../plos-fluxwell.pdf
+
+tar cvfzph ../plos-fluxwell-package.tgz 2015-10-11plos-one.pdf fig[0-9][0-9]*.tiff  plos-fluxwell-combined.tex  plos-fluxwell.pdf
+
+
+

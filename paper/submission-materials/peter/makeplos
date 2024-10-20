@@ -1,0 +1,21 @@
+## run makepackage first for arxiv version
+## run tiffify.pl script on figures in package directory
+
+make-plos-pieces.pl fluxwell-revtex4
+
+pdflatex plos-fluxwell
+bibtex plos-fluxwell
+pdflatex plos-fluxwell
+pdflatex plos-fluxwell
+
+open -a preview;
+
+## breakup-manuscript-supp.pl plos-fluxwell.pdf
+
+make-single-latex-file.pl plos-fluxwell.tex
+
+makelinks.pl plos-fluxwell-combined.tex
+
+makeplospackage
+
+
